@@ -221,7 +221,32 @@
                 justify-content: space-around;
                 z-index: 1000;
                 padding-bottom: max(0.8rem, env(safe-area-inset-bottom));
+                /* Slide Logic */
+                transform: translateY(120%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
+            .mobile-nav.open { transform: translateY(0); }
+
+            /* FAB TOGGLE */
+            .nav-toggle-btn {
+                display: flex;
+                position: fixed;
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 3.5rem;
+                height: 3.5rem;
+                background: linear-gradient(135deg, var(--brand-primary), var(--brand-glow));
+                border-radius: 50%;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+                z-index: 1100;
+                transition: 0.2s;
+            }
+            .nav-toggle-btn:active { transform: scale(0.95); }
             
             .mobile-nav-item {
                 display: flex;
@@ -363,15 +388,20 @@
             </div>
         </aside>
 
+        <!-- MOBILE NAV TOGGLE FAB -->
+        <button class="nav-toggle-btn" onclick="toggleMobileNav()">
+            <span class="mobile-nav-icon">☰</span>
+        </button>
+
         <!-- MOBILE BOTTOM NAV -->
-        <nav class="mobile-nav">
+        <nav class="mobile-nav" id="mobileNav">
             <div class="mobile-nav-item active" onclick="nav('dashboard', this)">
                 <span class="mobile-nav-icon">🏠</span>
                 <span>Home</span>
             </div>
             <div class="mobile-nav-item" onclick="nav('marketing-mgmt', this)">
-                <span class="mobile-nav-icon">📚</span>
-                <span>Study</span>
+                <span class="mobile-nav-icon">�</span>
+                <span>Marketing</span>
             </div>
              <div class="mobile-nav-item" onclick="nav('notes', this)">
                 <span class="mobile-nav-icon">📝</span>
@@ -1248,6 +1278,10 @@
 
 
 
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobileNav');
+            nav.classList.toggle('open');
+        }
     </script>
 </body>
 </html>
