@@ -183,6 +183,123 @@
         .quiz-opt.correct { border-color: #10b981; color: #10b981; background: rgba(16, 185, 129, 0.1); }
         .quiz-opt.wrong { border-color: #f43f5e; color: #f43f5e; background: rgba(244, 63, 94, 0.1); }
 
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            body { overflow-y: auto; height: auto; } /* Allow native scroll on mobile logic */
+            .bg-blobs { position: fixed; } /* Keep blobs fixed */
+            
+            .app-layout { 
+                flex-direction: column; 
+                height: auto; 
+                min-height: 100vh;
+                width: 100%;
+                overflow: visible !important;
+            }
+
+            /* HIDE SIDEBAR on Mobile, Move to Bottom Nav */
+            .sidebar { 
+                display: none; 
+            }
+
+            .main-viewport { 
+                padding: 1rem 1rem 6rem 1rem; /* Extra bottom padding for nav */
+                overflow: visible;
+                height: auto;
+                flex: none;
+            }
+
+            /* BOTTOM NAV BAR */
+            .mobile-nav {
+                display: flex !important;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: rgba(24, 24, 27, 0.95);
+                backdrop-filter: blur(20px);
+                border-top: 1px solid var(--border-subtle);
+                padding: 0.8rem 1rem;
+                justify-content: space-around;
+                z-index: 1000;
+                padding-bottom: max(0.8rem, env(safe-area-inset-bottom));
+            }
+            
+            .mobile-nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.3rem;
+                color: var(--text-secondary);
+                font-size: 0.7rem;
+                font-weight: 600;
+                cursor: pointer;
+                opacity: 0.7;
+                transition: 0.2s;
+            }
+            .mobile-nav-item.active { opacity: 1; color: var(--brand-primary); }
+            .mobile-nav-icon { font-size: 1.2rem; margin-bottom: 2px; }
+
+            /* TYPOGRAPHY SCALING */
+            .brand-logo { font-size: 2rem; margin-bottom: 1rem; }
+            .timer-display { font-size: 4rem; }
+            h1 { font-size: 2rem !important; }
+            .entry-question { font-size: 1.5rem; }
+            .name-input { font-size: 2.5rem; }
+
+            /* COMPONENT TWEAKS */
+            .card { padding: 1.5rem; }
+            
+            /* RESPONSIVE TABLE (Cards) */
+            table, thead, tbody, th, td, tr { display: block; }
+            thead tr { position: absolute; top: -9999px; left: -9999px; }
+            
+            tr { 
+                border: 1px solid var(--border-subtle); 
+                border-radius: 1rem; 
+                background: var(--bg-card) !important; 
+                margin-bottom: 1rem; 
+                padding: 1rem;
+            }
+            
+            td { 
+                border: none;
+                position: relative;
+                padding: 0.5rem 0 0.5rem 0 !important;
+                padding-left: 40% !important; 
+                text-align: right;
+            }
+            
+            td:before { 
+                position: absolute;
+                top: 0.5rem;
+                left: 0;
+                width: 35%; 
+                padding-right: 10px; 
+                white-space: nowrap;
+                content: attr(data-label);
+                font-weight: 700;
+                color: var(--text-muted);
+                text-align: left;
+                text-transform: uppercase;
+                font-size: 0.75rem;
+            }
+            
+            /* Remove weird rounding from table rows in card mode */
+            td:first-child, td:last-child { border-radius: 0 !important; }
+
+            /* Detail View */
+            .detail-view { padding: 1.5rem; }
+            .flashcard-stage { height: auto; min-height: 400px; }
+            .flashcard { height: 400px; }
+
+            /* Header adjustments */
+            .section-view h1 { margin-top: 1rem; }
+            #dashboard h1 br { display: none; }
+            #live-clock { display: none; } /* Hide clock on mobile to save space */
+        }
+        
+        .mobile-nav { display: none; } /* Hidden on desktop */
     </style>
 </head>
 <body>
@@ -214,6 +331,26 @@
                 <div class="nav-item" onclick="window.close()">Exit</div>
             </div>
         </aside>
+
+        <!-- MOBILE BOTTOM NAV -->
+        <nav class="mobile-nav">
+            <div class="mobile-nav-item active" onclick="nav('dashboard', this)">
+                <span class="mobile-nav-icon">🏠</span>
+                <span>Home</span>
+            </div>
+            <div class="mobile-nav-item" onclick="nav('marketing-mgmt', this)">
+                <span class="mobile-nav-icon">📚</span>
+                <span>Study</span>
+            </div>
+             <div class="mobile-nav-item" onclick="nav('notes', this)">
+                <span class="mobile-nav-icon">📝</span>
+                <span>Notes</span>
+            </div>
+            <div class="mobile-nav-item" onclick="nav('flashcards', this)">
+                <span class="mobile-nav-icon">⚡</span>
+                <span>Cards</span>
+            </div>
+        </nav>
 
         <main class="main-viewport">
             
@@ -918,8 +1055,11 @@
         function nav(id, el) {
             document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
+            
+            // Handle Desktop & Mobile Nav Highlighting
             if(el) {
                 document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                document.querySelectorAll('.mobile-nav-item').forEach(n => n.classList.remove('active'));
                 el.classList.add('active');
             }
         }
