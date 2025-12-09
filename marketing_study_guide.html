@@ -186,8 +186,8 @@
 
         /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
-            body { overflow-y: auto; height: auto; } /* Allow native scroll on mobile logic */
-            .bg-blobs { position: fixed; } /* Keep blobs fixed */
+            body { overflow-y: auto; height: auto; }
+            .bg-blobs { position: fixed; }
             
             .app-layout { 
                 flex-direction: column; 
@@ -197,13 +197,10 @@
                 overflow: visible !important;
             }
 
-            /* HIDE SIDEBAR on Mobile, Move to Bottom Nav */
-            .sidebar { 
-                display: none; 
-            }
+            .sidebar { display: none; }
 
             .main-viewport { 
-                padding: 1rem 1rem 6rem 1rem; /* Extra bottom padding for nav */
+                padding: 1rem 1rem 7rem 1rem; /* More bottom padding */
                 overflow: visible;
                 height: auto;
                 flex: none;
@@ -239,65 +236,98 @@
                 transition: 0.2s;
             }
             .mobile-nav-item.active { opacity: 1; color: var(--brand-primary); }
-            .mobile-nav-icon { font-size: 1.2rem; margin-bottom: 2px; }
+            .mobile-nav-icon { font-size: 1.25rem; }
+
+            /* TIMER WIDGET FIXES */
+            .timer-widget {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem; /* Space for absolute badge */
+                position: relative;
+            }
+            .session-badge {
+                top: 1rem;
+                right: 50%;
+                transform: translateX(50%);
+                white-space: nowrap;
+                position: absolute;
+            }
+            .timer-display { font-size: 3.5rem; margin: 0.5rem 0; }
+            .btn { width: 100%; margin-bottom: 0.5rem; justify-content: center; display: flex; }
+            .timer-widget div[style*="justify-content:center"] {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.5rem;
+            }
 
             /* TYPOGRAPHY SCALING */
             .brand-logo { font-size: 2rem; margin-bottom: 1rem; }
-            .timer-display { font-size: 4rem; }
-            h1 { font-size: 2rem !important; }
+            h1 { font-size: 1.75rem !important; line-height: 1.2; word-wrap: break-word; }
             .entry-question { font-size: 1.5rem; }
-            .name-input { font-size: 2.5rem; }
+            .name-input { font-size: 2rem; width: 100%; }
 
             /* COMPONENT TWEAKS */
-            .card { padding: 1.5rem; }
+            .card { padding: 1.25rem; }
             
             /* RESPONSIVE TABLE (Cards) */
-            table, thead, tbody, th, td, tr { display: block; }
+            table, thead, tbody, th, td, tr { display: block; width: 100%; }
             thead tr { position: absolute; top: -9999px; left: -9999px; }
             
             tr { 
                 border: 1px solid var(--border-subtle); 
                 border-radius: 1rem; 
-                background: var(--bg-card) !important; 
-                margin-bottom: 1rem; 
-                padding: 1rem;
+                background: linear-gradient(145deg, #18181b, #131315) !important;
+                margin-bottom: 1.5rem; 
+                padding: 1.25rem;
+                position: relative;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             }
             
             td { 
                 border: none;
                 position: relative;
-                padding: 0.5rem 0 0.5rem 0 !important;
-                padding-left: 40% !important; 
-                text-align: right;
+                padding: 0.25rem 0 0.25rem 7rem !important; /* Fixed left padding for label */
+                text-align: left;
+                min-height: 2rem;
+                display: flex;
+                align-items: center;
             }
             
             td:before { 
                 position: absolute;
-                top: 0.5rem;
+                top: 0.25rem; /* Align with text */
                 left: 0;
-                width: 35%; 
+                width: 6rem; 
                 padding-right: 10px; 
                 white-space: nowrap;
                 content: attr(data-label);
                 font-weight: 700;
                 color: var(--text-muted);
-                text-align: left;
                 text-transform: uppercase;
-                font-size: 0.75rem;
+                font-size: 0.7rem;
+                letter-spacing: 0.5px;
+                display: flex;
+                align-items: center;
+                height: 100%;
             }
+
+            td:first-child { 
+                margin-bottom: 1rem; 
+                border-bottom: 1px solid rgba(255,255,255,0.05); 
+                padding-bottom: 0.75rem !important;
+                padding-left: 0 !important;
+            }
+            td:first-child:before { display: none; } /* Hide label for Date row, allow full width */
             
-            /* Remove weird rounding from table rows in card mode */
-            td:first-child, td:last-child { border-radius: 0 !important; }
-
-            /* Detail View */
-            .detail-view { padding: 1.5rem; }
-            .flashcard-stage { height: auto; min-height: 400px; }
-            .flashcard { height: 400px; }
-
-            /* Header adjustments */
-            .section-view h1 { margin-top: 1rem; }
+            /* Make layouts stack vertically */
+            .detail-view { padding: 1rem; }
+            .flashcard-stage { height: auto; min-height: 400px; padding: 1rem 0; }
+            .flashcard { height: 450px; }
+            
+            /* Hide non-critical elements */
             #dashboard h1 br { display: none; }
-            #live-clock { display: none; } /* Hide clock on mobile to save space */
+            #live-clock { display: none; }
         }
         
         .mobile-nav { display: none; } /* Hidden on desktop */
@@ -391,48 +421,48 @@
                             </thead>
                             <tbody>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
-                                    <td style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--text-primary); font-size:1.1rem;">Dec 16</strong> <span style="font-size:0.9rem; opacity:0.7;">Tue</span></td>
-                                    <td style="padding:1.5rem;"><div style="color:var(--text-primary); font-weight:600;">Islamic Studies</div><div style="font-size:0.85rem; opacity:0.6;">FSMSS1007 • Room 297</div></td>
-                                    <td style="padding:1.5rem;">09:00 - 12:00</td>
-                                    <td style="padding:1.5rem; font-weight:600; color:var(--brand-glow);" id="countdown-0">--</td>
-                                    <td style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span style="opacity:0.3;">Upcoming</span></td>
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--text-primary); font-size:1.1rem;">Dec 16</strong> <span style="font-size:0.9rem; opacity:0.7;">Tue</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;"><div style="color:var(--text-primary); font-weight:600;">Islamic Studies</div><div style="font-size:0.85rem; opacity:0.6;">FSMSS1007 • Room 297</div></td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left" style="padding:1.5rem; font-weight:600; color:var(--brand-glow);" id="countdown-0">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span style="opacity:0.3;">Upcoming</span></td>
                                 </tr>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
-                                    <td style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--text-primary); font-size:1.1rem;">Dec 18</strong> <span style="font-size:0.9rem; opacity:0.7;">Thu</span></td>
-                                    <td style="padding:1.5rem;"><div style="color:var(--text-primary); font-weight:600;">Fundamentals of Accounting</div><div style="font-size:0.85rem; opacity:0.6;">AF1001 • Room 319</div></td>
-                                    <td style="padding:1.5rem;">09:00 - 12:00</td>
-                                    <td style="padding:1.5rem; font-weight:600; color:var(--brand-glow);" id="countdown-1">--</td>
-                                    <td style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span style="opacity:0.3;">Upcoming</span></td>
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--text-primary); font-size:1.1rem;">Dec 18</strong> <span style="font-size:0.9rem; opacity:0.7;">Thu</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;"><div style="color:var(--text-primary); font-weight:600;">Fundamentals of Accounting</div><div style="font-size:0.85rem; opacity:0.6;">AF1001 • Room 319</div></td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left" style="padding:1.5rem; font-weight:600; color:var(--brand-glow);" id="countdown-1">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span style="opacity:0.3;">Upcoming</span></td>
                                 </tr>
                                 <tr style="background:linear-gradient(90deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05)); border:1px solid rgba(139, 92, 246, 0.2);">
-                                    <td style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--brand-primary); font-size:1.1rem;">Dec 22</strong> <span style="font-size:0.9rem; opacity:0.7; color:var(--brand-glow);">Mon</span></td>
-                                    <td style="padding:1.5rem;"><div style="color:white; font-weight:700;">Marketing Management</div><div style="font-size:0.85rem; opacity:0.8; color:#ddd;">MG1002 • Room 259</div></td>
-                                    <td style="padding:1.5rem; color:white;">09:00 - 12:00</td>
-                                    <td style="padding:1.5rem; font-weight:600; color:white;" id="countdown-2">--</td>
-                                    <td style="padding:1.5rem; border-radius:0 1rem 1rem 0;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--brand-primary); font-size:1.1rem;">Dec 22</strong> <span style="font-size:0.9rem; opacity:0.7; color:var(--brand-glow);">Mon</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;"><div style="color:white; font-weight:700;">Marketing Management</div><div style="font-size:0.85rem; opacity:0.8; color:#ddd;">MG1002 • Room 259</div></td>
+                                    <td data-label="Time" style="padding:1.5rem; color:white;">09:00 - 12:00</td>
+                                    <td data-label="Time Left" style="padding:1.5rem; font-weight:600; color:white;" id="countdown-2">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;">
                                         <button class="btn btn-primary" style="padding:0.5rem 1.5rem; font-size:0.85rem; box-shadow:0 0 15px rgba(139, 92, 246, 0.4);" onclick="nav('marketing-mgmt', document.querySelectorAll('.nav-item')[1])">Deep Dive</button>
                                     </td>
                                 </tr>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
-                                    <td style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--text-primary); font-size:1.1rem;">Dec 24</strong> <span style="font-size:0.9rem; opacity:0.7;">Wed</span></td>
-                                    <td style="padding:1.5rem;"><div style="color:var(--text-primary); font-weight:600;">English - I</div><div style="font-size:0.85rem; opacity:0.6;">SS1016 • Room 308</div></td>
-                                    <td style="padding:1.5rem;">09:00 - 12:00</td>
-                                    <td style="padding:1.5rem; font-weight:600; color:var(--brand-glow);" id="countdown-3">--</td>
-                                    <td style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span style="opacity:0.3;">Upcoming</span></td>
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--text-primary); font-size:1.1rem;">Dec 24</strong> <span style="font-size:0.9rem; opacity:0.7;">Wed</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;"><div style="color:var(--text-primary); font-weight:600;">English - I</div><div style="font-size:0.85rem; opacity:0.6;">SS1016 • Room 308</div></td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left" style="padding:1.5rem; font-weight:600; color:var(--brand-glow);" id="countdown-3">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span style="opacity:0.3;">Upcoming</span></td>
                                 </tr>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
-                                    <td style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--text-primary); font-size:1.1rem;">Dec 26</strong> <span style="font-size:0.9rem; opacity:0.7;">Fri</span></td>
-                                    <td style="padding:1.5rem;"><div style="color:var(--text-primary); font-weight:600;">IT in Business</div><div style="font-size:0.85rem; opacity:0.6;">CS1001 • Room 313</div></td>
-                                    <td style="padding:1.5rem;">08:30 - 12:30</td>
-                                    <td style="padding:1.5rem; font-weight:600; color:var(--brand-glow);" id="countdown-4">--</td>
-                                    <td style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span style="opacity:0.3;">Upcoming</span></td>
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--text-primary); font-size:1.1rem;">Dec 26</strong> <span style="font-size:0.9rem; opacity:0.7;">Fri</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;"><div style="color:var(--text-primary); font-weight:600;">IT in Business</div><div style="font-size:0.85rem; opacity:0.6;">CS1001 • Room 313</div></td>
+                                    <td data-label="Time" style="padding:1.5rem;">08:30 - 12:30</td>
+                                    <td data-label="Time Left" style="padding:1.5rem; font-weight:600; color:var(--brand-glow);" id="countdown-4">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span style="opacity:0.3;">Upcoming</span></td>
                                 </tr>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
-                                    <td style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--text-primary); font-size:1.1rem;">Dec 30</strong> <span style="font-size:0.9rem; opacity:0.7;">Tue</span></td>
-                                    <td style="padding:1.5rem;"><div style="color:var(--text-primary); font-weight:600;">Business Math – I</div><div style="font-size:0.85rem; opacity:0.6;">MT1002 • Room 317</div></td>
-                                    <td style="padding:1.5rem;">09:00 - 12:00</td>
-                                    <td style="padding:1.5rem; font-weight:600; color:var(--brand-glow);" id="countdown-5">--</td>
-                                    <td style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span style="opacity:0.3;">Upcoming</span></td>
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong style="color:var(--text-primary); font-size:1.1rem;">Dec 30</strong> <span style="font-size:0.9rem; opacity:0.7;">Tue</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;"><div style="color:var(--text-primary); font-weight:600;">Business Math – I</div><div style="font-size:0.85rem; opacity:0.6;">MT1002 • Room 317</div></td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left" style="padding:1.5rem; font-weight:600; color:var(--brand-glow);" id="countdown-5">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span style="opacity:0.3;">Upcoming</span></td>
                                 </tr>
                             </tbody>
                         </table>
