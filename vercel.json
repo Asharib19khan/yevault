@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/marketing_study_guide.html" }
+  ]
+}
