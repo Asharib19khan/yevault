@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: black;
+  overflow: hidden; /* Prevent scrolling for the full-screen app */
+}
+
+/* Custom Animation Classes */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px #00ffff; }
+  50% { box-shadow: 0 0 25px #00ffff, 0 0 50px #00ffff; }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.fade-bottom {
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
