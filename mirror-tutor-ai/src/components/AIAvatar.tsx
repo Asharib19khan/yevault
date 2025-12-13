@@ -1,7 +1,6 @@
-
 import React, { useRef, useEffect, useMemo, useState } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, Text, Float, Stars } from '@react-three/drei';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Text, Float, Stars } from '@react-three/drei';
 import * as THREE from 'three';
 
 // --- AUDIO ANALYZER HOOK ---
@@ -109,6 +108,7 @@ const NeuralDust = ({ analyzer, dataArray, isSpeaking }: any) => {
                     count={count}
                     array={positions}
                     itemSize={3}
+                    args={[positions, 3]}
                 />
             </bufferGeometry>
             <pointsMaterial

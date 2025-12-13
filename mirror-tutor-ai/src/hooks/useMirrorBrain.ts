@@ -139,6 +139,6 @@ export const useMirrorBrain = () => {
         isListening,
         startListening,
         // Expose raw recognition object if needed for debugging
-        recognition: recognitionRef.current
+        recognitionRef
     };
 };
