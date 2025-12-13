@@ -112,8 +112,8 @@ const NeuralDust = ({ analyzer, dataArray, isSpeaking }: any) => {
                 />
             </bufferGeometry>
             <pointsMaterial
-                size={0.05}
-                color="#00ffff"
+                size={0.06}
+                color="#8b5cf6"
                 transparent
                 opacity={0.8}
                 sizeAttenuation={true}
@@ -169,7 +169,7 @@ const AIAvatar: React.FC<AIAvatarProps> = ({ isSpeaking, transcript }) => {
 
             {/* Dynamic Transcript Overlay */}
             <div className="absolute bottom-16 w-full text-center z-20 px-8">
-                <p className="font-mono text-cyan-400/70 text-[10px] uppercase mb-4 tracking-[0.4em] animate-pulse">
+                <p className="font-mono text-violet-400/70 text-[10px] uppercase mb-4 tracking-[0.4em] animate-pulse">
                     {isSpeaking ? '/// RECEIVING NEURAL TRANSMISSION ///' : ''}
                 </p>
                 <h1 className="text-4xl md:text-6xl font-extralight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50 tracking-tight drop-shadow-2xl">
