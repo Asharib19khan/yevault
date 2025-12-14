@@ -1,0 +1,2252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YE VAULT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            /* Palette */
+            --bg-dark: #09090b;
+            --bg-card: #18181b;
+            --bg-glass: rgba(24, 24, 27, 0.85);
+
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+
+            --brand-primary: #8b5cf6;
+            --brand-glow: #a78bfa;
+
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(20px);
+
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* --- Animations --- */
+        .bg-blobs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .blob-1 {
+            background: var(--brand-primary);
+            top: -20%;
+            left: -20%;
+        }
+
+        .blob-2 {
+            background: #06b6d4;
+            bottom: -20%;
+            right: -20%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        @keyframes blink-glow {
+
+            0%,
+            100% {
+                opacity: 1;
+                text-shadow: 0 0 10px var(--brand-primary);
+            }
+
+            50% {
+                opacity: 0.7;
+                text-shadow: 0 0 20px var(--brand-glow);
+                color: #fff;
+            }
+        }
+
+        /* --- Layout --- */
+        .app-layout {
+            display: flex;
+            height: 100vh;
+            max-width: 1920px;
+            margin: 0 auto;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.95);
+            transition: opacity 1s, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .app-layout.visible {
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-glass);
+            -webkit-backdrop-filter: var(--glass-blur);
+            backdrop-filter: var(--glass-blur);
+            border-right: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            z-index: 50;
+        }
+
+        /* --- AMBIENCE & PANIC CSS --- */
+        .ambience-controls {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .panic-btn {
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 2rem;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+            animation: pulse-red 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .panic-btn:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse-red {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        .cram-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(9, 9, 11, 0.95);
+            z-index: 3000;
+            /* High Z-Index */
+            display: none;
+            padding: 2rem;
+            overflow-y: auto;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .cram-paper {
+            background: #fff;
+            color: #000;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .cram-term {
+            display: block;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 0.2rem;
+        }
+
+        .cram-term strong {
+            color: #d32f2f;
+        }
+
+        .main-viewport {
+            flex: 1;
+            padding: 2rem 3rem;
+            overflow-y: auto;
+            position: relative;
+            scroll-behavior: smooth;
+        }
+
+        /* --- ENTRY PORTAL (The "Name Drop") --- */
+        #entry-portal {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: opacity 1s, transform 1s;
+        }
+
+        .entry-container {
+            text-align: center;
+        }
+
+        .entry-question {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s 0.5s forwards;
+        }
+
+        .name-input {
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--brand-primary);
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: white;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 0.5rem;
+            outline: none;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s 1s forwards;
+        }
+
+        .name-input::placeholder {
+            color: rgba(255, 255, 255, 0.1);
+        }
+
+        .entry-btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid var(--border-subtle);
+            padding: 1rem 3rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            opacity: 0;
+            animation: fadeIn 1s 2s forwards;
+        }
+
+        .entry-btn:hover {
+            background: var(--brand-primary);
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Components --- */
+        .brand-logo {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .brand-logo span {
+            color: var(--brand-primary);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            margin-bottom: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.03), transparent);
+            color: var(--text-primary);
+            transform: scale(1.02) translateX(4px);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.15), transparent);
+            color: var(--brand-primary);
+            font-weight: 600;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.1);
+            border-left: 3px solid var(--brand-primary);
+        }
+
+        .section-view {
+            display: none;
+        }
+
+        .section-view.active {
+            display: block;
+            animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.98);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-4px) scale(1.01);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .timer-widget {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
+            border: 1px solid var(--border-subtle);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timer-display {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin: 1rem 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .session-badge {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+        }
+
+        .btn {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-primary {
+            background: var(--brand-primary);
+            border: none;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #7c3aed;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag.purple {
+            background: rgba(139, 92, 246, 0.15);
+            color: #a78bfa;
+        }
+
+        .tag.cyan {
+            background: #06b6d426;
+            color: #22d3ee;
+        }
+
+        /* Note Detail Pro */
+        .detail-view {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            border: 1px solid var(--border-subtle);
+            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .detail-content h3 {
+            font-family: var(--font-display);
+            color: var(--brand-primary);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 0.5rem;
+        }
+
+        .detail-content h4 {
+            color: white;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .detail-content p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .detail-content ul,
+        .detail-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .detail-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .mnemonic-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 1rem 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        .tip-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 1rem 1rem 0;
+            font-size: 1.1rem;
+        }
+
+        /* Simple Flashcard CSS (preserved) */
+        .flashcard-stage {
+            perspective: 1200px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .flashcard {
+            width: 100%;
+            max-width: 600px;
+            height: 320px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .face.back {
+            transform: rotateY(180deg);
+            background: radial-gradient(circle at top, rgba(6, 182, 212, 0.1), transparent), var(--bg-card);
+            border-color: #06b6d4;
+        }
+
+        /* Quiz CSS (preserved) */
+        .quiz-opt {
+            width: 100%;
+            padding: 1.25rem;
+            margin-top: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: 0.75rem;
+            color: var(--text-secondary);
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+
+        .quiz-opt:hover {
+            background: rgba(255, 255, 255, 0.06);
+            padding-left: 1.5rem;
+        }
+
+        .quiz-opt.correct {
+            border-color: #10b981;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .quiz-opt.wrong {
+            border-color: #f43f5e;
+            color: #f43f5e;
+            background: rgba(244, 63, 94, 0.1);
+        }
+
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        /* --- RESPONSIVE SIDEBAR (MOBILE) --- */
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: 1050;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            body {
+                overflow-y: auto;
+                height: auto;
+            }
+
+            .bg-blobs {
+                position: fixed;
+            }
+
+            .app-layout {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+                width: 100%;
+                overflow: visible !important;
+            }
+
+            /* SIDEBAR TRANSFORMATION */
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 280px;
+                transform: translateX(-100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
+                display: flex !important;
+                z-index: 1100;
+                /* Ensure it's above the overlay (1050) */
+                /* Force display for slide-out */
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-viewport {
+                padding: 1.5rem;
+                /* Balanced padding */
+                overflow: visible;
+                height: auto;
+                flex: none;
+                width: 100%;
+            }
+
+            /* FAB TOGGLE - Adjust position */
+            .nav-toggle-btn {
+                display: flex;
+                position: fixed;
+                bottom: 2rem;
+                right: 2rem;
+                width: 3.5rem;
+                height: 3.5rem;
+                background: linear-gradient(135deg, var(--brand-primary), var(--brand-glow));
+                border-radius: 50%;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 20px rgba(139, 92, 246, 0.5);
+                z-index: 1200;
+                transition: 0.2s;
+            }
+
+            .nav-toggle-btn:active {
+                transform: scale(0.95);
+            }
+
+            /* ALIGNMENT FIXES */
+            #dashboard h1 {
+                font-size: 2.2rem !important;
+                line-height: 1.1;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Timer Widget Mobile */
+            .timer-widget {
+                padding: 2rem 1.5rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .timer-display {
+                font-size: 4rem;
+                margin: 1rem 0;
+            }
+
+            .timer-widget div[style*="justify-content:center"] {
+                flex-direction: column;
+                width: 100%;
+                gap: 0.8rem;
+            }
+
+            .timer-widget .btn {
+                width: 100%;
+            }
+
+            .session-badge {
+                position: static;
+                margin-top: 1rem;
+                background: rgba(16, 185, 129, 0.15);
+            }
+
+            /* Card Grid Fix */
+            div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            /* Hide Entry Portal Inputs on small screens if keyboard opens */
+            .name-input:focus {
+                font-size: 2rem;
+            }
+
+            /* Table Cards */
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+                width: 100%;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                margin-bottom: 1.5rem;
+                background: var(--bg-card) !important;
+                border: 1px solid var(--border-subtle);
+                border-radius: 1rem;
+                padding: 1rem;
+            }
+
+            td {
+                border: none;
+                padding: 0.5rem 0 0.5rem 0 !important;
+                position: relative;
+                padding-left: 40% !important;
+                text-align: right;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                min-height: 2.5rem;
+            }
+
+            td:before {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0;
+                width: 35%;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                font-weight: 700;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                font-size: 0.75rem;
+                text-align: left;
+            }
+
+            td:first-child {
+                border-bottom: 1px solid var(--border-subtle);
+                margin-bottom: 0.5rem;
+                padding-bottom: 0.5rem !important;
+                padding-left: 0 !important;
+                text-align: left;
+                justify-content: flex-start;
+            }
+
+            td:first-child:before {
+                content: none;
+            }
+
+            /* Detail Views */
+            .detail-view {
+                padding: 1.5rem;
+            }
+
+            /* Hide Live Clock on Mobile to save space */
+            #live-clock {
+                display: none;
+            }
+
+
+
+
+            td:first-child:before {
+                display: none;
+            }
+
+            .mobile-nav {
+                display: none !important;
+            }
+
+            #dashboard h1 br {
+                display: none;
+            }
+        }
+
+        .mobile-nav {
+            display: none;
+        }
+
+        /* Hidden on desktop */
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- SOUND -->
+    <audio id="timerSound"
+        src="data:audio/mp3;base64,SUQzBAAAAAABAFRYWFgAAAASAAADbWFqb3JfYnJhbmQAZGFzaABUWFhYAAAAEQAAA21pbm9yX3ZlcnNpb24AMABUWFhYAAAAHAAAA2NvbXBhdGlibGVfYnJhbmRzAGlzbzZtcDQxAFRTU0UAAAAPAAADTGF2ZjU5LjI3LjEwMAAAAAAAAAAAAAAA//uQZAAAAAAAALAAAADXAAAASAAAAAABAAiQAAJAJAAAlAz//uQZAAAAAAAALAAAADXAAAASAAAAAABAAiQAAJAJAAAlAz//uQZAAAAAAAALAAAADXAAAASAAAAAABAAiQAAJAJAAAlAz//uQZAAAAAAAALAAAADXAAAASAAAAAABAAiQAAJAJAAAlA=="></audio>
+
+    <!-- ENTRY PORTAL (The Minimalist Name Drop) -->
+    <div id="entry-portal">
+        <div class="entry-container">
+            <h1 class="entry-question">Who is conquering Marketing today?</h1>
+            <input type="text" id="name-input" class="name-input" placeholder="Type your Name" autocomplete="off">
+            <button class="entry-btn" onclick="enterApp()">Let's Go</button>
+        </div>
+    </div>
+
+
+    <!-- SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileNav()"></div>
+
+    <!-- APP LAYOUT -->
+    <div class="app-layout" id="app">
+        <aside class="sidebar" id="mainSidebar">
+            <div class="brand-logo">YE <span>VAULT</span></div>
+            <div class="nav-item active" onclick="nav('dashboard', this)">All roads lead to Rome</div>
+            <div class="nav-item" onclick="nav('marketing-mgmt', this)">Marketing Management</div>
+            <div class="nav-item" onclick="nav('islamic-studies', this)">Islamic Studies</div>
+            <div class="nav-item" onclick="nav('saint-yeezus', this)"
+                style="animation: blink-glow 2s infinite alternate;">Saint Yeezus</div>
+
+            <div style="margin-top:auto">
+                <div
+                    style="padding: 0 1rem 1rem 1rem; color: var(--text-muted); font-size: 0.75rem; border-bottom: 1px solid var(--border-subtle); margin-bottom: 1rem;">
+                    Created by <span style="color: var(--brand-glow);">Asharib</span>
+                </div>
+                <div class="nav-item" onclick="window.close()">Exit</div>
+            </div>
+        </aside>
+
+        <!-- MOBILE SIDEBAR TOGGLE FAB -->
+        <button class="nav-toggle-btn" onclick="toggleMobileNav()">
+            <span class="mobile-nav-icon">☰</span>
+        </button>
+
+        <main class="main-viewport">
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="section-view active" style="position:relative;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:2rem;">
+                    <h1 style="font-family:var(--font-display); font-size:3rem; line-height:1.1;">Run the world,
+                        <br><span id="user-display" style="color:var(--brand-primary);">Future CEO</span>.
+                    </h1>
+                    <div id="live-clock"></div>
+                </div>
+
+                <div class="timer-widget">
+                    <p
+                        style="text-transform:uppercase; letter-spacing:2px; color:var(--brand-primary); font-weight:700;">
+                        Deep Work Zone</p>
+                    <div class="session-badge">Sessions Today: <span id="session-count">0</span></div>
+                    <div class="timer-display" id="timer">25:00</div>
+                    <div style="display:flex; justify-content:center; gap:1rem; align-items:center;">
+                        <button class="btn btn-primary" onclick="toggleTimer()" id="timerBtn">Start Focus</button>
+                        <button class="btn" onclick="resetTimer()">Reset</button>
+                        <button class="btn" style="padding:0.8rem;" onclick="toggleSound()" id="soundBtn">Sound:
+                            On</button>
+                    </div>
+                </div>
+
+                <div class="card"
+                    style="margin-top:2rem; background:linear-gradient(145deg, rgba(24, 24, 27, 0.9), rgba(20, 20, 22, 0.95)); border:1px solid rgba(255,255,255,0.05);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+                        <h2 style="font-family:var(--font-display); font-size:1.5rem;">Exam Schedule</h2>
+                        <span class="tag cyan" style="font-size:0.8rem; padding:0.4rem 1rem;">Finals 2025</span>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table
+                            style="width:100%; border-collapse:separate; border-spacing:0 1rem; color:var(--text-secondary); min-width:600px;">
+                            <thead>
+                                <tr
+                                    style="text-align:left; color:var(--text-muted); font-size:0.9rem; text-transform:uppercase; letter-spacing:1px;">
+                                    <th style="padding:0 1.5rem;">Date</th>
+                                    <th style="padding:0 1.5rem;">Subject</th>
+                                    <th style="padding:0 1.5rem;">Time</th>
+                                    <th style="padding:0 1.5rem;">Time Left</th>
+                                    <th style="padding:0 1.5rem;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 16</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Tue</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:var(--text-primary); font-weight:600;">Islamic Studies</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">FSMSS1007 • Room 297</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left"
+                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
+                                        id="countdown-0">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
+                                            style="opacity:0.3;">Upcoming</span></td>
+                                </tr>
+                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 18</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Thu</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:var(--text-primary); font-weight:600;">Fundamentals of
+                                            Accounting</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">AF1001 • Room 319</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left"
+                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
+                                        id="countdown-1">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
+                                            style="opacity:0.3;">Upcoming</span></td>
+                                </tr>
+                                <tr
+                                    style="background:linear-gradient(90deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05)); border:1px solid rgba(139, 92, 246, 0.2);">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--brand-primary); font-size:1.1rem;">Dec 22</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7; color:var(--brand-glow);">Mon</span>
+                                    </td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:white; font-weight:700;">Marketing Management</div>
+                                        <div style="font-size:0.85rem; opacity:0.8; color:#ddd;">MG1002 • Room 259</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem; color:white;">09:00 - 12:00</td>
+                                    <td data-label="Time Left" style="padding:1.5rem; font-weight:600; color:white;"
+                                        id="countdown-2">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;">
+                                        <button class="btn btn-primary"
+                                            style="padding:0.5rem 1.5rem; font-size:0.85rem; box-shadow:0 0 15px rgba(139, 92, 246, 0.4);"
+                                            onclick="nav('marketing-mgmt', document.querySelectorAll('.nav-item')[1])">Deep
+                                            Dive</button>
+                                    </td>
+                                </tr>
+                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 24</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Wed</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:var(--text-primary); font-weight:600;">English - I</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">SS1016 • Room 308</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left"
+                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
+                                        id="countdown-3">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
+                                            style="opacity:0.3;">Upcoming</span></td>
+                                </tr>
+                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 26</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Fri</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:var(--text-primary); font-weight:600;">IT in Business</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">CS1001 • Room 313</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem;">08:30 - 12:30</td>
+                                    <td data-label="Time Left"
+                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
+                                        id="countdown-4">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
+                                            style="opacity:0.3;">Upcoming</span></td>
+                                </tr>
+                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 30</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Tue</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:var(--text-primary); font-weight:600;">Business Math – I</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">MT1002 • Room 317</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left"
+                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
+                                        id="countdown-5">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
+                                            style="opacity:0.3;">Upcoming</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MARKETING MANAGEMENT HUB -->
+            <section id="marketing-mgmt" class="section-view">
+                <h1
+                    style="font-family:var(--font-display); margin-bottom:2rem; font-size:3rem; color:var(--text-primary);">
+                    Marketing Management <span style="color:var(--brand-primary)">Suite</span></h1>
+                <p style="margin-bottom:2rem; color:var(--text-secondary); max-width:600px;">Access your comprehensive
+                    toolkit for mastering the finals. Select a module below to begin deep work.</p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
+                    <!-- Notes Module -->
+                    <div class="card" onclick="nav('notes')">
+                        <span class="tag cyan">Core Material</span>
+                        <h3>Smart Notes</h3>
+                        <p>Access detailed summaries for Chapters 2, 7, 8, 9, 10, 11, 12. Includes mnemonic devices and
+                            exam tips.</p>
+                    </div>
+
+                    <!-- Flashcards Module -->
+                    <div class="card" onclick="nav('flashcards')">
+                        <span class="tag purple">Active Recall</span>
+                        <h3>Flashcards</h3>
+                        <p>Test your memory with 30+ high-yield terms and definitions. Flip to reveal.</p>
+                    </div>
+
+                    <!-- PESTLE Module -->
+                    <div class="card" onclick="nav('pestle')">
+                        <span class="tag">Case Application</span>
+                        <h3>PESTLE Guide</h3>
+                        <p>Starbucks Case Study analysis showing how to apply PESTLE frameworks in real exams.</p>
+                    </div>
+
+                    <!-- Quiz Module -->
+                    <div class="card" onclick="nav('quiz')">
+                        <span class="tag">Self-Test</span>
+                        <h3>Quiz Mode</h3>
+                        <p>Rapid-fire multiple choice questions to validate your retention of key concepts.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ISLAMIC STUDIES SECTION -->
+            <section id="islamic-studies" class="section-view">
+                <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Islamic Studies Notes</h1>
+                <div id="islamic-notes-grid"
+                    style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem;"></div>
+                <div id="islamic-note-detail" class="detail-view">
+                    <button class="btn" style="margin-bottom:2rem;" onclick="closeIslamicNote()">← Back to
+                        Topics</button>
+                    <div id="islamic-note-body" class="detail-content"></div>
+                </div>
+            </section>
+
+            <!-- SAINT YEEZUS AI SECTION -->
+            <section id="saint-yeezus" class="section-view">
+                <div id="ai-launcher"
+                    style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; padding:2rem;">
+
+                    <!-- Digital Icon (CSS Shape instead of Emoji) -->
+                    <div
+                        style="width:80px; height:80px; background:var(--brand-primary); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); margin-bottom:2rem; animation: float 3s infinite ease-in-out; display:flex; align-items:center; justify-content:center; box-shadow:0 0 30px var(--brand-glow);">
+                        <div
+                            style="width:60%; height:60%; background:#000; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
+                        </div>
+                    </div>
+
+                    <h1
+                        style="font-family:var(--font-display); font-size:3.5rem; background: -webkit-linear-gradient(eee, #333); background-clip: text; -webkit-background-clip: text; color: transparent; text-shadow: 0 0 30px var(--brand-primary); margin-bottom:1rem;">
+                        Saint Yeezus AI</h1>
+                    <p style="color:var(--text-secondary); max-width:500px; margin:0 auto 3rem;">
+                        Advanced Mirror Tutor System. Verbal retention enhancement protocol active.
+                    </p>
+
+                    <div class="card" id="ai-status-card"
+                        style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0,0,0,0.4)); border:1px solid var(--brand-primary); padding:2rem; max-width:400px; transition: all 0.3s ease;">
+                        
+                        <!-- Initial State -->
+                        <div id="ai-status-initial">
+                            <p style="margin-bottom:1.5rem; color:var(--text-primary); font-size:0.9rem;">Server Status Check Required before Initialization.</p>
+                            <button onclick="checkServerAndLaunch()" class="btn btn-primary"
+                                style="display:inline-block; transform:scale(1.1); padding:1rem 2rem; letter-spacing:1px; text-transform:uppercase; font-size:0.9rem;">
+                                Initialize Mirror Interface
+                            </button>
+                        </div>
+
+                        <!-- Loading State -->
+                        <div id="ai-status-loading" style="display:none;">
+                            <div style="width:30px; height:30px; border:3px solid rgba(139, 92, 246, 0.3); border-top-color:var(--brand-primary); border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 1rem auto;"></div>
+                            <p style="color:var(--text-secondary); font-size:0.9rem;">Pinging Neural Network...</p>
+                        </div>
+
+                        <!-- Offline State -->
+                        <div id="ai-status-offline" style="display:none;">
+                            <p style="color:#ef4444; font-weight:700; margin-bottom:0.5rem;">⚠ SYSTEM OFFLINE</p>
+                            <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:1.5rem;">
+                                The AI Brain server is not responding. Please launch the backend terminal.
+                            </p>
+                            <div style="background:#000; padding:1rem; border-radius:0.5rem; text-align:left; margin-bottom:1.5rem; border:1px solid var(--border-subtle);">
+                                <code style="color:#10b981; font-family:monospace; font-size:0.8rem;">
+                                    > cd mirror-tutor-ai<br>
+                                    > npm run dev
+                                </code>
+                            </div>
+                            <button onclick="checkServerAndLaunch()" class="btn" style="border-color:var(--brand-primary); color:var(--brand-primary);">
+                                Retry Connection
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Embedded Interface Container -->
+                <!-- Embedded Interface Container -->
+                <!-- Embedded Interface Container -->
+                <!-- Moved to Body End for Fullscreen -->
+            </section>
+
+            <!-- NOTES (Preserved) -->
+            <section id="notes" class="section-view">
+                <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Master Notes</h1>
+                <div id="notes-grid"
+                    style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem;"></div>
+                <div id="note-detail" class="detail-view">
+                    <button class="btn" style="margin-bottom:2rem;" onclick="closeNote()">← Back to Chapters</button>
+                    <div id="note-body" class="detail-content"></div>
+                </div>
+            </section>
+
+            <!-- FLASHCARDS (Preserved) -->
+            <section id="flashcards" class="section-view">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+                    <h1 style="font-family:var(--font-display);">Flashcards</h1>
+                    <select id="fc-filter" onchange="filterCards()"
+                        style="padding:0.5rem 1rem; border-radius:0.5rem; background:var(--bg-card); color:white; border:1px solid var(--border-subtle);">
+                        <option value="all">All Chapters</option>
+                        <option value="ch2">Ch 2: Segmentation</option>
+                        <option value="ch7">Ch 7: Strategy</option>
+                        <option value="ch8">Ch 8: Product</option>
+                        <option value="ch9">Ch 9: PLC</option>
+                        <option value="ch10">Ch 10: Pricing</option>
+                        <option value="ch11">Ch 11: Tactics</option>
+                        <option value="ch12">Ch 12: Place</option>
+                    </select>
+                </div>
+                <div class="flashcard-stage">
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="face front">
+                            <span class="tag purple" id="fc-tag">Tag</span>
+                            <h2 id="fc-front" style="font-family:var(--font-display); font-size:1.8rem; padding:1rem;">
+                                Term</h2>
+                            <p style="margin-top:1rem; color:var(--text-muted); font-size:0.8rem;">Click to Flip</p>
+                        </div>
+                        <div class="face back">
+                            <h3 id="fc-back" style="font-weight:500;">Definition</h3>
+                        </div>
+                    </div>
+                    <div style="margin-top:2rem; display:flex; gap:1rem;">
+                        <button class="btn" onclick="moveCard(-1)">Previous</button>
+                        <button class="btn btn-primary" onclick="moveCard(1)">Next Card</button>
+                    </div>
+                    <p style="margin-top:1rem; color:var(--text-muted);" id="fc-count">1 / 30</p>
+                </div>
+            </section>
+
+            <!-- PESTLE & QUIZ (Preserved content) -->
+            <section id="pestle" class="section-view">
+                <h1 style="font-family:var(--font-display); margin-bottom:1rem;">PESTLE Masterclass</h1>
+                <div class="card"
+                    style="margin-bottom:2rem; background:rgba(139, 92, 246, 0.05); border-color:var(--brand-primary);">
+                    <h2 style="font-family:var(--font-display); color:var(--brand-primary);">Start Here: How to do
+                        PESTLE</h2>
+                    <p style="margin-top:0.5rem; color:var(--text-secondary);">PESTLE is a macro-environmental scanning
+                        tool. Do not analyze the company itself (Internal), analyze the **World** around it (External).
+                    </p>
+                    <div
+                        style="margin-top:1rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem;">
+                        <div class="tip-box" style="margin:0;"><strong>Step 1:</strong> Identify Factors (Tax, Laws,
+                            Tech).</div>
+                        <div class="tip-box" style="margin:0;"><strong>Step 2:</strong> Categorize them (P, E, S, T, L,
+                            E).</div>
+                        <div class="tip-box" style="margin:0;"><strong>Step 3:</strong> Analyze Impact (Opp or Threat?).
+                        </div>
+                    </div>
+                </div>
+                <h2 style="margin-bottom:1.5rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.5rem;">
+                    The Starbucks Case Study</h2>
+
+                <div class="card"
+                    style="margin-bottom:2rem; border:1px solid var(--border-subtle); background:rgba(255,255,255,0.02);">
+                    <h3 style="color:white; margin-bottom:1rem; font-family:var(--font-display);">Case Context</h3>
+                    <p style="margin-bottom:1rem; color:var(--text-secondary); font-size:0.95rem;">The first Starbucks
+                        was opened in Seattle, Washington in 1971 by three partners who were passionate about selling
+                        high quality beans and roasting equipment. However, it was only in the 1980s that they began
+                        selling coffee in the way we know it today. This shift is mainly due to the changing population,
+                        with more people working and needing quick and convenient and yet high-quality coffee. The
+                        coffee company pride themselves on selling coffee made from ethically sourced and high-quality
+                        beans, with their Espresso Roast being FairTrade certified, while the remainder of their
+                        products fall under their C.A.F.E practices (Coffee and Farmer Equity). This ensures that there
+                        are economic, social, environmental and quality requirements that all of their suppliers must
+                        uphold to.</p>
+                    <p style="margin-bottom:1rem; color:var(--text-secondary); font-size:0.95rem;">Starbucks were one of
+                        the first firms to adopt mobile technology, creating an app in 2009 to allow customers to check
+                        the balance of their loyalty card, and in a select few stores, differentiated them in the market
+                        due to the Coronavirus outbreak, allowing customers to order and pay for their drinks without
+                        having to come into contact with an employee and adhere to social distancing measures. This
+                        mobile technology has also allowed them to collect large amounts of data on their customers,
+                        allowing them to track the drinks that they purchase and use that to recommend them products
+                        that they should purchase in the future.</p>
+                    <p style="margin-bottom:1rem; color:var(--text-secondary); font-size:0.95rem;">However, it is not
+                        all smooth sailing with the firm having recently come under scrutiny for the amount of tax they
+                        are paying, having only paid £4m worth of tax despite earning £287m in revenues. Further to
+                        this, in 2018 a US employee won an Employment Tribunal, when suing the corporation for unpaid
+                        overtime. They came under even further scrutiny in that same year after pressure groups called
+                        for them to deliver their pledge to develop a recyclable coffee cup with a petition signed by
+                        nearly 900,000 people and protesters gathered at the company's Annual General Meeting.</p>
+                    <p style="margin-bottom:0; color:var(--text-secondary); font-size:0.95rem;">More recently however,
+                        the pandemic has only quickened Starbucks' restructuring plans of moving away from traditional
+                        cafés and toward more drive throughs and online ordering. But like many businesses they have
+                        seen a significant decline in trade due to the virus and because of this many staff have seen a
+                        reduction in their hours. Although the governments Eat Out to Help Out scheme has been extremely
+                        effective in helping them build back up to their pre-lockdown level of sales. Starbucks have
+                        seen very similar patterns of trade in the past, for example the Brexit vote in 2016 caused
+                        consumer confidence to plummet and saw sales decline. This combined with slowing economic
+                        growth, correlated to a 61% reduction in UK pre-tax profits.</p>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem;">
+                    <div class="card" style="border-left:4px solid #ef4444;">
+                        <h3 style="color:#ef4444;">1. Political</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Taxation:</strong> Starbucks faced
+                            massive criticism for paying only £4M tax on £387M revenue in UK.</p>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Trade:</strong> Brexit uncertainty
+                            affects import costs of coffee beans.</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid #f59e0b;">
+                        <h3 style="color:#f59e0b;">2. Economic</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Recession:</strong> Coffee is a luxury.
+                            High inflation and recession reduce customers' disposable income.</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid #3b82f6;">
+                        <h3 style="color:#3b82f6;">3. Social</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Conscious Consumers:</strong> Shift
+                            towards ethical sourcing (Fair Trade).</p>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Health Trends:</strong> Demand for oat
+                            milk, almond milk, and low-sugar options.</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid #8b5cf6;">
+                        <h3 style="color:#8b5cf6;">4. Technological</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Mobile:</strong> The Starbucks App
+                            (Order & Pay) drives 25%+ of transactions.</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid #10b981;">
+                        <h3 style="color:#10b981;">5. Legal</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Labor Laws:</strong> Minimum wage
+                            increases significantly impact operating costs.</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid #22d3ee;">
+                        <h3 style="color:#22d3ee;">6. Environmental</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Waste:</strong> Massive pressure to ban
+                            plastic straws and single-use cups.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="quiz" class="section-view">
+                <div style="max-width:800px; margin:0 auto;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:2rem;">
+                        <h1 style="font-family:var(--font-display);">Quiz Mode</h1>
+                        <h2 style="color:var(--brand-primary);">Score: <span id="q-score">0</span></h2>
+                    </div>
+                    <div id="quiz-container" class="card">
+                        <p id="q-progress"
+                            style="color:var(--text-muted); text-transform:uppercase; font-size:0.8rem; margin-bottom:1rem;">
+                            Question 1</p>
+                        <h2 id="q-text" style="font-family:var(--font-display);">Loading...</h2>
+                        <div id="q-options"></div>
+                        <button id="q-next" class="btn btn-primary" style="margin-top:2rem; width:100%; display:none;"
+                            onclick="nextQ()">Next Question</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+
+    <!-- MOVED AI INTERFACE CONTAINER (FULLSCREEN ROOT) -->
+    <div id="ai-interface"
+        style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:9999; background:rgba(0,0,0,1); overflow:hidden;">
+        <iframe src="/" style="width:100%; height:100%; border:none; display:block;"
+            allow="camera; microphone; autoplay"></iframe>
+        <button onclick="closeAI()"
+            style="position:absolute; top:2rem; right:2rem; background:rgba(255, 0, 0, 0.2); border:1px solid rgba(255,255,255,0.3); color:white; width:50px; height:50px; border-radius:50%; cursor:pointer; z-index:10000; font-size:1.5rem; display:flex; align-items:center; justify-content:center; transition: all 0.3s ease;"
+            onmouseover="this.style.background='rgba(255,0,0,0.8)'"
+            onmouseout="this.style.background='rgba(255,0,0,0.2)'">✕</button>
+    </div>
+
+    <script>
+        // --- DATA (RETAINED FROM PREVIOUS) ---
+        // (In a real app, I would import these, but keeping single file structure for you)
+        // I will re-inject the expanded notes here to ensure nothing is lost.
+
+        const notes = [
+            {
+                id: 'ch2', title: 'Ch 2: Company and Marketing Strategy', content: `
+                <h3>Theme: Partnering to Build Customer Engagement, Value, and Relationships</h3>
+                
+                <h3>1. Strategic Planning</h3>
+                <p>The process of developing and maintaining a strategic fit between the organizations goals/capabilities and its changing marketing opportunities.</p>
+                <div class="tip-box">
+                    <strong>The 4 Steps of Strategic Planning:</strong>
+                    <ol>
+                        <li><strong>Defining the Mission:</strong> What is our purpose?</li>
+                        <li><strong>Setting Objectives:</strong> Turning the mission into detailed supporting objectives.</li>
+                        <li><strong>Designing the Business Portfolio:</strong> Deciding which businesses to invest in.</li>
+                        <li><strong>Planning Marketing Strategies:</strong> Detailed planning for each functional department.</li>
+                    </ol>
+                    <p>💡 <strong>Memory Tip:</strong> M-O-P-S (Mission, Objectives, Portfolio, Strategies).</p>
+                </div>
+
+                <h3>2. Mission Statement</h3>
+                <p>A statement of the organizations purpose—what it wants to accomplish in the larger environment.</p>
+                <h4>Product-Oriented vs. Market-Oriented Definitions:</h4>
+                <ul>
+                    <li><strong>Product-Oriented:</strong> "We sell coffee." (Starbucks)</li>
+                    <li><strong>Market-Oriented:</strong> "We sell 'The Starbucks Experience'—one that enriches people's lives."</li>
+                </ul>
+                <p><em>Example:</em> Airbnb isnt just about renting rooms; their mission is "Belong Anywhere."</p>
+                <p><em>Example:</em> CVS Health is a "pharmacy innovation company" helping people on their path to better health.</p>
+
+                <h3>3. Business Portfolio Analysis (BCG Matrix)</h3>
+                <p>Evaluates a company's Strategic Business Units (SBUs) based on Market Growth Rate and Relative Market Share.</p>
+                <ul>
+                    <li><strong>Stars:</strong> High growth, High share. (Need heavy investment to finance growth).</li>
+                    <li><strong>Cash Cows:</strong> Low growth, High share. (Established, produce cash to pay bills).</li>
+                    <li><strong>Question Marks:</strong> High growth, Low share. (Need cash to hold share; hard decision).</li>
+                    <li><strong>Dogs:</strong> Low growth, Low share. (Generate enough cash to sustain themselves but no promise).</li>
+                </ul>
+
+                <h3>4. The Product/Market Expansion Grid (Growth Strategies)</h3>
+                <p>How companies grow sales.</p>
+                <ul>
+                    <li><strong>Market Penetration:</strong> Existing products in Existing markets (e.g., selling more to current customers).</li>
+                    <li><strong>Market Development:</strong> Existing products in New markets (e.g., Starbucks opening in a new country).</li>
+                    <li><strong>Product Development:</strong> New products in Existing markets (e.g., Starbucks introducing a new seasonal drink).</li>
+                    <li><strong>Diversification:</strong> New products in New markets (e.g., buying a non-food business).</li>
+                </ul>
+
+                <h3>5. Marketing Mix (The 4 Ps)</h3>
+                <p>The set of tactical marketing tools the firm blends to produce the response it wants in the target market.</p>
+                <ul>
+                    <li><strong>Product:</strong> The goods/services offered (Variety, Design, Packaging).</li>
+                    <li><strong>Price:</strong> Amount of money customers pay (List price, Discounts).</li>
+                    <li><strong>Place:</strong> Company activities that make the product available (Channels, Logistics).</li>
+                    <li><strong>Promotion:</strong> Activities that communicate value (Advertising, PR).</li>
+                </ul>
+
+                <h3>6. SWOT Analysis</h3>
+                <ul>
+                    <li><strong>Strengths (Internal):</strong> Capabilities, resources.</li>
+                    <li><strong>Weaknesses (Internal):</strong> Limitations.</li>
+                    <li><strong>Opportunities (External):</strong> Favorable trends.</li>
+                    <li><strong>Threats (External):</strong> Unfavorable external factors.</li>
+                </ul>
+
+                <h3>7. Measuring Marketing ROI (The "Perfecting" Addition)</h3>
+                <p><strong>Marketing ROI:</strong> Net return from a marketing investment divided by the costs of the marketing investment.</p>
+                <ul>
+                    <li><strong>Purpose:</strong> Measures the profits generated by investments in marketing activities.</li>
+                    <li><strong>Measures:</strong> Standard measures (sales, market share) and Customer-centered measures (customer acquisition, retention, lifetime value).</li>
+                </ul>
+                `
+            },
+            {
+                id: 'ch7', title: 'Ch 7: Customer Value-Driven Marketing Strategy', content: `
+                <h3>Theme: Creating Value for Target Customers</h3>
+
+                <h3>1. The Core Strategy Steps (STDP)</h3>
+                <ul>
+                    <li><strong>Segmentation:</strong> Divide the total market into smaller segments.</li>
+                    <li><strong>Targeting:</strong> Select the segment or segments to enter.</li>
+                    <li><strong>Differentiation:</strong> Differentiate the market offering to create superior customer value.</li>
+                    <li><strong>Positioning:</strong> Position the market offering in the minds of target customers.</li>
+                </ul>
+
+                <h3>2. Market Segmentation Bases</h3>
+                <p>How do we divide the market?</p>
+                <ul>
+                    <li><strong>Geographic:</strong> Nations, regions, states, cities (e.g., Target sells winter coats in NY, swimsuits in FL).</li>
+                    <li><strong>Demographic:</strong> Age, gender, income, occupation.</li>
+                    <li><strong>Psychographic:</strong> Social class, lifestyle, personality. <br><em>Example:</em> Rocky Mountain Tiny Houses targets the "simple living" lifestyle segment.</li>
+                    <li><strong>Behavioral:</strong> Occasions, benefits sought, user status, usage rate. <br><em>Example:</em> Schwinn makes bikes for different benefits—mountain vs. road.</li>
+                </ul>
+                <div class="mnemonic-box">💡 <strong>Memory Tip:</strong> G-D-P-B (Good Dogs Play Ball) -> Geo, Demo, Psycho, Behavior.</div>
+
+                <h3>3. Business & International Segmentation (The "Perfecting" Addition)</h3>
+                <ul>
+                    <li><strong>Business Markets:</strong> Segmented by operating characteristics, purchasing approaches, situational factors, and personal characteristics.</li>
+                    <li><strong>Intermarket (Cross-Market) Segmentation:</strong> Forming segments of consumers who have similar needs/behaviors even though they are located in different countries. <br><em>Example:</em> Zara targets style-conscious but value-seeking consumers globally.</li>
+                </ul>
+
+                <h3>4. Requirements for Effective Segmentation</h3>
+                <p>To be useful, segments must be:</p>
+                <ul>
+                    <li><strong>Measurable:</strong> Size and purchasing power can be measured.</li>
+                    <li><strong>Accessible:</strong> Can be reached and served.</li>
+                    <li><strong>Substantial:</strong> Large and profitable enough.</li>
+                    <li><strong>Differentiable:</strong> Respond differently to different marketing elements.</li>
+                    <li><strong>Actionable:</strong> Effective programs can be designed for them.</li>
+                </ul>
+
+                <h3>5. Market Targeting Strategies</h3>
+                <ul>
+                    <li><strong>Undifferentiated (Mass) Marketing:</strong> Target the whole market with one offer.</li>
+                    <li><strong>Differentiated (Segmented) Marketing:</strong> Target several market segments with separate offers. <br><em>Example:</em> Marriott (IHG) has different brands like Holiday Inn vs. Hotel Indigo.</li>
+                    <li><strong>Concentrated (Niche) Marketing:</strong> Large share of a small market. <br><em>Example:</em> American Giant focusing on made-in-USA apparel.</li>
+                    <li><strong>Micromarketing:</strong> Tailoring products to specific individuals (Local marketing & Individual marketing). <br><em>Example:</em> FitMyFoot 3D prints footwear for individual feet.</li>
+                </ul>
+
+                <h3>6. Differentiation & Positioning</h3>
+                <p><strong>Positioning:</strong> The place the product occupies in the consumer's mind relative to competitors.</p>
+                <p><em>Example:</em> Land Rover positions itself on luxury + off-road performance.</p>
+                <div class="tip-box"><strong>Socially Responsible Targeting:</strong> Marketers must consider if they are targeting vulnerable segments responsibly (e.g., not targeting kids with junk food).</div>
+                `
+            },
+            {
+                id: 'ch8', title: 'Ch 8: Products, Services, and Brands', content: `
+                <h3>Theme: Building Customer Value</h3>
+
+                <h3>1. What is a Product?</h3>
+                <p>Anything offered to a market for attention, acquisition, use, or consumption.</p>
+                <ul>
+                    <li><strong>Service:</strong> Intangible product (banking, airline travel).</li>
+                    <li><strong>Experience:</strong> Creating memorable events.</li>
+                </ul>
+                <p><em>Example:</em> Nike isn't just shoes; it's a "Just Do It" passion for sports.</p>
+                <p><em>Example:</em> Airbnb "Night At" program (sleepover at Dracula's castle).</p>
+
+                <h4>Three Levels of Product:</h4>
+                <ol>
+                    <li><strong>Core Customer Value:</strong> What is the buyer really buying? (e.g., An iPad is "entertainment").</li>
+                    <li><strong>Actual Product:</strong> Brand name, features, design, packaging.</li>
+                    <li><strong>Augmented Product:</strong> After-sale service, warranty, product support.</li>
+                </ol>
+
+                <h3>2. Consumer Product Classifications</h3>
+                <ul>
+                    <li><strong>Convenience:</strong> Frequent purchase, little effort (Toothpaste).</li>
+                    <li><strong>Shopping:</strong> Less frequent, compares suitability/price (Furniture, Clothing).</li>
+                    <li><strong>Specialty:</strong> Strong brand preference, little comparison, high price (Rolex, Crystal).</li>
+                    <li><strong>Unsought:</strong> Consumer doesn't know about or doesn't normally think of buying (Life Insurance, Blood Donation).</li>
+                </ul>
+                <div class="mnemonic-box">💡 <strong>Memory Tip:</strong> C-S-S-U (Can Sam Sell Umbrellas?) -> Convenience, Shopping, Specialty, Unsought.</div>
+
+                <h3>3. Industrial & Social Products (The "Perfecting" Addition)</h3>
+                <ul>
+                    <li><strong>Industrial Products:</strong> Purchased for further processing or for use in conducting a business (Materials and parts, Capital items, Supplies).</li>
+                    <li><strong>Place Marketing:</strong> Changing attitudes toward particular places (e.g., Tourism boards).</li>
+                    <li><strong>Social Marketing:</strong> Using marketing to improve individual/societal well-being. <br><em>Example:</em> "She Can STEM" campaign to encourage girls in science.</li>
+                </ul>
+
+                <h3>4. Product Decisions</h3>
+                <p><strong>Individual Decisions:</strong> Attributes -> Branding -> Packaging -> Labeling -> Support Services.</p>
+                
+                <h4>Product Line</h4>
+                <p>A group of closely related products.</p>
+                <ul>
+                    <li><strong>Line Filling:</strong> Adding more items within the present range.</li>
+                    <li><strong>Line Stretching:</strong> Lengthening the product line beyond current range. <br><em>Example:</em> Google Nest stretching/filling to serve smart homes.</li>
+                </ul>
+
+                <h4>Product Mix</h4>
+                <p>All product lines and items a seller offers. Dimensions: Width, Length, Depth, Consistency.</p>
+                <p><em>Example:</em> Colgate-Palmolive "World of Care".</p>
+
+                <h3>5. Services Marketing Characteristics</h3>
+                <p>Services are different from physical goods because of four traits:</p>
+                <ul>
+                    <li><strong>Intangibility:</strong> Cannot be seen/felt before purchase.</li>
+                    <li><strong>Inseparability:</strong> Produced and consumed at the same time.</li>
+                    <li><strong>Variability:</strong> Quality depends on who provides it and when.</li>
+                    <li><strong>Perishability:</strong> Cannot be stored for later sale.</li>
+                </ul>
+                <div class="mnemonic-box">💡 <strong>Memory Tip:</strong> VIIP -> Variability, Intangibility, Inseparability, Perishability.</div>
+
+                <h3>6. Brand Strategy Decisions</h3>
+                <p><strong>Brand Equity:</strong> The differential effect that knowing the brand name has on customer response.</p>
+                
+                <h4>Brand Sponsorship:</h4>
+                <ul>
+                    <li>National Brand (Samsung).</li>
+                    <li>Private (Store) Brand (Kirkland/Costco).</li>
+                    <li>Licensing (Disney characters on toothbrushes).</li>
+                    <li>Co-branding (Two brands together).</li>
+                </ul>
+
+                <h4>Brand Development Strategies:</h4>
+                <ul>
+                    <li><strong>Line Extension:</strong> Existing Brand Name, Existing Product Category (e.g., New flavor of Coke).</li>
+                    <li><strong>Brand Extension:</strong> Existing Brand Name, New Product Category (e.g., Mr. Clean car wash).</li>
+                    <li><strong>Multibrands:</strong> New Brand Name, Existing Product Category (e.g., PepsiCo owns Pepsi, Mountain Dew).</li>
+                    <li><strong>New Brands:</strong> New Brand Name, New Product Category.</li>
+                </ul>
+                `
+            },
+            {
+                id: 'ch9', title: 'Ch 9: New Products & Product Life Cycle', content: `
+                <h3>1. The Golden Rule of this Chapter</h3>
+                <p><strong>Innovation is Survival.</strong></p>
+                <p><strong>Fact:</strong> 60%–80% of new products fail.</p>
+                <p><strong>The Solution:</strong> You need a system to innovate.</p>
+                <p><em>Example:</em> Google (Alphabet) isn't just a search engine; it's a "Moonshot Factory" culture that accepts failure to find the next big thing.</p>
+
+                <h3>2. The 8 Steps to Creating a New Product</h3>
+                <div class="tip-box">
+                    <strong>Must memorize this order:</strong>
+                    <ol>
+                        <li><strong>Idea Generation:</strong> Finding ideas (Internal R&D, Crowdsourcing).</li>
+                        <li><strong>Idea Screening:</strong> R-W-W Rule (Real? Win? Worth?).</li>
+                        <li><strong>Concept Development & Testing:</strong> Detailed version tested with consumers ("Would you buy this?").</li>
+                        <li><strong>Marketing Strategy:</strong> Target market, price, budget.</li>
+                        <li><strong>Business Analysis:</strong> Check the money (Sales vs Costs).</li>
+                        <li><strong>Product Development:</strong> Building the physical prototype (Big money spent here, e.g., Pfizer COVID vaccine).</li>
+                        <li><strong>Test Marketing:</strong> Standard (Real cities) vs Simulated (Online).</li>
+                        <li><strong>Commercialization:</strong> Full launch (When and Where).</li>
+                    </ol>
+                    <p>🧠 <strong>Mnemonic:</strong> I Saw Cats Marching Behind People Tasting Candy.</p>
+                </div>
+
+                <h3>3. The Product Life Cycle (PLC)</h3>
+                <ul>
+                    <li><strong>Stage 1: Introduction (The Baby):</strong> Low sales, negative profits. Goal: Awareness.</li>
+                    <li><strong>Stage 2: Growth (The Teenager):</strong> Climbing sales, rising profits. Goal: Maximize Market Share.</li>
+                    <li><strong>Stage 3: Maturity (The Adult):</strong> Peak sales, leveling profits. Goal: Defend profit (Modify product/marketing).</li>
+                    <li><strong>Stage 4: Decline (The Senior):</strong> Falling sales. Strategy: Milk (cut costs) or Drop.</li>
+                </ul>
+
+                <h3>4. Vital Terms</h3>
+                <ul>
+                    <li><strong>Crowdsourcing:</strong> Asking the "crowd" for ideas.</li>
+                    <li><strong>Standardization:</strong> Exact same product globally (iPhone).</li>
+                    <li><strong>Adaptation:</strong> Modifying for local culture (McDonald's wine in France).</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Exam Tips:</strong><br>
+                    - If they ask about "Screening": Write <strong>R-W-W</strong>.<br>
+                    - Introduction Stage Goal = <strong>AWARENESS</strong>.<br>
+                    - Maturity Stage Goal = <strong>DEFENSE</strong>.
+                </div>
+                `
+            },
+            {
+                id: 'ch10', title: 'Ch 10: Pricing – Understanding Value', content: `
+                <h3>1. The Golden Rule of this Chapter</h3>
+                <p><strong>Price is the only "P" that brings in money.</strong> (Others are costs).</p>
+                <p>You don't just set a number; you capture value.</p>
+                <p><em>Example:</em> Peloton charges $1,745 for the "cult" and lifestyle, not just the bike.</p>
+
+                <h3>2. The 3 Major Pricing Strategies</h3>
+                <h4>Strategy 1: Customer Value-Based Pricing (The "Right" Way)</h4>
+                <p>Start with the customer's perception of value.</p>
+                <ul>
+                    <li><strong>Good-Value Pricing:</strong> Fair quality at fair price (Aldi).</li>
+                    <li><strong>Value-Added Pricing:</strong> Charging more for features/services (Peloton).</li>
+                </ul>
+
+                <h4>Strategy 2: Cost-Based Pricing (The "Math" Way)</h4>
+                <p>Cost + Markup. Risk: Ignores demand.</p>
+                <ul>
+                    <li><strong>Cost-Plus:</strong> Cost + Markup.</li>
+                    <li><strong>Break-Even:</strong> Price covers costs exactly (0 profit).</li>
+                </ul>
+
+                <h4>Strategy 3: Competition-Based Pricing (The "Follower" Way)</h4>
+                <p>Look at competitors. More value? Higher price. Less value? Lower price.</p>
+
+                <h3>3. Essential Cost Terms</h3>
+                <ul>
+                    <li><strong>Fixed Costs (Overhead):</strong> Stay same (Rent, Salaries). Memory: "The Factory".</li>
+                    <li><strong>Variable Costs:</strong> Go up with volume (Materials). Memory: "The Volume".</li>
+                    <li><strong>Total Costs:</strong> Fixed + Variable.</li>
+                </ul>
+
+                <h3>4. The Economics Stuff</h3>
+                <ul>
+                    <li><strong>Demand Curve:</strong> Price ⬆️ = Demand ⬇️.</li>
+                    <li><strong>Price Elasticity:</strong> Sensitivity to price.
+                        <ul>
+                            <li><strong>Inelastic:</strong> "Need it" (Gas).</li>
+                            <li><strong>Elastic:</strong> "Too expensive, bye" (Vacation).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Exam Tips:</strong><br>
+                    - "Perception" = <strong>Value-Based</strong>.<br>
+                    - "Markup" = <strong>Cost-Based</strong>.
+                </div>
+                `
+            },
+            {
+                id: 'ch11', title: 'Ch 11: Pricing Strategies (Advanced)', content: `
+                <h3>1. Pricing New Products</h3>
+                <ul>
+                    <li><strong>Market-Skimming:</strong> High initial price to "skim" revenue (Apple). Use when high quality/image.</li>
+                    <li><strong>Market-Penetration:</strong> Low initial price to win share (Samsung/IKEA). Use when market is price-sensitive.</li>
+                </ul>
+
+                <h3>2. Product Mix Pricing</h3>
+                <ul>
+                    <li><strong>Product Line:</strong> Price steps (iPhone 14 vs Pro).</li>
+                    <li><strong>Optional-Product:</strong> Main + Extras (Car + GPS).</li>
+                    <li><strong>Captive-Product:</strong> Cheap main + Expensive supplies (Printer + Ink). Memory: "Trapped".</li>
+                    <li><strong>By-Product:</strong> Selling waste (Sawdust).</li>
+                    <li><strong>Product Bundle:</strong> Combo pack (McDonald's Meal).</li>
+                </ul>
+
+                <h3>3. Price Adjustment Strategies</h3>
+                <ul>
+                    <li><strong>Discount/Allowance:</strong> Cash discount, Trade-in.</li>
+                    <li><strong>Segmented:</strong> Student/Senior discounts.</li>
+                    <li><strong>Psychological:</strong> $100 perfume smells better than $10. Reference prices ("Was $100!").</li>
+                    <li><strong>Promotional:</strong> Flash sales.</li>
+                    <li><strong>Dynamic:</strong> Prices move with demand (Uber). Memory: "Movement".</li>
+                </ul>
+
+                <h3>4. Public Policy (The Illegal Stuff)</h3>
+                <ul>
+                    <li><strong>Price Fixing:</strong> Collusion with competitors.</li>
+                    <li><strong>Predatory Pricing:</strong> Selling below cost to kill competition.</li>
+                    <li><strong>Deceptive Pricing:</strong> Lying about original price.</li>
+                </ul>
+                `
+            },
+            {
+                id: 'ch12', title: 'Ch 12: Marketing Channels – Delivering Value', content: `
+                <h3>Theme: You can cut out the middleman, but you can't cut out their job.</h3>
+                <p><strong>Value Delivery Network:</strong> It's a partnership. (Supplier -> Company -> Distributor -> Customer).</p>
+                <p><em>Example:</em> Airbnb disrupted this by creating a new network.</p>
+
+                <h3>2. How Channels Are Organized</h3>
+                <ul>
+                    <li><strong>Conventional:</strong> Everyone fights; lower profits.</li>
+                    <li><strong>Vertical Marketing System (VMS):</strong> Teamwork.
+                        <ul>
+                            <li><strong>Corporate:</strong> Single ownership (Zara).</li>
+                            <li><strong>Contractual:</strong> Franchise (McDonald's).</li>
+                            <li><strong>Administered:</strong> Big player bullies (Walmart).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Horizontal:</strong> Two companies join (Starbucks inside Target).</li>
+                </ul>
+
+                <h3>3. Distribution Strategies</h3>
+                <ul>
+                    <li><strong>Intensive:</strong> Everywhere (Coke).</li>
+                    <li><strong>Exclusive:</strong> Few places (Rolex).</li>
+                    <li><strong>Selective:</strong> Middle (TVs).</li>
+                </ul>
+
+                <h3>4. Logistics (The Moving Stuff)</h3>
+                <p>Goal: Right product, right place, right time, right cost.</p>
+                <ul>
+                    <li><strong>Warehousing:</strong> Storing.</li>
+                    <li><strong>Inventory (JIT):</strong> Just-in-Time saves storage cost.</li>
+                    <li><strong>Transportation:</strong> Truck (Flexible), Rail (Bulk), Water (Cheap/Slow), Air (Fast/Exp), Multimodal.</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Exam Tips:</strong><br>
+                    - <strong>Disintermediation:</strong> Killing the middleman (Spotify killed CD stores).<br>
+                    - <strong>Upstream:</strong> Raw materials. <strong>Downstream:</strong> Retailers (Marketing focus).
+                </div>
+                `
+            }
+        ];
+
+
+        const islamicNotes = [
+            {
+                id: 'isl1', title: 'Topic 1: Basic Concepts of Islam', content: `
+                <h3>1. The Foundation: Iman Mufassal</h3>
+                <p>You must believe in 7 specific things:</p>
+                <ol>
+                    <li>Allah (God)</li>
+                    <li>Malaikah (Angels)</li>
+                    <li>Kutub (Books)</li>
+                    <li>Rusul (Prophets)</li>
+                    <li>Yaum al-Akhirah (Day of Judgment)</li>
+                    <li>Taqdeer (Predestination – good/bad is from Allah)</li>
+                    <li>Ba'th ba'd al-Mawt (Resurrection after death)</li>
+                </ol>
+
+                <h3>2. Tawhid (The Oneness of Allah)</h3>
+                <p><strong>4 Levels of Oneness:</strong></p>
+                <ul>
+                    <li><strong>Necessary Existence (Wajib al-Wujud):</strong> Only God must exist; He is eternal.</li>
+                    <li><strong>Creator of All:</strong> Created everything, including actions/thoughts.</li>
+                    <li><strong>Sole Manager:</strong> Manages the universe alone.</li>
+                    <li><strong>Worthy of Worship:</strong> The only one deserving prayer.</li>
+                </ul>
+                <div class="mnemonic-box">💡 <strong>Memory Tip:</strong> Founder -> Builder -> CEO -> Only one who gets paid (Worshipped).</div>
+
+                <h3>3. Taqdeer (Destiny)</h3>
+                <p><strong>4 Elements:</strong></p>
+                <ul>
+                    <li><strong>Knowledge (Ilm):</strong> Allah knew everything before creation.</li>
+                    <li><strong>Writing (Kitabat):</strong> Written in Lauh-e-Mahfooz.</li>
+                    <li><strong>Will (Mashiyat):</strong> Nothing happens without His permission.</li>
+                    <li><strong>Creation (Khalaq):</strong> Allah creates the action; we choose it (Adopters/Kasib).</li>
+                </ul>
+                <div class="tip-box">"Wa kana amrullahi qadran maqdura" (And the command of Allah is a decree determined).</div>
+                `
+            },
+            {
+                id: 'isl2', title: 'Topic 2: Prophethood (Risalat)', content: `
+                <h3>1. Nabi vs. Rasool (The Big Difference)</h3>
+                <ul>
+                    <li><strong>Rasool (Messenger):</strong> Brings a New Shariah (Law) and usually a New Book (e.g., Musa, Isa, Muhammad SAW).</li>
+                    <li><strong>Nabi (Prophet):</strong> Follows/enforces Previous Shariah (e.g., Haroon followed Musa).</li>
+                </ul>
+
+                <h3>2. The Numbers Game</h3>
+                <ul>
+                    <li><strong>Total Prophets:</strong> ~124,000</li>
+                    <li><strong>First:</strong> Adam (AS) | <strong>Last:</strong> Muhammad (SAW)</li>
+                    <li><strong>Mentioned in Quran:</strong> 25 by name.</li>
+                </ul>
+
+                <h3>3. Why Send Prophets?</h3>
+                <ul>
+                    <li><strong>Human Limitations:</strong> Mind can find God, but not <em>how</em> to worship Him.</li>
+                    <li><strong>Hujjah (Argument):</strong> So humans can't say "We didn't know" on Judgment Day.</li>
+                </ul>
+                `
+            },
+            {
+                id: 'isl3', title: 'Topic 3: Islamic Economics & Contracts', content: `
+                <h3>1. Islamic vs. Capitalist Economy</h3>
+                <ul>
+                    <li><strong>Capitalism:</strong> Profit/Self-Interest, Supply & Demand, Absolute Ownership.</li>
+                    <li><strong>Islamic:</strong> Divine Rules (Shariah), Resources are a Trust (Amanah), No Interest (Riba).</li>
+                </ul>
+
+                <h3>2. 7 Conditions of a Valid Sale</h3>
+                <div class="mnemonic-box">💡 <strong>Memory Trick:</strong> E-O-P-D (Existence, Ownership, Possession, Definition)</div>
+                <ul>
+                    <li><strong>Existence:</strong> Product must exist (No unborn calves).</li>
+                    <li><strong>Ownership:</strong> You must own it.</li>
+                    <li><strong>Possession:</strong> Physical/Constructive control.</li>
+                    <li><strong>Definition:</strong> Price/Product clearly defined (No Gharar/Ambiguity).</li>
+                    <li><strong>Halal:</strong> Product must be permissible.</li>
+                    <li><strong>Transferable:</strong> Can hand it over.</li>
+                    <li><strong>Consent:</strong> Mutual agreement.</li>
+                </ul>
+
+                <h3>3. Deferred Sale (Installments)</h3>
+                <p>Allowed IF: Price is fixed at contract time (no hiking for late payment) and dates are clear.</p>
+                `
+            },
+            {
+                id: 'isl4', title: 'Topic 4: Zakat (The Poor Due)', content: `
+                <h3>1. Definition</h3>
+                <p><strong>Literal:</strong> To Purify / To Increase.</p>
+                <p><strong>Technical:</strong> Transferring 2.5% of surplus wealth to deserving Muslims.</p>
+
+                <h3>2. The Golden Rule of Priorities</h3>
+                <p>Order of preference for relatives:</p>
+                <ol>
+                    <li>Brothers/Sisters</li>
+                    <li>Nephews/Nieces</li>
+                    <li>Uncles/Aunts</li>
+                    <li>In-laws</li>
+                </ol>
+                <p><em>Note: Cannot give to Parents, Children, Spouse.</em></p>
+
+                <h3>3. Calculation</h3>
+                <p><strong>Formula:</strong> (Total Assets - Debts) x 2.5%</p>
+                <p><strong>Nisab:</strong> Gold (7.5 Tola / 87.48g) or Silver (52.5 Tola / 612.36g).</p>
+                `
+            },
+            {
+                id: 'isl5', title: 'Topic 5: Hajj (The Pilgrimage)', content: `
+                <h3>1. Virtues</h3>
+                <p>"The reward of Hajj Mabrur is nothing but Jannah."</p>
+
+                <h3>2. The 5 Days of Hajj SEQUENCE</h3>
+                <div class="tip-box"><strong>8th Zil Hijjah:</strong> Ihram -> Mina (Sleep).</div>
+                <div class="tip-box"><strong>9th Zil Hijjah (Arafah):</strong> Arafat (Wuquf - Main Fard) -> Sunset -> Muzdalifah (Sleep/Collect Stones).</div>
+                <div class="tip-box"><strong>10th Zil Hijjah (Sacrifice):</strong> Mina -> Pelt Big Devil -> Sacrifice -> Shave -> Tawaf.</div>
+                <div class="mnemonic-box">💡 <strong>Locations:</strong> M - A - M (Mina -> Arafat -> Muzdalifah).</div>
+                `
+            },
+            {
+                id: 'isl6', title: 'Topic 6: Ethics (Surah Hujurat)', content: `
+                <h3>1. Manners with Prophet (v1-5)</h3>
+                <p>Don't raise voice above him. If you do, deeds might be voided.</p>
+
+                <h3>2. Social Evils (v11-12)</h3>
+                <ul>
+                    <li><strong>Mockery:</strong> Men mocking men, women mocking women.</li>
+                    <li><strong>Sarcasm/Defamation:</strong> Finding faults.</li>
+                    <li><strong>Nicknames:</strong> Offensive names.</li>
+                    <li><strong>Suspicion (Zann):</strong> Avoid it.</li>
+                    <li><strong>Spying:</strong> Don't look for faults.</li>
+                    <li><strong>Backbiting:</strong> Like eating flesh of dead brother.</li>
+                </ul>
+
+                <h3>3. The Standard (v13)</h3>
+                <p>"The most noble of you is the most righteous (Taqwa)." Race/Tribes are just for identity.</p>
+                `
+            }
+        ];
+
+        const flashcardsData = [
+            { ch: "ch2", f: "Market Segmentation", b: "Dividing a market into smaller segments with distinct needs." },
+            { ch: "ch2", f: "Differentiation", b: "Making a product different to create superior customer value." },
+            { ch: "ch2", f: "Positioning", b: "Arranging for a product to occupy a clear, distinctive place in consumer minds." },
+            { ch: "ch2", f: "Demographic Segmentation", b: "Dividing market by Age, Gender, Income, Occupation." },
+            { ch: "ch2", f: "Psychographic Segmentation", b: "Dividing market by Social Class, Lifestyle, Personality." },
+            { ch: "ch7", f: "Undifferentiated Marketing", b: "Targeting the whole market with one offer (Mass Marketing)." },
+            { ch: "ch7", f: "Micromarketing", b: "Tailoring products to the needs of specific individuals (Local/Individual)." },
+            { ch: "ch7", f: "Value Proposition", b: "The full mix of benefits on which a brand is differentiated and positioned." },
+            { ch: "ch8", f: "Core Customer Value", b: "The basic problem-solving benefit that consumers are really buying." },
+            { ch: "ch8", f: "Augmented Product", b: "Additional consumer services and benefits (Warranty, Credit)." },
+            { ch: "ch8", f: "Convenience Product", b: "Consumer product that customers usually buy frequently, immediately, and with minimal comparison." },
+            { ch: "ch8", f: "Specialty Product", b: "Consumer product with unique characteristics for which a significant group is willing to make a special purchase effort." },
+            { ch: "ch8", f: "Unsought Product", b: "Consumer product that the consumer either does not know about or knows about but does not normally consider buying." },
+            { ch: "ch9", f: "Product Life Cycle (PLC)", b: "The course of a product's sales and profits over its lifetime." },
+            { ch: "ch9", f: "PLC: Introduction Stage", b: "Period of slow sales growth as product is introduced. Nonexistent profits." },
+            { ch: "ch9", f: "PLC: Maturity Stage", b: "Period of slowdown in sales growth because product has achieved acceptance. Profits level off." },
+            { ch: "ch10", f: "Value-Based Pricing", b: "Setting price based on buyers' perceptions of value rather than on the seller's cost." },
+            { ch: "ch10", f: "Cost-Plus Pricing", b: "Adding a standard markup to the cost of the product." },
+            { ch: "ch10", f: "Price Elasticity", b: "A measure of the sensitivity of demand to changes in price." },
+            { ch: "ch11", f: "Dynamic Pricing", b: "Adjusting prices continually to meet the characteristics and needs of individual customers and situations." },
+            { ch: "ch11", f: "Psychological Pricing", b: "Pricing that considers the psychology of prices, not simply the economics ($9.99)." },
+            { ch: "ch12", f: "Direct Marketing Channel", b: "A marketing channel that has no intermediary levels." },
+            { ch: "ch12", f: "Vertical Marketing System (VMS)", b: "A channel structure in which producers, wholesalers, and retailers act as a unified system." },
+            { ch: "ch12", f: "Multichannel Distribution", b: "A single firm sets up two or more marketing channels to reach one or more customer segments." },
+            { ch: "gen", f: "SWOT Analysis", b: "Strengths (Int), Weaknesses (Int), Opportunities (Ext), Threats (Ext)." },
+            { ch: "gen", f: "Marketing Mix (4 Ps)", b: "Product, Price, Place, Promotion." }
+        ];
+
+        const quizData = [
+            // Part 1: Conceptual Questions adapted to Quiz format
+            { q: "What is the difference between a Star and a Cash Cow in the BCG Matrix?", a: ["Star: High Growth/High Share, Cash Cow: Low Growth/High Share", "Star: Low Growth/High Share, Cash Cow: High Growth/High Share", "Star: High Growth/Low Share, Cash Cow: Low Growth/Low Share", "They are the same"], c: 0 },
+            { q: "What does 'Marketing ROI' measure?", a: ["Return on Influencer investment", "Profits generated by marketing investments", "Rate of Interest on loans", "Revenue from online sales only"], c: 1 },
+            { q: "Differentiated Marketing targets:", a: ["The whole market with one offer", "A small niche share", "Multiple segments with separate offers", "One person at a time"], c: 2 },
+            { q: "What is a 'Value Proposition'?", a: ["The lowest price on the market", "The full mix of benefits differentiating a brand", "A discount coupon", "The company mission statement"], c: 1 },
+            { q: "Service Perishability means:", a: ["Services expire after 1 year", "Services cannot be stored for later sale or use", "Services are always fresh", "Service quality varies by employee"], c: 1 },
+            { q: "Line Extension vs. Brand Extension:", a: ["Same category vs. New category", "New category vs. Same category", "Both are new categories", "Both are same category"], c: 0 },
+            { q: "In Idea Screening, R-W-W stands for:", a: ["Real, Win, Worth", "Read, Write, Walk", "Ready, Willing, Waiting", "Rich, Wealthy, Wise"], c: 0 },
+            { q: "Why are profits often negative in the Introduction stage?", a: ["Low prices", "High development and launch costs", "Too many competitors", "Product is bad"], c: 1 },
+            { q: "Good-Value Pricing vs. Value-Added Pricing:", a: ["High price vs. Low price", "Fair quality/price vs. Features justifying higher price", "Math-based vs. Psychology-based", "None of the above"], c: 1 },
+            { q: "Price Elasticity measures:", a: ["How fast prices change", "Sensitivity of demand to price changes", "The cost of rubber bands", "Profit margins"], c: 1 },
+            { q: "When to use Market-Skimming Pricing?", a: ["Low quality product", "High price sensitivity", "High quality/image, hard for competitors to enter", "Mass market basics"], c: 2 },
+            { q: "Cheap printer, expensive ink is an example of:", a: ["Product Bundle Pricing", "Captive-Product Pricing", "Optional-Product Pricing", "By-Product Pricing"], c: 1 },
+            { q: "Vertical Marketing System (VMS) is:", a: ["Producers, Wholesalers, Retailers acting as a unified system", "Producers fighting Retailers", "Direct to consumer only", "A pyramid scheme"], c: 0 },
+            { q: "Disintermediation means:", a: ["Adding more middlemen", "Cutting out marketing channel intermediaries", "Mediating disputes", "Distributing everywhere"], c: 1 },
+
+            // Part 2: MCQs
+            { q: "(Chap 2) Growth strategy: make more sales to current customers without changing product?", a: ["Market Development", "Market Penetration", "Product Development", "Diversification"], c: 1 },
+            { q: "(Chap 7) Variables like social class, lifestyle, and personality are used in:", a: ["Geographic", "Behavioral", "Psychographic", "Demographic"], c: 2 },
+            { q: "(Chap 8) A laundry detergent bought regularly without planning is a:", a: ["Shopping Product", "Specialty Product", "Unsought Product", "Convenience Product"], c: 3 },
+            { q: "(Chap 8) 'Service Variability' means:", a: ["Services are invisible", "Services can't be stored", "Quality depends on who/when/where/how", "Produced/consumed same time"], c: 2 },
+            { q: "(Chap 9) Stage where competitors enter in large numbers & goal is max market share?", a: ["Introduction", "Growth", "Maturity", "Decline"], c: 1 },
+            { q: "(Chap 9) Crowdsourcing is a form of:", a: ["Idea Screening", "Test Marketing", "Idea Generation", "Commercialization"], c: 2 },
+            { q: "(Chap 10) Compares costs that change directly with production level:", a: ["Fixed Cost", "Overhead", "Total Cost", "Variable Cost"], c: 3 },
+            { q: "(Chap 11) Selling a Razor for $5 but blades for $20 is:", a: ["Product Bundle", "Captive-Product", "Optional-Product", "By-Product"], c: 1 },
+            { q: "(Chap 11) Adjusting prices continually (like Uber) is:", a: ["Segmented Pricing", "Dynamic Pricing", "Psychological Pricing", "Promotional Pricing"], c: 1 },
+            { q: "(Chap 12) Luxury brands like Rolex use which distribution?", a: ["Intensive", "Selective", "Exclusive", "Mass"], c: 2 }
+        ];
+
+        // --- STATE ---
+        let cards = [...flashcardsData];
+        let cIdx = 0;
+        let qIdx = 0;
+        let qScore = 0;
+        let timerTime = 25 * 60;
+        let timerInterval = null;
+        let isRunning = false;
+        let soundEnabled = true;
+
+        // --- INIT ---
+        window.onload = () => {
+            renderNotes();
+            renderIslamicNotes();
+            updateCard();
+            loadQuiz();
+            updateExamCountdown(); // Calc countdowns
+
+            // Focus Name Input auto
+            setTimeout(() => document.getElementById('name-input').focus(), 1500);
+
+            // Enter key listener
+            document.getElementById('name-input').addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') enterApp();
+            });
+        };
+
+        // --- CREATIVE ENTRY LOGIC (NO CSV) ---
+        function enterApp() {
+            const name = document.getElementById('name-input').value || "Legend";
+
+            // Visual Transition
+            const portal = document.getElementById('entry-portal');
+            const app = document.getElementById('app');
+
+            portal.style.opacity = '0';
+            portal.style.transform = 'scale(1.1)'; // Warp effect
+
+            setTimeout(() => {
+                portal.style.display = 'none';
+                app.classList.add('visible');
+                document.getElementById('user-display').innerText = name; // Personalize Header
+            }, 800);
+        }
+
+        // --- NAV ---
+        function nav(id, el) {
+            document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+
+            // Handle Desktop & Mobile Nav Highlighting
+            if (el) {
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                document.querySelectorAll('.mobile-nav-item').forEach(n => n.classList.remove('active'));
+                el.classList.add('active');
+            }
+
+            // Auto-launch AI if selecting Saint Yeezus
+            if (id === 'saint-yeezus') {
+                launchAI();
+            }
+        }
+
+        // --- NOTES ---
+        function renderNotes() {
+            document.getElementById('notes-grid').innerHTML = notes.map(n => `
+                <div class="card" onclick="openNote('${n.id}')">
+                    <span class="tag purple">${n.id.toUpperCase()}</span>
+                    <h3>${n.title}</h3>
+                    <p>Click to read detailed notes.</p>
+                </div>
+            `).join('');
+        }
+        function openNote(id) {
+            const n = notes.find(x => x.id === id);
+            document.getElementById('note-body').innerHTML = `<h1>${n.title}</h1>${n.content}`;
+            document.getElementById('notes-grid').style.display = 'none';
+            document.getElementById('note-detail').style.display = 'block';
+        }
+        function closeNote() {
+            document.getElementById('note-detail').style.display = 'none';
+            document.getElementById('notes-grid').style.display = 'grid';
+        }
+
+        // --- ISLAMIC NOTES ---
+        function renderIslamicNotes() {
+            const grid = document.getElementById('islamic-notes-grid');
+            if (grid) {
+                grid.innerHTML = islamicNotes.map(n => `
+                    <div class="card" onclick="openIslamicNote('${n.id}')">
+                        <span class="tag cyan">${n.id.toUpperCase()}</span>
+                        <h3>${n.title}</h3>
+                        <p>Click to read detailed notes.</p>
+                    </div>
+                `).join('');
+            }
+        }
+        function openIslamicNote(id) {
+            const n = islamicNotes.find(x => x.id === id);
+            document.getElementById('islamic-note-body').innerHTML = `<h1>${n.title}</h1>${n.content}`;
+            document.getElementById('islamic-notes-grid').style.display = 'none';
+            document.getElementById('islamic-note-detail').style.display = 'block';
+        }
+        function closeIslamicNote() {
+            document.getElementById('islamic-note-detail').style.display = 'none';
+            document.getElementById('islamic-notes-grid').style.display = 'grid';
+        }
+
+        // --- FLASHCARDS ---
+        function filterCards() {
+            const cat = document.getElementById('fc-filter').value;
+            if (cat === 'all') cards = [...flashcardsData];
+            else cards = flashcardsData.filter(c => c.ch === cat);
+            cIdx = 0; updateCard();
+        }
+        function updateCard() {
+            if (cards.length === 0) return;
+            const c = cards[cIdx];
+            document.getElementById('fc-tag').innerText = c.ch.toUpperCase();
+            document.getElementById('fc-front').innerText = c.f;
+            document.getElementById('fc-back').innerText = c.b;
+            document.getElementById('fc-count').innerText = `${cIdx + 1} / ${cards.length}`;
+            document.querySelector('.flashcard').classList.remove('flipped');
+        }
+        function moveCard(dir) {
+            cIdx = (cIdx + dir + cards.length) % cards.length;
+            updateCard();
+        }
+
+        // --- QUIZ ---
+        function loadQuiz() {
+            if (qIdx >= quizData.length) {
+                document.getElementById('quiz-container').innerHTML = `<h1 style="text-align:center;">🎉 Quiz Complete! <br>Score: ${qScore}/${quizData.length}</h1>`;
+                return;
+            }
+            const q = quizData[qIdx];
+            document.getElementById('q-text').innerText = q.q;
+            document.getElementById('q-options').innerHTML = q.a.map((opt, i) => `
+                <button class="quiz-opt" onclick="checkAnswer(this, ${i})">${opt}</button>
+            `).join('');
+            document.getElementById('q-next').style.display = 'none';
+        }
+        function checkAnswer(btn, i) {
+            document.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+            const q = quizData[qIdx];
+            if (i === q.c) { btn.classList.add('correct'); qScore++; document.getElementById('q-score').innerText = qScore; }
+            else { btn.classList.add('wrong'); document.querySelectorAll('.quiz-opt')[q.c].classList.add('correct'); }
+            document.getElementById('q-next').style.display = 'block';
+        }
+        function nextQ() { qIdx++; loadQuiz(); }
+
+        // --- TIMER LOGIC ---
+        function toggleTimer() {
+            if (isRunning) {
+                clearInterval(timerInterval);
+                document.getElementById('timerBtn').innerText = "Resume Focus";
+                document.getElementById('timerBtn').classList.remove('btn-danger'); // Assuming you might have a danger class, otherwise simple text change
+            } else {
+                timerInterval = setInterval(() => {
+                    timerTime--;
+                    updateTimerDisplay();
+                    if (timerTime <= 0) {
+                        clearInterval(timerInterval);
+                        isRunning = false;
+                        document.getElementById('timerBtn').innerText = "Start Focus";
+                        if (soundEnabled) document.getElementById('timerSound').play();
+                        // Optional: Add a visual alarm
+                        alert("Session Complete!");
+                    }
+                }, 1000);
+                document.getElementById('timerBtn').innerText = "Pause";
+            }
+            isRunning = !isRunning;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            timerTime = 25 * 60;
+            updateTimerDisplay();
+            document.getElementById('timerBtn').innerText = "Start Focus";
+        }
+
+        function updateTimerDisplay() {
+            const m = Math.floor(timerTime / 60);
+            const s = timerTime % 60;
+            document.getElementById('timer').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('soundBtn').innerText = soundEnabled ? "Sound: On" : "Sound: Off";
+            document.getElementById('soundBtn').style.opacity = soundEnabled ? "1" : "0.5";
+        }
+
+        // --- CLOCK LOGIC ---
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const dateString = now.toLocaleDateString([], { weekday: 'long', month: 'short', day: 'numeric' });
+
+            const clockEl = document.getElementById('live-clock');
+            if (clockEl) {
+                clockEl.innerHTML = `<div style="text-align:right; line-height:1.2;">
+                    <div style="font-size:2rem; font-weight:700; color:white;">${timeString}</div>
+                    <div style="font-size:0.9rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:1px;">${dateString}</div>
+                </div>`;
+            }
+        }
+        setInterval(updateClock, 1000); // Start clock ticker
+
+        // --- EXAM COUNTDOWN ---
+        function updateExamCountdown() {
+            const exams = [
+                { date: '2025-12-16', id: 'countdown-0' },
+                { date: '2025-12-18', id: 'countdown-1' },
+                { date: '2025-12-22', id: 'countdown-2' },
+                { date: '2025-12-24', id: 'countdown-3' },
+                { date: '2025-12-26', id: 'countdown-4' },
+                { date: '2025-12-30', id: 'countdown-5' }
+            ];
+
+            const now = new Date();
+
+            exams.forEach(ex => {
+                const target = new Date(ex.date);
+                const diffTime = target - now;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                const el = document.getElementById(ex.id);
+                if (el) {
+                    if (diffDays > 0) el.innerText = `${diffDays} Days`;
+                    else if (diffDays === 0) el.innerText = "Today!";
+                    else el.innerText = "Done";
+                }
+            });
+        }
+
+
+
+        function toggleMobileNav() {
+            const sidebar = document.getElementById('mainSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // --- AI LAUNCHER LOGIC ---
+        // --- AI LAUNCHER LOGIC ---
+        
+        // Add spinner animation style dynamically if not present
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        `;
+        document.head.appendChild(styleSheet);
+
+        async function checkServerAndLaunch() {
+            const initialUI = document.getElementById('ai-status-initial');
+            const loadingUI = document.getElementById('ai-status-loading');
+            const offlineUI = document.getElementById('ai-status-offline');
+            const card = document.getElementById('ai-status-card');
+
+            // Show Loading
+            initialUI.style.display = 'none';
+            offlineUI.style.display = 'none';
+            loadingUI.style.display = 'block';
+
+            try {
+                // Try to fetch specific resource to check if Next.js is running
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 2000); // 2s timeout
+                
+                const response = await fetch('/', { 
+                    method: 'HEAD', 
+                    signal: controller.signal,
+                    mode: 'no-cors' // Use no-cors to avoid CORS errors just for checking existence
+                });
+                clearTimeout(timeoutId);
+
+                // If we get here (even with opaque response), server is likely up
+                launchAI();
+                
+                // Reset UI for next time
+                setTimeout(() => {
+                    loadingUI.style.display = 'none';
+                    initialUI.style.display = 'block';
+                }, 1000);
+
+            } catch (error) {
+                // Server Offline
+                console.error("AI Server Check Failed", error);
+                loadingUI.style.display = 'none';
+                offlineUI.style.display = 'block';
+                
+                // Shake effect
+                card.style.transform = "translateX(10px)";
+                setTimeout(() => card.style.transform = "translateX(-10px)", 100);
+                setTimeout(() => card.style.transform = "translateX(10px)", 200);
+                setTimeout(() => card.style.transform = "translateX(0)", 300);
+            }
+        }
+
+        function launchAI() {
+            const launcher = document.getElementById('ai-launcher');
+            const interface = document.getElementById('ai-interface');
+            const iframe = interface.querySelector('iframe');
+
+            // Ensure iframe src is correct
+            if (iframe.src !== window.location.origin + '/') {
+                iframe.src = '/';
+            }
+
+            launcher.style.display = 'none';
+            interface.style.display = 'block';
+        }
+
+        function closeAI() {
+            const launcher = document.getElementById('ai-launcher');
+            const interface = document.getElementById('ai-interface');
+
+            // Reload iframe to stop camera/mic
+            const iframe = interface.querySelector('iframe');
+            if (iframe) iframe.src = 'about:blank'; // Clear it to fully stop streams
+
+            interface.style.display = 'none';
+            launcher.style.display = 'flex';
+        }
+    </script>
+</body>
+
+</html>
