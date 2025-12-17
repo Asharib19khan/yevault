@@ -38,10 +38,14 @@ export default function SafeMirrorAI() {
     async function getDevices() {
       try {
         const allDevices = await navigator.mediaDevices.enumerateDevices();
-        const videoInputs = allDevices.filter(d => d.kind === 'videoinput');
+        const videoInputs = allDevices.filter(d => 
+          d.kind === 'videoinput' && 
+          !d.label.includes('DroidCam') && 
+          !d.label.includes('Virtual')
+        );
         setDevices(videoInputs);
         if (videoInputs.length > 0) {
-          setActiveDeviceId(videoInputs[0].deviceId); // Default to first
+          setActiveDeviceId(videoInputs[0].deviceId); 
         }
       } catch (e) {
         console.error("Device Enum Error:", e);
