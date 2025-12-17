@@ -2228,7 +2228,7 @@ Ending Capital:                              Rs. 350,000
     <!-- MOVED AI INTERFACE CONTAINER (FULLSCREEN ROOT) -->
     <div id="ai-interface"
         style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:9999; background:rgba(0,0,0,1); overflow:hidden;">
-        <iframe src="/" style="width:100%; height:100%; border:none; display:block;"
+        <iframe src="/ai" style="width:100%; height:100%; border:none; display:block;"
             allow="camera; microphone; autoplay"></iframe>
         <button onclick="closeAI()"
             style="position:absolute; top:2rem; right:2rem; background:rgba(255, 0, 0, 0.2); border:1px solid rgba(255,255,255,0.3); color:white; width:50px; height:50px; border-radius:50%; cursor:pointer; z-index:10000; font-size:1.5rem; display:flex; align-items:center; justify-content:center; transition: all 0.3s ease;"
@@ -2842,6 +2842,14 @@ Ending Capital:                              Rs. 350,000
         function enterApp() {
             const name = document.getElementById('name-input').value || "Legend";
 
+            // --- SUPABASE VISITOR LOG ---
+            // Fire and forget - don't block the UI
+            fetch('/api/visitor', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: name })
+            }).catch(console.error);
+
             // Visual Transition
             const portal = document.getElementById('entry-portal');
             const app = document.getElementById('app');
@@ -3100,7 +3108,7 @@ Ending Capital:                              Rs. 350,000
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 2000); // 2s timeout
                 
-                const response = await fetch('/', { 
+                const response = await fetch('/ai', { 
                     method: 'HEAD', 
                     signal: controller.signal,
                     mode: 'no-cors' // Use no-cors to avoid CORS errors just for checking existence
@@ -3136,8 +3144,8 @@ Ending Capital:                              Rs. 350,000
             const iframe = interface.querySelector('iframe');
 
             // Ensure iframe src is correct
-            if (iframe.src !== window.location.origin + '/') {
-                iframe.src = window.location.origin + '/';
+            if (iframe.src !== window.location.origin + '/ai') {
+                iframe.src = window.location.origin + '/ai';
             }
 
             launcher.style.display = 'none';
