@@ -169,89 +169,84 @@ export default function SafeMirrorAI() {
     synth.speak(utterance);
   };
 
-  const getBorderColor = () => {
-    if (envError) return 'border-red-600';
-    switch(interactionState) {
-      case 'LISTENING': return 'border-yellow-400 shadow-[0_0_50px_rgba(250,204,21,0.6)]';
-      case 'PROCESSING': return 'border-orange-500 shadow-[0_0_50px_rgba(249,115,22,0.8)]';
-      default: return 'border-white/10';
-    }
+  // 5. VISUAL STYLES
+  const getNeuralColor = () => {
+    if (isAiSpeaking) return 'bg-orange-500 shadow-[0_0_100px_rgba(249,115,22,0.6)] animate-pulse-fast'; // AI Speaking
+    if (interactionState === 'LISTENING') return 'bg-cyan-500 shadow-[0_0_100px_rgba(6,182,212,0.6)] animate-pulse-slow'; // User Speaking
+    return 'bg-violet-900/50 shadow-[0_0_60px_rgba(139,92,246,0.2)] animate-pulse-slower'; // Idle
+  };
+  
+  const getNeuralSize = () => {
+    if (isAiSpeaking) return 'scale-125';
+    if (interactionState === 'LISTENING') return 'scale-110';
+    return 'scale-100';
   };
 
   return (
-    <div className="w-screen h-screen bg-black flex items-center justify-center overflow-hidden relative">
+    <div className="w-screen h-screen bg-black flex items-center justify-center overflow-hidden relative font-mono">
       
       {/* START OVERLAY */}
       {!hasStarted && !envError && (
         <div className="absolute inset-0 z-50 bg-black flex flex-col items-center justify-center gap-6">
-           <h1 className="text-4xl text-white font-mono tracking-widest animate-pulse">MIRROR.AI</h1>
+           <div className="w-24 h-24 rounded-full bg-violet-900/50 shadow-[0_0_60px_rgba(139,92,246,0.4)] animate-pulse"></div>
+           <h1 className="text-4xl text-white tracking-widest">NEURAL.LINK</h1>
            <button 
              onClick={handleStart}
-             className="px-8 py-4 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-full text-xl shadow-[0_0_30px_rgba(8,145,178,0.6)] transition-all"
+             className="px-8 py-3 border border-white/20 hover:bg-white/10 text-white rounded-none tracking-widest text-sm transition-all"
            >
-             TAP TO INITIALIZE
+             [ INITIALIZE SYSTEM ]
            </button>
-           <p className="text-gray-500 text-sm max-w-xs text-center">
-             Requires Camera & Microphone access.
-             <br/>tap to unlock neural link.
-           </p>
         </div>
       )}
 
-      <div className={`relative w-[90%] h-[90%] rounded-3xl overflow-hidden border-4 transition-all duration-500 ease-in-out ${getBorderColor()}`}>
+      {/* CONTAINER */}
+      <div className="relative w-full h-full">
         
+        {/* 1. GHOST VIDEO BACKGROUND (z-0) */}
         <video
           ref={videoRef}
           autoPlay
           playsInline
           muted
-          className="absolute inset-0 w-full h-full object-cover transform scale-x-[-1]"
+          className="absolute inset-0 w-full h-full object-cover transform scale-x-[-1] z-0 opacity-40 grayscale contrast-125 brightness-50"
         />
 
-        <div className="absolute inset-0 z-20 p-6 flex flex-col justify-between pointer-events-none">
-           <div className="flex flex-col gap-2 pointer-events-auto items-start">
-             <div className="bg-black/60 backdrop-blur border border-cyan-500/30 px-4 py-3 rounded-xl text-cyan-400 font-mono text-xs shadow-lg">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className={`w-2 h-2 rounded-full ${cameraStatus === 'Active' ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                  <span>{cameraStatus.toUpperCase()}</span>
-                </div>
-                
-                {devices.length > 0 && (
-                  <select 
-                    className="bg-black/50 border border-cyan-500/30 rounded px-2 py-1 text-xs outline-none focus:border-cyan-400 w-48 mb-2"
-                    value={activeDeviceId}
-                    onChange={(e) => setActiveDeviceId(e.target.value)}
-                  >
-                    <option value="">Default (User Facing)</option>
-                    {devices.map((device, i) => (
-                      <option key={device.deviceId} value={device.deviceId}>
-                        {device.label || `Camera ${i + 1}`}
-                      </option>
-                    ))}
-                  </select>
-                )}
-                <div className="text-cyan-200/70">STATE: {interactionState}</div>
-             </div>
-          </div>
-
-          <div className="w-full flex justify-center pb-10">
-             {transcript && (
-               <div className="max-w-2xl bg-black/80 backdrop-blur-md border-l-4 border-cyan-400 p-6 rounded-r-xl shadow-2xl animate-fade-in-up">
-                 <p className="font-mono text-cyan-50 text-xl leading-relaxed">
-                   <span className="text-cyan-400 mr-2">{'>'}</span>
-                   {transcript}
-                   <span className="animate-blink inline-block w-2 h-5 bg-cyan-400 ml-2 align-middle"/>
-                 </p>
-               </div>
-             )}
-          </div>
+        {/* 2. NEURAL CLOUD AVATAR (z-10) */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+           <div className={`transition-all duration-700 ease-in-out w-64 h-64 rounded-full blur-3xl ${getNeuralColor()} ${getNeuralSize()}`}></div>
+           {/* Inner Core */}
+           <div className={`absolute w-32 h-32 rounded-full blur-xl bg-white/10 mix-blend-overlay ${isAiSpeaking ? 'animate-spin-slow' : ''}`}></div>
         </div>
 
+        {/* 3. HUD / TRANSCRIPT (z-20) */}
+        <div className="absolute inset-0 z-20 p-8 flex flex-col justify-between pointer-events-none">
+           
+           {/* Top: Status Line */}
+           <div className="flex justify-between w-full opacity-60">
+              <div className="text-xs text-white bg-black/50 px-2 py-1">
+                 SYSTEM: {hasStarted ? 'ONLINE' : 'OFFLINE'} | CAM: {cameraStatus}
+              </div>
+              <div className="text-xs text-white bg-black/50 px-2 py-1">
+                 MODE: {interactionState}
+              </div>
+           </div>
+
+           {/* Bottom: Terminal Transcript */}
+           <div className="w-full flex justify-center pb-12">
+             <div className="max-w-3xl w-full bg-black/80 border-t border-white/20 p-6 backdrop-blur-sm min-h-[100px] flex items-end justify-center text-center">
+                 <p className="text-lg text-white/90 leading-relaxed uppercase tracking-wide">
+                   {transcript || (isAiSpeaking ? "PROCESSING DATA..." : "AWAITING INPUT...")}
+                   <span className="animate-pulse inline-block w-3 h-5 bg-white/80 ml-2 align-bottom"></span>
+                 </p>
+             </div>
+           </div>
+        </div>
+
+        {/* ENV ERROR */}
         {envError && (
-          <div className="absolute inset-0 bg-black/90 z-50 flex items-center justify-center">
-            <div className="bg-red-900/20 border border-red-500 p-8 rounded-xl max-w-md text-center">
-              <h2 className="text-2xl font-bold text-red-500 mb-4">SYSTEM ERROR</h2>
-              <p className="text-white font-mono">{envError}</p>
+          <div className="absolute inset-0 bg-red-900/20 z-50 flex items-center justify-center backdrop-blur-md">
+            <div className="text-red-500 font-bold border border-red-500 p-8 bg-black">
+              FATAL ERROR: {envError}
             </div>
           </div>
         )}
