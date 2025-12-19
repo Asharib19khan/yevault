@@ -1265,7 +1265,7 @@
 
             <!-- SEATING PLAN SECTION -->
             <section id="seating-plan" class="section-view" style="height: 100%; padding: 0;">
-                <iframe src="/seating_plan.html" style="width: 100%; height: 100%; border: none;"></iframe>
+                <iframe src="seating_plan.html" style="width: 100%; height: 100%; border: none;"></iframe>
             </section>
 
             <!-- NOTES (Preserved) -->
@@ -2744,7 +2744,138 @@ Ending Capital:                              Rs. 350,000
                 `
             },
             {
-                id: 'isl2', title: 'Topic 2: Number Systems', content: ''
+                id: 'isl2', title: 'Topic 2: Number Systems', content: `
+                <h3>1. Number System Conversions</h3>
+                
+                <h4>A. Decimal to Binary</h4>
+                <p><strong>Method:</strong> Repeated Division by 2.</p>
+                <ul>
+                    <li><strong>Process:</strong> Divide the decimal number by 2, record the remainder (0 or 1), and repeat with the quotient until it reaches 0.</li>
+                    <li><strong>Reading the Result:</strong> Read remainders from <strong>Bottom to Top</strong> (MSD to LSD).</li>
+                </ul>
+                <div class="example">
+                    <strong>Example:</strong> Convert 139<sub>10</sub> to binary<br>
+                    139 ÷ 2 = 69 remainder 1<br>
+                    69 ÷ 2 = 34 remainder 1<br>
+                    34 ÷ 2 = 17 remainder 0<br>
+                    17 ÷ 2 = 8 remainder 1<br>
+                    8 ÷ 2 = 4 remainder 0<br>
+                    4 ÷ 2 = 2 remainder 0<br>
+                    2 ÷ 2 = 1 remainder 0<br>
+                    1 ÷ 2 = 0 remainder 1<br><br>
+                    Reading bottom to top: <strong>10001011<sub>2</sub></strong>
+                </div>
+
+                <h4>B. Binary to Decimal</h4>
+                <p><strong>Method:</strong> Sum of Powers of 2.</p>
+                <p><strong>Process:</strong> Multiply each bit by 2<sup>n</sup> (where n is the position starting from 0 on the right) and sum them up.</p>
+                <div class="example">
+                    <strong>Example:</strong> 10001011<sub>2</sub><br>
+                    = (1×2<sup>7</sup>) + (0×2<sup>6</sup>) + (0×2<sup>5</sup>) + (0×2<sup>4</sup>) + (1×2<sup>3</sup>) + (0×2<sup>2</sup>) + (1×2<sup>1</sup>) + (1×2<sup>0</sup>)<br>
+                    = 128 + 0 + 0 + 0 + 8 + 0 + 2 + 1<br>
+                    = <strong>139<sub>10</sub></strong>
+                </div>
+
+                <h4>C. Binary ↔ Octal (Base 8)</h4>
+                <p><strong>Rule:</strong> Group bits by 3.</p>
+                <ul>
+                    <li><strong>Binary to Octal:</strong> Starting from the binary point (right), separate bits into groups of three. Replace each group with the octal digit.</li>
+                </ul>
+                <div class="example">
+                    <strong>Example:</strong> 10001011<sub>2</sub><br>
+                    Group by 3 from right: <strong>10 001 011</strong><br>
+                    010 = 2, 001 = 1, 011 = 3<br>
+                    Result: <strong>213<sub>8</sub></strong>
+                </div>
+                <ul>
+                    <li><strong>Octal to Binary:</strong> Replace each octal digit with its corresponding 3-bit binary string.</li>
+                </ul>
+
+                <h4>D. Binary ↔ Hexadecimal (Base 16)</h4>
+                <p><strong>Rule:</strong> Group bits by 4.</p>
+                <ul>
+                    <li><strong>Binary to Hex:</strong> Starting from the right, separate bits into groups of four. Replace with the hex digit.</li>
+                </ul>
+                <div class="example">
+                    <strong>Example:</strong> 10001011<sub>2</sub><br>
+                    Group by 4 from right: <strong>1000 1011</strong><br>
+                    1000 = 8, 1011 = B (11 in decimal)<br>
+                    Result: <strong>8B<sub>16</sub></strong>
+                </div>
+                <ul>
+                    <li><strong>Hex to Binary:</strong> Replace each hex digit with its corresponding 4-bit binary string.</li>
+                </ul>
+
+                <div class="mnemonic-box">
+                    ⚡ <strong>Trick for Conversions:</strong><br>
+                    • Octal = 3 bits (2<sup>3</sup> = 8)<br>
+                    • Hex = 4 bits (2<sup>4</sup> = 16)<br>
+                    • Always group from <strong>Right to Left</strong>. If the last group doesn't have enough bits, add leading zeros.
+                </div>
+
+                <h3>2. Binary Arithmetic</h3>
+
+                <h4>A. Binary Addition</h4>
+                <p><strong>Rules:</strong></p>
+                <ul>
+                    <li>0 + 0 = 0</li>
+                    <li>0 + 1 = 1</li>
+                    <li>1 + 0 = 1</li>
+                    <li>1 + 1 = 10 (Sum = 0, Carry = 1)</li>
+                    <li>1 + 1 + 1 = 11 (Sum = 1, Carry = 1)</li>
+                </ul>
+
+                <h4>B. Binary Subtraction</h4>
+                <p><strong>Rules:</strong></p>
+                <ul>
+                    <li>0 - 0 = 0</li>
+                    <li>1 - 1 = 0</li>
+                    <li>1 - 0 = 1</li>
+                    <li>10 - 1 = 1 (This happens when you borrow from the left)</li>
+                </ul>
+
+                <h4>C. Binary Multiplication</h4>
+                <p><strong>Rules:</strong></p>
+                <ul>
+                    <li>Works exactly like decimal multiplication.</li>
+                    <li>1 × 1 = 1</li>
+                    <li>Anything multiplied by 0 is 0</li>
+                    <li>Shift the rows to the left as you multiply by higher place values, then add the results.</li>
+                </ul>
+
+                <h3>3. Complements (Signed Numbers)</h3>
+
+                <h4>A. 1's Complement</h4>
+                <p><strong>Method:</strong> Invert every bit.</p>
+                <p>Change all 0s to 1s and all 1s to 0s.</p>
+                <div class="example">
+                    <strong>Example:</strong><br>
+                    Original: 11001010<br>
+                    1's Complement: <strong>00110101</strong>
+                </div>
+
+                <h4>B. 2's Complement</h4>
+                <p><strong>Method:</strong> 1's Complement + 1.</p>
+                <ul>
+                    <li><strong>Step 1:</strong> Find the 1's complement (invert digits).</li>
+                    <li><strong>Step 2:</strong> Add 1 to the result.</li>
+                </ul>
+                <div class="example">
+                    <strong>Example:</strong><br>
+                    Original: 11001010<br>
+                    1's Comp: 00110101<br>
+                    Add 1: 00110101 + 1 = <strong>00110110</strong>
+                </div>
+
+                <div class="mnemonic-box">
+                    💡 <strong>Tip for 2's Complement:</strong><br>
+                    This is how computers represent negative numbers.<br><br>
+                    <strong>Shortcut:</strong> Start from the right side of the binary number. Copy all zeros and the first '1' you see. Then, invert every bit after that (to the left).<br><br>
+                    <strong>Try it on 11001010:</strong><br>
+                    Right to left: 0 (copy), 1 (copy first 1). Now invert the rest: 0→1, 1→0, 0→1, 0→1, 1→0, 1→0.<br>
+                    Result: <strong>00110110</strong> (Matches the calculation!)
+                </div>
+                `
             },
             {
                 id: 'isl3', title: 'Topic 3: Information System', content: ''
@@ -3015,8 +3146,6 @@ Ending Capital:                              Rs. 350,000
                 document.querySelectorAll('.mobile-nav-item').forEach(n => n.classList.remove('active'));
                 el.classList.add('active');
             }
-
-
         }
 
         // --- NOTES ---
