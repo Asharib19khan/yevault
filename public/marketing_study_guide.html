@@ -2161,12 +2161,6 @@ Ending Capital:                              Rs. 350,000
                     <div id="foa-tab-videos" class="foa-content" style="display:none;">
                          <h2 style="font-family:var(--font-display); color:var(--brand-primary); margin-bottom:1rem;">Video Tutorials</h2>
                          
-                         <div class="card" style="background:rgba(255,193,7,0.1); border-left:3px solid #ffc107; margin-bottom:2rem;">
-                             <p style="margin:0; color:#ffc107;">
-                                 <strong>⚠️ Note:</strong> YouTube videos require this page to be opened through a web server (like <code>npm run dev</code> or Live Server in VS Code). If you're viewing this by double-clicking the HTML file, the videos won't load due to browser security restrictions.
-                             </p>
-                         </div>
-                         
                          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
                             <!-- Main Player -->
                             <div class="card" style="padding:0; overflow:hidden; aspect-ratio:16/9; grid-column: 1 / -1;">
@@ -3103,7 +3097,162 @@ Ending Capital:                              Rs. 350,000
                 `
             },
             {
-                id: 'isl4', title: 'Topic 4: Python Programming', content: ''
+                id: 'isl4', title: 'Topic 4: Python Programming', content: `
+                <h3>1. Variables (Naming Conventions)</h3>
+                <p><strong>Definition:</strong> Variables are containers for storing data values created the moment you assign a value.</p>
+                
+                <h4>Naming Rules:</h4>
+                <ul>
+                    <li>A variable name must start with a letter or the underscore character.</li>
+                    <li>A variable name cannot start with a number.</li>
+                    <li>Variable names can only contain alpha-numeric characters and underscores (A-z, 0-9, and _ ).</li>
+                    <li>Variable names are case-sensitive (e.g., <code>age</code>, <code>Age</code>, and <code>AGE</code> are three different variables).</li>
+                </ul>
+
+                <div class="tip-box">
+                    <strong>Tips & Tricks:</strong><br>
+                    • <strong>Readability:</strong> Use snake_case (e.g., <code>my_variable_name</code>) for multi-word variables to make them readable.<br>
+                    • <strong>Meaningful Names:</strong> Avoid single letters like <code>x</code> or <code>y</code> in complex scripts; use <code>user_age</code> or <code>total_price</code> instead.<br>
+                    • <strong>Avoid Keywords:</strong> Never use Python keywords (like <code>if</code>, <code>for</code>, <code>class</code>, <code>list</code>) as variable names.
+                </div>
+
+                <h3>2. Data Types (int, float, and string)</h3>
+                
+                <h4>Numeric Types:</h4>
+                <ul>
+                    <li><strong>int (Integer):</strong> A whole number, positive or negative, without decimals, of unlimited length.</li>
+                    <li><strong>float (Floating Point):</strong> A number, positive or negative, containing one or more decimals. It can also be a scientific number with an "e" to indicate the power of 10.</li>
+                    <li><strong>Complex:</strong> Written with a "j" as the imaginary part (e.g., <code>3+5j</code>).</li>
+                </ul>
+
+                <h4>Text Type (String):</h4>
+                <ul>
+                    <li>Defined as <code>str</code> in Python.</li>
+                    <li>Strings are sequences of characters enclosed in single (<code>' '</code>) or double (<code>" "</code>) quotes.</li>
+                </ul>
+
+                <h4>Type Conversion:</h4>
+                <p>You can convert between types using the <code>int()</code>, <code>float()</code>, and <code>complex()</code> methods.</p>
+
+                <div class="tip-box">
+                    <strong>Tips & Tricks:</strong><br>
+                    • <strong>Integer Division:</strong> Remember that normal division <code>/</code> always returns a float (e.g., <code>4 / 2</code> is <code>2.0</code>). Use <code>//</code> for integer (floor) division.<br>
+                    • <strong>Float Precision:</strong> Be careful when comparing floats directly due to precision issues.<br>
+                    • <strong>String Immutability:</strong> Strings cannot be changed once created. Any modification creates a new string.
+                </div>
+
+                <h3>3. Python Collections (List, Tuple & Sets)</h3>
+
+                <h4>Lists (list):</h4>
+                <p><strong>Properties:</strong> Ordered, changeable (mutable), and allow duplicate values.</p>
+                <ul>
+                    <li><strong>Syntax:</strong> Created using square brackets <code>[]</code>.</li>
+                    <li><strong>Indexing:</strong> Zero-based index; the first item is <code>[0]</code>, the second is <code>[1]</code>.</li>
+                    <li><strong>Negative Indexing:</strong> <code>-1</code> refers to the last item, <code>-2</code> to the second last.</li>
+                    <li><strong>Modifying:</strong> You can change, add, and remove items after creation.</li>
+                </ul>
+
+                <p><strong>Key Methods:</strong></p>
+                <ul>
+                    <li><code>len()</code>: Determines the number of items.</li>
+                    <li><code>insert()</code>: Adds an item at a specified index.</li>
+                    <li><code>append()</code>: Adds an item to the end of the list.</li>
+                    <li><code>extend()</code>: Appends elements from another list.</li>
+                    <li><code>sort()</code> / <code>reverse()</code>: Sorts or reverses the order.</li>
+                </ul>
+
+                <h4>Tuples (tuple):</h4>
+                <p><strong>Properties:</strong> Ordered and unchangeable (immutable).</p>
+                <ul>
+                    <li><strong>Syntax:</strong> Written with round brackets <code>()</code>.</li>
+                    <li><strong>Workaround for Changes:</strong> You cannot add/remove items directly. You must convert the tuple to a list, make changes, and convert it back to a tuple.</li>
+                    <li><strong>Packing/Unpacking:</strong> Assigning values to a tuple is "packing". Extracting them back into variables is "unpacking".</li>
+                </ul>
+
+                <h4>Sets (set):</h4>
+                <p><strong>Properties:</strong> Unordered, unindexed, and do not allow duplicate values.</p>
+                <ul>
+                    <li><strong>Syntax:</strong> Written with curly brackets <code>{}</code>.</li>
+                    <li><strong>Usage:</strong> Best for membership testing (checking if an item exists) and eliminating duplicates.</li>
+                </ul>
+
+                <div class="mnemonic-box">
+                    💡 <strong>Choosing the Right Type:</strong><br>
+                    • Use <strong>Lists</strong> for data that may change or needs to be ordered.<br>
+                    • Use <strong>Tuples</strong> for data that should not change (like coordinates), as they are faster and memory-efficient.<br>
+                    • Use <strong>Sets</strong> to instantly remove duplicates from a list: <code>list(set(my_list))</code>.<br><br>
+                    <strong>Copying Lists:</strong> Don't just do <code>list2 = list1</code>. This creates a reference, not a copy. Use <code>list2 = list1.copy()</code> or <code>list2 = list1[:]</code>.
+                </div>
+
+                <h3>4. Conditional Structures</h3>
+                <p><strong>Logic:</strong> Uses comparison and logical operators to determine the flow of execution.</p>
+
+                <h4>Structures:</h4>
+                <ul>
+                    <li><strong>if:</strong> Executes code only if a condition is True.</li>
+                    <li><strong>elif:</strong> "Else if" - checks a new condition if the previous conditions were False.</li>
+                    <li><strong>else:</strong> Executes code if all previous conditions were False.</li>
+                    <li><strong>Nested if:</strong> An if statement inside another if statement.</li>
+                </ul>
+
+                <div class="tip-box">
+                    <strong>Tips & Tricks:</strong><br>
+                    • <strong>Indentation:</strong> Python relies on indentation (whitespace). Ensure all code inside an if block is indented consistently.<br>
+                    • <strong>Short-hand:</strong> Use ternary operators for simple assignments: <code>status = "Adult" if age >= 18 else "Minor"</code>.<br>
+                    • <strong>Truthiness:</strong> Empty lists <code>[]</code>, strings <code>""</code>, and the number <code>0</code> evaluate to False in conditions.
+                </div>
+
+                <h3>5. Operators</h3>
+
+                <h4>Arithmetic Operators:</h4>
+                <p>Used for mathematical operations.</p>
+                <ul>
+                    <li><code>+</code> (Add), <code>-</code> (Subtract), <code>*</code> (Multiply), <code>/</code> (Divide).</li>
+                    <li><code>%</code> (Modulus/Remainder), <code>**</code> (Exponentiation), <code>//</code> (Floor Division).</li>
+                </ul>
+
+                <h4>Assignment Operators:</h4>
+                <p>Used to assign values.</p>
+                <ul>
+                    <li><code>=</code> (Assign), <code>+=</code> (Add and assign), <code>-=</code> (Subtract and assign), etc.</li>
+                </ul>
+
+                <h4>Comparison Operators:</h4>
+                <p>Used to compare two values.</p>
+                <ul>
+                    <li><code>==</code> (Equal), <code>!=</code> (Not equal).</li>
+                    <li><code>&lt;</code> (Less than), <code>&gt;</code> (Greater than), <code>&lt;=</code> (Less than or equal), <code>&gt;=</code> (Greater than or equal).</li>
+                </ul>
+
+                <h4>Logical Operators:</h4>
+                <p>Used to combine conditional statements.</p>
+                <ul>
+                    <li><code>and</code> (Returns True if both are true).</li>
+                    <li><code>or</code> (Returns True if one is true).</li>
+                    <li><code>not</code> (Reverse the result).</li>
+                </ul>
+
+                <h4>Identity Operators:</h4>
+                <p>Compare objects, not just values.</p>
+                <ul>
+                    <li><code>is</code> (Returns True if variables are the same object).</li>
+                    <li><code>is not</code> (Returns True if variables are not the same object).</li>
+                </ul>
+
+                <h4>Membership Operators:</h4>
+                <p>Test if a sequence is present in an object.</p>
+                <ul>
+                    <li><code>in</code> (Returns True if a value is found in the sequence).</li>
+                    <li><code>not in</code> (Returns True if a value is not found).</li>
+                </ul>
+
+                <div class="mnemonic-box">
+                    💡 <strong>Tips & Tricks:</strong><br>
+                    • <strong>== vs is:</strong> Use <code>==</code> for value equality (e.g., <code>a == b</code>). Use <code>is</code> for checking if they are the exact same object in memory (e.g., checking for <code>None</code>).<br>
+                    • <strong>Chaining:</strong> You can chain comparisons: <code>if 0 &lt; x &lt; 10:</code> is valid Python.<br>
+                    • <strong>Modulus %:</strong> Great for checking even/odd numbers (<code>x % 2 == 0</code>) or cycling through indices.
+                </div>
+                `
             },
             {
                 id: 'isl5', title: 'Topic 5: SDLC', content: ''
