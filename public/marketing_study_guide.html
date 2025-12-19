@@ -1044,7 +1044,7 @@
             <div class="brand-logo">YE <span>VAULT</span></div>
             <div class="nav-item active" onclick="nav('dashboard', this)">All roads lead to Rome</div>
             <div class="nav-item" onclick="nav('marketing-mgmt', this)">Marketing Management</div>
-            <div class="nav-item" onclick="nav('islamic-studies', this)">Islamic Studies</div>
+            <div class="nav-item" onclick="nav('islamic-studies', this)">IT in Business</div>
             <div class="nav-item" onclick="nav('foa-suite', this)">Fundamentals of Accounting</div>
             <div class="nav-item" onclick="nav('seating-plan', this)">Exam Seating Plan</div>
 
@@ -1253,7 +1253,7 @@
 
             <!-- ISLAMIC STUDIES SECTION -->
             <section id="islamic-studies" class="section-view">
-                <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Islamic Studies Notes</h1>
+                <h1 style="font-family:var(--font-display); margin-bottom:2rem;">IT in Business Notes</h1>
                 <div id="islamic-notes-grid"
                     style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem;"></div>
                 <div id="islamic-note-detail" class="detail-view">
@@ -2632,137 +2632,131 @@ Ending Capital:                              Rs. 350,000
 
         const islamicNotes = [
             {
-                id: 'isl1', title: 'Topic 1: Basic Concepts of Islam', content: `
-                <h3>1. The Foundation: Iman Mufassal</h3>
-                <p>You must believe in 7 specific things:</p>
+                id: 'isl1', title: 'Topic 1: General Computing Concepts', content: `
+                <h3>1. Information Processing Cycle (IPOS)</h3>
+                <p>All computers follow a standard cycle to convert raw data into useful information.</p>
+                <ul>
+                    <li><strong>Input:</strong> Entering raw data (e.g., typing on a keyboard, clicking a mouse).</li>
+                    <li><strong>Process:</strong> The CPU converts that raw data into information based on instructions.</li>
+                    <li><strong>Output:</strong> Displaying the result (e.g., monitor, printer, speaker).</li>
+                    <li><strong>Storage:</strong> Saving data for later use (e.g., Hard Drive, Cloud, USB).</li>
+                </ul>
+                <div class="mnemonic-box">💡 <strong>Tip (Mnemonic):</strong> Remember "IPOS" — Input, Processing, Output, Storage.</div>
+                
+                <div class="tip-box">
+                    <strong>Pizza Shop Analogy:</strong>
+                    <ul>
+                        <li><strong>Input:</strong> Taking the order (Raw data)</li>
+                        <li><strong>Process:</strong> Cooking the pizza (Processing)</li>
+                        <li><strong>Output:</strong> Serving the pizza to the customer (Information)</li>
+                        <li><strong>Storage:</strong> Freezing leftovers for later (Saving)</li>
+                    </ul>
+                </div>
+
+                <h3>2. Data Conversion & ASCII Code</h3>
+                <p>Computers only understand Binary (0s and 1s). To bridge the gap between human language and computer machine language, we use encoding systems like ASCII.</p>
+                
+                <p><strong>What is ASCII?</strong></p>
+                <ul>
+                    <li><strong>Acronym:</strong> American Standard Code for Information Interchange.</li>
+                    <li><strong>Function:</strong> It assigns a unique numeric value to every character (letters, numbers, symbols) so the computer can store it as binary.</li>
+                    <li><strong>Structure:</strong>
+                        <ul>
+                            <li>Standard ASCII uses 7 bits (representing 128 characters, 0–127).</li>
+                            <li>Extended ASCII uses 8 bits (representing 256 characters, 0–255) to include more symbols.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <p><strong>Key ASCII Values to Remember:</strong></p>
+                <ul>
+                    <li><strong>"A" (Uppercase):</strong> starts at 65.</li>
+                    <li><strong>"a" (Lowercase):</strong> starts at 97.</li>
+                    <li><strong>"0" (Number):</strong> starts at 48.</li>
+                    <li><strong>Space:</strong> is 32.</li>
+                </ul>
+
+                <div class="mnemonic-box">
+                    ⚡ <strong>Trick for Conversion:</strong> Uppercase to Lowercase: Add 32.<br>
+                    Example: 'A' is 65. 65 + 32 = 97, which is 'a'.<br>
+                    <em>Why 32? In binary, 32 is a single bit flip (2<sup>5</sup>). This makes it very easy for the CPU to switch cases just by flipping one bit!</em>
+                </div>
+
+                <h3>3. The Core Hardware: CPU vs. RAM</h3>
+                <p>These two work together to run every task on your computer.</p>
+
+                <h4>CPU (Central Processing Unit)</h4>
+                <ul>
+                    <li><strong>Role:</strong> The "Brain" of the computer. It fetches instructions, decodes them, and executes them (The Fetch-Decode-Execute Cycle).</li>
+                    <li><strong>Speed:</strong> Measured in GHz (Billions of cycles per second).</li>
+                    <li><strong>Components:</strong>
+                        <ul>
+                            <li><strong>ALU (Arithmetic Logic Unit):</strong> Does the math (+ - × ÷) and logic (True/False).</li>
+                            <li><strong>CU (Control Unit):</strong> Directs traffic; tells data where to go.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>RAM (Random Access Memory)</h4>
+                <ul>
+                    <li><strong>Role:</strong> The "Workspace" or "Short-term Memory". It holds data currently in use for quick access by the CPU.</li>
+                    <li><strong>Volatile:</strong> If you turn the power off, everything in RAM is deleted.</li>
+                </ul>
+
+                <div class="tip-box">
+                    <strong>The Kitchen Analogy:</strong>
+                    <ul>
+                        <li><strong>CPU (The Chef):</strong> Processes the ingredients (data). A faster chef chops faster.</li>
+                        <li><strong>RAM (The Countertop):</strong> Where ingredients are placed for immediate cooking. Low RAM = Small counter = Chef wastes time walking to pantry.</li>
+                        <li><strong>Hard Drive (The Pantry):</strong> Where ingredients are stored long-term. Huge capacity, but slower to access.</li>
+                    </ul>
+                </div>
+
+                <h3>4. Client-Server Architecture</h3>
+                <p>This is how modern networks (like the Internet) are organized.</p>
+                <ul>
+                    <li><strong>The Client (Requester):</strong> The device asking for information (e.g., Chrome, mobile app).</li>
+                    <li><strong>The Server (Provider):</strong> A powerful computer that stores resources and "serves" them (e.g., Web servers, Email servers, Database servers).</li>
+                </ul>
+
+                <p><strong>How they talk (Request-Response Loop):</strong></p>
                 <ol>
-                    <li>Allah (God)</li>
-                    <li>Malaikah (Angels)</li>
-                    <li>Kutub (Books)</li>
-                    <li>Rusul (Prophets)</li>
-                    <li>Yaum al-Akhirah (Day of Judgment)</li>
-                    <li>Taqdeer (Predestination – good/bad is from Allah)</li>
-                    <li>Ba'th ba'd al-Mawt (Resurrection after death)</li>
+                    <li><strong>Request:</strong> The Client sends a message.</li>
+                    <li><strong>Process:</strong> The Server finds the file or runs the query.</li>
+                    <li><strong>Response:</strong> The Server sends the data back to the Client to be displayed.</li>
                 </ol>
 
-                <h3>2. Tawhid (The Oneness of Allah)</h3>
-                <p><strong>4 Levels of Oneness:</strong></p>
-                <ul>
-                    <li><strong>Necessary Existence (Wajib al-Wujud):</strong> Only God must exist; He is eternal.</li>
-                    <li><strong>Creator of All:</strong> Created everything, including actions/thoughts.</li>
-                    <li><strong>Sole Manager:</strong> Manages the universe alone.</li>
-                    <li><strong>Worthy of Worship:</strong> The only one deserving prayer.</li>
-                </ul>
-                <div class="mnemonic-box">💡 <strong>Memory Tip:</strong> Founder -> Builder -> CEO -> Only one who gets paid (Worshipped).</div>
+                <div class="mnemonic-box">
+                    💡 <strong>Tip:</strong> Think of a Restaurant.<br>
+                    <strong>Client</strong> = Hungry Customer (You).<br>
+                    <strong>Server</strong> = The Waiter/Kitchen (Fulfills your request).<br>
+                    <strong>Request</strong> = Your Order.<br>
+                    <strong>Response</strong> = The Food.
+                </div>
 
-                <h3>3. Taqdeer (Destiny)</h3>
-                <p><strong>4 Elements:</strong></p>
-                <ul>
-                    <li><strong>Knowledge (Ilm):</strong> Allah knew everything before creation.</li>
-                    <li><strong>Writing (Kitabat):</strong> Written in Lauh-e-Mahfooz.</li>
-                    <li><strong>Will (Mashiyat):</strong> Nothing happens without His permission.</li>
-                    <li><strong>Creation (Khalaq):</strong> Allah creates the action; we choose it (Adopters/Kasib).</li>
-                </ul>
-                <div class="tip-box">"Wa kana amrullahi qadran maqdura" (And the command of Allah is a decree determined).</div>
-                `
-            },
-            {
-                id: 'isl2', title: 'Topic 2: Prophethood (Risalat)', content: `
-                <h3>1. Nabi vs. Rasool (The Big Difference)</h3>
-                <ul>
-                    <li><strong>Rasool (Messenger):</strong> Brings a New Shariah (Law) and usually a New Book (e.g., Musa, Isa, Muhammad SAW).</li>
-                    <li><strong>Nabi (Prophet):</strong> Follows/enforces Previous Shariah (e.g., Haroon followed Musa).</li>
-                </ul>
-
-                <h3>2. The Numbers Game</h3>
-                <ul>
-                    <li><strong>Total Prophets:</strong> ~124,000</li>
-                    <li><strong>First:</strong> Adam (AS) | <strong>Last:</strong> Muhammad (SAW)</li>
-                    <li><strong>Mentioned in Quran:</strong> 25 by name.</li>
-                </ul>
-
-                <h3>3. Why Send Prophets?</h3>
-                <ul>
-                    <li><strong>Human Limitations:</strong> Mind can find God, but not <em>how</em> to worship Him.</li>
-                    <li><strong>Hujjah (Argument):</strong> So humans can't say "We didn't know" on Judgment Day.</li>
+                <h3>Summary Checklist for Finals</h3>
+                <ul class="checklist">
+                    <li>[ ] <strong>IPOS:</strong> Can you name the 4 stages? (Input, Process, Output, Storage)</li>
+                    <li>[ ] <strong>ASCII:</strong> Do you know that 'A'=65 and 'a'=97?</li>
+                    <li>[ ] <strong>CPU vs RAM:</strong> Remember "Chef vs Countertop."</li>
+                    <li>[ ] <strong>Client-Server:</strong> Remember "Customer vs Waiter."</li>
                 </ul>
                 `
             },
             {
-                id: 'isl3', title: 'Topic 3: Islamic Economics & Contracts', content: `
-                <h3>1. Islamic vs. Capitalist Economy</h3>
-                <ul>
-                    <li><strong>Capitalism:</strong> Profit/Self-Interest, Supply & Demand, Absolute Ownership.</li>
-                    <li><strong>Islamic:</strong> Divine Rules (Shariah), Resources are a Trust (Amanah), No Interest (Riba).</li>
-                </ul>
-
-                <h3>2. 7 Conditions of a Valid Sale</h3>
-                <div class="mnemonic-box">💡 <strong>Memory Trick:</strong> E-O-P-D (Existence, Ownership, Possession, Definition)</div>
-                <ul>
-                    <li><strong>Existence:</strong> Product must exist (No unborn calves).</li>
-                    <li><strong>Ownership:</strong> You must own it.</li>
-                    <li><strong>Possession:</strong> Physical/Constructive control.</li>
-                    <li><strong>Definition:</strong> Price/Product clearly defined (No Gharar/Ambiguity).</li>
-                    <li><strong>Halal:</strong> Product must be permissible.</li>
-                    <li><strong>Transferable:</strong> Can hand it over.</li>
-                    <li><strong>Consent:</strong> Mutual agreement.</li>
-                </ul>
-
-                <h3>3. Deferred Sale (Installments)</h3>
-                <p>Allowed IF: Price is fixed at contract time (no hiking for late payment) and dates are clear.</p>
-                `
+                id: 'isl2', title: 'Topic 2: Number Systems', content: ''
             },
             {
-                id: 'isl4', title: 'Topic 4: Zakat (The Poor Due)', content: `
-                <h3>1. Definition</h3>
-                <p><strong>Literal:</strong> To Purify / To Increase.</p>
-                <p><strong>Technical:</strong> Transferring 2.5% of surplus wealth to deserving Muslims.</p>
-
-                <h3>2. The Golden Rule of Priorities</h3>
-                <p>Order of preference for relatives:</p>
-                <ol>
-                    <li>Brothers/Sisters</li>
-                    <li>Nephews/Nieces</li>
-                    <li>Uncles/Aunts</li>
-                    <li>In-laws</li>
-                </ol>
-                <p><em>Note: Cannot give to Parents, Children, Spouse.</em></p>
-
-                <h3>3. Calculation</h3>
-                <p><strong>Formula:</strong> (Total Assets - Debts) x 2.5%</p>
-                <p><strong>Nisab:</strong> Gold (7.5 Tola / 87.48g) or Silver (52.5 Tola / 612.36g).</p>
-                `
+                id: 'isl3', title: 'Topic 3: Information System', content: ''
             },
             {
-                id: 'isl5', title: 'Topic 5: Hajj (The Pilgrimage)', content: `
-                <h3>1. Virtues</h3>
-                <p>"The reward of Hajj Mabrur is nothing but Jannah."</p>
-
-                <h3>2. The 5 Days of Hajj SEQUENCE</h3>
-                <div class="tip-box"><strong>8th Zil Hijjah:</strong> Ihram -> Mina (Sleep).</div>
-                <div class="tip-box"><strong>9th Zil Hijjah (Arafah):</strong> Arafat (Wuquf - Main Fard) -> Sunset -> Muzdalifah (Sleep/Collect Stones).</div>
-                <div class="tip-box"><strong>10th Zil Hijjah (Sacrifice):</strong> Mina -> Pelt Big Devil -> Sacrifice -> Shave -> Tawaf.</div>
-                <div class="mnemonic-box">💡 <strong>Locations:</strong> M - A - M (Mina -> Arafat -> Muzdalifah).</div>
-                `
+                id: 'isl4', title: 'Topic 4: Python Programming', content: ''
             },
             {
-                id: 'isl6', title: 'Topic 6: Ethics (Surah Hujurat)', content: `
-                <h3>1. Manners with Prophet (v1-5)</h3>
-                <p>Don't raise voice above him. If you do, deeds might be voided.</p>
-
-                <h3>2. Social Evils (v11-12)</h3>
-                <ul>
-                    <li><strong>Mockery:</strong> Men mocking men, women mocking women.</li>
-                    <li><strong>Sarcasm/Defamation:</strong> Finding faults.</li>
-                    <li><strong>Nicknames:</strong> Offensive names.</li>
-                    <li><strong>Suspicion (Zann):</strong> Avoid it.</li>
-                    <li><strong>Spying:</strong> Don't look for faults.</li>
-                    <li><strong>Backbiting:</strong> Like eating flesh of dead brother.</li>
-                </ul>
-
-                <h3>3. The Standard (v13)</h3>
-                <p>"The most noble of you is the most righteous (Taqwa)." Race/Tribes are just for identity.</p>
-                `
+                id: 'isl5', title: 'Topic 5: SDLC', content: ''
+            },
+            {
+                id: 'isl6', title: 'Topic 6: Database concepts and management systems (DBMS)', content: ''
             }
         ];
 
