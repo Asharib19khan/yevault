@@ -21,7 +21,7 @@ export default function SafeMirrorAI() {
   
   // State
   const [hasStarted, setHasStarted] = useState(false);
-  const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
+
   const [activeDeviceId, setActiveDeviceId] = useState<string>('');
   const [cameraStatus, setCameraStatus] = useState<string>("Initializing...");
   const [envError, setEnvError] = useState<string | null>(null);
@@ -41,23 +41,7 @@ export default function SafeMirrorAI() {
     }
   }, []);
 
-  // 1. ENUMERATE DEVICES
-  useEffect(() => {
-    async function getDevices() {
-      try {
-        const allDevices = await navigator.mediaDevices.enumerateDevices();
-        const videoInputs = allDevices.filter(d => 
-          d.kind === 'videoinput' && 
-          !d.label.includes('DroidCam') && 
-          !d.label.includes('Virtual')
-        );
-        setDevices(videoInputs);
-      } catch (e) {
-        console.error("Device Enum Error:", e);
-      }
-    }
-    getDevices();
-  }, []);
+
 
   // 2. START SEQUENCE (Requires User Gesture)
   const handleStart = async () => {
@@ -79,8 +63,12 @@ export default function SafeMirrorAI() {
         videoRef.current.srcObject = stream;
         videoRef.current.play(); // Explicit play
       }
-    } catch (err: any) {
-      setCameraStatus(`Error: ${err.message}`);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setCameraStatus(`Error: ${err.message}`);
+      } else {
+        setCameraStatus(`Error: Unknown error`);
+      }
     }
 
     // Initialize Speech
@@ -100,6 +88,7 @@ export default function SafeMirrorAI() {
            if (interactionState !== 'PROCESSING') setInteractionState('IDLE');
         };
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         recognition.onresult = (event: any) => {
           let interimTranscript = '';
           for (let i = event.resultIndex; i < event.results.length; ++i) {
@@ -113,18 +102,19 @@ export default function SafeMirrorAI() {
           }
         };
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         recognition.onerror = (event: any) => {
           console.log("Speech Error:", event.error);
         };
         
         recognition.onend = () => {
           if (!isAiSpeaking && recognitionRef.current) {
-             try { recognitionRef.current.start(); } catch(e) {}
+             try { recognitionRef.current.start(); } catch {}
           }
         };
 
         recognitionRef.current = recognition;
-        try { recognition.start(); } catch(e) {}
+        try { recognition.start(); } catch {}
       } else {
         setCameraStatus("Error: Speech API not supported on this browser.");
       }
@@ -163,7 +153,7 @@ export default function SafeMirrorAI() {
       setIsAiSpeaking(false);
       setTranscript("");
       setInteractionState('IDLE');
-      if (recognitionRef.current) try { recognitionRef.current.start(); } catch(e) {}
+      if (recognitionRef.current) try { recognitionRef.current.start(); } catch {}
     };
 
     synth.speak(utterance);

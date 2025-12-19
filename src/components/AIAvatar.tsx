@@ -20,7 +20,7 @@ const useAudioAnalyzer = () => {
 
                 setAnalyzer(ana);
                 setDataArray(new Uint8Array(ana.frequencyBinCount));
-            } catch (e) {
+            } catch {
                 // console.error("Mic access denied for visualizer", e);
             }
         };
@@ -54,12 +54,14 @@ const WordStar = ({ text, position }: { text: string, position: [number, number,
 
 // --- NEURAL DUST COMPONENT (REPLACED BUBBLES) ---
 // Uses GL_POINTS for a sleek, high-tech dust effect rather than geometry meshes
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const NeuralDust = ({ analyzer, dataArray, isSpeaking }: any) => {
     const count = 3000;
     const meshRef = useRef<THREE.Points>(null);
 
     // Initial random positions & attributes
     const { positions, randoms } = useMemo(() => {
+        // eslint-disable-next-line react-hooks/purity
         const positions = new Float32Array(count * 3);
         const randoms = new Float32Array(count);
         for (let i = 0; i < count; i++) {
@@ -142,6 +144,7 @@ const AIAvatar: React.FC<AIAvatarProps> = ({ isSpeaking, transcript }) => {
                 text: lastWord,
                 pos: [(Math.random() - 0.5) * 10, (Math.random() - 0.5) * 6, (Math.random() - 0.5) * 4] as [number, number, number]
             };
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setWords(prev => [...prev.slice(-15), newWord]);
         }
     }, [transcript]);

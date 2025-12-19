@@ -38,9 +38,13 @@ const VisionConfig: React.FC<VisionConfigProps> = ({ onFaceDetected }) => {
                     stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
                     setPermissionState("granted");
                     setCamStatus("Permission Granted. Enumerating devices...");
-                } catch (e: any) {
+                } catch (e: unknown) {
                     setPermissionState("denied");
-                    setCamError(`Permission Error: ${e.name} - ${e.message}`);
+                    if (e instanceof Error) {
+                        setCamError(`Permission Error: ${e.name} - ${e.message}`);
+                    } else {
+                        setCamError(`Permission Error: Unknown`);
+                    }
                     setCamStatus("PERMISSION_DENIED");
                     return;
                 }
@@ -64,9 +68,13 @@ const VisionConfig: React.FC<VisionConfigProps> = ({ onFaceDetected }) => {
                     setCamStatus("NO_DEVICES");
                 }
 
-            } catch (err: any) {
+            } catch (err: unknown) {
                 setPermissionState("error");
-                setCamError(`System Error: ${err.name}: ${err.message}`);
+                if (err instanceof Error) {
+                    setCamError(`System Error: ${err.name}: ${err.message}`);
+                } else {
+                    setCamError(`System Error: Unknown`);
+                }
                 setCamStatus("SYSTEM_ERROR");
             }
         };
@@ -106,6 +114,7 @@ const VisionConfig: React.FC<VisionConfigProps> = ({ onFaceDetected }) => {
         const canvas = canvasRef.current;
 
         if (video.currentTime > 0 && !video.paused && !video.ended && video.readyState >= 2) {
+            // eslint-disable-next-line react-hooks/purity
             const startTimeMs = performance.now();
             const results = faceLandmarkerRef.current.detectForVideo(video, startTimeMs);
 
@@ -137,6 +146,7 @@ const VisionConfig: React.FC<VisionConfigProps> = ({ onFaceDetected }) => {
         if (visionLoaded) {
             requestAnimationFrame(predictWebcam);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [visionLoaded]);
 
     return (
@@ -169,7 +179,7 @@ const VisionConfig: React.FC<VisionConfigProps> = ({ onFaceDetected }) => {
                 </div>
 
                 <div className="mt-4 text-[10px] text-gray-500 border-t border-gray-800 pt-2">
-                    NOTE: If Blocked, check browser permissions icon in URL bar or iframe 'allow' attributes.
+                    NOTE: If Blocked, check browser permissions icon in URL bar or iframe &apos;allow&apos; attributes.
                 </div>
             </div>
 

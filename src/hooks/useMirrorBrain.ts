@@ -27,6 +27,7 @@ export const useMirrorBrain = () => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
             // recognition setup
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
             if (SpeechRecognition) {
                 const recognition = new SpeechRecognition();
@@ -107,7 +108,7 @@ export const useMirrorBrain = () => {
             try {
                 recognitionRef.current.start();
                 setIsListening(true);
-            } catch (e) {
+            } catch {
                 // Ignore 'already started' errors
             }
 
