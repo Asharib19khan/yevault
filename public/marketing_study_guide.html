@@ -100,18 +100,75 @@
         }
 
         @keyframes blink-glow {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--brand-primary); }
+            50% { opacity: 0.7; text-shadow: 0 0 20px var(--brand-glow); color: #fff; }
+        }
 
-            0%,
-            100% {
-                opacity: 1;
-                text-shadow: 0 0 10px var(--brand-primary);
-            }
+        /* --- KRATOS / GOD OF WAR FX --- */
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0); }
+            10%, 30%, 50%, 70%, 90% { transform: translate(-10px, -10px); }
+            20%, 40%, 60%, 80% { transform: translate(10px, 10px); }
+        }
 
-            50% {
-                opacity: 0.7;
-                text-shadow: 0 0 20px var(--brand-glow);
-                color: #fff;
-            }
+        @keyframes thunder-flash {
+            0% { background-color: var(--bg-dark); }
+            10% { background-color: #fff; }
+            15% { background-color: #450a0a; } /* Blood Red Dark */
+            20% { background-color: #fff; }
+            40% { background-color: #270404; } /* Deep Red */
+            100% { background-color: #000; }
+        }
+
+        @keyframes text-burn {
+            0% { letter-spacing: 0px; color: var(--text-secondary); }
+            100% { letter-spacing: 5px; color: #ef4444; text-shadow: 0 0 20px #b91c1c, 0 0 40px #7f1d1d; }
+        }
+
+        .shake-element {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        .kratos-mode {
+            animation: thunder-flash 0.8s forwards !important;
+        }
+
+        .kratos-mode .entry-question {
+            animation: text-burn 0.5s forwards !important;
+            font-family: 'Times New Roman', serif; /* Classic Mythic Look */
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .kratos-mode .name-input {
+            border-color: #ef4444 !important;
+            color: #ef4444 !important;
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+        }
+
+        .kratos-mode .entry-btn {
+            background: #7f1d1d !important;
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 30px #ef4444 !important;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- ADVANCED STORM FX (CANVAS) --- */
+        #kratos-storm {
+            position: absolute;
+            inset: 0;
+            z-index: -1; 
+            background: #000;
+            display: none;
+            overflow: hidden;
+        }
+        
+        #storm-canvas {
+            display: block; 
+            width: 100%; 
+            height: 100%;
         }
 
         /* --- Layout --- */
@@ -965,8 +1022,13 @@
 
     <!-- ENTRY PORTAL (The Minimalist Name Drop) -->
     <div id="entry-portal">
+        <!-- New Storm Container -->
+        <div id="kratos-storm">
+             <canvas id="storm-canvas"></canvas>
+        </div>
+
         <div class="entry-container">
-            <h1 class="entry-question">Who is conquering Marketing today?</h1>
+            <h1 id="kratos-title" class="entry-question">Who is conquering Marketing today?</h1>
             <input type="text" id="name-input" class="name-input" placeholder="Type your Name" autocomplete="off">
             <button class="entry-btn" onclick="enterApp()">Let's Go</button>
         </div>
@@ -2838,12 +2900,142 @@ Ending Capital:                              Rs. 350,000
             });
         };
 
-        // --- CREATIVE ENTRY LOGIC (NO CSV) ---
-        function enterApp() {
-            const name = document.getElementById('name-input').value || "Legend";
+        // --- GOD TIER STORM ENGINE ---
+        class StormSystem {
+            constructor() {
+                this.canvas = document.getElementById('storm-canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.lightning = 0;
+                this.width = 0;
+                this.height = 0;
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+            }
 
+            resize() {
+                this.width = this.canvas.width = window.innerWidth;
+                this.height = this.canvas.height = window.innerHeight;
+            }
+
+            start() {
+                this.loop();
+                // Create Initial Rain
+                for(let i=0; i<500; i++) this.particles.push(this.newDrop());
+            }
+
+            newDrop() {
+                return {
+                    x: Math.random() * this.width,
+                    y: Math.random() * this.height,
+                    l: Math.random() * 20 + 10, // length
+                    v: Math.random() * 10 + 20  // velocity
+                };
+            }
+
+            drawLightning() {
+                if (Math.random() > 0.02) return; // Rare flash
+                
+                const x = Math.random() * this.width;
+                this.ctx.beginPath();
+                this.ctx.moveTo(x, 0);
+                let cx = x;
+                for (let y = 0; y < this.height; y += 20) {
+                    cx += (Math.random() - 0.5) * 40;
+                    this.ctx.lineTo(cx, y);
+                }
+                this.ctx.strokeStyle = '#fff';
+                this.ctx.lineWidth = 2;
+                this.ctx.stroke();
+                
+                // Flash Screen
+                this.ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                this.ctx.fillRect(0,0,this.width, this.height);
+                this.lightning = 10;
+            }
+
+            loop() {
+                // Fade bg for trails
+                this.ctx.fillStyle = this.lightning > 0 ? `rgba(69, 10, 10, 0.8)` : 'rgba(10, 0, 0, 0.4)';
+                this.ctx.fillRect(0, 0, this.width, this.height);
+
+                if(this.lightning > 0) this.lightning--;
+
+                // Rain
+                this.ctx.strokeStyle = 'rgba(220, 38, 38, 0.6)'; // RED RAIN
+                this.ctx.lineWidth = 1;
+                this.ctx.beginPath();
+                for (let p of this.particles) {
+                    this.ctx.moveTo(p.x, p.y);
+                    this.ctx.lineTo(p.x, p.y + p.l);
+                    
+                    p.y += p.v;
+                    if (p.y > this.height) {
+                        p.y = -p.l;
+                        p.x = Math.random() * this.width;
+                    }
+                }
+                this.ctx.stroke();
+
+                this.drawLightning();
+                
+                requestAnimationFrame(() => this.loop());
+            }
+        }
+        
+        let stormEngine = null;
+
+        // --- CREATIVE ENTRY LOGIC (STRICT MODE) ---
+        let loginAttempts = 0;
+
+        function enterApp() {
+            const nameInput = document.getElementById('name-input');
+            const name = nameInput.value.trim();
+
+            // 1. Validation Logic
+            if (!name) {
+                loginAttempts++;
+                
+                // VISUAL PENALTY SYSTEM
+                if (loginAttempts === 1) {
+                    // Strike 1: Warning Shake
+                    nameInput.classList.add('shake-element');
+                    nameInput.style.borderColor = '#f59e0b'; // Warning Orange
+                    setTimeout(() => nameInput.classList.remove('shake-element'), 500);
+                    nameInput.placeholder = "Name Required.";
+                } else if (loginAttempts >= 2) {
+                    // Strike 2: GOD OF WAR MODE
+                    const portal = document.getElementById('entry-portal');
+                    const stormContainer = document.getElementById('kratos-storm');
+                    const title = document.getElementById('kratos-title') || document.querySelector('.entry-question');
+                    
+                    // Trigger Chaos
+                    portal.classList.add('kratos-mode');
+                    if (stormContainer) {
+                        stormContainer.style.display = 'block';
+                        if(!stormEngine) {
+                            stormEngine = new StormSystem();
+                            stormEngine.start();
+                        }
+                    }
+                    
+                    // Force Text Update
+                    if(title) {
+                        title.innerHTML = "BOY. <br> IDENTIFY YOURSELF.";
+                        title.style.color = "#ef4444"; // Explicit Red
+                        title.style.textShadow = "0 0 30px #b91c1c";
+                        title.style.fontFamily = "'Times New Roman', serif";
+                    }
+                    
+                    // Permanent Shake until fixed
+                    nameInput.classList.add('shake-element');
+                    setTimeout(() => nameInput.classList.remove('shake-element'), 500);
+                }
+                return; // STOP HERE
+            }
+
+            // 2. Success Logic
             // --- SUPABASE VISITOR LOG ---
-            // Fire and forget - don't block the UI
             fetch('/api/visitor', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -2854,13 +3046,15 @@ Ending Capital:                              Rs. 350,000
             const portal = document.getElementById('entry-portal');
             const app = document.getElementById('app');
 
+            // Smooth exit even from Kratos mode
+            portal.style.transition = 'opacity 0.8s, transform 0.8s';
             portal.style.opacity = '0';
-            portal.style.transform = 'scale(1.1)'; // Warp effect
+            portal.style.transform = 'scale(1.1)'; 
 
             setTimeout(() => {
                 portal.style.display = 'none';
                 app.classList.add('visible');
-                document.getElementById('user-display').innerText = name; // Personalize Header
+                document.getElementById('user-display').innerText = name; 
             }, 800);
         }
 
