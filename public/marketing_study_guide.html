@@ -1046,6 +1046,7 @@
             <div class="nav-item" onclick="nav('marketing-mgmt', this)">Marketing Management</div>
             <div class="nav-item" onclick="nav('islamic-studies', this)">Islamic Studies</div>
             <div class="nav-item" onclick="nav('foa-suite', this)">Fundamentals of Accounting</div>
+            <div class="nav-item" onclick="nav('seating-plan', this)">Exam Seating Plan</div>
             <div class="nav-item" onclick="nav('saint-yeezus', this)"
                 style="animation: blink-glow 2s infinite alternate;">Saint Yeezus</div>
 
@@ -2280,6 +2281,16 @@ Ending Capital:                              Rs. 350,000
                             </div>
                          </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- SEATING PLAN SECTION -->
+            <section id="seating-plan" class="section-view">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; border-bottom: 2px solid var(--brand-primary); padding-bottom: 1rem;">
+                    <h1 style="font-family:var(--font-display); font-size:3rem; letter-spacing:-1px;">EXAM <span style="color:var(--brand-primary); text-shadow: 0 0 20px rgba(185, 28, 28, 0.4);">SEATING</span></h1>
+                </div>
+                <div class="card" style="padding:0; overflow:hidden; border-radius:1.5rem; height:calc(100vh - 200px); background:#0c0c0e; border:1px solid var(--border-subtle);">
+                    <iframe id="seating-frame" src="seating_plan.html" style="width:100%; height:100%; border:none;" allow="fullscreen"></iframe>
                 </div>
             </section>
 
