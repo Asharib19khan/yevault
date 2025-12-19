@@ -3393,7 +3393,125 @@ Ending Capital:                              Rs. 350,000
                 `
             },
             {
-                id: 'isl6', title: 'Topic 6: Database concepts and management systems (DBMS)', content: ''
+                id: 'isl6', title: 'Topic 6: Database concepts and management systems (DBMS)', content: `
+                <h3>1. Database Concepts & DBMS</h3>
+
+                <h4>Data vs. Information</h4>
+                <ul>
+                    <li><strong>Data:</strong> Raw facts and figures (e.g., numbers, dates, names) that have not been processed to reveal meaning.</li>
+                    <li><strong>Information:</strong> Processed data that is meaningful and useful for decision-making (e.g., a trend analysis derived from sales numbers).</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Think of data as the "ingredients" and information as the "cooked meal." You can't make decisions based on ingredients alone.
+                </div>
+
+                <h4>What is a DBMS?</h4>
+                <p>A software system that enables users to define, create, maintain, and control access to the database.</p>
+                <ul>
+                    <li><strong>Role:</strong> It acts as an intermediary between the user/applications and the physical database.</li>
+                    <li><strong>Examples:</strong> MySQL, Oracle, PostgreSQL, Microsoft SQL Server.</li>
+                </ul>
+
+                <h4>Data Types</h4>
+                <ul>
+                    <li><strong>Structured Data:</strong> Highly organized in rows and columns (e.g., Relational Databases, Spreadsheets).</li>
+                    <li><strong>Unstructured Data:</strong> No pre-defined format (e.g., Videos, Emails, Social Media posts).</li>
+                    <li><strong>Semi-Structured Data:</strong> Contains tags or markers but isn't fully tabular (e.g., JSON, XML).</li>
+                </ul>
+
+                <h4>Database Structures</h4>
+                <ul>
+                    <li><strong>Hierarchical:</strong> Data is organized in a tree-like structure (Parent-Child).</li>
+                    <li><strong>Network:</strong> Allows more complex connections (Many-to-Many relationships).</li>
+                    <li><strong>Relational (RDBMS):</strong> Data is stored in tables (relations) related by common fields. This is the most common modern model.</li>
+                    <li><strong>Object-Oriented:</strong> Stores data as "objects" (like in programming).</li>
+                </ul>
+
+                <h3>2. Entity Relationship Diagram (ERD)</h3>
+                <p><strong>Definition:</strong> A visual representation of the logical structure of a database. It shows how data entities relate to one another.</p>
+
+                <h4>Core Components:</h4>
+                <ul>
+                    <li><strong>Entities (Rectangles):</strong> Objects or concepts where data is stored (e.g., Student, Course, Customer).</li>
+                    <li><strong>Attributes (Ovals):</strong> Details or properties of an entity (e.g., StudentName, StudentID, Email).</li>
+                    <li><strong>Relationships (Diamonds):</strong> How two entities are connected (e.g., Enrolls, Teaches, Purchases).</li>
+                </ul>
+
+                <h4>Advanced Attributes:</h4>
+                <ul>
+                    <li><strong>Multivalued Attribute (Double Oval):</strong> An attribute that can have more than one value (e.g., Phone_Number for a person who has multiple phones).</li>
+                    <li><strong>Derived Attribute (Dashed Oval):</strong> An attribute whose value is calculated from other attributes (e.g., Age is derived from Date_Of_Birth).</li>
+                    <li><strong>Weak Entity (Double Rectangle):</strong> An entity that cannot exist without a "strong" owner entity (e.g., a Dependent entity relies on an Employee entity).</li>
+                </ul>
+
+                <div class="tip-box">
+                    <strong>Tip:</strong> When drawing an ERD, start by identifying the "Nouns" (Entities) and then the "Verbs" (Relationships). If a noun is just a property of another noun (like "Color" of a "Car"), it's an attribute, not an entity.
+                </div>
+
+                <h3>3. Keys (The Backbone of RDBMS)</h3>
+                <p>Keys ensure data integrity and establish links between tables.</p>
+
+                <h4>Primary Key (PK):</h4>
+                <ul>
+                    <li><strong>Definition:</strong> A unique identifier for a specific record in a table.</li>
+                    <li><strong>Rules:</strong> Must be unique (no duplicates) and cannot be NULL (empty).</li>
+                    <li><strong>Example:</strong> Student_ID in a Students table.</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Always create a surrogate key (like an auto-incrementing ID) if a natural unique key doesn't exist.
+                </div>
+
+                <h4>Candidate Key:</h4>
+                <ul>
+                    <li><strong>Definition:</strong> Any attribute (column) that could qualify as a Primary Key.</li>
+                    <li><strong>Example:</strong> In a table with Student_ID, Email, and SSN, all three are candidate keys because they are unique. You pick one to be the Primary Key.</li>
+                </ul>
+
+                <h4>Unique Key:</h4>
+                <ul>
+                    <li><strong>Definition:</strong> Ensures all values in a column are different.</li>
+                    <li><strong>Difference from PK:</strong> A table can have multiple Unique Keys, but only one Primary Key. Also, a Unique Key can usually accept one NULL value (depending on the DBMS).</li>
+                </ul>
+
+                <h4>Foreign Key (FK):</h4>
+                <ul>
+                    <li><strong>Definition:</strong> A field in one table that links to the Primary Key of another table.</li>
+                    <li><strong>Purpose:</strong> Enforces Referential Integrity (ensures you can't have an order for a customer that doesn't exist).</li>
+                    <li><strong>Example:</strong> Customer_ID in the Orders table is a Foreign Key pointing to Customer_ID in the Customers table.</li>
+                </ul>
+
+                <h3>4. Relationships (Cardinality)</h3>
+                <p>Cardinality defines the numerical relationship between rows of one table and rows of another.</p>
+
+                <h4>One-to-One (1:1):</h4>
+                <ul>
+                    <li><strong>Definition:</strong> A single record in Table A is related to a single record in Table B.</li>
+                    <li><strong>Example:</strong> Person ↔ Passport. One person has one passport; one passport belongs to one person.</li>
+                    <li><strong>Implementation:</strong> Share the same Primary Key or put the PK of one as a Unique FK in the other.</li>
+                </ul>
+
+                <h4>One-to-Many (1:N):</h4>
+                <ul>
+                    <li><strong>Definition:</strong> A single record in Table A can be related to multiple records in Table B, but a record in Table B relates to only one in Table A.</li>
+                    <li><strong>Example:</strong> Customer ↔ Orders. One customer can place many orders, but an order belongs to only one customer.</li>
+                    <li><strong>Implementation:</strong> Put the Primary Key of the "One" side (Customer) as a Foreign Key in the "Many" side (Orders).</li>
+                </ul>
+
+                <h4>Many-to-Many (M:N):</h4>
+                <ul>
+                    <li><strong>Definition:</strong> Multiple records in Table A are related to multiple records in Table B.</li>
+                    <li><strong>Example:</strong> Student ↔ Course. A student can take many courses, and a course can have many students.</li>
+                    <li><strong>Implementation:</strong> You cannot implement this directly. You must create a third Junction Table (or Associative Entity) that breaks it into two 1:N relationships.
+                        <ul>
+                            <li><strong>New Table:</strong> Enrollments (contains Student_ID and Course_ID).</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="mnemonic-box">
+                    💡 <strong>Tip:</strong> To determine the relationship type, ask the question in both directions. "How many X can a Y have?" AND "How many Y can an X have?"
+                </div>
+                `
             }
         ];
 
