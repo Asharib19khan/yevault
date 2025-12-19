@@ -1048,8 +1048,7 @@
             <div class="nav-item" onclick="nav('foa-suite', this)">Fundamentals of Accounting</div>
             <div class="nav-item" onclick="window.location.href='/seating_plan.html'">Exam Seating Plan</div>
 
-            <div class="nav-item" onclick="nav('saint-yeezus', this)"
-                style="animation: blink-glow 2s infinite alternate;">Saint Yeezus</div>
+
 
             <div style="margin-top:auto">
                 <div
@@ -1264,69 +1263,7 @@
                 </div>
             </section>
 
-            <!-- SAINT YEEZUS AI SECTION -->
-            <section id="saint-yeezus" class="section-view">
-                <div id="ai-launcher"
-                    style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; text-align:center; padding:2rem;">
 
-                    <!-- Digital Icon (CSS Shape instead of Emoji) -->
-                    <div
-                        style="width:80px; height:80px; background:var(--brand-primary); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); margin-bottom:2rem; animation: float 3s infinite ease-in-out; display:flex; align-items:center; justify-content:center; box-shadow:0 0 30px var(--brand-glow);">
-                        <div
-                            style="width:60%; height:60%; background:#000; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);">
-                        </div>
-                    </div>
-
-                    <h1
-                        style="font-family:var(--font-display); font-size:3.5rem; background: -webkit-linear-gradient(eee, #333); background-clip: text; -webkit-background-clip: text; color: transparent; text-shadow: 0 0 30px var(--brand-primary); margin-bottom:1rem;">
-                        Saint Yeezus AI</h1>
-                    <p style="color:var(--text-secondary); max-width:500px; margin:0 auto 3rem;">
-                        Advanced Mirror Tutor System. Verbal retention enhancement protocol active.
-                    </p>
-
-                    <div class="card" id="ai-status-card"
-                        style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0,0,0,0.4)); border:1px solid var(--brand-primary); padding:2rem; max-width:400px; transition: all 0.3s ease;">
-                        
-                        <!-- Initial State -->
-                        <div id="ai-status-initial">
-                            <p style="margin-bottom:1.5rem; color:var(--text-primary); font-size:0.9rem;">Server Status Check Required before Initialization.</p>
-                            <button onclick="checkServerAndLaunch()" class="btn btn-primary"
-                                style="display:inline-block; transform:scale(1.1); padding:1rem 2rem; letter-spacing:1px; text-transform:uppercase; font-size:0.9rem;">
-                                Initialize Mirror Interface
-                            </button>
-                        </div>
-
-                        <!-- Loading State -->
-                        <div id="ai-status-loading" style="display:none;">
-                            <div style="width:30px; height:30px; border:3px solid rgba(139, 92, 246, 0.3); border-top-color:var(--brand-primary); border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 1rem auto;"></div>
-                            <p style="color:var(--text-secondary); font-size:0.9rem;">Pinging Neural Network...</p>
-                        </div>
-
-                        <!-- Offline State -->
-                        <div id="ai-status-offline" style="display:none;">
-                            <p style="color:#ef4444; font-weight:700; margin-bottom:0.5rem;">⚠ SYSTEM OFFLINE</p>
-                            <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:1.5rem;">
-                                The AI Brain server is not responding. Please launch the backend terminal.
-                            </p>
-                            <div style="background:#000; padding:1rem; border-radius:0.5rem; text-align:left; margin-bottom:1.5rem; border:1px solid var(--border-subtle);">
-                                <code style="color:#10b981; font-family:monospace; font-size:0.8rem;">
-                                    > cd mirror-tutor-ai<br>
-                                    > npm run dev
-                                </code>
-                            </div>
-                            <button onclick="checkServerAndLaunch()" class="btn" style="border-color:var(--brand-primary); color:var(--brand-primary);">
-                                Retry Connection
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Embedded Interface Container -->
-                <!-- Embedded Interface Container -->
-                <!-- Embedded Interface Container -->
-                <!-- Moved to Body End for Fullscreen -->
-            </section>
 
             <!-- NOTES (Preserved) -->
             <section id="notes" class="section-view">
@@ -3082,10 +3019,7 @@ Ending Capital:                              Rs. 350,000
                 el.classList.add('active');
             }
 
-            // Auto-launch AI if selecting Saint Yeezus
-            if (id === 'saint-yeezus') {
-                launchAI();
-            }
+
         }
 
         // --- NOTES ---
@@ -3298,77 +3232,7 @@ Ending Capital:                              Rs. 350,000
         `;
         document.head.appendChild(styleSheet);
 
-        async function checkServerAndLaunch() {
-            const initialUI = document.getElementById('ai-status-initial');
-            const loadingUI = document.getElementById('ai-status-loading');
-            const offlineUI = document.getElementById('ai-status-offline');
-            const card = document.getElementById('ai-status-card');
 
-            // Show Loading
-            initialUI.style.display = 'none';
-            offlineUI.style.display = 'none';
-            loadingUI.style.display = 'block';
-
-            try {
-                // Try to fetch specific resource to check if Next.js is running
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 2000); // 2s timeout
-                
-                const response = await fetch('/ai', { 
-                    method: 'HEAD', 
-                    signal: controller.signal,
-                    mode: 'no-cors' // Use no-cors to avoid CORS errors just for checking existence
-                });
-                clearTimeout(timeoutId);
-
-                // If we get here (even with opaque response), server is likely up
-                launchAI();
-                
-                // Reset UI for next time
-                setTimeout(() => {
-                    loadingUI.style.display = 'none';
-                    initialUI.style.display = 'block';
-                }, 1000);
-
-            } catch (error) {
-                // Server Offline
-                console.error("AI Server Check Failed", error);
-                loadingUI.style.display = 'none';
-                offlineUI.style.display = 'block';
-                
-                // Shake effect
-                card.style.transform = "translateX(10px)";
-                setTimeout(() => card.style.transform = "translateX(-10px)", 100);
-                setTimeout(() => card.style.transform = "translateX(10px)", 200);
-                setTimeout(() => card.style.transform = "translateX(0)", 300);
-            }
-        }
-
-        function launchAI() {
-            const launcher = document.getElementById('ai-launcher');
-            const interface = document.getElementById('ai-interface');
-            const iframe = interface.querySelector('iframe');
-
-            // Ensure iframe src is correct
-            if (iframe.src !== window.location.origin + '/ai') {
-                iframe.src = window.location.origin + '/ai';
-            }
-
-            launcher.style.display = 'none';
-            interface.style.display = 'block';
-        }
-
-        function closeAI() {
-            const launcher = document.getElementById('ai-launcher');
-            const interface = document.getElementById('ai-interface');
-
-            // Reload iframe to stop camera/mic
-            const iframe = interface.querySelector('iframe');
-            if (iframe) iframe.src = 'about:blank'; // Clear it to fully stop streams
-
-            interface.style.display = 'none';
-            launcher.style.display = 'flex';
-        }
 
         // --- FOA MODULE LOGIC ---
         function switchFoaTab(tab, btn) {
