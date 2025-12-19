@@ -3255,7 +3255,142 @@ Ending Capital:                              Rs. 350,000
                 `
             },
             {
-                id: 'isl5', title: 'Topic 5: SDLC', content: ''
+                id: 'isl5', title: 'Topic 5: SDLC', content: `
+                <h3>1. SDLC Phases & Artifacts</h3>
+                <p>The SDLC is a framework describing the activities performed at each stage of a software development project.</p>
+
+                <h4>Phase 1: Planning and Requirements</h4>
+                <p><strong>Description:</strong> This is the first and most important phase. The Business Analyst collects the client's requirements. This information is used to plan the basic project approach, expenditure, risk analysis, and technical analysis.</p>
+                <p><strong>Artifact (Output):</strong> <strong>BRS (Business Requirement Specification)</strong>. This document is prepared after planning to outline the high-level business needs.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Focus on the "why" in this phase. If the requirements are wrong here, the cost to fix them effectively doubles with every subsequent phase.
+                </div>
+
+                <h4>Phase 2: Analysis</h4>
+                <p><strong>Description:</strong> The requirements are analyzed in depth to define what the system should do.</p>
+                <p><strong>Artifact (Output):</strong> <strong>SRS (Software Requirement Specification)</strong>. This is derived from the BRS and contains all product requirements to be designed and developed.</p>
+                <p><strong>Sub-Artifacts:</strong> Based on the SRS, two detailed documents are often created:</p>
+                <ul>
+                    <li>FRS (Functional Requirement Specification)</li>
+                    <li>System Requirement Specification</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Tip:</strong> The SRS is your "contract" for the project scope. If it's not in the SRS, it's technically not required.
+                </div>
+
+                <h4>Phase 3: Designing</h4>
+                <p><strong>Description:</strong> Product architecture is proposed based on the SRS.</p>
+                <p><strong>Artifact (Output):</strong> <strong>DDS (Design Document Specification)</strong></p>
+                <p><strong>Sub-Artifacts:</strong></p>
+                <ul>
+                    <li><strong>HLD (High-Level Design):</strong> Overview of architecture (often done by System Architect).</li>
+                    <li><strong>LLD (Low-Level Design):</strong> Detailed internal logic of modules.</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Tip:</strong> HLD is about "Architecture" (database design, interface relationships), while LLD is about "Logic" (algorithms, pseudo-code).
+                </div>
+
+                <h4>Phase 4: Development (Building)</h4>
+                <p><strong>Description:</strong> The actual coding of the project takes place here. Developers convert the design documents into executable code.</p>
+                <p><strong>Artifact (Output):</strong> Source Code / Executable Software.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> This is usually the longest phase in the Waterfall model but can be short and repetitive in Agile.
+                </div>
+
+                <h4>Phase 5: Testing</h4>
+                <p><strong>Description:</strong> The software is executed to find defects. It ensures the product meets the requirements specified in the SRS.</p>
+                <p><strong>Artifact (Output):</strong> Test Reports, Bug Reports.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Testing isn't just about finding bugs; it's about verifying the "Expected Result" matches the "Actual Result".
+                </div>
+
+                <h4>Phase 6: Deployment & Maintenance</h4>
+                <p><strong>Description:</strong> The product is released to the market/client. Maintenance involves updating the product or fixing issues reported by users after release.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Maintenance is often the most expensive phase over the life of the software because it lasts the longest.
+                </div>
+
+                <h3>2. SDLC Models</h3>
+                <p>Different projects require different approaches. These models define how the phases interact.</p>
+
+                <h4>Waterfall Model</h4>
+                <p><strong>Concept:</strong> The "Classic" model. It is linear and sequential. You must finish one phase completely before starting the next.</p>
+                <ul>
+                    <li><strong>Pros:</strong> Simple to manage, easy to understand.</li>
+                    <li><strong>Cons:</strong> Inflexible. You cannot go back to change requirements once the testing phase starts without significant cost.</li>
+                </ul>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Use this only when requirements are crystal clear and unchanging (e.g., a simple payroll system).
+                </div>
+
+                <h4>V-Shaped Model (Verification and Validation)</h4>
+                <p><strong>Concept:</strong> An extension of Waterfall where testing is planned in parallel with the corresponding development phase. For every development step on the left side of the "V", there is a testing step on the right.</p>
+                <p><strong>Phases Mapping:</strong></p>
+                <ul>
+                    <li>Requirements Planning ↔ Acceptance Testing</li>
+                    <li>Product Specification ↔ System Testing</li>
+                    <li>High-Level Design ↔ Integration Testing</li>
+                    <li>Detailed Design ↔ Unit Testing</li>
+                </ul>
+                <div class="mnemonic-box">
+                    💡 <strong>Tip:</strong> "Verification" asks "Are we building the product right?" (Development). "Validation" asks "Are we building the right product?" (Testing).
+                </div>
+
+                <h4>Iterative Model</h4>
+                <p><strong>Concept:</strong> Develop a system through repeated cycles (iterations) and in smaller portions at a time (incremental).</p>
+                <p><strong>Process:</strong> You start with a simple implementation of a subset of requirements and iteratively enhance the evolving versions until the full system is implemented.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Great for projects where the major requirements are known, but some details might evolve over time.
+                </div>
+
+                <h4>Spiral Model</h4>
+                <p><strong>Concept:</strong> Combines elements of design and prototyping-in-stages to combine the advantages of top-down and bottom-up concepts. Risk Analysis is the key feature here.</p>
+                <p><strong>Weaknesses:</strong> Risk assessment expertise is required, and it can be complex and expensive for small projects.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Use this for large, expensive, and complicated projects (like flight control systems) where failure is not an option.
+                </div>
+
+                <h4>Agile Model</h4>
+                <p><strong>Concept:</strong> Focuses on continuous iteration of development and testing throughout the SDLC. It emphasizes individuals and interactions over processes and tools.</p>
+                <p><strong>Key:</strong> Customer collaboration is prioritized over contract negotiation.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Agile is a mindset, not just a process. It breaks the product into small "sprints" (usually 2-4 weeks) delivering working software frequently.
+                </div>
+
+                <h3>3. Testing Types</h3>
+                <p>Testing ensures the quality of the software by finding defects before the users do.</p>
+
+                <h4>Unit Testing</h4>
+                <p><strong>Definition:</strong> Testing of individual modules or components of the software.</p>
+                <p><strong>Who does it:</strong> Usually the Developers.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> This is "White Box" testing because the tester looks at the internal code logic.
+                </div>
+
+                <h4>Integration Testing</h4>
+                <p><strong>Definition:</strong> Testing new code in combination with code that has already been integrated. It verifies that different modules work together correctly.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Finds issues in the "interfaces" (data passing) between modules.
+                </div>
+
+                <h4>System Testing</h4>
+                <p><strong>Definition:</strong> Execution of the entire software for the purpose of finding defects. It tests the complete, integrated system to verify it meets specific requirements.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> This is "Black Box" testing; the tester doesn't care about the code, only the input and output.
+                </div>
+
+                <h4>Regression Testing</h4>
+                <p><strong>Definition:</strong> Re-running functional and non-functional tests to ensure that previously developed and tested software still performs after a change.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> Essential in Agile and Iterative models. Whenever you fix a bug, you run regression tests to ensure you didn't break something else.
+                </div>
+
+                <h4>Acceptance Testing</h4>
+                <p><strong>Definition:</strong> Checks the entire software system in its environment to see if it meets the user's business needs.</p>
+                <div class="tip-box">
+                    <strong>Tip:</strong> This is the final gateway before the software "Goes Live." It includes Alpha (internal) and Beta (client) testing.
+                </div>
+                `
             },
             {
                 id: 'isl6', title: 'Topic 6: Database concepts and management systems (DBMS)', content: ''
