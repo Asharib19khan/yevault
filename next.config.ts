@@ -2,12 +2,16 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async rewrites() {
-    return [
-      {
-        source: '/',
-        destination: '/marketing_study_guide.html',
-      },
-    ];
+    return {
+      beforeFiles: [
+        {
+          source: '/',
+          destination: '/marketing_study_guide.html',
+        },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
   },
 };
 
