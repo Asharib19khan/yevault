@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>YE VAULT</title>
+    
+    <!-- DNS Prefetch for External Domains -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
+    <!-- Preconnect for Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload Critical CSS -->
+    <link rel="preload" as="style" href="marketing_study_guide.css">
+    
+    <!-- Google Fonts with display=swap for faster loading -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- External CSS File -->
+    <link rel="stylesheet" href="marketing_study_guide.css">
+</head>
+
+<body>
+
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <!-- SOUND -->
+    <audio id="timerSound"
+        src="data:audio/mp3;base64,SUQzBAAAAAABAFRYWFgAAAASAAADbWFqb3JfYnJhbmQAZGFzaABUWFhYAAAAEQAAA21pbm9yX3ZlcnNpb24AMABUWFhYAAAAHAAAA2NvbXBhdGlibGVfYnJhbmRzAGlzbzZtcDQxAFRTU0UAAAAPAAADTGF2ZjU5LjI3LjEwMAAAAAAAAAAAAAAA//uQZAAAAAAAALAAAADXAAAASAAAAAABAAiQAAJAJAAAlAz//u">
+    </audio>
+
+    <!-- ENTRY PORTAL (The Minimalist Name Drop) -->
+    <div id="entry-portal">
+        <!-- New Storm Container -->
+        <div id="kratos-storm">
+             <canvas id="storm-canvas"></canvas>
+        </div>
+
+        <div class="entry-container">
+            <h1 id="kratos-title" class="entry-question">YE VAULT ACCESS</h1>
+            <input type="password" id="name-input" class="name-input" placeholder="Enter Access Key" autocomplete="off">
+            <button class="entry-btn" onclick="enterApp()">Let's Go</button>
+        </div>
+    </div>
+
+
+    <!-- SIDEBAR OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileNav()"></div>
+
+    <!-- APP LAYOUT -->
+    <div class="app-layout" id="app">
+        <aside class="sidebar" id="mainSidebar">
+            <div class="brand-logo">YE <span>VAULT</span></div>
+            <div class="nav-item active" onclick="nav('dashboard', this)">All roads lead to Rome</div>
+            <div class="nav-item" onclick="nav('marketing-mgmt', this)">Marketing Management</div>
+            <div class="nav-item" onclick="nav('islamic-studies', this)">IT in Business</div>
+            <div class="nav-item" onclick="nav('foa-suite', this)">Fundamentals of Accounting</div>
+            <div class="nav-item" onclick="nav('business-maths', this)">Business Maths</div>
+            <div class="nav-item" onclick="nav('seating-plan', this)">Exam Seating Plan</div>
+
+
+
+            <div style="margin-top:auto">
+                <div
+                    style="padding: 0 1rem 1rem 1rem; color: var(--text-muted); font-size: 0.75rem; border-bottom: 1px solid var(--border-subtle); margin-bottom: 1rem;">
+                    Created by <span style="color: var(--brand-glow);">Asharib</span>
+                </div>
+                <div class="nav-item" onclick="window.close()">Exit</div>
+            </div>
+        </aside>
+
+        <!-- MOBILE SIDEBAR TOGGLE FAB -->
+        <button class="nav-toggle-btn" onclick="toggleMobileNav()">
+            <span class="mobile-nav-icon">☰</span>
+        </button>
+
+        <main class="main-viewport">
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="section-view active" style="position:relative;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:2rem;">
+                    <h1 style="font-family:var(--font-display); font-size:3rem; line-height:1.1;">Run the world,
+                        <br><span id="user-display" style="color:var(--brand-primary);">Future CEO</span>.
+                    </h1>
+                    <div id="live-clock"></div>
+                </div>
+
+                <div class="timer-widget">
+                    <p
+                        style="text-transform:uppercase; letter-spacing:2px; color:var(--brand-primary); font-weight:700;">
+                        Deep Work Zone</p>
+                    <div class="session-badge">Sessions Today: <span id="session-count">0</span></div>
+                    <div class="timer-display" id="timer">25:00</div>
+                    <div style="display:flex; justify-content:center; gap:1rem; align-items:center;">
+                        <button class="btn btn-primary" onclick="toggleTimer()" id="timerBtn">Start Focus</button>
+                        <button class="btn" onclick="resetTimer()">Reset</button>
+                        <button class="btn" style="padding:0.8rem;" onclick="toggleSound()" id="soundBtn">Sound:
+                            On</button>
+                    </div>
+                </div>
+
+                <div class="card"
+                    style="margin-top:2rem; background:linear-gradient(145deg, rgba(24, 24, 27, 0.9), rgba(20, 20, 22, 0.95)); border:1px solid rgba(255,255,255,0.05);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+                        <h2 style="font-family:var(--font-display); font-size:1.5rem;">Exam Schedule</h2>
+                        <span class="tag cyan" style="font-size:0.8rem; padding:0.4rem 1rem;">Finals 2025</span>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table
+                            style="width:100%; border-collapse:separate; border-spacing:0 1rem; color:var(--text-secondary); min-width:600px;">
+                            <thead>
+                                <tr
+                                    style="text-align:left; color:var(--text-muted); font-size:0.9rem; text-transform:uppercase; letter-spacing:1px;">
+                                    <th style="padding:0 1.5rem;">Date</th>
+                                    <th style="padding:0 1.5rem;">Subject</th>
+                                    <th style="padding:0 1.5rem;">Time</th>
+                                    <th style="padding:0 1.5rem;">Time Left</th>
+                                    <th style="padding:0 1.5rem;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 16</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Tue</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:var(--text-primary); font-weight:600;">Islamic Studies</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">FSMSS1007 • Room 297</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left"
+                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
+                                        id="countdown-0">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
+                                            style="opacity:0.3;">Upcoming</span></td>
+                                </tr>
+                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 18</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Thu</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:var(--text-primary); font-weight:600;">Fundamentals of
+                                            Accounting</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">AF1001 • Room 319</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left"
+                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
+                                        id="countdown-1">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
+                                            style="opacity:0.3;">Upcoming</span></td>
+                                </tr>
+                                <tr
+                                    style="background:linear-gradient(90deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05)); border:1px solid rgba(139, 92, 246, 0.2);">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--brand-primary); font-size:1.1rem;">Dec 22</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7; color:var(--brand-glow);">Mon</span>
+                                    </td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:white; font-weight:700;">Marketing Management</div>
+                                        <div style="font-size:0.85rem; opacity:0.8; color:#ddd;">MG1002 • Room 259</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem; color:white;">09:00 - 12:00</td>
+                                    <td data-label="Time Left" style="padding:1.5rem; font-weight:600; color:white;"
+                                        id="countdown-2">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;">
+                                        <button class="btn btn-primary"
+                                            style="padding:0.5rem 1.5rem; font-size:0.85rem; box-shadow:0 0 15px rgba(139, 92, 246, 0.4);"
+                                            onclick="nav('marketing-mgmt', document.querySelectorAll('.nav-item')[1])">Deep
+                                            Dive</button>
+                                    </td>
+                                </tr>
+                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 24</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Wed</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:var(--text-primary); font-weight:600;">English - I</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">SS1016 • Room 308</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left"
+                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
+                                        id="countdown-3">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
+                                            style="opacity:0.3;">Upcoming</span></td>
+                                </tr>
+                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 26</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Fri</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:var(--text-primary); font-weight:600;">IT in Business</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">CS1001 • Room 313</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem;">08:30 - 12:30</td>
+                                    <td data-label="Time Left"
+                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
+                                        id="countdown-4">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
+                                            style="opacity:0.3;">Upcoming</span></td>
+                                </tr>
+                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 30</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Tue</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:var(--text-primary); font-weight:600;">Business Math – I</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">MT1002 • Room 317</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left"
+                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
+                                        id="countdown-5">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
+                                            style="opacity:0.3;">Upcoming</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MARKETING MANAGEMENT HUB -->
+            <section id="marketing-mgmt" class="section-view">
+                <h1
+                    style="font-family:var(--font-display); margin-bottom:2rem; font-size:3rem; color:var(--text-primary);">
+                    Marketing Management <span style="color:var(--brand-primary)">Suite</span></h1>
+                <p style="margin-bottom:2rem; color:var(--text-secondary); max-width:600px;">Access your comprehensive
+                    toolkit for mastering the finals. Select a module below to begin deep work.</p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:2rem;">
+                    <!-- Notes Module -->
+                    <div class="card" onclick="nav('notes')">
+                        <span class="tag cyan">Core Material</span>
+                        <h3>Smart Notes</h3>
+                        <p>Access detailed summaries for Chapters 2, 7, 8, 9, 10, 11, 12. Includes mnemonic devices and
+                            exam tips.</p>
+                    </div>
+
+                    <!-- Flashcards Module -->
+                    <div class="card" onclick="nav('flashcards')">
+                        <span class="tag purple">Active Recall</span>
+                        <h3>Flashcards</h3>
+                        <p>Test your memory with 30+ high-yield terms and definitions. Flip to reveal.</p>
+                    </div>
+
+                    <!-- PESTLE Module -->
+                    <div class="card" onclick="nav('pestle')">
+                        <span class="tag">Case Application</span>
+                        <h3>PESTLE Guide</h3>
+                        <p>Starbucks Case Study analysis showing how to apply PESTLE frameworks in real exams.</p>
+                    </div>
+
+                    <!-- Quiz Module -->
+                    <div class="card" onclick="nav('quiz')">
+                        <span class="tag">Self-Test</span>
+                        <h3>Quiz Mode</h3>
+                        <p>Rapid-fire multiple choice questions to validate your retention of key concepts.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ISLAMIC STUDIES SECTION -->
+            <section id="islamic-studies" class="section-view">
+                <h1 style="font-family:var(--font-display); margin-bottom:2rem;">IT in Business Notes</h1>
+                <div id="islamic-notes-grid"
+                    style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem;"></div>
+                <div id="islamic-note-detail" class="detail-view">
+                    <button class="btn" style="margin-bottom:2rem;" onclick="closeIslamicNote()">← Back to
+                        Topics</button>
+                    <div id="islamic-note-body" class="detail-content"></div>
+                </div>
+            </section>
+
+            <!-- SEATING PLAN SECTION -->
+            <section id="seating-plan" class="section-view" style="height: 100%; padding: 0;">
+                <iframe src="seating_plan.html" style="width: 100%; height: 100%; border: none;"></iframe>
+            </section>
+
+            <!-- BUSINESS MATHS SECTION -->
+            <section id="business-maths" class="section-view">
+                <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Business Maths Notes</h1>
+                <p style="color: var(--text-secondary); text-align: center; margin-top: 4rem;">
+                    Content coming soon...
+                </p>
+            </section>
+
+            <!-- NOTES (Preserved) -->
+            <section id="notes" class="section-view">
+                <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Master Notes</h1>
+                <div id="notes-grid"
+                    style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem;"></div>
+                <div id="note-detail" class="detail-view">
+                    <button class="btn" style="margin-bottom:2rem;" onclick="closeNote()">← Back to Chapters</button>
+                    <div id="note-body" class="detail-content"></div>
+                </div>
+            </section>
+
+            <!-- FLASHCARDS (Preserved) -->
+            <section id="flashcards" class="section-view">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+                    <h1 style="font-family:var(--font-display);">Flashcards</h1>
+                    <select id="fc-filter" onchange="filterCards()"
+                        style="padding:0.5rem 1rem; border-radius:0.5rem; background:var(--bg-card); color:white; border:1px solid var(--border-subtle);">
+                        <option value="all">All Chapters</option>
+                        <option value="ch2">Ch 2: Segmentation</option>
+                        <option value="ch7">Ch 7: Strategy</option>
+                        <option value="ch8">Ch 8: Product</option>
+                        <option value="ch9">Ch 9: PLC</option>
+                        <option value="ch10">Ch 10: Pricing</option>
+                        <option value="ch11">Ch 11: Tactics</option>
+                        <option value="ch12">Ch 12: Place</option>
+                    </select>
+                </div>
+                <div class="flashcard-stage">
+                    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                        <div class="face front">
+                            <span class="tag purple" id="fc-tag">Tag</span>
+                            <h2 id="fc-front" style="font-family:var(--font-display); font-size:1.8rem; padding:1rem;">
+                                Term</h2>
+                            <p style="margin-top:1rem; color:var(--text-muted); font-size:0.8rem;">Click to Flip</p>
+                        </div>
+                        <div class="face back">
+                            <h3 id="fc-back" style="font-weight:500;">Definition</h3>
+                        </div>
+                    </div>
+                    <div style="margin-top:2rem; display:flex; gap:1rem;">
+                        <button class="btn" onclick="moveCard(-1)">Previous</button>
+                        <button class="btn btn-primary" onclick="moveCard(1)">Next Card</button>
+                    </div>
+                    <p style="margin-top:1rem; color:var(--text-muted);" id="fc-count">1 / 30</p>
+                </div>
+            </section>
+
+            <!-- PESTLE & QUIZ (Preserved content) -->
+            <section id="pestle" class="section-view">
+                <h1 style="font-family:var(--font-display); margin-bottom:1rem;">PESTLE Masterclass</h1>
+                <div class="card"
+                    style="margin-bottom:2rem; background:rgba(139, 92, 246, 0.05); border-color:var(--brand-primary);">
+                    <h2 style="font-family:var(--font-display); color:var(--brand-primary);">Start Here: How to do
+                        PESTLE</h2>
+                    <p style="margin-top:0.5rem; color:var(--text-secondary);">PESTLE is a macro-environmental scanning
+                        tool. Do not analyze the company itself (Internal), analyze the **World** around it (External).
+                    </p>
+                    <div
+                        style="margin-top:1rem; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem;">
+                        <div class="tip-box" style="margin:0;"><strong>Step 1:</strong> Identify Factors (Tax, Laws,
+                            Tech).</div>
+                        <div class="tip-box" style="margin:0;"><strong>Step 2:</strong> Categorize them (P, E, S, T, L,
+                            E).</div>
+                        <div class="tip-box" style="margin:0;"><strong>Step 3:</strong> Analyze Impact (Opp or Threat?).
+                        </div>
+                    </div>
+                </div>
+                <h2 style="margin-bottom:1.5rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.5rem;">
+                    The Starbucks Case Study</h2>
+
+                <div class="card"
+                    style="margin-bottom:2rem; border:1px solid var(--border-subtle); background:rgba(255,255,255,0.02);">
+                    <h3 style="color:white; margin-bottom:1rem; font-family:var(--font-display);">Case Context</h3>
+                    <p style="margin-bottom:1rem; color:var(--text-secondary); font-size:0.95rem;">The first Starbucks
+                        was opened in Seattle, Washington in 1971 by three partners who were passionate about selling
+                        high quality beans and roasting equipment. However, it was only in the 1980s that they began
+                        selling coffee in the way we know it today. This shift is mainly due to the changing population,
+                        with more people working and needing quick and convenient and yet high-quality coffee. The
+                        coffee company pride themselves on selling coffee made from ethically sourced and high-quality
+                        beans, with their Espresso Roast being FairTrade certified, while the remainder of their
+                        products fall under their C.A.F.E practices (Coffee and Farmer Equity). This ensures that there
+                        are economic, social, environmental and quality requirements that all of their suppliers must
+                        uphold to.</p>
+                    <p style="margin-bottom:1rem; color:var(--text-secondary); font-size:0.95rem;">Starbucks were one of
+                        the first firms to adopt mobile technology, creating an app in 2009 to allow customers to check
+                        the balance of their loyalty card, and in a select few stores, differentiated them in the market
+                        due to the Coronavirus outbreak, allowing customers to order and pay for their drinks without
+                        having to come into contact with an employee and adhere to social distancing measures. This
+                        mobile technology has also allowed them to collect large amounts of data on their customers,
+                        allowing them to track the drinks that they purchase and use that to recommend them products
+                        that they should purchase in the future.</p>
+                    <p style="margin-bottom:1rem; color:var(--text-secondary); font-size:0.95rem;">However, it is not
+                        all smooth sailing with the firm having recently come under scrutiny for the amount of tax they
+                        are paying, having only paid £4m worth of tax despite earning £287m in revenues. Further to
+                        this, in 2018 a US employee won an Employment Tribunal, when suing the corporation for unpaid
+                        overtime. They came under even further scrutiny in that same year after pressure groups called
+                        for them to deliver their pledge to develop a recyclable coffee cup with a petition signed by
+                        nearly 900,000 people and protesters gathered at the company's Annual General Meeting.</p>
+                    <p style="margin-bottom:0; color:var(--text-secondary); font-size:0.95rem;">More recently however,
+                        the pandemic has only quickened Starbucks' restructuring plans of moving away from traditional
+                        cafés and toward more drive throughs and online ordering. But like many businesses they have
+                        seen a significant decline in trade due to the virus and because of this many staff have seen a
+                        reduction in their hours. Although the governments Eat Out to Help Out scheme has been extremely
+                        effective in helping them build back up to their pre-lockdown level of sales. Starbucks have
+                        seen very similar patterns of trade in the past, for example the Brexit vote in 2016 caused
+                        consumer confidence to plummet and saw sales decline. This combined with slowing economic
+                        growth, correlated to a 61% reduction in UK pre-tax profits.</p>
+                </div>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem;">
+                    <div class="card" style="border-left:4px solid #ef4444;">
+                        <h3 style="color:#ef4444;">1. Political</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Taxation:</strong> Starbucks faced
+                            massive criticism for paying only £4M tax on £387M revenue in UK.</p>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Trade:</strong> Brexit uncertainty
+                            affects import costs of coffee beans.</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid #f59e0b;">
+                        <h3 style="color:#f59e0b;">2. Economic</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Recession:</strong> Coffee is a luxury.
+                            High inflation and recession reduce customers' disposable income.</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid #3b82f6;">
+                        <h3 style="color:#3b82f6;">3. Social</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Conscious Consumers:</strong> Shift
+                            towards ethical sourcing (Fair Trade).</p>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Health Trends:</strong> Demand for oat
+                            milk, almond milk, and low-sugar options.</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid #8b5cf6;">
+                        <h3 style="color:#8b5cf6;">4. Technological</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Mobile:</strong> The Starbucks App
+                            (Order & Pay) drives 25%+ of transactions.</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid #10b981;">
+                        <h3 style="color:#10b981;">5. Legal</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Labor Laws:</strong> Minimum wage
+                            increases significantly impact operating costs.</p>
+                    </div>
+                    <div class="card" style="border-left:4px solid #22d3ee;">
+                        <h3 style="color:#22d3ee;">6. Environmental</h3>
+                        <p style="font-size:0.9rem; margin-top:0.5rem;"><strong>Waste:</strong> Massive pressure to ban
+                            plastic straws and single-use cups.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="quiz" class="section-view">
+                <div style="max-width:800px; margin:0 auto;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:2rem;">
+                        <h1 style="font-family:var(--font-display);">Quiz Mode</h1>
+                        <h2 style="color:var(--brand-primary);">Score: <span id="q-score">0</span></h2>
+                    </div>
+                    <div id="quiz-container" class="card">
+                        <p id="q-progress"
+                            style="color:var(--text-muted); text-transform:uppercase; font-size:0.8rem; margin-bottom:1rem;">
+                            Question 1</p>
+                        <h2 id="q-text" style="font-family:var(--font-display);">Loading...</h2>
+                        <div id="q-options"></div>
+                        <button id="q-next" class="btn btn-primary" style="margin-top:2rem; width:100%; display:none;"
+                            onclick="nextQ()">Next Question</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="foa-suite" class="section-view">
+                <div style="max-width:1200px; margin:0 auto;">
+                    <div style="margin-bottom:2rem;">
+                        <h1 style="font-family:var(--font-display); margin-bottom:0.5rem;">Fundamentals of Accounting</h1>
+                        <p style="color:var(--text-secondary);">Merchandising & Depreciation Complete Study Guide</p>
+                    </div>
+
+                    <!-- FOA Navigation -->
+                    <div class="card" style="padding:0.5rem; display:flex; gap:0.5rem; overflow-x:auto; margin-bottom:2rem; background:rgba(0,0,0,0.2);">
+                        <button class="btn btn-primary foa-tab-btn" onclick="switchFoaTab('merchandising', this)">Merchandising</button>
+                        <button class="btn foa-tab-btn" onclick="switchFoaTab('depreciation', this)">Depreciation</button>
+                        <button class="btn foa-tab-btn" onclick="switchFoaTab('adjusting', this)">Adjusting Entries</button>
+                        <button class="btn foa-tab-btn" onclick="switchFoaTab('classified-bs', this)">Balance Sheet</button>
+                        <button class="btn foa-tab-btn" onclick="switchFoaTab('owners-equity', this)">Owner's Equity</button>
+                        <button class="btn foa-tab-btn" onclick="switchFoaTab('videos', this)">Videos</button>
+                    </div>
+
+                    <!-- MERCHANDISING CONTENT -->
+                    <div id="foa-tab-merchandising" class="foa-content active">
+                        <h1 style="font-family:var(--font-display); color:var(--brand-primary); margin-bottom:1rem;">🛍️ Merchandising Operations</h1>
+            
+                        <!-- 1. COGS Statement -->
+                        <div class="foa-card">
+                            <h2>📌 1. Cost of Goods Sold (COGS) Statement</h2>
+                            
+                            <h3>Definition:</h3>
+                            <p>COGS is the total cost of merchandise purchased and sold during an accounting period. It directly relates to the merchandise inventory account.</p>
+                            
+                            <div class="key-point">
+                                <strong>Key Concept:</strong> COGS connects the Income Statement to the Balance Sheet through inventory management.
+                            </div>
+                            
+                            <h3>Formula:</h3>
+                            <div class="formula">
+        COGS = Beginning Inventory + Net Purchases - Ending Inventory
+                            </div>
+                            
+                            <h3>Alternative Formula:</h3>
+                            <div class="formula">
+        Cost of Goods Available for Sale = Beginning Inventory + Net Purchases
+        COGS = Cost of Goods Available for Sale - Ending Inventory
+                            </div>
+                            
+                            <h3>Components Breakdown:</h3>
+                            <div class="list-item">✓ <strong>Beginning Inventory:</strong> Merchandise on hand at the start of the period</div>
+                            <div class="list-item">✓ <strong>Net Purchases:</strong> Gross Purchases - Purchase Returns - Purchase Discounts</div>
+                            <div class="list-item">✓ <strong>Ending Inventory:</strong> Merchandise remaining at period end</div>
+                            
+                            <div class="example">
+                                <strong>Example 1: COGS Calculation</strong><br>
+                                Beginning Inventory: Rs. 50,000<br>
+                                Gross Purchases: Rs. 200,000<br>
+                                Purchase Returns: Rs. 10,000<br>
+                                Purchase Discounts: Rs. 5,000<br>
+                                Ending Inventory: Rs. 60,000<br><br>
+                                
+                                Net Purchases = 200,000 - 10,000 - 5,000 = Rs. 185,000<br>
+                                COGS = 50,000 + 185,000 - 60,000 = <span class="emphasis">Rs. 175,000</span>
+                            </div>
+                            
+                            <div class="practice-question">
+                                <div class="q-number">Q1. Quick Calculation</div>
+                                <div class="q-text">
+                                    Beginning Inventory: Rs. 30,000<br>
+                                    Purchases: Rs. 150,000<br>
+                                    Purchase Returns: Rs. 8,000<br>
+                                    Ending Inventory: Rs. 35,000<br>
+                                    Calculate COGS.
+                                </div>
+                                <button class="answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                                <div class="answer">
+                                    <strong>Solution:</strong><br>
+                                    Net Purchases = 150,000 - 8,000 = 142,000<br>
+                                    COGS = 30,000 + 142,000 - 35,000 = <strong>Rs. 137,000</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other FOA content tabs would go here -->
+                    <div id="foa-tab-depreciation" class="foa-content" style="display:none;">
+                        <h1 style="font-family:var(--font-display); color:var(--brand-primary); margin-bottom:1rem;">📉 Depreciation Methods</h1>
+                        <p>Depreciation content would go here...</p>
+                    </div>
+
+                    <div id="foa-tab-adjusting" class="foa-content" style="display:none;">
+                        <h1 style="font-family:var(--font-display); color:var(--brand-primary); margin-bottom:1rem;">🔧 Adjusting Entries</h1>
+                        <p>Adjusting entries content would go here...</p>
+                    </div>
+
+                    <div id="foa-tab-classified-bs" class="foa-content" style="display:none;">
+                        <h1 style="font-family:var(--font-display); color:var(--brand-primary); margin-bottom:1rem;">📊 Classified Balance Sheet</h1>
+                        <p>Balance sheet content would go here...</p>
+                    </div>
+
+                    <div id="foa-tab-owners-equity" class="foa-content" style="display:none;">
+                        <h1 style="font-family:var(--font-display); color:var(--brand-primary); margin-bottom:1rem;">💰 Owner's Equity</h1>
+                        <p>Owner's equity content would go here...</p>
+                    </div>
+
+                    <div id="foa-tab-videos" class="foa-content" style="display:none;">
+                        <h1 style="font-family:var(--font-display); color:var(--brand-primary); margin-bottom:1rem;">📺 Video Tutorials</h1>
+                        <p>Video content would go here...</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- External JavaScript File with defer for faster initial parse -->
+    <script src="marketing_study_guide.js" defer></script>
+
+</body>
+
+</html>

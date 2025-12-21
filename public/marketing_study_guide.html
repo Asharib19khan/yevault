@@ -1028,8 +1028,8 @@
         </div>
 
         <div class="entry-container">
-            <h1 id="kratos-title" class="entry-question">Who is conquering Marketing today?</h1>
-            <input type="text" id="name-input" class="name-input" placeholder="Type your Name" autocomplete="off">
+            <h1 id="kratos-title" class="entry-question">YE VAULT ACCESS</h1>
+            <input type="password" id="name-input" class="name-input" placeholder="Enter Access Key" autocomplete="off">
             <button class="entry-btn" onclick="enterApp()">Let's Go</button>
         </div>
     </div>
@@ -3688,75 +3688,106 @@ Ending Capital:                              Rs. 350,000
 
         // --- CREATIVE ENTRY LOGIC (STRICT MODE) ---
         let loginAttempts = 0;
+        const ACCESS_KEY = "FYODOR DOSTOYEVSKY";
+        let authStep = 1;
 
         function enterApp() {
-            const nameInput = document.getElementById('name-input');
-            const name = nameInput.value.trim();
+            const inputField = document.getElementById('name-input');
+            const enteredVal = inputField.value.trim();
+            const portal = document.getElementById('entry-portal');
+            const title = document.getElementById('kratos-title') || document.querySelector('.entry-question');
 
-            // 1. Validation Logic
-            if (!name) {
-                loginAttempts++;
-                
-                // VISUAL PENALTY SYSTEM
-                if (loginAttempts === 1) {
-                    // Strike 1: Warning Shake
-                    nameInput.classList.add('shake-element');
-                    nameInput.style.borderColor = '#f59e0b'; // Warning Orange
-                    setTimeout(() => nameInput.classList.remove('shake-element'), 500);
-                    nameInput.placeholder = "Name Required.";
-                } else if (loginAttempts >= 2) {
-                    // Strike 2: GOD OF WAR MODE
-                    const portal = document.getElementById('entry-portal');
-                    const stormContainer = document.getElementById('kratos-storm');
-                    const title = document.getElementById('kratos-title') || document.querySelector('.entry-question');
+            // STEP 1: PASSWORD VERIFICATION
+            if (authStep === 1) {
+                if (enteredVal !== ACCESS_KEY) {
+                    loginAttempts++;
                     
-                    // Trigger Chaos
-                    portal.classList.add('kratos-mode');
-                    if (stormContainer) {
-                        stormContainer.style.display = 'block';
-                        if(!stormEngine) {
-                            stormEngine = new StormSystem();
-                            stormEngine.start();
+                    // VISUAL PENALTY SYSTEM
+                    if (loginAttempts === 1) {
+                        // Strike 1: Warning Shake
+                        inputField.classList.add('shake-element');
+                        inputField.style.borderColor = '#f59e0b'; // Warning Orange
+                        setTimeout(() => inputField.classList.remove('shake-element'), 500);
+                        inputField.value = "";
+                        inputField.placeholder = "Incorrect Key. Try again.";
+                    } else if (loginAttempts >= 2) {
+                        // Strike 2: GOD OF WAR MODE
+                        const stormContainer = document.getElementById('kratos-storm');
+                        
+                        // Trigger Chaos
+                        portal.classList.add('kratos-mode');
+                        if (stormContainer) {
+                            stormContainer.style.display = 'block';
+                            if(!stormEngine) {
+                                stormEngine = new StormSystem();
+                                stormEngine.start();
+                            }
                         }
+                        
+                        // Force Text Update
+                        if(title) {
+                            title.innerHTML = "BOY. <br> THAT IS NOT THE KEY.";
+                            title.style.color = "#ef4444"; // Explicit Red
+                            title.style.textShadow = "0 0 30px #b91c1c";
+                            title.style.fontFamily = "'Times New Roman', serif";
+                        }
+                        
+                        // Permanent Shake until fixed
+                        inputField.classList.add('shake-element');
+                        setTimeout(() => inputField.classList.remove('shake-element'), 500);
+                        inputField.value = "";
                     }
-                    
-                    // Force Text Update
-                    if(title) {
-                        title.innerHTML = "BOY. <br> IDENTIFY YOURSELF.";
-                        title.style.color = "#ef4444"; // Explicit Red
-                        title.style.textShadow = "0 0 30px #b91c1c";
-                        title.style.fontFamily = "'Times New Roman', serif";
+                    return; 
+                } else {
+                    // SUCCESS: Transition to Name Step
+                    authStep = 2;
+                    loginAttempts = 0;
+                    inputField.value = "";
+                    inputField.type = "text";
+                    inputField.placeholder = "Type your Name";
+                    if (title) {
+                        title.innerHTML = "Who is conquering Marketing today?";
+                        title.style.color = "";
+                        title.style.textShadow = "";
+                        title.style.fontFamily = "";
                     }
-                    
-                    // Permanent Shake until fixed
-                    nameInput.classList.add('shake-element');
-                    setTimeout(() => nameInput.classList.remove('shake-element'), 500);
+                    portal.classList.remove('kratos-mode');
+                    inputField.style.borderColor = "";
+                    const stormContainer = document.getElementById('kratos-storm');
+                    if (stormContainer) stormContainer.style.display = 'none';
+                    return;
                 }
-                return; // STOP HERE
             }
 
-            // 2. Success Logic
-            // --- SUPABASE VISITOR LOG ---
-            fetch('/api/visitor', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name: name })
-            }).catch(console.error);
+            // STEP 2: NAME ENTRY
+            if (authStep === 2) {
+                if (!enteredVal) {
+                    inputField.classList.add('shake-element');
+                    setTimeout(() => inputField.classList.remove('shake-element'), 500);
+                    inputField.placeholder = "Name Required.";
+                    return;
+                }
 
-            // Visual Transition
-            const portal = document.getElementById('entry-portal');
-            const app = document.getElementById('app');
+                // Final Success Logic
+                fetch('/api/visitor', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: enteredVal })
+                }).catch(console.error);
 
-            // Smooth exit even from Kratos mode
-            portal.style.transition = 'opacity 0.8s, transform 0.8s';
-            portal.style.opacity = '0';
-            portal.style.transform = 'scale(1.1)'; 
+                const app = document.getElementById('app');
 
-            setTimeout(() => {
-                portal.style.display = 'none';
-                app.classList.add('visible');
-                document.getElementById('user-display').innerText = name; 
-            }, 800);
+                // Smooth exit
+                portal.style.transition = 'opacity 0.8s, transform 0.8s';
+                portal.style.opacity = '0';
+                portal.style.transform = 'scale(1.1)'; 
+
+                setTimeout(() => {
+                    portal.style.display = 'none';
+                    app.classList.add('visible');
+                    document.getElementById('user-display').innerText = enteredVal; 
+                }, 800);
+            }
         }
 
         // --- NAV ---
