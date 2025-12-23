@@ -1217,8 +1217,14 @@
 
             <!-- IT IN BUSINESS SECTION -->
              <section id="it-business" class="section-view">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+                    <h1 style="font-family:var(--font-display); margin:0;">IT in Business Notes</h1>
+                    <button id="it-load-btn" onclick="renderItNotes()" class="btn btn-primary" style="font-size:0.8rem;">Refresh Notes</button>
+                </div>
+
                 <div id="it-notes-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
                     <!-- IT Notes rendered here -->
+                    <p style="color:var(--text-muted);">Loading notes...</p>
                 </div>
 
                 <div id="it-note-detail" class="detail-view">
@@ -3060,15 +3066,24 @@ const itNotes = [
 ];
 
 function renderItNotes() {
+    console.log("Attempting to render IT Notes...");
     const grid = document.getElementById('it-notes-grid');
     if (grid) {
-        grid.innerHTML = itNotes.map(n => `
-            <div class="card" onclick="openItNote('${n.id}')">
-                <span class="tag cyan">${n.id.toUpperCase()}</span>
-                <h3>${n.title}</h3>
-                <p>Click to read detailed notes.</p>
-            </div>
-        `).join('');
+        if (itNotes && itNotes.length > 0) {
+            grid.innerHTML = itNotes.map(n => `
+                <div class="card" onclick="openItNote('${n.id}')">
+                    <span class="tag cyan">${n.id.toUpperCase()}</span>
+                    <h3>${n.title}</h3>
+                    <p>Click to read detailed notes.</p>
+                </div>
+            `).join('');
+            console.log("IT Notes rendered successfully.");
+            document.getElementById('it-load-btn').style.display = 'none'; // Hide button on success
+        } else {
+            grid.innerHTML = "<p>No IT Notes available.</p>";
+        }
+    } else {
+        console.error("IT Notes Grid element not found!");
     }
 }
 
@@ -3086,8 +3101,20 @@ function closeItNote() {
     document.getElementById('it-notes-grid').style.display = 'grid';
 }
 
-// Auto-render
-renderItNotes();
+// Robust Initialization
+document.addEventListener('DOMContentLoaded', () => {
+    // Render all note sections
+    if (typeof renderNotes === 'function') renderNotes();
+    renderItNotes();
+    if (typeof renderIslamicNotes === 'function') renderIslamicNotes();
+});
+
+// Fallback for immediate execution if DOM is already ready
+if (document.readyState === 'loading') {
+    // Wait for DOMContentLoaded
+} else {
+    renderItNotes();
+}
 
 // --- ISLAMIC NOTES ---
 function renderIslamicNotes() {
