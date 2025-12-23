@@ -1043,7 +1043,7 @@
         <aside class="sidebar" id="mainSidebar">
             <div class="brand-logo">YE <span>VAULT</span></div>
             <div class="nav-item active" onclick="nav('dashboard', this)">All roads lead to Rome</div>
-            <div class="nav-item" onclick="nav('islamic-studies', this)">IT in Business</div>
+            <div class="nav-item" onclick="nav('it-business', this)">IT in Business</div>
             <div class="nav-item" onclick="nav('business-maths', this)">Business Maths</div>
             <div class="nav-item" onclick="nav('seating-plan', this)">Exam Seating Plan</div>
 
@@ -1213,6 +1213,18 @@
                 <p style="color: var(--text-secondary); text-align: center; margin-top: 4rem;">
                     Content coming soon...
                 </p>
+            </section>
+
+            <!-- IT IN BUSINESS SECTION -->
+             <section id="it-business" class="section-view">
+                <div id="it-notes-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <!-- IT Notes rendered here -->
+                </div>
+
+                <div id="it-note-detail" class="detail-view">
+                    <button onclick="closeItNote()" class="btn" style="margin-bottom: 2rem;">← Back to Topics</button>
+                    <div id="it-note-body" class="detail-content"></div>
+                </div>
             </section>
 
             <section id="quiz" class="section-view">

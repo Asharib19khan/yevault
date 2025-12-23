@@ -1135,9 +1135,102 @@ function toggleAnswer(button) {
             answer.classList.remove('show');
             button.innerHTML = 'Show Answer';
             button.style.background = 'var(--brand-primary)';
-            button.style.color = '#000';
         }
     } else {
         console.error("Answer element not found next to button", button);
     }
 }
+
+// --- IT IN BUSINESS NOTES ---
+const itNotes = [
+    {
+        id: 'it1', title: 'Topic 1: Introduction to IT in Business', content: `
+        <h3>1. The Role of IT in Business</h3>
+        <p>Information Technology (IT) is the use of computers, storage, networking, and other physical devices, infrastructure, and processes to create, process, store, secure, and exchange all forms of electronic data.</p>
+        <ul>
+            <li><strong>Communication:</strong> Email, Video Conferencing, Slack.</li>
+            <li><strong>Efficiency:</strong> Automation of repetitive tasks.</li>
+            <li><strong>Decision Making:</strong> Data analytics and Business Intelligence (BI).</li>
+            <li><strong>Global Reach:</strong> E-commerce and remote work.</li>
+        </ul>
+
+        <h3>2. Components of an Information System</h3>
+        <p>An Information System (IS) is a combination of:</p>
+        <ol>
+            <li><strong>Hardware:</strong> Physical equipment (Computers, Servers).</li>
+            <li><strong>Software:</strong> Programs (OS, Applications).</li>
+            <li><strong>Data:</strong> Raw properties/facts.</li>
+            <li><strong>People:</strong> Users and IT professionals.</li>
+            <li><strong>Procedures:</strong> Rules and instructions.</li>
+        </ol>
+        <div class="mnemonic-box">💡 <strong>Remember:</strong> H-S-D-P-P (Hardware, Software, Data, People, Procedures).</div>
+        `
+    },
+    {
+        id: 'it2', title: 'Topic 2: E-Commerce & E-Business', content: `
+        <h3>1. E-Commerce Models</h3>
+        <ul>
+            <li><strong>B2B (Business to Business):</strong> Alibaba, AWS.</li>
+            <li><strong>B2C (Business to Consumer):</strong> Amazon, Netflix.</li>
+            <li><strong>C2C (Consumer to Consumer):</strong> eBay, Facebook Marketplace.</li>
+            <li><strong>C2B (Consumer to Business):</strong> Freelancers (Upwork), Influencers.</li>
+        </ul>
+
+        <h3>2. E-Business vs. E-Commerce</h3>
+        <p><strong>E-Commerce:</strong> Buying and selling over the internet.</p>
+        <p><strong>E-Business:</strong> Includes E-Commerce PLUS internal business processes (HR, Logicstics, production management) done online.</p>
+        `
+    },
+     {
+        id: 'it3', title: 'Topic 3: Data Security & Ethics', content: `
+        <h3>1. CIA Triad</h3>
+        <p>The core of information security.</p>
+        <ul>
+            <li><strong>Confidentiality:</strong> Only authorized people see data.</li>
+            <li><strong>Integrity:</strong> Data is not altered/tampered with.</li>
+            <li><strong>Availability:</strong> Data is accessible when needed.</li>
+        </ul>
+
+        <h3>2. Common Threats</h3>
+        <ul>
+            <li><strong>Phishing:</strong> Fake emails stealing creds.</li>
+            <li><strong>Malware:</strong> Viruses, Worms, Ransomware.</li>
+            <li><strong>Social Engineering:</strong> Manipulating people into giving info.</li>
+        </ul>
+        `
+    }
+];
+
+function renderItNotes() {
+    const grid = document.getElementById('it-notes-grid');
+    if (grid) {
+        grid.innerHTML = itNotes.map(n => `
+            <div class="card" onclick="openItNote('${n.id}')">
+                <span class="tag cyan">${n.id.toUpperCase()}</span>
+                <h3>${n.title}</h3>
+                <p>Click to read detailed notes.</p>
+            </div>
+        `).join('');
+    }
+}
+
+function openItNote(id) {
+    const n = itNotes.find(x => x.id === id);
+    if(n) {
+        document.getElementById('it-note-body').innerHTML = `<h1>${n.title}</h1>${n.content}`;
+        document.getElementById('it-notes-grid').style.display = 'none';
+        document.getElementById('it-note-detail').style.display = 'block';
+    }
+}
+
+function closeItNote() {
+    document.getElementById('it-note-detail').style.display = 'none';
+    document.getElementById('it-notes-grid').style.display = 'grid';
+}
+
+// Ensure renderItNotes is called on load
+const originalOnLoad = window.onload;
+window.onload = () => {
+    if (typeof originalOnLoad === 'function') originalOnLoad();
+    renderItNotes();
+};
