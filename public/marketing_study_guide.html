@@ -1191,16 +1191,7 @@
             </section>
 
             <!-- IT IN BUSINESS SECTION -->
-            <section id="islamic-studies" class="section-view">
-                <h1 style="font-family:var(--font-display); margin-bottom:2rem;">IT in Business Notes</h1>
-                <div id="islamic-notes-grid"
-                    style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1.5rem;"></div>
-                <div id="islamic-note-detail" class="detail-view">
-                    <button class="btn" style="margin-bottom:2rem;" onclick="closeIslamicNote()">← Back to
-                        Topics</button>
-                    <div id="islamic-note-body" class="detail-content"></div>
-                </div>
-            </section>
+
 
             <!-- SEATING PLAN SECTION -->
             <section id="seating-plan" class="section-view" style="height: 100%; padding: 0;">
@@ -1829,9 +1820,32 @@
         ];
 
 
-        const islamicNotes = [
+        const itNotes = [
             {
-                id: 'isl1', title: 'Topic 1: General Computing Concepts', content: `
+                id: 'it1', title: 'Topic 1: Introduction to IT in Business', content: `
+                <h3>1. The Role of IT in Business</h3>
+                <p>Information Technology (IT) is the use of computers, storage, networking, and other physical devices, infrastructure, and processes to create, process, store, secure, and exchange all forms of electronic data.</p>
+                <ul>
+                    <li><strong>Communication:</strong> Email, Video Conferencing, Slack.</li>
+                    <li><strong>Efficiency:</strong> Automation of repetitive tasks.</li>
+                    <li><strong>Decision Making:</strong> Data analytics and Business Intelligence (BI).</li>
+                    <li><strong>Global Reach:</strong> E-commerce and remote work.</li>
+                </ul>
+
+                <h3>2. Components of an Information System</h3>
+                <p>An Information System (IS) is a combination of:</p>
+                <ol>
+                    <li><strong>Hardware:</strong> Physical equipment (Computers, Servers).</li>
+                    <li><strong>Software:</strong> Programs (OS, Applications).</li>
+                    <li><strong>Data:</strong> Raw properties/facts.</li>
+                    <li><strong>People:</strong> Users and IT professionals.</li>
+                    <li><strong>Procedures:</strong> Rules and instructions.</li>
+                </ol>
+                <div class="mnemonic-box">💡 <strong>Remember:</strong> H-S-D-P-P (Hardware, Software, Data, People, Procedures).</div>
+                `
+            },
+            {
+                id: 'it2', title: 'Topic 2: General Computing Concepts', content: `
                 <h3>1. Information Processing Cycle (IPOS)</h3>
                 <p>All computers follow a standard cycle to convert raw data into useful information.</p>
                 <ul>
@@ -1943,7 +1957,7 @@
                 `
             },
             {
-                id: 'isl2', title: 'Topic 2: Number Systems', content: `
+                id: 'it3', title: 'Topic 3: Number Systems', content: `
                 <h3>1. Number System Conversions</h3>
                 
                 <h4>A. Decimal to Binary</h4>
@@ -2077,7 +2091,7 @@
                 `
             },
             {
-                id: 'isl3', title: 'Topic 3: Information System', content: `
+                id: 'it4', title: 'Topic 4: Information System Details', content: `
                 <h3>1. Components of an Information System</h3>
                 <p>An Information System (IS) is more than just computers; it is an organized combination of people, hardware, software, communications networks, data resources, and policies.</p>
 
@@ -2277,7 +2291,7 @@
                 `
             },
             {
-                id: 'isl4', title: 'Topic 4: Python Programming', content: `
+                id: 'it5', title: 'Topic 5: Python Programming', content: `
                 <h3>1. Variables (Naming Conventions)</h3>
                 <p><strong>Definition:</strong> Variables are containers for storing data values created the moment you assign a value.</p>
                 
@@ -2435,7 +2449,7 @@
                 `
             },
             {
-                id: 'isl5', title: 'Topic 5: SDLC', content: `
+                id: 'it6', title: 'Topic 6: SDLC', content: `
                 <h3>1. SDLC Phases & Artifacts</h3>
                 <p>The SDLC is a framework describing the activities performed at each stage of a software development project.</p>
 
@@ -2573,7 +2587,7 @@
                 `
             },
             {
-                id: 'isl6', title: 'Topic 6: Database concepts and management systems (DBMS)', content: `
+                id: 'it7', title: 'Topic 7: Database concepts and management systems (DBMS)', content: `
                 <h3>1. Database Concepts & DBMS</h3>
 
                 <h4>Data vs. Information</h4>
@@ -2691,6 +2705,39 @@
                 <div class="mnemonic-box">
                     💡 <strong>Tip:</strong> To determine the relationship type, ask the question in both directions. "How many X can a Y have?" AND "How many Y can an X have?"
                 </div>
+                `
+            },
+            {
+                id: 'it8', title: 'Topic 8: E-Commerce & E-Business', content: `
+                <h3>1. E-Commerce Models</h3>
+                <ul>
+                    <li><strong>B2B (Business to Business):</strong> Alibaba, AWS.</li>
+                    <li><strong>B2C (Business to Consumer):</strong> Amazon, Netflix.</li>
+                    <li><strong>C2C (Consumer to Consumer):</strong> eBay, Facebook Marketplace.</li>
+                    <li><strong>C2B (Consumer to Business):</strong> Freelancers (Upwork), Influencers.</li>
+                </ul>
+
+                <h3>2. E-Business vs. E-Commerce</h3>
+                <p><strong>E-Commerce:</strong> Buying and selling over the internet.</p>
+                <p><strong>E-Business:</strong> Includes E-Commerce PLUS internal business processes (HR, Logicstics, production management) done online.</p>
+                `
+            },
+            {
+                id: 'it9', title: 'Topic 9: Data Security & Ethics', content: `
+                <h3>1. CIA Triad</h3>
+                <p>The core of information security.</p>
+                <ul>
+                    <li><strong>Confidentiality:</strong> Only authorized people see data.</li>
+                    <li><strong>Integrity:</strong> Data is not altered/tampered with.</li>
+                    <li><strong>Availability:</strong> Data is accessible when needed.</li>
+                </ul>
+
+                <h3>2. Common Threats</h3>
+                <ul>
+                    <li><strong>Phishing:</strong> Fake emails stealing creds.</li>
+                    <li><strong>Malware:</strong> Viruses, Worms, Ransomware.</li>
+                    <li><strong>Social Engineering:</strong> Manipulating people into giving info.</li>
+                </ul>
                 `
             }
         ];
@@ -3006,64 +3053,7 @@
 
 
 // --- IT IN BUSINESS NOTES ---
-const itNotes = [
-    {
-        id: 'it1', title: 'Topic 1: Introduction to IT in Business', content: `
-        <h3>1. The Role of IT in Business</h3>
-        <p>Information Technology (IT) is the use of computers, storage, networking, and other physical devices, infrastructure, and processes to create, process, store, secure, and exchange all forms of electronic data.</p>
-        <ul>
-            <li><strong>Communication:</strong> Email, Video Conferencing, Slack.</li>
-            <li><strong>Efficiency:</strong> Automation of repetitive tasks.</li>
-            <li><strong>Decision Making:</strong> Data analytics and Business Intelligence (BI).</li>
-            <li><strong>Global Reach:</strong> E-commerce and remote work.</li>
-        </ul>
 
-        <h3>2. Components of an Information System</h3>
-        <p>An Information System (IS) is a combination of:</p>
-        <ol>
-            <li><strong>Hardware:</strong> Physical equipment (Computers, Servers).</li>
-            <li><strong>Software:</strong> Programs (OS, Applications).</li>
-            <li><strong>Data:</strong> Raw properties/facts.</li>
-            <li><strong>People:</strong> Users and IT professionals.</li>
-            <li><strong>Procedures:</strong> Rules and instructions.</li>
-        </ol>
-        <div class="mnemonic-box">💡 <strong>Remember:</strong> H-S-D-P-P (Hardware, Software, Data, People, Procedures).</div>
-        `
-    },
-    {
-        id: 'it2', title: 'Topic 2: E-Commerce & E-Business', content: `
-        <h3>1. E-Commerce Models</h3>
-        <ul>
-            <li><strong>B2B (Business to Business):</strong> Alibaba, AWS.</li>
-            <li><strong>B2C (Business to Consumer):</strong> Amazon, Netflix.</li>
-            <li><strong>C2C (Consumer to Consumer):</strong> eBay, Facebook Marketplace.</li>
-            <li><strong>C2B (Consumer to Business):</strong> Freelancers (Upwork), Influencers.</li>
-        </ul>
-
-        <h3>2. E-Business vs. E-Commerce</h3>
-        <p><strong>E-Commerce:</strong> Buying and selling over the internet.</p>
-        <p><strong>E-Business:</strong> Includes E-Commerce PLUS internal business processes (HR, Logicstics, production management) done online.</p>
-        `
-    },
-     {
-        id: 'it3', title: 'Topic 3: Data Security & Ethics', content: `
-        <h3>1. CIA Triad</h3>
-        <p>The core of information security.</p>
-        <ul>
-            <li><strong>Confidentiality:</strong> Only authorized people see data.</li>
-            <li><strong>Integrity:</strong> Data is not altered/tampered with.</li>
-            <li><strong>Availability:</strong> Data is accessible when needed.</li>
-        </ul>
-
-        <h3>2. Common Threats</h3>
-        <ul>
-            <li><strong>Phishing:</strong> Fake emails stealing creds.</li>
-            <li><strong>Malware:</strong> Viruses, Worms, Ransomware.</li>
-            <li><strong>Social Engineering:</strong> Manipulating people into giving info.</li>
-        </ul>
-        `
-    }
-];
 
 function renderItNotes() {
     console.log("Attempting to render IT Notes...");
@@ -3106,7 +3096,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render all note sections
     if (typeof renderNotes === 'function') renderNotes();
     renderItNotes();
-    if (typeof renderIslamicNotes === 'function') renderIslamicNotes();
+
 });
 
 // Fallback for immediate execution if DOM is already ready
@@ -3117,28 +3107,7 @@ if (document.readyState === 'loading') {
 }
 
 // --- ISLAMIC NOTES ---
-function renderIslamicNotes() {
-            const grid = document.getElementById('islamic-notes-grid');
-            if (grid) {
-                grid.innerHTML = islamicNotes.map(n => `
-                    <div class="card" onclick="openIslamicNote('${n.id}')">
-                        <span class="tag cyan">${n.id.toUpperCase()}</span>
-                        <h3>${n.title}</h3>
-                        <p>Click to read detailed notes.</p>
-                    </div>
-                `).join('');
-            }
-        }
-        function openIslamicNote(id) {
-            const n = islamicNotes.find(x => x.id === id);
-            document.getElementById('islamic-note-body').innerHTML = `<h1>${n.title}</h1>${n.content}`;
-            document.getElementById('islamic-notes-grid').style.display = 'none';
-            document.getElementById('islamic-note-detail').style.display = 'block';
-        }
-        function closeIslamicNote() {
-            document.getElementById('islamic-note-detail').style.display = 'none';
-            document.getElementById('islamic-notes-grid').style.display = 'grid';
-        }
+
 
         // --- FLASHCARDS ---
         function filterCards() {
