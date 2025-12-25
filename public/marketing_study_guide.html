@@ -1045,6 +1045,7 @@
             <div class="nav-item active" onclick="nav('dashboard', this)">All roads lead to Rome</div>
             <div class="nav-item" onclick="nav('it-business', this)">IT in Business</div>
             <div class="nav-item" onclick="nav('business-maths', this)">Business Maths</div>
+            <div class="nav-item" onclick="window.open('https://examseatingplan-five.vercel.app/', '_blank')">Exam Seating Plan</div>
 
 
 
@@ -2834,12 +2835,24 @@
 
             // Focus Name Input auto
             setTimeout(() => document.getElementById('name-input').focus(), 1500);
-
-            // Enter key listener
-            document.getElementById('name-input').addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') enterApp();
-            });
         };
+
+        // --- ENTER KEY LISTENER (GLOBAL - WORKS ALWAYS) ---
+        // Using keydown instead of keypress for better compatibility
+        // Using document level listener so it ALWAYS works
+        document.addEventListener('keydown', function(e) {
+            // Only trigger on Enter key
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                const portal = document.getElementById('entry-portal');
+                const nameInput = document.getElementById('name-input');
+                
+                // Only process if portal is visible and input is focused
+                if (portal && portal.style.display !== 'none' && nameInput === document.activeElement) {
+                    e.preventDefault(); // Prevent form submission or other default behaviors
+                    enterApp();
+                }
+            }
+        });
 
         // --- GOD TIER STORM ENGINE ---
         class StormSystem {
