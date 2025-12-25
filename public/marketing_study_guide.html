@@ -1045,7 +1045,6 @@
             <div class="nav-item active" onclick="nav('dashboard', this)">All roads lead to Rome</div>
             <div class="nav-item" onclick="nav('it-business', this)">IT in Business</div>
             <div class="nav-item" onclick="nav('business-maths', this)">Business Maths</div>
-            <div class="nav-item" onclick="nav('seating-plan', this)">Exam Seating Plan</div>
 
 
 
@@ -1192,12 +1191,6 @@
 
             <!-- IT IN BUSINESS SECTION -->
 
-
-            <!-- SEATING PLAN SECTION -->
-            <section id="seating-plan" class="section-view" style="height: 100%; padding: 0;">
-                <iframe src="seating_plan.html" style="width: 100%; height: 100%; border: none;"></iframe>
-            </section>
-
             <!-- BUSINESS MATHS SECTION -->
             <section id="business-maths" class="section-view">
                 <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Business Maths Notes</h1>
@@ -1208,19 +1201,47 @@
 
             <!-- IT IN BUSINESS SECTION -->
              <section id="it-business" class="section-view">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
-                    <h1 style="font-family:var(--font-display); margin:0;">IT in Business Notes</h1>
-                    <button id="it-load-btn" onclick="renderItNotes()" class="btn btn-primary" style="font-size:0.8rem;">Refresh Notes</button>
+                <!-- ITB Hub View -->
+                <div id="itb-hub">
+                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">IT in Business</h1>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                        <div class="card" onclick="showItNotes()">
+                            <span class="tag cyan">CHAPTERS 1-9</span>
+                            <h3>Notes</h3>
+                            <p>Complete notes for all 9 IT in Business chapters</p>
+                        </div>
+                        <div class="card" onclick="showItCodeQuestions()">
+                            <span class="tag purple">PRACTICE</span>
+                            <h3>Code Questions to Practice</h3>
+                            <p>Practice questions to master IT concepts</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div id="it-notes-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
-                    <!-- IT Notes rendered here -->
-                    <p style="color:var(--text-muted);">Loading notes...</p>
+                <!-- IT Notes List View -->
+                <div id="it-notes-section" style="display:none;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+                        <h1 style="font-family:var(--font-display); margin:0;">IT in Business Notes</h1>
+                    </div>
+                    <div id="it-notes-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                        <!-- IT Notes rendered here -->
+                        <p style="color:var(--text-muted);">Loading notes...</p>
+                    </div>
                 </div>
 
+                <!-- IT Note Detail View -->
                 <div id="it-note-detail" class="detail-view">
-                    <button onclick="closeItNote()" class="btn" style="margin-bottom: 2rem;">← Back to Topics</button>
+                    <button onclick="closeItNote()" class="btn" style="margin-bottom: 2rem;">← Back to Notes</button>
                     <div id="it-note-body" class="detail-content"></div>
+                </div>
+
+                <!-- IT Code Questions View -->
+                <div id="it-code-questions" style="display:none;">
+                    <button onclick="backToItbHub()" class="btn" style="margin-bottom: 2rem;">← Back to IT in Business</button>
+                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Code Questions to Practice</h1>
+                    <div class="card" style="text-align:center; padding:4rem;">
+                        <p style="color:var(--text-secondary); font-size:1.2rem;">Questions will be provided by user</p>
+                    </div>
                 </div>
             </section>
 
@@ -1242,15 +1263,7 @@
                 </div>
             </section>
 
-            <!-- SEATING PLAN SECTION -->
-            <section id="seating-plan" class="section-view">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; border-bottom: 2px solid var(--brand-primary); padding-bottom: 1rem;">
-                    <h1 style="font-family:var(--font-display); font-size:3rem; letter-spacing:-1px;">EXAM <span style="color:var(--brand-primary); text-shadow: 0 0 20px rgba(185, 28, 28, 0.4);">SEATING</span></h1>
-                </div>
-                <div class="card" style="padding:0; overflow:hidden; border-radius:1.5rem; height:calc(100vh - 200px); background:#0c0c0e; border:1px solid var(--border-subtle);">
-                    <iframe id="seating-frame" src="seating_plan.html" style="width:100%; height:100%; border:none;" allow="fullscreen"></iframe>
-                </div>
-            </section>
+
 
         </main>
     </div>
@@ -2982,6 +2995,9 @@
                     inputField.style.borderColor = "";
                     const stormContainer = document.getElementById('kratos-storm');
                     if (stormContainer) stormContainer.style.display = 'none';
+                    
+                    // Auto-focus for immediate name entry
+                    setTimeout(() => inputField.focus(), 100);
                     return;
                 }
             }
@@ -3054,6 +3070,30 @@
 
 // --- IT IN BUSINESS NOTES ---
 
+// Show IT Notes List
+function showItNotes() {
+    document.getElementById('itb-hub').style.display = 'none';
+    document.getElementById('it-notes-section').style.display = 'block';
+    document.getElementById('it-code-questions').style.display = 'none';
+    document.getElementById('it-note-detail').style.display = 'none';
+    renderItNotes();
+}
+
+// Show Code Questions
+function showItCodeQuestions() {
+    document.getElementById('itb-hub').style.display = 'none';
+    document.getElementById('it-notes-section').style.display = 'none';
+    document.getElementById('it-code-questions').style.display = 'block';
+    document.getElementById('it-note-detail').style.display = 'none';
+}
+
+// Back to ITB Hub
+function backToItbHub() {
+    document.getElementById('itb-hub').style.display = 'block';
+    document.getElementById('it-notes-section').style.display = 'none';
+    document.getElementById('it-code-questions').style.display = 'none';
+    document.getElementById('it-note-detail').style.display = 'none';
+}
 
 function renderItNotes() {
     console.log("Attempting to render IT Notes...");
@@ -3068,7 +3108,6 @@ function renderItNotes() {
                 </div>
             `).join('');
             console.log("IT Notes rendered successfully.");
-            document.getElementById('it-load-btn').style.display = 'none'; // Hide button on success
         } else {
             grid.innerHTML = "<p>No IT Notes available.</p>";
         }
@@ -3081,14 +3120,14 @@ function openItNote(id) {
     const n = itNotes.find(x => x.id === id);
     if(n) {
         document.getElementById('it-note-body').innerHTML = `<h1>${n.title}</h1>${n.content}`;
-        document.getElementById('it-notes-grid').style.display = 'none';
+        document.getElementById('it-notes-section').style.display = 'none';
         document.getElementById('it-note-detail').style.display = 'block';
     }
 }
 
 function closeItNote() {
     document.getElementById('it-note-detail').style.display = 'none';
-    document.getElementById('it-notes-grid').style.display = 'grid';
+    document.getElementById('it-notes-section').style.display = 'block';
 }
 
 // Robust Initialization
