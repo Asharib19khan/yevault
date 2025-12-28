@@ -3295,6 +3295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render all note sections
     if (typeof renderNotes === 'function') renderNotes();
     renderItNotes();
+    renderPakNotes();
 });
 
 // Fallback for immediate execution if DOM is already ready
@@ -3302,6 +3303,7 @@ if (document.readyState === 'loading') {
     // Wait for DOMContentLoaded
 } else {
     renderItNotes();
+    renderPakNotes();
 }
 
 // --- ISLAMIC NOTES ---
