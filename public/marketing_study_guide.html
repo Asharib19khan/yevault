@@ -1054,65 +1054,100 @@
         }
 
 
-        /* --- PAKISTAN STUDIES THEME (Glassmorphism & Light Pink) --- */
-        body.pak-mode {
-            --bg-dark: #fce7f3; /* Pink 100 */
-            --bg-card: rgba(255, 255, 255, 0.65);
-            --bg-glass: rgba(255, 255, 255, 0.75); /* Light Glass Sidebar */
-            --text-primary: #831843; /* Pink 900 */
-            --text-secondary: #9d174d; /* Pink 700 */
-            --text-muted: #be185d; /* Pink 600 */
-            --brand-primary: #db2777; /* Pink 600 */
-            --brand-glow: #f472b6; /* Pink 400 */
-            --border-subtle: rgba(131, 24, 67, 0.1); 
+        /* --- GLOBAL TRANSITIONS --- */
+        body {
+            transition: background-color 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.8s ease;
         }
 
-        body.pak-mode .blob-1 { background: #fbcfe8; opacity: 0.6; filter: blur(100px); }
-        body.pak-mode .blob-2 { background: #f9a8d4; opacity: 0.6; filter: blur(100px); }
+        /* --- PAKISTAN STUDIES THEME (Dark Premium Rose Glass) --- */
+        body.pak-mode {
+            /* Dark Burgundy/Rose Background */
+            --bg-dark: #1a050b; 
+            --bg-card: rgba(80, 7, 36, 0.3); /* Dark Red Glass */
+            --bg-glass: rgba(40, 4, 15, 0.8); /* Dark Sidebar */
+            
+            --text-primary: #fff1f2; /* Rose 50 */
+            --text-secondary: #fda4af; /* Rose 300 */
+            --text-muted: #f43f5e; /* Rose 500 */
+            
+            --brand-primary: #e11d48; /* Rose 600 */
+            --brand-glow: #fb7185; /* Rose 400 */
+            --border-subtle: rgba(225, 29, 72, 0.2); 
+        }
 
-        /* React-like Card UI for Pak Mode */
+        /* Soft Animated Blobs for Pak Mode */
+        body.pak-mode .blob-1 { background: #be123c; opacity: 0.25; filter: blur(120px); }
+        body.pak-mode .blob-2 { background: #9f1239; opacity: 0.25; filter: blur(120px); }
+
+        /* Remove "Weird White Line" (Border) from Sidebar in Pak Mode */
+        body.pak-mode .sidebar {
+            border-right: 1px solid rgba(225, 29, 72, 0.1) !important; /* Subtle Rose Border */
+            box-shadow: 5px 0 30px rgba(0,0,0,0.2);
+        }
+
+        /* React-like Card UI for Pak Mode (Dark Glass) */
         body.pak-mode .card {
-            background: rgba(255, 255, 255, 0.6) !important;
-            backdrop-filter: blur(16px) !important;
-            -webkit-backdrop-filter: blur(16px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.8) !important;
-            box-shadow: 0 10px 40px rgba(131, 24, 67, 0.05), 0 1px 3px rgba(0,0,0,0.05) !important;
+            background: linear-gradient(145deg, rgba(80, 7, 36, 0.4), rgba(40, 4, 15, 0.6)) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
             border-radius: 1rem !important;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s ease !important;
+        }
+
+        body.pak-mode .card:hover {
+            transform: translateY(-5px) scale(1.01) !important;
+            box-shadow: 0 20px 40px rgba(225, 29, 72, 0.15) !important;
+            border-color: var(--brand-primary) !important;
         }
 
         body.pak-mode .tab-container {
-            background: rgba(255, 255, 255, 0.4) !important;
-            border: 1px solid rgba(255, 255, 255, 0.6) !important;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02) !important;
+            background: rgba(0, 0, 0, 0.3) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
         }
 
         body.pak-mode .tab-btn {
-            color: #9d174d !important;
+            color: #fda4af !important;
         }
         
         body.pak-mode .tab-btn.active {
-            background: #db2777 !important;
+            background: linear-gradient(135deg, #e11d48, #be123c) !important;
             color: white !important;
-            box-shadow: 0 4px 12px rgba(219, 39, 119, 0.4) !important;
+            box-shadow: 0 0 20px rgba(225, 29, 72, 0.5) !important;
         }
 
-        body.pak-mode .nav-item { color: #9d174d; }
-        body.pak-mode .nav-item:hover { background: rgba(219, 39, 119, 0.1); color: #831843; }
+        body.pak-mode .nav-item { color: #fda4af; transition: all 0.3s ease; }
+        body.pak-mode .nav-item:hover { 
+            background: rgba(225, 29, 72, 0.1); 
+            color: #fff; 
+            padding-left: 1.5rem; /* Animated Slide */
+        }
         body.pak-mode .nav-item.active { 
-            background: rgba(219, 39, 119, 0.15) !important; 
-            color: #db2777 !important; 
-            border-left-color: #db2777 !important;
+            background: linear-gradient(90deg, rgba(225, 29, 72, 0.1), transparent) !important; 
+            color: #e11d48 !important; 
+            border-left-color: #e11d48 !important;
         }
 
-        /* React UI Typography & Polish */
+        /* Typography */
         body.pak-mode h1, body.pak-mode h2, body.pak-mode h3 {
-            letter-spacing: -0.5px; /* Tighter, modern heading */
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 30px rgba(225, 29, 72, 0.2);
         }
         
         body.pak-mode .tag {
-            background: #fdf2f8 !important;
-            color: #db2777 !important;
-            border: 1px solid #fbcfe8 !important;
+            background: rgba(225, 29, 72, 0.15) !important;
+            color: #fb7185 !important;
+            border: 1px solid rgba(225, 29, 72, 0.3) !important;
+        }
+
+        /* Custom Scrollbar for Pak Mode */
+        body.pak-mode ::-webkit-scrollbar-thumb {
+            background: #881337;
+            border-radius: 4px;
+        }
+        body.pak-mode ::-webkit-scrollbar-track {
+            background: #1a050b;
         }
 
     </style>
