@@ -194,7 +194,6 @@
             background: var(--bg-glass);
             -webkit-backdrop-filter: var(--glass-blur);
             backdrop-filter: var(--glass-blur);
-            border-right: 1px solid var(--border-subtle);
             display: flex;
             flex-direction: column;
             padding: 2rem;
@@ -1006,6 +1005,54 @@
             animation: fadeIn 0.4s ease;
         }
 
+        /* --- TABS & ANIMATIONS --- */
+        .tab-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-subtle);
+            max-width: 500px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        .tab-btn.active {
+            background: var(--brand-primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
     </style>
 </head>
 
@@ -1249,38 +1296,26 @@
 
             <!-- PAKISTAN STUDIES SECTION -->
             <section id="pakistan-studies" class="section-view">
-                <!-- Pakistan Studies Hub View -->
-                <div id="pakistan-hub">
-                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Pakistan studies - BDS</h1>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
-                        <div class="card" onclick="showPakistanNotes()">
-                            <span class="tag cyan">NOTES</span>
-                            <h3>them goddamn notes</h3>
-                            <p>Complete chapter-wise notes for Pakistan Studies</p>
-                        </div>
-                        <div class="card" onclick="showPakistanQA()">
-                            <span class="tag purple">Q/A</span>
-                            <h3>them goddamn Q/A</h3>
-                            <p>Practice questions and answers</p>
-                        </div>
-                    </div>
+                <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Pakistan studies - BDS</h1>
+                
+                <div class="tab-container">
+                    <button class="tab-btn active" onclick="switchPakTab('notes', this)">them goddamn notes</button>
+                    <button class="tab-btn" onclick="switchPakTab('qa', this)">them goddamn Q/A</button>
                 </div>
 
                 <!-- Pakistan Notes View -->
-                <div id="pakistan-notes-section" style="display:none;">
-                    <button onclick="backToPakistanHub()" class="btn" style="margin-bottom: 2rem;">← Back to Pakistan Studies</button>
-                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Pakistan Studies Notes</h1>
-                    <div class="card" style="text-align:center; padding:4rem;">
-                        <p style="color:var(--text-secondary); font-size:1.2rem;">Notes will be provided by user</p>
+                <div id="pak-notes-content" class="tab-content active">
+                     <div class="card" style="text-align:center; padding:4rem;">
+                        <h2 style="font-family:var(--font-display); margin-bottom:1rem; color:var(--brand-primary);">Notes</h2>
+                        <p style="color:var(--text-secondary); font-size:1.2rem;">Complete chapter-wise notes for Pakistan Studies will appear here.</p>
                     </div>
                 </div>
 
                 <!-- Pakistan Q/A View -->
-                <div id="pakistan-qa-section" style="display:none;">
-                    <button onclick="backToPakistanHub()" class="btn" style="margin-bottom: 2rem;">← Back to Pakistan Studies</button>
-                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Pakistan Studies Q/A</h1>
+                <div id="pak-qa-content" class="tab-content">
                     <div class="card" style="text-align:center; padding:4rem;">
-                        <p style="color:var(--text-secondary); font-size:1.2rem;">Questions and Answers will be provided by user</p>
+                         <h2 style="font-family:var(--font-display); margin-bottom:1rem; color:var(--brand-primary);">Q/A</h2>
+                        <p style="color:var(--text-secondary); font-size:1.2rem;">Practice questions and answers will appear here.</p>
                     </div>
                 </div>
             </section>
@@ -3183,26 +3218,19 @@ function closeItNote() {
 }
 
 // --- PAKISTAN STUDIES NAVIGATION ---
+function switchPakTab(tab, btn) {
+    // Buttons
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    if(btn) btn.classList.add('active');
 
-// Show Pakistan Notes
-function showPakistanNotes() {
-    document.getElementById('pakistan-hub').style.display = 'none';
-    document.getElementById('pakistan-notes-section').style.display = 'block';
-    document.getElementById('pakistan-qa-section').style.display = 'none';
-}
-
-// Show Pakistan Q/A
-function showPakistanQA() {
-    document.getElementById('pakistan-hub').style.display = 'none';
-    document.getElementById('pakistan-notes-section').style.display = 'none';
-    document.getElementById('pakistan-qa-section').style.display = 'block';
-}
-
-// Back to Pakistan Hub
-function backToPakistanHub() {
-    document.getElementById('pakistan-hub').style.display = 'block';
-    document.getElementById('pakistan-notes-section').style.display = 'none';
-    document.getElementById('pakistan-qa-section').style.display = 'none';
+    // Content
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    
+    if (tab === 'notes') {
+        document.getElementById('pak-notes-content').classList.add('active');
+    } else if (tab === 'qa') {
+        document.getElementById('pak-qa-content').classList.add('active');
+    }
 }
 
 // Robust Initialization
