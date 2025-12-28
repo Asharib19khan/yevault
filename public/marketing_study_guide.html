@@ -1305,10 +1305,15 @@
 
                 <!-- Pakistan Notes View -->
                 <div id="pak-notes-content" class="tab-content active">
-                     <div class="card" style="text-align:center; padding:4rem;">
-                        <h2 style="font-family:var(--font-display); margin-bottom:1rem; color:var(--brand-primary);">Notes</h2>
-                        <p style="color:var(--text-secondary); font-size:1.2rem;">Complete chapter-wise notes for Pakistan Studies will appear here.</p>
-                    </div>
+                     <div id="pak-notes-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                             <!-- Content Rendered by renderPakNotes() -->
+                             <p>Loading...</p>
+                     </div>
+                     
+                     <div id="pak-note-detail" class="detail-view" style="display:none;">
+                        <button onclick="closePakNote()" class="btn" style="margin-bottom: 2rem;">← Back to Notes</button>
+                        <div id="pak-note-body" class="detail-content"></div>
+                     </div>
                 </div>
 
                 <!-- Pakistan Q/A View -->
@@ -3218,6 +3223,57 @@ function closeItNote() {
 }
 
 // --- PAKISTAN STUDIES NAVIGATION ---
+const pakNotes = [
+    { id: 'pak1', title: 'Aims and Objectives of the Ideology of Pakistan', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak2', title: 'The Ideology of Pakistan and Quaid-e-Azam', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak3', title: 'The Ideology of Pakistan and Allama Iqbal', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak4', title: 'Importance of the Ideology of Pakistan', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak5', title: 'Two Nation Theory', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak6', title: 'Two Nation Theory and Quaid-e-Azam', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak7', title: 'Hazrat Shah Wali Ullah (1703-1762)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak8', title: 'Sheikh Ahmad Sirhindi (1564-1624)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak9', title: 'Sir Syed Ahmed Khan (1817-1898)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak10', title: 'Partition of Bengal (1905-1911)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak11', title: 'Simla Delegation (1906)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak12', title: 'All India Muslim League (1906)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak13', title: 'Lucknow Pact (1916)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak14', title: 'Khilafat Movement (1919-1924)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak15', title: 'Nehru Report (1928)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak16', title: 'Fourteen points of Quaid-E-Azam (1929)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak17', title: 'Pakistan Resolution (1940)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak18', title: 'Simla Conference (1945)', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak19', title: 'Constitution of 1956', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak20', title: 'Constitution of 1962', content: '<h3>Content coming soon...</h3>' },
+    { id: 'pak21', title: 'Constitution of 1973', content: '<h3>Content coming soon...</h3>' },
+];
+
+function renderPakNotes() {
+    const grid = document.getElementById('pak-notes-grid');
+    if(grid) {
+        grid.innerHTML = pakNotes.map(n => `
+            <div class="card" onclick="openPakNote('${n.id}')">
+                <span class="tag cyan">TOPIC ${n.id.replace('pak','')}</span>
+                <h3>${n.title}</h3>
+                <p>Click to read detailed notes.</p>
+            </div>
+        `).join('');
+    }
+}
+
+function openPakNote(id) {
+    const n = pakNotes.find(x => x.id === id);
+    if(n) {
+         document.getElementById('pak-note-body').innerHTML = `<h1>${n.title}</h1>${n.content}`;
+         document.getElementById('pak-notes-grid').style.display = 'none';
+         document.getElementById('pak-note-detail').style.display = 'block';
+    }
+}
+
+function closePakNote() {
+    document.getElementById('pak-note-detail').style.display = 'none';
+    document.getElementById('pak-notes-grid').style.display = 'grid';
+}
+
 function switchPakTab(tab, btn) {
     // Buttons
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -3228,6 +3284,7 @@ function switchPakTab(tab, btn) {
     
     if (tab === 'notes') {
         document.getElementById('pak-notes-content').classList.add('active');
+        renderPakNotes(); // Ensure notes are rendered
     } else if (tab === 'qa') {
         document.getElementById('pak-qa-content').classList.add('active');
     }
