@@ -1053,6 +1053,68 @@
             animation: fadeSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
+
+        /* --- PAKISTAN STUDIES THEME (Glassmorphism & Light Pink) --- */
+        body.pak-mode {
+            --bg-dark: #fce7f3; /* Pink 100 */
+            --bg-card: rgba(255, 255, 255, 0.65);
+            --bg-glass: rgba(255, 255, 255, 0.75); /* Light Glass Sidebar */
+            --text-primary: #831843; /* Pink 900 */
+            --text-secondary: #9d174d; /* Pink 700 */
+            --text-muted: #be185d; /* Pink 600 */
+            --brand-primary: #db2777; /* Pink 600 */
+            --brand-glow: #f472b6; /* Pink 400 */
+            --border-subtle: rgba(131, 24, 67, 0.1); 
+        }
+
+        body.pak-mode .blob-1 { background: #fbcfe8; opacity: 0.6; filter: blur(100px); }
+        body.pak-mode .blob-2 { background: #f9a8d4; opacity: 0.6; filter: blur(100px); }
+
+        /* React-like Card UI for Pak Mode */
+        body.pak-mode .card {
+            background: rgba(255, 255, 255, 0.6) !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.8) !important;
+            box-shadow: 0 10px 40px rgba(131, 24, 67, 0.05), 0 1px 3px rgba(0,0,0,0.05) !important;
+            border-radius: 1rem !important;
+        }
+
+        body.pak-mode .tab-container {
+            background: rgba(255, 255, 255, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.6) !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02) !important;
+        }
+
+        body.pak-mode .tab-btn {
+            color: #9d174d !important;
+        }
+        
+        body.pak-mode .tab-btn.active {
+            background: #db2777 !important;
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(219, 39, 119, 0.4) !important;
+        }
+
+        body.pak-mode .nav-item { color: #9d174d; }
+        body.pak-mode .nav-item:hover { background: rgba(219, 39, 119, 0.1); color: #831843; }
+        body.pak-mode .nav-item.active { 
+            background: rgba(219, 39, 119, 0.15) !important; 
+            color: #db2777 !important; 
+            border-left-color: #db2777 !important;
+        }
+
+        /* React UI Typography & Polish */
+        body.pak-mode h1, body.pak-mode h2, body.pak-mode h3 {
+            letter-spacing: -0.5px; /* Tighter, modern heading */
+        }
+        
+        body.pak-mode .tag {
+            background: #fdf2f8 !important;
+            color: #db2777 !important;
+            border: 1px solid #fbcfe8 !important;
+        }
+
     </style>
 </head>
 
@@ -3135,6 +3197,13 @@
                 document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
                 document.querySelectorAll('.mobile-nav-item').forEach(n => n.classList.remove('active'));
                 el.classList.add('active');
+            }
+
+            // Theme Switching for Pakistan Studies
+            if (id === 'pakistan-studies') {
+                document.body.classList.add('pak-mode');
+            } else {
+                document.body.classList.remove('pak-mode');
             }
         }
 
