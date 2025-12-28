@@ -4833,10 +4833,11 @@ function switchPakTab(tab, btn) {
     }
 }
 
-// --- PAKISTAN RAIN SYSTEM ---
+// --- PAKISTAN RAIN SYSTEM (ADVANCED) ---
 let rainState = 0; // 0=Off, 1=Rain, 2=Thunder
 let rainAnimId = null;
 let drops = [];
+let bolts = [];
 let thunderFlash = 0;
 let mouseX = 0, mouseY = 0;
 
@@ -4865,64 +4866,147 @@ function toggleRain() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         canvas.style.display = 'none';
         drops = [];
+        bolts = [];
     }
 }
 
 function initRain(isThunder) {
     const canvas = document.getElementById('pak-rain');
-    const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
-    // Reset drops if starting fresh or keep existing for smooth transition
-    if (drops.length === 0 || rainState === 1) {
-        drops = [];
-        const count = isThunder ? 1500 : 800; // More drops for thunder
-        for(let i=0; i<count; i++) drops.push(createDrop(canvas));
-    } else if (rainState === 2) {
-        // Add more drops for thunder transition
-        for(let i=0; i<700; i++) drops.push(createDrop(canvas));
-    }
+    // Reset drops if starting fresh or moving to/from thunder
+    drops = [];
+    bolts = []; // Clear bolts
+    
+    // 1. Heavy Rain for Thunder, Light for Normal
+    const count = isThunder ? 2000 : 800; 
+    for(let i=0; i<count; i++) drops.push(createDrop(canvas, isThunder));
 
     if (rainAnimId) cancelAnimationFrame(rainAnimId);
     loopRain(isThunder);
 }
 
-function createDrop(canvas) {
+function createDrop(canvas, isThunder) {
     return {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        l: Math.random() * 20 + 10, // Length
-        s: Math.random() * 10 + 10, // Speed
-        vx: 0, 
+        l: Math.random() * 20 + 10,
+        // Faster rain for thunder
+        s: isThunder ? Math.random() * 15 + 15 : Math.random() * 5 + 5, 
+        vx: isThunder ? -2 : 0, // Wind slanting rain during storm
         vy: 0
     };
+}
+
+// --- LIGHTNING BOLT GENERATOR ---
+class LightningBolt {
+    constructor(x, y, height) {
+        this.segments = [];
+        this.life = 15; // Frames to live
+        this.totalHeight = height;
+        this.generate(x, y);
+    }
+
+    generate(x, y) {
+        let currX = x;
+        let currY = y;
+        
+        while (currY < this.totalHeight + 100) {
+            // Jagged steps
+            let nextX = currX + (Math.random() - 0.5) * 50; 
+            let nextY = currY + (Math.random() * 30 + 10);
+            
+            this.segments.push({x1: currX, y1: currY, x2: nextX, y2: nextY});
+            
+            // Chance to branch
+            if (Math.random() < 0.2) {
+                this.createBranch(currX, currY, this.totalHeight);
+            }
+
+            currX = nextX;
+            currY = nextY;
+        }
+    }
+
+    createBranch(x, y, limit) {
+        let currX = x;
+        let currY = y;
+        let length = 0;
+        
+        // Branch is shorter
+        while (length < 200 && currY < limit) {
+            let nextX = currX + (Math.random() - 0.5) * 60; // Wider spread for branches
+            let nextY = currY + (Math.random() * 20 + 10);
+            this.segments.push({x1: currX, y1: currY, x2: nextX, y2: nextY, isBranch: true});
+            currX = nextX;
+            currY = nextY;
+            length += 30;
+        }
+    }
+
+    draw(ctx) {
+        ctx.save();
+        ctx.strokeStyle = '#fff';
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = '#e11d48'; // Red/Pink Glow to match theme
+        ctx.globalAlpha = Math.random() * 0.5 + 0.5; // Flicker
+        
+        // Fading out
+        if (this.life < 10) ctx.globalAlpha = this.life / 10;
+
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        for (let s of this.segments) {
+            if (s.isBranch) ctx.lineWidth = 1;
+            else ctx.lineWidth = 2.5;
+
+            ctx.moveTo(s.x1, s.y1);
+            ctx.lineTo(s.x2, s.y2);
+        }
+        ctx.stroke();
+        ctx.restore();
+        
+        this.life--;
+    }
 }
 
 function loopRain(isThunder) {
     const canvas = document.getElementById('pak-rain');
     const ctx = canvas.getContext('2d');
-    
-    // Flash effect for thunder
-    if (isThunder && Math.random() < 0.005) {
-        thunderFlash = 20; // Frames of flash
-    }
-    
-    if (thunderFlash > 0) {
-        ctx.fillStyle = `rgba(255, 255, 255, ${thunderFlash / 40})`;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        thunderFlash--;
-    } else {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // --- THUNDER LOGIC ---
+    if (isThunder) {
+        // Randomly spawn lightning (approx every 2-3 seconds)
+        if (Math.random() < 0.008) {
+             bolts.push(new LightningBolt(Math.random() * canvas.width, 0, canvas.height));
+             thunderFlash = 6; // Bright flash frames
+        }
     }
 
-    ctx.strokeStyle = '#fda4af'; // Rose rain
-    ctx.lineWidth = 1;
+    // --- DRAW BACKGROUND & FLASH ---
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear
+    
+    if (thunderFlash > 0) {
+        // Intense flash
+        ctx.fillStyle = `rgba(255, 230, 240, ${thunderFlash / 8})`; 
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        thunderFlash--;
+    }
+
+    // --- DRAW BOLTS ---
+    for (let i = bolts.length - 1; i >= 0; i--) {
+        bolts[i].draw(ctx);
+        if (bolts[i].life <= 0) bolts.splice(i, 1);
+    }
+
+    // --- DRAW RAIN ---
+    ctx.strokeStyle = isThunder ? 'rgba(255, 255, 255, 0.6)' : '#fda4af'; // White rain for storm, Pink for gentle
+    ctx.lineWidth = isThunder ? 1.5 : 1;
     ctx.beginPath();
     
     for (let d of drops) {
         // Physics & Interaction
-        // Distance from mouse
         const dx = d.x - mouseX;
         const dy = d.y - mouseY;
         const dist = Math.sqrt(dx*dx + dy*dy);
@@ -4930,26 +5014,25 @@ function loopRain(isThunder) {
         // Repel from mouse
         if (dist < 100) {
             const force = (100 - dist) / 100;
-            d.vx += (dx / dist) * force * 2;
-            d.vy += (dy / dist) * force * 2;
+            d.vx += (dx / dist) * force * 5; // Stronger repel
+            d.vy += (dy / dist) * force * 5;
         }
 
         d.x += d.vx;
         d.y += d.s + d.vy;
         
-        // Dampen velocity
-        d.vx *= 0.95;
-        d.vy *= 0.95;
+        // Dampen velocity / Return to distinct wind speed
+        if (isThunder) d.vx = (d.vx * 0.9) - 0.1; // Persistent wind LEFT
+        else { d.vx *= 0.95; d.vy *= 0.95; }
 
-        // Draw
         ctx.moveTo(d.x, d.y);
-        ctx.lineTo(d.x, d.y + d.l);
+        ctx.lineTo(d.x + d.vx, d.y + d.l); // Slant drops with velocity
 
         // Reset
         if (d.y > canvas.height) {
             d.y = -d.l;
             d.x = Math.random() * canvas.width;
-            d.vx = 0; 
+            d.vx = isThunder ? -2 : 0; 
             d.vy = 0;
         }
     }
