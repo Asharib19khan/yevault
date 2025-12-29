@@ -5095,12 +5095,47 @@ function createSplash(x, y, color) {
     }
 }
 
-// --- LIGHTNING BOLT GENERATOR ---
+// --- 3. ZEUS MODE & RIPPLES ---
+let ripples = [];
+
+document.addEventListener('click', (e) => {
+    // Only in Pak Mode
+    if (!document.body.classList.contains('pak-mode')) return;
+    
+    // ZEUS STRIKE
+    // Summon bolt from top (random X nearby) to mouse (click X, Y)
+    const startX = e.clientX + (Math.random() - 0.5) * 200;
+    bolts.push(new LightningBolt(startX, 0, window.innerHeight, e.clientX, e.clientY));
+    
+    // RIPPLE EFFECT
+    createRipple(e.clientX, e.clientY);
+    
+    // FLASH SCREEN
+    thunderFlash = 5;
+    
+    // Shake Effect
+    document.body.style.transform = `translate(${Math.random()*6-3}px, ${Math.random()*6-3}px)`;
+    setTimeout(() => document.body.style.transform = 'none', 50);
+});
+
+function createRipple(x, y) {
+    ripples.push({
+        x: x, 
+        y: y,
+        r: 0, // Radius
+        alpha: 1,
+        speed: 5
+    });
+}
+
+// --- LIGHTNING BOLT GENERATOR (UPDATED FOR ZEUS) ---
 class LightningBolt {
-    constructor(x, y, height) {
+    constructor(x, y, height, targetX = null, targetY = null) {
         this.segments = [];
-        this.life = 15; // Frames to live
+        this.life = 15; 
         this.totalHeight = height;
+        this.targetX = targetX;
+        this.targetY = targetY;
         this.generate(x, y);
     }
 
@@ -5108,20 +5143,38 @@ class LightningBolt {
         let currX = x;
         let currY = y;
         
-        while (currY < this.totalHeight + 100) {
+        let limitY = this.targetY ? this.targetY : (this.totalHeight + 100);
+        
+        while (currY < limitY) {
+            // If we have a target, bias towards it
+            let biasX = 0;
+            if (this.targetX !== null) {
+                // Calculate direction to target
+                const remainingY = this.targetY - currY;
+                const remainingX = this.targetX - currX;
+                if (remainingY > 0) biasX = remainingX / (remainingY / 20); // 20 is step size
+            }
+
             // Jagged steps
-            let nextX = currX + (Math.random() - 0.5) * 50; 
+            let nextX = currX + (Math.random() - 0.5) * 50 + biasX; 
             let nextY = currY + (Math.random() * 30 + 10);
+            
+            // Clamp if we overshoot targetY
+            if (this.targetY && nextY > this.targetY) {
+                nextY = this.targetY;
+                nextX = this.targetX; // Snap to target
+            }
             
             this.segments.push({x1: currX, y1: currY, x2: nextX, y2: nextY});
             
-            // Chance to branch
-            if (Math.random() < 0.2) {
+            // Chance to branch (only if not near target)
+            if (Math.random() < 0.2 && (!this.targetY || (this.targetY - currY) > 100)) {
                 this.createBranch(currX, currY, this.totalHeight);
             }
 
             currX = nextX;
             currY = nextY;
+            if (this.targetY && currY >= this.targetY) break;
         }
     }
 
@@ -5161,6 +5214,15 @@ class LightningBolt {
             ctx.lineTo(s.x2, s.y2);
         }
         ctx.stroke();
+        
+        // Draw Impact Point if Zeus
+        if (this.targetX && this.life > 10) {
+            ctx.fillStyle = "#fff";
+            ctx.beginPath();
+            ctx.arc(this.targetX, this.targetY, 5 + Math.random() * 10, 0, Math.PI*2);
+            ctx.fill();
+        }
+
         ctx.restore();
         
         this.life--;
@@ -5195,6 +5257,21 @@ function loopRain(isThunder) {
     for (let i = bolts.length - 1; i >= 0; i--) {
         bolts[i].draw(ctx);
         if (bolts[i].life <= 0) bolts.splice(i, 1);
+    }
+
+    // --- DRAW RIPPLES ---
+    ctx.lineWidth = 2;
+    for (let i = ripples.length - 1; i >= 0; i--) {
+        const r = ripples[i];
+        r.r += r.speed;
+        r.alpha -= 0.02;
+        
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, r.r, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${r.alpha})`;
+        ctx.stroke();
+
+        if (r.alpha <= 0) ripples.splice(i, 1);
     }
 
     // --- DRAW RAIN ---
