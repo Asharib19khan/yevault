@@ -1201,6 +1201,92 @@
             color: #fff1f2;
         }
 
+        /* --- 1. VAULT DECODER --- */
+        .scramble-text {
+            font-family: 'Courier New', monospace; /* Tech feel */
+            display: inline-block;
+        }
+
+        /* --- 2. SCROLL OF TIME --- */
+        .pak-timeline-container {
+            position: absolute;
+            left: 20px;
+            top: 100px;
+            bottom: 100px;
+            width: 4px;
+            background: rgba(225, 29, 72, 0.2);
+            border-radius: 2px;
+            z-index: 50;
+            display: none; /* Hidden by default, shown in Grid */
+        }
+        .pak-timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: #fb7185;
+            box-shadow: 0 0 10px #fb7185;
+            transition: height 0.1s ease-out;
+        }
+        .timeline-year {
+            position: absolute;
+            left: 15px;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .timeline-year.active {
+            color: #fb7185;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(225, 29, 72, 0.5);
+        }
+
+        /* --- 3. PARALLAX MONUMENTS --- */
+        .pak-skyline {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background-repeat: repeat-x;
+            background-position: bottom left;
+            opacity: 0.15;
+            z-index: 0; /* Behind content */
+            pointer-events: none;
+            /* Simple CSS Gradient/Shape Skyline fallback if SVG fails */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" preserveAspectRatio="none"><path d="M50,300 L50,150 L60,140 L40,140 L50,150 M150,300 L150,100 L180,300 M250,300 L250,200 L300,150 L350,200 L350,300 M450,300 L500,50 L550,300 M650,300 C650,200 750,200 750,300" fill="%23be123c"/></svg>'); 
+        }
+
+        /* --- 4. PARTITION MAP --- */
+        .pak-map-widget {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 120px;
+            height: 100px;
+            opacity: 0.8;
+            transition: all 0.3s;
+            z-index: 60;
+            /* Placeholder styling until JS injects SVG */
+            border: 1px solid rgba(225, 29, 72, 0.3);
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .pak-map-widget:hover {
+            transform: scale(1.1);
+            border-color: #fb7185;
+            box-shadow: 0 0 20px rgba(225, 29, 72, 0.4);
+        }
+
     </style>
 </head>
 
@@ -5180,21 +5266,194 @@ function loopRain(isThunder) {
     rainAnimId = requestAnimationFrame(() => loopRain(isThunder));
 }
 
+// --- 1. VAULT DECODER LOGIC ---
+function scrambleText(element, finalString) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+    let iterations = 0;
+    
+    // Safety check
+    if(!element) return;
+    
+    const interval = setInterval(() => {
+        element.innerText = finalString
+            .split('')
+            .map((letter, index) => {
+                if(index < iterations) return finalString[index];
+                return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join('');
+        
+        if(iterations >= finalString.length) clearInterval(interval);
+        iterations += 1/2; // Speed of decoding
+    }, 30);
+}
+
+// --- 2. TIMELINE & PARALLAX LOGIC ---
+let pakTimelineYears = [];
+
+function initPakFeatures() {
+    // 1. Inject Timeline Container if missing
+    if (!document.querySelector('.pak-timeline-container')) {
+        const tContainer = document.createElement('div');
+        tContainer.className = 'pak-timeline-container';
+        tContainer.innerHTML = `<div class="pak-timeline-progress" id="pak-time-bar"></div>`;
+        document.getElementById('pakistan-studies').appendChild(tContainer);
+    }
+
+    // 2. Inject Skyline if missing
+    if (!document.querySelector('.pak-skyline')) {
+        const skyline = document.createElement('div');
+        skyline.className = 'pak-skyline';
+        document.body.appendChild(skyline); // Body attachment for fixed pos
+    }
+
+    // 3. Inject Map Widget if missing
+    if (!document.querySelector('.pak-map-widget')) {
+        const mapWidget = document.createElement('div');
+        mapWidget.className = 'pak-map-widget';
+        mapWidget.title = "The Partition (1947)";
+        // Simple SVG Map
+        mapWidget.innerHTML = `
+        <svg  viewBox="0 0 200 150" style="width:100%; height:100%;">
+            <path id="map-pak-west" d="M10,80 L30,60 L50,70 L40,100 Z" fill="#374151" stroke="#be123c" stroke-width="1.5" />
+            <path id="map-pak-east" d="M150,80 L170,75 L180,90 L160,100 Z" fill="#374151" stroke="#be123c" stroke-width="1.5" />
+            <path id="map-india" d="M50,70 L150,80 L100,140 Z" fill="rgba(255,255,255,0.05)" />
+            <text x="50%" y="140" text-anchor="middle" fill="#be123c" font-size="10">1947</text>
+        </svg>`;
+        
+        // Hover Interaction using JS
+        mapWidget.addEventListener('mouseenter', () => {
+             document.getElementById('map-pak-west').setAttribute('fill', '#e11d48');
+             document.getElementById('map-pak-west').setAttribute('filter', 'drop-shadow(0 0 5px #e11d48)');
+             document.getElementById('map-pak-east').setAttribute('fill', '#e11d48');
+             document.getElementById('map-pak-east').setAttribute('filter', 'drop-shadow(0 0 5px #e11d48)');
+        });
+        mapWidget.addEventListener('mouseleave', () => {
+             document.getElementById('map-pak-west').setAttribute('fill', '#374151');
+             document.getElementById('map-pak-west').setAttribute('filter', 'none');
+             document.getElementById('map-pak-east').setAttribute('fill', '#374151');
+             document.getElementById('map-pak-east').setAttribute('filter', 'none');
+        });
+
+        document.getElementById('pakistan-studies').appendChild(mapWidget);
+    }
+}
+
+function updatePakTimeline() {
+    const years = pakNotes.map(n => {
+        const m = n.title.match(/\b(19\d{2})\b/); // Extract Year (19xx)
+        return m ? m[0] : null; 
+    }).filter(y => y); // Clean list
+
+    // Remove duplicates and sort
+    pakTimelineYears = [...new Set(years)].sort();
+
+    const container = document.querySelector('.pak-timeline-container');
+    if (!container) return; // Feature not inited yet
+
+    // Render Markers
+    // We purposefully remove old markers to re-render
+    const existingMarkers = container.querySelectorAll('.timeline-year');
+    existingMarkers.forEach(e => e.remove());
+
+    pakTimelineYears.forEach((year, i) => {
+        const marker = document.createElement('div');
+        marker.className = 'timeline-year';
+        marker.innerText = year;
+        marker.style.top = `${(i / (pakTimelineYears.length - 1)) * 100}%`;
+        marker.onclick = () => scrollToYear(year);
+        container.appendChild(marker);
+    });
+    
+    container.style.display = 'block';
+}
+
+function scrollToYear(year) {
+    // Find card with this year
+    const targetCard = Array.from(document.querySelectorAll('#pak-notes-grid .card')).find(c => c.innerText.includes(year));
+    if (targetCard) {
+        targetCard.scrollIntoView({behavior: 'smooth', block: 'center'});
+    }
+}
+
+// Global Scroll Handler for Timeline & Parallax
+window.addEventListener('scroll', () => {
+    // Only active in Pak Mode
+    if (!document.body.classList.contains('pak-mode')) return;
+
+    // 1. Parallax Monument
+    const skyline = document.querySelector('.pak-skyline');
+    if (skyline) {
+        const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        skyline.style.backgroundPosition = `-${window.scrollY * 0.2}px bottom`; // Move Horizontally
+    }
+    
+    // 2. Timeline Progress (Only active in Grid View)
+    const grid = document.getElementById('pak-notes-grid');
+    if (grid && grid.style.display !== 'none') {
+        const gridRect = grid.getBoundingClientRect();
+        const container = document.querySelector('.pak-timeline-container');
+        const progressBar = document.getElementById('pak-time-bar');
+
+        // Logic: Map scroll position relative to grid height to the timeline bar
+        // Simple approx:
+        const scrollP = window.scrollY / (grid.scrollHeight - window.innerHeight);
+        const satScroll = Math.min(Math.max(scrollP, 0), 1);
+        
+        if (progressBar) progressBar.style.height = `${satScroll * 100}%`;
+        
+        // Highlight active year logic could go here based on element visibility
+    }
+});
+
+function openPakNote(id) {
+    const n = pakNotes.find(x => x.id === id);
+    if(n) {
+         const body = document.getElementById('pak-note-body');
+         // Use existing animation wrapper
+         
+         // 1. Render Basic Layout
+         body.innerHTML = `
+            <h1 id="pak-note-title" style="opacity:0"></h1>
+            <div id="pak-note-text" style="animation: fadeSlideUp 0.5s 0.2s ease forwards; opacity:0; transform:translateY(20px); animation-fill-mode:forwards;">
+                ${n.content}
+            </div>`;
+         
+         // 2. Scramble Effect for Title
+         const titleEl = document.getElementById('pak-note-title');
+         titleEl.style.opacity = '1';
+         titleEl.classList.add('scramble-text');
+         scrambleText(titleEl, n.title);
+
+         document.getElementById('pak-notes-grid').style.display = 'none';
+         document.getElementById('pak-note-detail').style.display = 'block';
+         window.scrollTo(0,0);
+         
+         // Hide timeline in detail view
+         const tContainer = document.querySelector('.pak-timeline-container');
+         if(tContainer) tContainer.style.display = 'none';
+    }
+}
+
+function closePakNote() {
+    document.getElementById('pak-note-detail').style.display = 'none';
+    document.getElementById('pak-notes-grid').style.display = 'grid';
+    // Show timeline
+    const tContainer = document.querySelector('.pak-timeline-container');
+    if(tContainer) tContainer.style.display = 'block';
+}
+
 // Robust Initialization
 document.addEventListener('DOMContentLoaded', () => {
     // Render all note sections
     if (typeof renderNotes === 'function') renderNotes();
     renderItNotes();
     renderPakNotes();
+    
+    // Init Visuals
+    initPakFeatures();
+    updatePakTimeline();
 });
-
-// Fallback for immediate execution if DOM is already ready
-if (document.readyState === 'loading') {
-    // Wait for DOMContentLoaded
-} else {
-    renderItNotes();
-    renderPakNotes();
-}
 
 // --- ISLAMIC NOTES ---
 
