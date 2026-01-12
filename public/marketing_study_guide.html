@@ -1572,12 +1572,12 @@
                 </div>
 
                 <!-- TEACHING UNIT 1: CARDIOVASCULAR & BLOOD SYSTEMS -->
-                <div style="margin-top:3rem;">
+                <div id="pharma-cv-grid" style="margin-top:3rem;">
                     <h2 style="font-family:var(--font-display); margin-bottom:2rem; color:var(--brand-primary);">
                         💊 TEACHING UNIT 1: CARDIOVASCULAR & BLOOD SYSTEMS
                     </h2>
                     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
-                        <div class="card">
+                        <div class="card" onclick="showPharmaNote('hypertension')" style="cursor:pointer;">
                             <span class="tag cyan">CV1</span>
                             <h3>Topic 1: Hypertension</h3>
                             <p>Anti-hypertensive drugs and classifications</p>
@@ -1718,6 +1718,247 @@
                             <span class="tag purple">CHEMO3</span>
                             <h3>Topic 3: Anticancer Drugs</h3>
                             <p>Cell cycle and chemotherapy agents</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HYPERTENSION DETAIL VIEW -->
+                <div id="pharma-hypertension-detail" style="display:none;">
+                    <button onclick="closePharmaNote()" class="btn" style="margin-bottom: 2rem;">← Back to Topics</button>
+                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Hypertension</h1>
+                    
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">1. THE BASICS: What is Hypertension?</h2>
+                        <p style="margin-bottom:1rem; line-height:1.8;"><strong>Definition:</strong> Persistent elevation of arterial blood pressure.</p>
+                        
+                        <div style="background:rgba(139,92,246,0.1); padding:1.5rem; border-radius:1rem; margin:1.5rem 0;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">The Golden Equation:</h3>
+                            <p style="font-size:1.2rem; text-align:center; font-weight:700; color:var(--text-primary);">BP = CO × PVR</p>
+                            <ul style="margin-top:1rem; line-height:2;">
+                                <li><strong>CO (Cardiac Output):</strong> Blood volume & Heart rate (controlled by Heart &amp; Kidneys)</li>
+                                <li><strong>PVR (Peripheral Vascular Resistance):</strong> Vessel diameter (controlled by Arterioles)</li>
+                            </ul>
+                        </div>
+
+                        <h3 style=" color:var(--brand-primary); margin:1.5rem 0 1rem;">Sites of Action:</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Arterioles:</strong> Resistance vessels (PVR)</li>
+                            <li><strong>Venules:</strong> Capacitance vessels (Preload)</li>
+                            <li><strong>Heart:</strong> Pump output</li>
+                            <li><strong>Kidney:</strong> Blood volume (Renin-Angiotensin System)</li>
+                        </ul>
+
+                        <div style="background:rgba(34,197,94,0.1); border-left:4px solid #22c55e; padding:1rem 1.5rem; margin-top:1.5rem; border-radius:0.5rem;">
+                            <p style="color:#22c55e; font-weight:700; margin-bottom:0.5rem;">💡 EXAM TIP:</p>
+                            <p style="color:var(--text-primary);">If a drug dilates veins, it reduces <strong>Preload</strong>. If it dilates arteries, it reduces <strong>Afterload</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">2. CLASSIFICATION (The "ABCD" Rule)</h2>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem;">
+                            <div style="background:rgba(6,182,212,0.1); padding:1.5rem; border-radius:1rem;">
+                                <h3 style="color:#06b6d4; margin-bottom:0.5rem;">A</h3>
+                                <p style="line-height:1.8;"><strong>ACE Inhibitors</strong> (End in <em>-pril</em>)<br><strong>ARBs</strong> (End in <em>-sartan</em>)<br><strong>Alpha Blockers</strong> (<em>-zosin</em>)</p>
+                            </div>
+                            <div style="background:rgba(139,92,246,0.1); padding:1.5rem; border-radius:1rem;">
+                                <h3 style="color:#8b5cf6; margin-bottom:0.5rem;">B</h3>
+                                <p style="line-height:1.8;"><strong>Beta Blockers</strong><br>(End in <em>-olol</em>)</p>
+                            </div>
+                            <div style="background:rgba(236,72,153,0.1); padding:1.5rem; border-radius:1rem;">
+                                <h3 style="color:#ec4899; margin-bottom:0.5rem;">C</h3>
+                                <p style="line-height:1.8;"><strong>Calcium Channel Blockers</strong><br>(End in <em>-dipine</em> or Verapamil/Diltiazem)</p>
+                            </div>
+                            <div style="background:rgba(245,158,11,0.1); padding:1.5rem; border-radius:1rem;">
+                                <h3 style="color:#f59e0b; margin-bottom:0.5rem;">D</h3>
+                                <p style="line-height:1.8;"><strong>Diuretics</strong><br>(Thiazides, Loop, K+ Sparing)</p>
+                            </div>
+                        </div>
+                        <p style="margin-top:1.5rem; color:var(--text-secondary);"><strong>Others:</strong> Centrally Acting (Methyldopa), Direct Vasodilators (Hydralazine)</p>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">3. RAAS INHIBITORS (The "A" Group)</h2>
+                        
+                        <h3 style="color:#06b6d4; margin:1.5rem 0 1rem;">A. ACE Inhibitors (Angiotensin Converting Enzyme Inhibitors)</h3>
+                        <p style="margin-bottom:1rem;"><strong>Drugs:</strong> Captopril, Enalapril, Lisinopril</p>
+                        
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem; margin:1rem 0;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:1rem;">Mechanism of Action (MOA):</h4>
+                            <ul style="line-height:2;">
+                                <li>Inhibits the enzyme ACE (Kinase II)</li>
+                                <li>Blocks conversion of Angiotensin I → Angiotensin II (a potent vasoconstrictor)</li>
+                                <li><strong>Result:</strong> Vasodilation + Reduced Aldosterone (Sodium/Water excretion)</li>
+                            </ul>
+                            <p style="margin-top:1rem; padding:1rem; background:rgba(239,68,68,0.1); border-radius:0.5rem;">
+                                <strong>Side Effect Mechanism:</strong> ACE also breaks down Bradykinin. When ACE is blocked → Bradykinin accumulates → <strong>Dry Cough</strong>
+                            </p>
+                        </div>
+
+                        <div style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:1.5rem; margin:1.5rem 0; border-radius:0.5rem;">
+                            <h4 style="color:#ef4444; margin-bottom:1rem;">⚠️ MNEMONIC: Side Effects of "CAPTOPRIL"</h4>
+                            <ul style="line-height:2.2; list-style:none; padding:0;">
+                                <li><strong>C</strong> = <strong>Cough</strong> (Dry, non-productive - due to Bradykinin)</li>
+                                <li><strong>A</strong> = <strong>Angioedema</strong> (Swelling of lips/tongue - Life Threatening!)</li>
+                                <li><strong>P</strong> = <strong>Potassium excess</strong> (Hyperkalemia)</li>
+                                <li><strong>T</strong> = <strong>Taste changes</strong> (Dysgeusia)</li>
+                                <li><strong>O</strong> = <strong>Orthostatic Hypotension</strong> (First dose effect)</li>
+                                <li><strong>P</strong> = <strong>Pregnancy Contraindicated</strong> (Teratogenic - Fetal Renal Damage)</li>
+                                <li><strong>R</strong> = <strong>Renal failure</strong> (in bilateral renal artery stenosis)</li>
+                                <li><strong>I</strong> = <strong>Indomethacin</strong> (NSAIDs) decreases efficacy</li>
+                                <li><strong>L</strong> = <strong>Leukopenia</strong> (rare)</li>
+                            </ul>
+                        </div>
+
+                        <h3 style="color:#06b6d4; margin:2rem 0 1rem;">B. ARBs (Angiotensin Receptor Blockers)</h3>
+                        <p style="margin-bottom:1rem;"><strong>Drugs:</strong> Losartan, Valsartan</p>
+                        <p style="margin-bottom:1rem;"><strong>MOA:</strong> Blocks the AT1 Receptor directly</p>
+                        
+                        <div style="background:rgba(34,197,94,0.1); padding:1.5rem; border-radius:1rem; margin:1rem 0;">
+                            <p style="color:#22c55e; font-weight:700; margin-bottom:0.5rem;">The "Trick":</p>
+                            <p style="line-height:1.8;">They do the same thing as ACE Inhibitors BUT they do <strong>NOT</strong> increase Bradykinin.</p>
+                            <p style="margin-top:1rem;"><strong>Result:</strong> No Dry Cough, No Angioedema</p>
+                            <p style="margin-top:0.5rem; color:var(--text-secondary);"><strong>Use:</strong> Alternative for patients who cannot tolerate ACE Inhibitors due to cough</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">4. BETA BLOCKERS (The "B" Group)</h2>
+                        
+                        <h3 style="margin:1rem 0;">Drug Classification:</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Non-Selective (β₁ + β₂):</strong> Propranolol</li>
+                            <li><strong>Cardioselective (β₁ only):</strong> Atenolol, Metoprolol, Bisoprolol</li>
+                            <li><strong>Mixed (α + β):</strong> Labetalol, Carvedilol</li>
+                        </ul>
+
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem; margin:1.5rem 0;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:1rem;">Mechanism of Action:</h4>
+                            <ul style="line-height:2;">
+                                <li><strong>Heart (β₁):</strong> Decreases Heart Rate (Negative Chronotropy) &amp; Contractility (Negative Inotropy) → ↓ CO</li>
+                                <li><strong>Kidney (β₁):</strong> Decreases Renin release</li>
+                            </ul>
+                        </div>
+
+                        <div style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:1.5rem; margin:1.5rem 0; border-radius:0.5rem;">
+                            <h4 style="color:#ef4444; margin-bottom:1rem;">⚠️ MNEMONIC: Adverse Effects "ABCDE"</h4>
+                            <ul style="line-height:2.2; list-style:none; padding:0;">
+                                <li><strong>A</strong> = <strong>Asthma</strong> (Bronchospasm via β₂ block - Avoid Propranolol in Asthmatics)</li>
+                                <li><strong>B</strong> = <strong>Block</strong> (Heart Block/Bradycardia)</li>
+                                <li><strong>C</strong> = <strong>Cold extremities</strong> (Raynaud's phenomenon)</li>
+                                <li><strong>D</strong> = <strong>Diabetes</strong> (Masks signs of hypoglycemia like tachycardia)</li>
+                                <li><strong>E</strong> = <strong>Erectile Dysfunction</strong> / Fatigue</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">5. CALCIUM CHANNEL BLOCKERS (CCBs) (The "C" Group)</h2>
+                        
+                        <p style="margin-bottom:1.5rem;"><strong>MOA:</strong> Block L-Type Voltage-Gated Calcium Channels → No Calcium entry → Muscle relaxation</p>
+
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin:1.5rem 0;">
+                            <div style="background:rgba(236,72,153,0.1); padding:1.5rem; border-radius:1rem;">
+                                <h3 style="color:#ec4899; margin-bottom:1rem;">Dihydropyridines</h3>
+                                <p style="margin-bottom:0.5rem;"><strong>(Vessel Selective)</strong></p>
+                                <p style="margin-bottom:1rem;">Nifedipine, Amlodipine</p>
+                                <p style="margin-bottom:0.5rem;"><strong>Action:</strong> Potent Vasodilation</p>
+                                <p><strong>ADR:</strong> Reflex Tachycardia, Ankle Edema</p>
+                            </div>
+                            <div style="background:rgba(139,92,246,0.1); padding:1.5rem; border-radius:1rem;">
+                                <h3 style="color:#8b5cf6; margin-bottom:1rem;">Non-Dihydropyridines</h3>
+                                <p style="margin-bottom:0.5rem;"><strong>(Heart Selective)</strong></p>
+                                <p style="margin-bottom:1rem;">Verapamil, Diltiazem</p>
+                                <p style="margin-bottom:0.5rem;"><strong>Action:</strong> Decreases Heart Rate &amp; Force (like Beta Blockers)</p>
+                                <p><strong>ADR:</strong> Constipation (Verapamil), Bradycardia</p>
+                            </div>
+                        </div>
+
+                        <div style="background:rgba(245,158,11,0.1); border-left:4px solid #f59e0b; padding:1.5rem; margin-top:1.5rem; border-radius:0.5rem;">
+                            <p style="color:#f59e0b; font-weight:700; margin-bottom:0.5rem;">🦷 DENTAL GOLD:</p>
+                            <p style="line-height:1.8;"><strong>Gingival Hyperplasia</strong> (Gum Overgrowth) is a classic side effect of Nifedipine and Amlodipine.</p>
+                            <p style="margin-top:0.5rem; color:var(--text-secondary);">Other drugs causing this: Phenytoin (Epilepsy), Cyclosporine (Immunosuppressant)</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">6. DIURETICS (The "D" Group)</h2>
+                        
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Thiazides (Hydrochlorothiazide)</h3>
+                            <ul style="line-height:2;">
+                                <li><strong>Site:</strong> Distal Convoluted Tubule (DCT)</li>
+                                <li><strong>MOA:</strong> Blocks Na+/Cl- transporter</li>
+                                <li><strong>Status:</strong> First-line drug for mild-moderate HTN</li>
+                            </ul>
+                        </div>
+
+                        <p><strong>Loop Diuretics (Furosemide):</strong> Used in HTN only if kidney function is poor or Edema/Heart Failure is present</p>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">7. OTHER ANTI-HYPERTENSIVES</h2>
+                        
+                        <h3 style="margin:1.5rem 0 1rem;">Alpha-1 Blockers (Prazosin)</h3>
+                        <p><strong>MOA:</strong> Vasodilation</p>
+                        <div style="background:rgba(239,68,68,0.1); padding:1rem; border-radius:0.5rem; margin:1rem 0;">
+                            <p><strong>ADR:</strong> First Dose Phenomenon (Severe postural hypotension after the first dose)</p>
+                            <p style="margin-top:0.5rem; color:var(--text-secondary);"><strong>Tip:</strong> Take at bedtime</p>
+                        </div>
+
+                        <h3 style="margin:2rem 0 1rem;">Centrally Acting Agents</h3>
+                        <p style="margin-bottom:0.5rem;"><strong>Methyldopa:</strong> Converted to α-methylnorepinephrine (α₂ agonist) in CNS → Reduces sympathetic outflow</p>
+                        <div style="background:rgba(34,197,94,0.1); padding:1rem; border-radius:0.5rem; margin:1rem 0;">
+                            <p style="color:#22c55e; font-weight:700;">Use: Drug of Choice for Hypertension in Pregnancy (Preeclampsia)</p>
+                        </div>
+                        <p><strong>ADR:</strong> Sedation, Coombs +ve Hemolytic Anemia</p>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">8. HYPERTENSIVE EMERGENCY</h2>
+                        
+                        <div style="background:rgba(239,68,68,0.15); padding:1.5rem; border-radius:1rem; margin-bottom:1.5rem;">
+                            <p style="margin-bottom:0.5rem;"><strong>Definition:</strong> BP &gt; 180/120 mmHg + End Organ Damage</p>
+                            <p style="color:var(--text-secondary);">(Stroke, MI, Retinal hemorrhage, Renal failure)</p>
+                        </div>
+
+                        <p style="margin-bottom:1.5rem; font-weight:700;">Goal: Lower BP gradually (max 25% in first hour) to prevent cerebral ischemia</p>
+
+                        <h3 style="margin:1.5rem 0 1rem;">Drugs of Choice:</h3>
+                        
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:0.5rem;">Sodium Nitroprusside (IV)</h4>
+                            <p style="margin-bottom:0.5rem;"><strong>MOA:</strong> Releases Nitric Oxide (NO) spontaneously. Dilates arteries AND veins</p>
+                            <p><strong>Note:</strong> Light sensitive (wrap in foil). Can cause Cyanide Toxicity (Antidote: Sodium Thiosulfate)</p>
+                        </div>
+
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:0.5rem;">Labetalol (IV)</h4>
+                            <p>Combined α + β blocker. Safe in pregnancy (Eclampsia)</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; background:rgba(245,158,11,0.1); border:2px solid #f59e0b;">
+                        <h2 style="color:#f59e0b; margin-bottom:1.5rem;">🦷 DENTAL MANAGEMENT FOR HYPERTENSIVE PATIENTS</h2>
+                        
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Orthostatic Hypotension</h3>
+                            <p style="line-height:1.8;">Common with Prazosin, Nitrates, and older patients. <strong>Raise the dental chair slowly.</strong></p>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Gingival Hyperplasia</h3>
+                            <p style="line-height:1.8;">Check if patient is on <strong>Nifedipine/Amlodipine</strong>.</p>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Local Anesthesia (LA)</h3>
+                            <p style="line-height:1.8;">Limit Epinephrine in cardiac patients (Max 0.04mg or 2 cartridges of 1:100,000). <strong>Avoid Epinephrine if BP is uncontrolled.</strong></p>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">NSAIDs</h3>
+                            <p style="line-height:1.8;">Long-term NSAID use (Ibuprofen) can <strong>reduce the effect</strong> of ACE Inhibitors and Beta Blockers.</p>
                         </div>
                     </div>
                 </div>
@@ -3543,6 +3784,24 @@
             } else {
                 document.body.classList.remove('pak-mode');
             }
+        }
+
+        // --- PHARMA NOTES ---
+        function showPharmaNote(topicId) {
+            // Hide all topic grids
+            document.getElementById('pharma-cv-grid').style.display = 'none';
+            
+            // Show the specific detail view
+            document.getElementById('pharma-' + topicId + '-detail').style.display = 'block';
+        }
+
+        function closePharmaNote() {
+            // Hide all detail views
+            const detailViews = document.querySelectorAll('[id^="pharma-"][id$="-detail"]');
+            detailViews.forEach(view => view.style.display = 'none');
+            
+            // Show the topic grids
+            document.getElementById('pharma-cv-grid').style.display = 'block';
         }
 
         // --- NOTES ---
