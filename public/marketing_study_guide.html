@@ -1602,12 +1602,12 @@
                             <h3>Topic 5: Heart Failure</h3>
                             <p>Cardiac glycosides and HF management</p>
                         </div>
-                        <div class="card">
+                        <div class="card" onclick="showPharmaNote('hyperlipidemia')" style="cursor:pointer;">
                             <span class="tag cyan">CV6</span>
                             <h3>Topic 6: Hyperlipidemia</h3>
                             <p>Statins, Fibrates, and lipid-lowering agents</p>
                         </div>
-                        <div class="card">
+                        <div class="card" onclick="showPharmaNote('blood')" style="cursor:pointer;">
                             <span class="tag cyan">CV7</span>
                             <h3>Topic 7: Blood Pharmacology</h3>
                             <p>Anticoagulants, Antiplatelets, Hemostatics</p>
@@ -1699,7 +1699,7 @@
                 </div>
 
                 <!-- TEACHING UNIT 4: CHEMOTHERAPY -->
-                <div style="margin-top:3rem;">
+                <div id="pharma-chemo-grid" style="margin-top:3rem;">
                     <h2 style="font-family:var(--font-display); margin-bottom:2rem; color:var(--brand-primary);">
                         ⚕️ TEACHING UNIT 4: CHEMOTHERAPY
                     </h2>
@@ -2586,6 +2586,233 @@
                                 <h4 style="color:#ef4444; margin-bottom:0.5rem;">Antibiotic Interaction ⚠️</h4>
                                 <p style="color:var(--text-secondary); line-height:1.6;"><strong>Erythromycin/Clarithromycin</strong> inhibit gut bacteria that metabolize Digoxin &rarr; TOXICITY.<br><strong>Alternative:</strong> Azithromycin.</p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- HYPERLIPIDEMIA DETAIL VIEW -->
+                <div id="pharma-hyperlipidemia-detail" style="display:none;">
+                    <button onclick="closePharmaNote()" class="btn" style="margin-bottom: 2rem;">← Back to Topics</button>
+                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Hyperlipidemia (Lipid-Lowering Drugs)</h1>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">1. THE BASICS: Good vs. Bad Cholesterol</h2>
+                        <div style="background:rgba(139,92,246,0.1); padding:1.5rem; border-radius:1rem; margin-bottom:1.5rem;">
+                            <p style="margin-bottom:0.5rem; line-height:1.8;"><strong>Hyperlipidemia:</strong> An abnormal elevation of lipids (Cholesterol and/or Triglycerides) in the blood.</p>
+                        </div>
+
+                        <h3 style="color:var(--brand-primary); margin:1.5rem 0 1rem;">The Players</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>LDL (Low-Density Lipoprotein):</strong> "Bad Cholesterol" &rarr; Deposits in arteries &rarr; Atherosclerosis.</li>
+                            <li><strong>HDL (High-Density Lipoprotein):</strong> "Good Cholesterol" &rarr; Carries cholesterol away from arteries to the liver.</li>
+                            <li><strong>VLDL:</strong> Carries Triglycerides (Fat).</li>
+                        </ul>
+                        <div style="background:rgba(34,197,94,0.1); padding:1rem; border-radius:0.5rem; text-align:center; margin-top:1rem;">
+                            <strong>Goal:</strong> &darr; LDL, &darr; Triglycerides, &uarr; HDL.
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">2. CLASSIFICATION OF DRUGS</h2>
+                        <ol style="line-height:2;">
+                            <li><strong>HMG-CoA Reductase Inhibitors (Statins):</strong> Simvastatin, Atorvastatin, Rosuvastatin.</li>
+                            <li><strong>Fibrates:</strong> Gemfibrozil, Fenofibrate.</li>
+                            <li><strong>Niacin</strong> (Nicotinic Acid / Vit B3).</li>
+                            <li><strong>Cholesterol Absorption Inhibitors:</strong> Ezetimibe.</li>
+                            <li><strong>Bile Acid Sequestrants:</strong> Cholestyramine.</li>
+                        </ol>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:#06b6d4; margin-bottom:1.5rem;">3. STATINS (The Gold Standard) 🥇</h2>
+                        <p style="margin-bottom:1rem;"><strong>Drugs:</strong> Simvastatin, Atorvastatin, Lovastatin.</p>
+
+                        <h3 style="color:var(--brand-primary); margin:1.5rem 0 1rem;">Mechanism of Action (MOA)</h3>
+                        <ol style="line-height:2;">
+                            <li>Competitively inhibits <strong>HMG-CoA Reductase</strong> (the rate-limiting enzyme in cholesterol synthesis in the liver).</li>
+                            <li>Liver senses low cholesterol &rarr; Upregulates <strong>LDL Receptors</strong> on its surface.</li>
+                            <li>Liver pulls more LDL out of the blood.</li>
+                        </ol>
+                        <p style="margin-top:0.5rem;"><strong>Result:</strong> Potent reduction of LDL.</p>
+
+                        <h3 style="color:var(--brand-primary); margin:1.5rem 0 1rem;">Pharmacokinetics</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>First Pass Effect:</strong> Extensive (Low bioavailability).</li>
+                            <li><strong>Prodrug:</strong> Simvastatin and Lovastatin are inactive prodrugs (activated in the liver).</li>
+                            <li><strong>Timing:</strong> Synthesis of cholesterol peaks at night. <br><span style="color:#fbbf24;">Tip: Take Simvastatin at bedtime.</span></li>
+                            <li><strong>Metabolism:</strong> CYP3A4 (Crucial for interactions!).</li>
+                        </ul>
+
+                        <div style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:1.5rem; margin-top:1.5rem; border-radius:0.5rem;">
+                            <h4 style="color:#ef4444; margin-bottom:0.5rem;">⚠️ MNEMONIC: "HMG" for Side Effects</h4>
+                            <ul style="line-height:2; list-style:none; padding:0;">
+                                <li><strong>H = Hepatotoxicity</strong> (Check Liver Function Tests).</li>
+                                <li><strong>M = Myopathy</strong> / Muscle pain (Can progress to Rhabdomyolysis -> kidney failure).</li>
+                                <li><strong>G = Girls</strong> (Contraindicated in Pregnancy / Lactation - Category X).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">4. OTHER DRUGS</h2>
+                        
+                        <h3 style="color:#8b5cf6; margin-bottom:1rem;">A. Fibrates (Triglyceride Busters)</h3>
+                        <p><strong>Drugs:</strong> Gemfibrozil, Fenofibrate.</p>
+                        <ul style="line-height:2; margin-top:0.5rem;">
+                            <li><strong>MOA:</strong> Activates PPAR-α &rarr; Increases Lipoprotein Lipase &rarr; breaks down TGs.</li>
+                            <li><strong>Clinical Use:</strong> Hypertriglyceridemia.</li>
+                            <li><strong>Adverse Effects:</strong> Gallstones (Cholelithiasis), Myopathy (risk &uarr; with Statins).</li>
+                        </ul>
+
+                        <h3 style="color:#f43f5e; margin:1.5rem 0 1rem;">B. Niacin (Vitamin B3)</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>MOA:</strong> Inhibits lipolysis in adipose tissue.</li>
+                            <li><strong>Effect:</strong> Most effective drug to Increase HDL.</li>
+                            <li><strong>Adverse Effect: The "Flushing" Reaction.</strong> Intense redness/burning.
+                                <br><span style="color:var(--text-secondary); font-size:0.9rem;">Mechanism: Prostaglandins. <strong>Tip:</strong> Pre-medicate with Aspirin 30 mins prior.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem; border:2px solid #ef4444;">
+                        <h2 style="color:#ef4444; margin-bottom:1.5rem;">5. DRUG INTERACTIONS: The Dental Danger Zone 🦷⚠️</h2>
+                        <p style="line-height:1.8; margin-bottom:1.5rem;">
+                            Statins (Simvastatin) are metabolized by <strong>CYP3A4</strong>. If you inhibit this enzyme, Statin levels rise to toxic levels &rarr; <strong>Rhabdomyolysis</strong>.
+                        </p>
+
+                        <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Common Dental Enzyme Inhibitors (AVOID with Simvastatin):</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Macrolide Antibiotics:</strong> Erythromycin, Clarithromycin. <span style="color:#22c55e;">(Azithromycin is SAFE).</span></li>
+                            <li><strong>Azole Antifungals:</strong> Ketoconazole, Itraconazole.</li>
+                        </ul>
+
+                        <div style="background:rgba(255,255,255,0.05); padding:1.5rem; border-radius:1rem; margin-top:1.5rem;">
+                            <h4 style="color:var(--text-main); margin-bottom:0.5rem;">💡 CLINICAL SCENARIO</h4>
+                            <p style="color:var(--text-secondary); line-height:1.6;">A patient on Simvastatin comes in with a dental abscess. You prescribe Erythromycin.</p>
+                            <p style="color:#ef4444; font-weight:bold; margin-top:0.5rem;">RESULT: Patient develops severe muscle pain and kidney failure (Rhabdomyolysis).</p>
+                            <p style="color:#22c55e; font-weight:bold; margin-top:0.5rem;">CORRECT ACTION: Prescribe Azithromycin or Penicillin instead.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- BLOOD PHARMACOLOGY DETAIL VIEW -->
+                <div id="pharma-blood-detail" style="display:none;">
+                    <button onclick="closePharmaNote()" class="btn" style="margin-bottom: 2rem;">← Back to Topics</button>
+                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Blood Pharmacology</h1>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">1. THE CLOTTING CASCADE (The Basics)</h2>
+                        <img src="clotting_cascade.png" alt="Clotting Cascade" style="width:100%; border-radius:1rem; margin-bottom:1.5rem; border:1px solid rgba(255,255,255,0.1);">
+                        
+                        <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Hemostasis: The process of stopping bleeding.</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Platelets:</strong> Form the initial "Plug" (Primary Hemostasis). &rarr; Targeted by <em>Antiplatelets</em>.</li>
+                            <li><strong>Coagulation Factors:</strong> Form the "Fibrin Mesh" (Secondary Hemostasis). &rarr; Targeted by <em>Anticoagulants</em>.</li>
+                            <li><strong>Fibrinolysis:</strong> The process of breaking down the clot (Plasmin digests fibrin). &rarr; Targeted by <em>Thrombolytics</em>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">2. ANTICOAGULANTS (Venous Thrombosis)</h2>
+                        <p style="margin-bottom:1rem;">Used to prevent clots in veins (DVT, PE) or stagnant blood (Afib).</p>
+
+                        <h3 style="color:#06b6d4; margin:1.5rem 0 1rem;">A. Heparin (The "Immediate" Actor)</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Source:</strong> Bovine lung / Porcine intestine (Mast cells).</li>
+                            <li><strong>Mechanism:</strong> Binds <strong>Antithrombin III</strong> &rarr; Inactivates <strong>Thrombin</strong> & <strong>Factor Xa</strong>.</li>
+                            <li><strong>Types:</strong>
+                                <ul style="list-style:circle; margin-left:2rem; color:var(--text-secondary);">
+                                    <li><strong>UFH:</strong> Inactivates Thrombin + Xa. Needs monitoring (aPTT).</li>
+                                    <li><strong>LMWH (Enoxaparin):</strong> Selectively inhibits Xa. Predictable (No monitoring).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Route:</strong> Parenteral (IV/SC) only. <strong>Pregnancy: SAFE.</strong></li>
+                            <li><strong>Antidote:</strong> Protamine Sulfate.</li>
+                        </ul>
+
+                        <h3 style="color:#f43f5e; margin:1.5rem 0 1rem;">B. Warfarin (The "Delayed" Actor)</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Mechanism:</strong> Vitamin K Antagonist (Inhibits synthesis of Factors 2, 7, 9, 10).</li>
+                            <li><strong>Onset:</strong> Slow (3-5 days). Must wait for existing factors to degrade.</li>
+                            <li><strong>Route:</strong> Oral. <strong>Pregnancy: CONTRAINDICATED</strong> (Teratogenic).</li>
+                            <li><strong>Monitoring:</strong> PT / INR. Normal INR = 1.0. Therapeutic = 2.0-3.0.</li>
+                            <li><strong>Antidote:</strong> Vitamin K (slow) or FFP (immediate).</li>
+                        </ul>
+
+                        <div style="margin-top:2rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">C. Heparin vs. Warfarin (Exam Favorite)</h3>
+                            <div style="overflow-x:auto;">
+                                <table style="width:100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="background:rgba(139,92,246,0.1);">
+                                            <th style="padding:0.5rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Feature</th>
+                                            <th style="padding:0.5rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Heparin</th>
+                                            <th style="padding:0.5rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Warfarin</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td><strong>Route</strong></td><td>IV / SC</td><td>Oral</td></tr>
+                                        <tr><td><strong>Onset</strong></td><td>Rapid</td><td>Slow</td></tr>
+                                        <tr><td><strong>MOA</strong></td><td>Activates Antithrombin III</td><td>Vit K Antagonist</td></tr>
+                                        <tr><td><strong>Antidote</strong></td><td>Protamine Sulfate</td><td>Vit K / FFP</td></tr>
+                                        <tr><td><strong>Pregnancy</strong></td><td>Safe</td><td>Unsafe</td></tr>
+                                        <tr><td><strong>Monitoring</strong></td><td>aPTT</td><td>PT / INR</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">3. ANTIPLATELETS (Arterial Thrombosis)</h2>
+                        <p style="margin-bottom:1rem;">Used to prevent clots in arteries (MI, Stroke).</p>
+
+                        <h3 style="color:#8b5cf6; margin:1.5rem 0 1rem;">A. Aspirin</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>MOA:</strong> Irreversibly inhibits <strong>COX-1</strong> &rarr; Prevents Thromboxane A2.</li>
+                            <li><strong>Effect:</strong> Lasts for platelet lifespan (7-10 days).</li>
+                            <li><strong>Contraindication:</strong> Kids (Reye's Syndrome), Hemophilia.</li>
+                        </ul>
+
+                        <h3 style="color:#8b5cf6; margin:1.5rem 0 1rem;">B. Clopidogrel (Plavix)</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>MOA:</strong> Blocks <strong>ADP Receptors (P2Y12)</strong>.</li>
+                            <li><strong>Interaction:</strong> Activated by CYP2C19. <strong>Inhibited by Omeprazole (PPI).</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:#22c55e; margin-bottom:1.5rem;">4. HEMOSTATICS (Drugs to STOP Bleeding)</h2>
+                        <ul style="line-height:2;">
+                            <li><strong>Vitamin K:</strong> For Warfarin overdose.</li>
+                            <li><strong>Tranexamic Acid:</strong> Anti-fibrinolytic (Prevents clot breakdown). Dental mouthwash (5%).</li>
+                            <li><strong>Desmopressin (DDAVP):</strong> Releases Factor VIII and vWF. For Hemophilia A.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem; border:2px solid var(--brand-primary);">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">5. DENTAL IMPLICATIONS 🦷</h2>
+                        
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+                            <div style="background:rgba(239, 68, 68, 0.1); padding:1rem; border-radius:0.5rem;">
+                                <h4 style="color:#ef4444; margin-bottom:0.5rem;">Warfarin Management</h4>
+                                <ul style="line-height:1.6; padding-left:1rem;">
+                                    <li><strong>Check INR:</strong> Within 24 hours.</li>
+                                    <li><strong>Safe Limit:</strong> INR &le; 3.5 for simple extractions.</li>
+                                    <li><strong>Do NOT stop Warfarin</strong> without physician consult.</li>
+                                    <li><strong>Local Measures:</strong> Gelfoam, Sutures, Tranexamic acid.</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="background:rgba(239, 68, 68, 0.1); padding:1rem; border-radius:0.5rem;">
+                                <h4 style="color:#ef4444; margin-bottom:0.5rem;">Drug Interactions</h4>
+                                <p style="line-height:1.6;"><strong>Antibiotics:</strong> Metronidazole & Erythromycin &uarr; INR (Bleeding).<br>
+                                <strong>NSAIDs:</strong> Ibuprofen displaces Warfarin + stomach ulcers = BLEEDING RISK.<br>
+                                <span style="color:#22c55e;"><strong>Safe Painkiller:</strong> Paracetamol.</span></p>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top:1.5rem; background:rgba(34, 197, 94, 0.1); padding:1rem; border-radius:0.5rem;">
+                            <h4 style="color:#22c55e; margin-bottom:0.5rem;">Aspirin Patients</h4>
+                            <p style="line-height:1.6;"><strong>Do NOT stop Aspirin</strong> for routine dental extractions. Bleeding can be managed locally.</p>
                         </div>
                     </div>
                 </div>
@@ -6816,9 +7043,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         // --- PHARMA LOGIC ---
+        // --- PHARMA LOGIC ---
         function showPharmaNote(id) {
             // 1. Hide All Grids
-            const grids = ['pharma-cv-grid', 'pharma-git-grid', 'pharma-cns-grid'];
+            const grids = ['pharma-cv-grid', 'pharma-git-grid', 'pharma-cns-grid', 'pharma-chemo-grid'];
             grids.forEach(g => {
                 const el = document.getElementById(g);
                 if(el) el.style.display = 'none';
@@ -6839,7 +7067,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             // 2. Show All Grids
-            const grids = ['pharma-cv-grid', 'pharma-git-grid', 'pharma-cns-grid'];
+            const grids = ['pharma-cv-grid', 'pharma-git-grid', 'pharma-cns-grid', 'pharma-chemo-grid'];
             grids.forEach(g => {
                 const el = document.getElementById(g);
                 if(el) el.style.display = ''; 
