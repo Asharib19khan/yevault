@@ -1597,7 +1597,7 @@
                             <h3>Topic 4: Angina Pectoris</h3>
                             <p>Anti-anginal drugs and mechanisms</p>
                         </div>
-                        <div class="card">
+                        <div class="card" onclick="showPharmaNote('heart-failure')" style="cursor:pointer;">
                             <span class="tag cyan">CV5</span>
                             <h3>Topic 5: Heart Failure</h3>
                             <p>Cardiac glycosides and HF management</p>
@@ -2441,6 +2441,151 @@
                         <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem;">
                             <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Orthostatic Hypotension</h3>
                             <p style="line-height:1.8;">Common side effect of nitrates. Upright chair slowly.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- HEART FAILURE DETAIL VIEW -->
+                <div id="pharma-heart-failure-detail" style="display:none;">
+                    <button onclick="closePharmaNote()" class="btn" style="margin-bottom: 2rem;">← Back to Topics</button>
+                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Heart Failure & Cardiac Glycosides</h1>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">1. THE BASICS: What is Heart Failure?</h2>
+                        <div style="background:rgba(239,68,68,0.15); padding:1.5rem; border-radius:1rem; margin-bottom:1.5rem;">
+                            <h3 style="color:#ef4444; margin-bottom:1rem;">Definition</h3>
+                            <p style="margin-bottom:0.5rem; line-height:1.8;">The heart is unable to pump sufficient blood to meet the metabolic needs of the body.</p>
+                        </div>
+
+                        <h3 style="color:var(--brand-primary); margin:1.5rem 0 1rem;">The Vicious Cycle (Pathophysiology)</h3>
+                        <p style="margin-bottom:1rem;">When cardiac output drops, the body tries to "help" but actually makes it worse:</p>
+                        <ul style="line-height:2;">
+                            <li><strong>Sympathetic Activation:</strong> Increases Heart Rate &rarr; Tires the heart.</li>
+                            <li><strong>RAAS Activation:</strong> Retains Na+/Water &rarr; Causes Edema & increases load.</li>
+                            <li><strong>Remodeling:</strong> The heart muscle gets thick/fibrotic and weak.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">2. DRUG MANAGEMENT STRATEGY</h2>
+                        <p style="margin-bottom:1.5rem;">To treat HF, we either reduce the load or increase the force.</p>
+                        
+                        <div style="overflow-x:auto;">
+                            <table style="width:100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background:rgba(139,92,246,0.1);">
+                                        <th style="padding:1rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Goal</th>
+                                        <th style="padding:1rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Drug Class</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                                        <td style="padding:1rem;"><strong>Reduce Preload</strong> (Volume)</td>
+                                        <td style="padding:1rem;">Diuretics (Furosemide), Venodilators (Nitrates)</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                                        <td style="padding:1rem;"><strong>Reduce Afterload</strong> (Pressure)</td>
+                                        <td style="padding:1rem;">ACE Inhibitors, ARBs, Hydralazine</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                                        <td style="padding:1rem;"><strong>Block Remodeling</strong> (Survival)</td>
+                                        <td style="padding:1rem;">ACE Inhibitors, β-Blockers, Spironolactone</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:1rem;"><strong>Increase Contractility</strong></td>
+                                        <td style="padding:1rem;">Cardiac Glycosides (Digoxin)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="background:rgba(251,191,36,0.1); border-left:4px solid #fbbf24; padding:1.5rem; margin-top:1.5rem; border-radius:0.5rem;">
+                            <h4 style="color:#fbbf24; margin-bottom:0.5rem;">💡 EXAM TIP</h4>
+                            <p><strong>ACE Inhibitors</strong> (Captopril/Enalapril) are the agents proven to <strong>prolong life</strong> (decrease mortality) in heart failure patients. Digoxin only improves symptoms.</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">3. CARDIAC GLYCOSIDES: DIGOXIN</h2>
+                        <p style="margin-bottom:1rem;"><strong>Source:</strong> Derived from the Foxglove plant (Digitalis purpurea).</p>
+
+                        <h3 style="color:#06b6d4; margin:1.5rem 0 1rem;">A. Mechanism of Action (The "Pump Blocker")</h3>
+                        <p style="margin-bottom:1rem;">This is a frequent exam question. It happens in 3 steps:</p>
+                        <ol style="line-height:2;">
+                            <li><strong>Inhibition:</strong> Digoxin inhibits the <strong>Na+/K+ ATPase pump</strong> on the cardiac cell membrane.</li>
+                            <li><strong>Accumulation:</strong> This prevents Na+ from leaving the cell &rarr; Intracellular Na+ increases.</li>
+                            <li><strong>Exchange:</strong> The Na+/Ca2+ exchanger stops working (because it needs a Na+ gradient) &rarr; Ca2+ stays inside the cell.</li>
+                        </ol>
+                        <div style="background:rgba(34,197,94,0.1); padding:1rem; border-radius:0.5rem; text-align:center; margin-top:1rem;">
+                            <strong>RESULT:</strong> More Calcium = Stronger Contraction (Positive Inotropy).
+                        </div>
+
+                        <h3 style="color:#06b6d4; margin:1.5rem 0 1rem;">B. Other Effects</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Vagal Stimulation:</strong> Mimics the Vagus nerve &rarr; Slows Heart Rate (Negative Chronotropy).</li>
+                            <li><strong>Clinical Use:</strong> Used in Atrial Fibrillation to slow the heart down.</li>
+                        </ul>
+
+                        <h3 style="color:#06b6d4; margin:1.5rem 0 1rem;">C. Pharmacokinetics</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Therapeutic Index:</strong> Narrow (Very dangerous drug). Safe zone: 0.5 – 1.5 ng/ml. Toxicity starts > 2.0 ng/ml.</li>
+                            <li><strong>Excretion:</strong> Renal (Kidneys). Caution in elderly patients.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:#ef4444; margin-bottom:1.5rem;">4. DIGOXIN TOXICITY (The "Must-Know")</h2>
+                        <p style="margin-bottom:1rem;">Because the safety margin is so small, toxicity is common.</p>
+
+                        <h3 style="color:#ef4444; margin-bottom:1rem;">A. Precipitating Factors (What triggers toxicity?)</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Hypokalemia (Low Potassium):</strong> The Mechanism: K+ and Digoxin compete for the same binding site on the pump. If K+ is low, more Digoxin binds &rarr; Toxicity.
+                                <br><span style="color:var(--text-secondary); font-size:0.9rem;">Culprit: Loop Diuretics (Furosemide) cause hypokalemia &rarr; precipitate Digoxin toxicity.</span>
+                            </li>
+                            <li><strong>Renal Failure:</strong> Drug accumulates.</li>
+                            <li><strong>Drug Interactions:</strong> Erythromycin, Quinidine, Verapamil (displace Digoxin).</li>
+                        </ul>
+
+                        <h3 style="color:#ef4444; margin:1.5rem 0 1rem;">B. Signs & Symptoms ⚠️ MNEMONIC: "DIG"</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>D = Delirium</strong> / Confusion / Fatigue (CNS effects).</li>
+                            <li><strong>I = Irregular Heartbeat</strong> (Arrhythmias - AV block, Ventricular tachycardia).</li>
+                            <li><strong>G = Gastrointestinal Distress</strong> (Anorexia, Nausea, Vomiting - Earliest sign).</li>
+                        </ul>
+
+                        <div style="background:rgba(139,92,246,0.1); padding:1.5rem; border-radius:1rem; margin:1.5rem 0;">
+                            <h4 style="color:#8b5cf6; margin-bottom:0.5rem;">🎨 THE VAN GOGH SIGN</h4>
+                            <p>Digoxin causes <strong>Xanthopsia</strong> (Yellow/Green vision) and halos around lights.</p>
+                            <p style="font-size:0.9rem; margin-top:0.5rem; color:var(--text-secondary);">Trivia tip: Vincent Van Gogh was believed to be on Digitalis, which is why his "Starry Night" painting has yellow halos!</p>
+                        </div>
+
+                        <h3 style="color:#ef4444; margin-bottom:1rem;">C. Management of Toxicity</h3>
+                        <ol style="line-height:2;">
+                            <li>Stop Digoxin immediately.</li>
+                            <li><strong>Correct Electrolytes:</strong> Give Potassium (forces Digoxin off the receptor).</li>
+                            <li><strong>Anti-arrhythmics:</strong> Lidocaine or Phenytoin.</li>
+                            <li><strong>The Antidote:</strong> Digibind (Digoxin Immune Fab) - Antibodies that eat up the drug.</li>
+                        </ol>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem; border:1px solid var(--brand-primary);">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">5. DENTAL IMPLICATIONS 🦷</h2>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+                            <div>
+                                <h4 style="color:var(--text-main); margin-bottom:0.5rem;">Patient Position</h4>
+                                <p style="color:var(--text-secondary); line-height:1.6;">HF patients may have <strong>Orthopnea</strong> (cannot breathe while lying flat). Keep chair semi-supine.</p>
+                            </div>
+                            <div>
+                                <h4 style="color:var(--text-main); margin-bottom:0.5rem;">Gag Reflex</h4>
+                                <p style="color:var(--text-secondary); line-height:1.6;">Digoxin stimulates the CTZ. Patients have exaggerated gag reflex. Caution with impression trays!</p>
+                            </div>
+                            <div>
+                                <h4 style="color:var(--text-main); margin-bottom:0.5rem;">Vasoconstrictors</h4>
+                                <p style="color:var(--text-secondary); line-height:1.6;">Limit Epinephrine (Max 0.04mg) to avoid arrhythmias.</p>
+                            </div>
+                            <div>
+                                <h4 style="color:#ef4444; margin-bottom:0.5rem;">Antibiotic Interaction ⚠️</h4>
+                                <p style="color:var(--text-secondary); line-height:1.6;"><strong>Erythromycin/Clarithromycin</strong> inhibit gut bacteria that metabolize Digoxin &rarr; TOXICITY.<br><strong>Alternative:</strong> Azithromycin.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
