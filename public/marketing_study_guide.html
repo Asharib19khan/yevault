@@ -1582,12 +1582,12 @@
                             <h3>Topic 1: Hypertension</h3>
                             <p>Anti-hypertensive drugs and classifications</p>
                         </div>
-                        <div class="card">
+                        <div class="card" onclick="showPharmaNote('hypertensive-emergency')" style="cursor:pointer;">
                             <span class="tag cyan">CV2</span>
                             <h3>Topic 2: Hypertensive Emergency</h3>
                             <p>Emergency management and drug protocols</p>
                         </div>
-                        <div class="card">
+                        <div class="card" onclick="showPharmaNote('diuretics')" style="cursor:pointer;">
                             <span class="tag cyan">CV3</span>
                             <h3>Topic 3: Diuretics</h3>
                             <p>Loop, Thiazides, K+ Sparing, Osmotic</p>
@@ -1915,6 +1915,334 @@
                         <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem;">
                             <h3 style="color:var(--brand-primary); margin-bottom:1rem;">NSAIDs</h3>
                             <p style="line-height:1.8;">Long-term NSAID use (Ibuprofen) can <strong>reduce the efficacy</strong> of ACE Inhibitors and Beta Blockers (by blocking kidney prostaglandins).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HYPERTENSIVE EMERGENCY DETAIL VIEW -->
+                <div id="pharma-hypertensive-emergency-detail" style="display:none;">
+                    <button onclick="closePharmaNote()" class="btn" style="margin-bottom: 2rem;">← Back to Topics</button>
+                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Hypertensive Emergency</h1>
+                    
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">1. DEFINITION & DIAGNOSIS</h2>
+                        
+                        <div style="background:rgba(239,68,68,0.15); padding:1.5rem; border-radius:1rem; margin-bottom:1.5rem;">
+                            <h3 style="color:#ef4444; margin-bottom:1rem;">Hypertensive Emergency</h3>
+                            <p style="margin-bottom:0.5rem; line-height:1.8;">Severe elevation of BP (<strong>&gt;180/120 mmHg</strong>) <strong>WITH</strong> evidence of new or worsening <strong>Target Organ Damage</strong>.</p>
+                        </div>
+
+                        <h3 style="color:var(--brand-primary); margin:1.5rem 0 1rem;">Examples of Organ Damage:</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Encephalopathy</strong> (Brain)</li>
+                            <li><strong>Myocardial Infarction</strong> (Heart)</li>
+                            <li><strong>Pulmonary Edema</strong> (Lungs)</li>
+                            <li><strong>Acute Renal Failure</strong> (Kidney)</li>
+                            <li><strong>Retinal Hemorrhage</strong> (Eyes)</li>
+                        </ul>
+
+                        <div style="background:rgba(245,158,11,0.1); padding:1.5rem; border-radius:1rem; margin-top:1.5rem;">
+                            <h3 style="color:#f59e0b; margin-bottom:1rem;">Hypertensive Urgency</h3>
+                            <p style="line-height:1.8;">Severe elevation of BP (<strong>&gt;180/120 mmHg</strong>) <strong>WITHOUT</strong> target organ damage.</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">2. MANAGEMENT PRINCIPLES</h2>
+                        
+                        <div style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:1.5rem; margin-bottom:1.5rem; border-radius:0.5rem;">
+                            <h3 style="color:#ef4444; margin-bottom:1rem;">⚠️ The "Goldilocks" Rule: Do not lower BP too fast!</h3>
+                            <p style="line-height:2; margin-bottom:1rem;"><strong>Goal:</strong> Lower BP by max <strong>25%</strong> in the first hour.</p>
+                            <p style="line-height:2; margin-bottom:1rem;"><strong>Why?</strong> Rapid drop causes <strong>Cerebral Hypoperfusion</strong> (Stroke) or <strong>Coronary Ischemia</strong>.</p>
+                            <p style="line-height:2;"><strong>Target:</strong> Achieve <strong>~160/100 mmHg</strong> within 2–6 hours.</p>
+                        </div>
+
+                        <h3 style="color:var(--brand-primary); margin:1.5rem 0 1rem;">Exceptions:</h3>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1rem;">
+                            <div style="background:rgba(139,92,246,0.1); padding:1.5rem; border-radius:1rem;">
+                                <h4 style="color:#8b5cf6; margin-bottom:0.5rem;">Ischemic Stroke</h4>
+                                <p style="line-height:1.8;">Do not lower BP unless <strong>&gt;220/120</strong> (brain needs perfusion).</p>
+                            </div>
+                            <div style="background:rgba(236,72,153,0.1); padding:1.5rem; border-radius:1rem;">
+                                <h4 style="color:#ec4899; margin-bottom:0.5rem;">Aortic Dissection</h4>
+                                <p style="line-height:1.8;">Lower BP <strong>rapidly</strong> (systolic <strong>&lt;120</strong>) to stop the tear.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">3. DRUGS OF CHOICE (IV AGENTS)</h2>
+                        
+                        <h3 style="color:#06b6d4; margin:1.5rem 0 1rem;">A. Sodium Nitroprusside (The "Gold Standard")</h3>
+                        
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem; margin:1rem 0;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:1rem;">Mechanism of Action:</h4>
+                            <ul style="line-height:2;">
+                                <li>Releases <strong>Nitric Oxide (NO)</strong> spontaneously</li>
+                                <li>Dilates <strong>Both</strong> Arterioles and Venules (↓ Afterload & ↓ Preload)</li>
+                            </ul>
+                        </div>
+
+                        <div style="background:rgba(34,197,94,0.1); padding:1.5rem; border-radius:1rem; margin:1rem 0;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:1rem;">Pharmacokinetics:</h4>
+                            <ul style="line-height:2;">
+                                <li><strong>Route:</strong> IV Infusion only</li>
+                                <li><strong>Onset:</strong> Immediate</li>
+                                <li><strong>Duration:</strong> 1–2 minutes (allows precise titration)</li>
+                            </ul>
+                            <p style="margin-top:1rem; padding:1rem; background:rgba(245,158,11,0.2); border-radius:0.5rem;">
+                                <strong>Special Note:</strong> Sensitive to light (bottle must be wrapped in <strong>aluminum foil</strong>).
+                            </p>
+                        </div>
+
+                        <div style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:1.5rem; margin:1.5rem 0; border-radius:0.5rem;">
+                            <h4 style="color:#ef4444; margin-bottom:1rem;">⚠️ Adverse Effects:</h4>
+                            <ul style="line-height:2.2; list-style:none; padding:0;">
+                                <li><strong>Cyanide Toxicity:</strong> Metabolism releases cyanide
+                                    <ul style="list-style:disc; margin-left:2rem; margin-top:0.5rem;">
+                                        <li><strong>Antidote:</strong> Sodium Thiosulfate (donates Sulfur to form thiocyanate) or Hydroxocobalamin</li>
+                                    </ul>
+                                </li>
+                                <li style="margin-top:0.5rem;"><strong>Hypotension:</strong> If infusion is too fast</li>
+                                <li style="margin-top:0.5rem;"><strong>Hypothyroidism:</strong> Thiocyanate blocks iodine uptake (rare)</li>
+                            </ul>
+                        </div>
+
+                        <h3 style="color:#06b6d4; margin:2rem 0 1rem;">B. Labetalol</h3>
+                        <p style="margin-bottom:1rem;"><strong>Class:</strong> Combined α₁ and non-selective β blocker</p>
+                        
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem; margin:1rem 0;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:1rem;">Mechanism:</h4>
+                            <ul style="line-height:2;">
+                                <li>Blocks <strong>α₁</strong> → Vasodilation (↓ PVR)</li>
+                                <li>Blocks <strong>β₁</strong> → Prevents reflex tachycardia</li>
+                            </ul>
+                        </div>
+
+                        <div style="background:rgba(34,197,94,0.1); padding:1.5rem; border-radius:1rem; margin:1rem 0;">
+                            <h4 style="color:#22c55e; margin-bottom:1rem;">Clinical Use:</h4>
+                            <ul style="line-height:2;">
+                                <li>Hypertensive Emergencies</li>
+                                <li><strong>Drug of Choice for Eclampsia</strong> (HTN in pregnancy)</li>
+                            </ul>
+                        </div>
+
+                        <div style="background:rgba(239,68,68,0.1); padding:1rem; border-radius:0.5rem; margin:1rem 0;">
+                            <p style="margin-bottom:0.5rem;"><strong>Contraindications:</strong></p>
+                            <ul style="line-height:2;">
+                                <li>Asthma/COPD (due to β-blockade)</li>
+                                <li>Heart Failure</li>
+                                <li>Bradycardia</li>
+                            </ul>
+                        </div>
+
+                        <h3 style="color:#06b6d4; margin:2rem 0 1rem;">C. Other Agents</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Nicardipine:</strong> IV Calcium Channel Blocker</li>
+                            <li><strong>Nitroglycerin:</strong> Used if Heart Failure or Angina is present (dilates coronary arteries)</li>
+                            <li><strong>Hydralazine:</strong> Used in Eclampsia (Safe in pregnancy)</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; background:rgba(34,197,94,0.1); border:2px solid #22c55e;">
+                        <h2 style="color:#22c55e; margin-bottom:1.5rem;">💡 EXAM TIP: DRUG SELECTION</h2>
+                        
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Pregnancy (Eclampsia)</h3>
+                            <p style="line-height:1.8; font-weight:700;">Labetalol or Hydralazine</p>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Myocardial Ischemia</h3>
+                            <p style="line-height:1.8; font-weight:700;">Nitroglycerin</p>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Aortic Dissection</h3>
+                            <p style="line-height:1.8; font-weight:700;">Esmolol (Beta blocker) + Nitroprusside</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIURETICS DETAIL VIEW -->
+                <div id="pharma-diuretics-detail" style="display:none;">
+                    <button onclick="closePharmaNote()" class="btn" style="margin-bottom: 2rem;">← Back to Topics</button>
+                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Diuretics</h1>
+                    
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">1. THE NEPHRON & SITES OF ACTION</h2>
+                        
+                        <div style="overflow-x:auto;">
+                            <table style="width:100%; border-collapse: collapse; margin-top:1rem;">
+                                <thead>
+                                    <tr style="background:rgba(139,92,246,0.1);">
+                                        <th style="padding:1rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Drug Class</th>
+                                        <th style="padding:1rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Site of Action</th>
+                                        <th style="padding:1rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Transporter Blocked</th>
+                                        <th style="padding:1rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Potency</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                                        <td style="padding:1rem;"><strong>Osmotic (Mannitol)</strong></td>
+                                        <td style="padding:1rem;">PCT & Descending Loop</td>
+                                        <td style="padding:1rem;">None (Osmosis)</td>
+                                        <td style="padding:1rem;">Variable</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                                        <td style="padding:1rem;"><strong>Loop (Furosemide)</strong></td>
+                                        <td style="padding:1rem;">Thick Ascending Limb</td>
+                                        <td style="padding:1rem;">Na⁺/K⁺/2Cl⁻</td>
+                                        <td style="padding:1rem;"><strong>High Ceiling</strong> (Strongest)</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                                        <td style="padding:1rem;"><strong>Thiazides (HCTZ)</strong></td>
+                                        <td style="padding:1rem;">Distal Convoluted Tubule</td>
+                                        <td style="padding:1rem;">Na⁺/Cl⁻</td>
+                                        <td style="padding:1rem;">Moderate</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:1rem;"><strong>K⁺ Sparing</strong></td>
+                                        <td style="padding:1rem;">Collecting Duct</td>
+                                        <td style="padding:1rem;">Na⁺ Channels / Aldosterone</td>
+                                        <td style="padding:1rem;">Weak</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">2. LOOP DIURETICS (Furosemide)</h2>
+                        
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem; margin:1rem 0;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:1rem;">Mechanism:</h4>
+                            <p style="line-height:2;">Inhibits the <strong>Na⁺-K⁺-2Cl⁻ Co-transporter</strong> in the Thick Ascending Limb of Loop of Henle.</p>
+                            <p style="line-height:2; margin-top:1rem;"><strong>Effect:</strong> Massive excretion of NaCl, K⁺, Ca²⁺, and Mg²⁺.</p>
+                        </div>
+
+                        <h3 style="color:var(--brand-primary); margin:1.5rem 0 1rem;">Clinical Uses:</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Acute Pulmonary Edema</strong> (Emergency)</li>
+                            <li>Heart Failure</li>
+                            <li>Hypertension (only if renal failure is present)</li>
+                        </ul>
+
+                        <div style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:1.5rem; margin:1.5rem 0; border-radius:0.5rem;">
+                            <h4 style="color:#ef4444; margin-bottom:1rem;">⚠️ Adverse Effects:</h4>
+                            <ul style="line-height:2.2; list-style:none; padding:0;">
+                                <li><strong>Hypokalemia</strong> (Low K⁺ → Arrhythmias)</li>
+                                <li><strong>Ototoxicity</strong> (Hearing loss - especially if given with Aminoglycosides)</li>
+                                <li><strong>Hyperuricemia</strong> (Gout)</li>
+                                <li><strong>Hypocalcemia</strong> (Loss of Ca²⁺)</li>
+                                <li><strong>Sulfa Allergy:</strong> (Structure contains sulfonamide)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">3. THIAZIDE DIURETICS (Hydrochlorothiazide)</h2>
+                        
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem; margin:1rem 0;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:1rem;">Mechanism:</h4>
+                            <p style="line-height:2;">Inhibits <strong>Na⁺-Cl⁻ Co-transporter</strong> in the Distal Convoluted Tubule (DCT).</p>
+                            <p style="line-height:2; margin-top:1rem;"><strong>Effect:</strong> Excretion of Na⁺, K⁺. <strong style="color:#22c55e;">Retains Ca²⁺</strong>.</p>
+                        </div>
+
+                        <h3 style="color:var(--brand-primary); margin:1.5rem 0 1rem;">Clinical Uses:</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Hypertension</strong> (First line)</li>
+                            <li><strong>Kidney Stones</strong> (Calcium oxalate stones - because it reduces Ca²⁺ in urine)</li>
+                        </ul>
+
+                        <div style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:1.5rem; margin:1.5rem 0; border-radius:0.5rem;">
+                            <h4 style="color:#ef4444; margin-bottom:1rem;">⚠️ Adverse Effects ("Hyper GLUC"):</h4>
+                            <ul style="line-height:2.2; list-style:none; padding:0;">
+                                <li><strong>Hyper Glycemia</strong> (Inhibits insulin release - Caution in Diabetes)</li>
+                                <li><strong>Hyper Lipidemia</strong> (↑ LDL/Triglycerides)</li>
+                                <li><strong>Hyper Uricemia</strong> (Gout)</li>
+                                <li><strong>Hyper Calcemia</strong></li>
+                                <li><strong>Plus: Hypokalemia</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">4. POTASSIUM SPARING DIURETICS</h2>
+                        
+                        <h3 style="margin:1rem 0;">Types:</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Aldosterone Antagonists:</strong> Spironolactone, Eplerenone</li>
+                            <li><strong>Na⁺ Channel Blockers:</strong> Amiloride, Triamterene</li>
+                        </ul>
+
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem; margin:1.5rem 0;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:1rem;">Mechanism (Spironolactone):</h4>
+                            <p style="line-height:2;">Competes with Aldosterone in the Collecting Duct → prevents Na⁺ reabsorption and prevents K⁺ secretion.</p>
+                        </div>
+
+                        <h3 style="color:var(--brand-primary); margin:1.5rem 0 1rem;">Clinical Uses:</h3>
+                        <ul style="line-height:2;">
+                            <li>Used in combination with Loop/Thiazides to prevent Hypokalemia</li>
+                            <li>Heart Failure (Prevents remodeling)</li>
+                            <li>PCOS / Hirsutism (Anti-androgenic effect)</li>
+                        </ul>
+
+                        <div style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:1.5rem; margin:1.5rem 0; border-radius:0.5rem;">
+                            <h4 style="color:#ef4444; margin-bottom:1rem;">⚠️ Adverse Effects:</h4>
+                            <ul style="line-height:2.2; list-style:none; padding:0;">
+                                <li><strong>Hyperkalemia</strong> (Life threatening arrhythmia)</li>
+                                <li><strong>Gynecomastia</strong> (Spironolactone only - breast growth in men)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">5. OSMOTIC DIURETICS (Mannitol)</h2>
+                        
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem; margin:1rem 0;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:1rem;">Mechanism:</h4>
+                            <p style="line-height:2;">Pharmacologically inert. Stays in the tubule → increases osmotic pressure → holds water in the urine.</p>
+                        </div>
+
+                        <h3 style="color:var(--brand-primary); margin:1.5rem 0 1rem;">Clinical Uses:</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Cerebral Edema</strong> (Lowers Intracranial Pressure)</li>
+                            <li><strong>Acute Glaucoma</strong> (Lowers Intraocular Pressure)</li>
+                        </ul>
+
+                        <div style="background:rgba(239,68,68,0.1); padding:1rem; border-radius:0.5rem; margin:1.5rem 0;">
+                            <h4 style="margin-bottom:0.5rem;">Contraindication:</h4>
+                            <ul style="line-height:2;">
+                                <li>Heart Failure (Initially expands plasma volume → Pulmonary Edema)</li>
+                                <li>Anuria (Complete renal failure)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; background:rgba(245,158,11,0.1); border:2px solid #f59e0b;">
+                        <h2 style="color:#f59e0b; margin-bottom:1.5rem;">🦷 DENTAL IMPLICATIONS OF DIURETICS</h2>
+                        
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Xerostomia (Dry Mouth)</h3>
+                            <p style="line-height:1.8;">Common with all diuretics due to dehydration.</p>
+                            <p style="margin-top:0.5rem;"><strong>Management:</strong> Advise frequent water sips, sugar-free gum, fluoride varnish to prevent caries.</p>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Orthostatic Hypotension</h3>
+                            <p style="line-height:1.8;">Patient may faint if standing up too fast from the dental chair.</p>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">NSAID Interaction</h3>
+                            <p style="line-height:1.8;">NSAIDs (Ibuprofen) reduce the efficacy of Loop and Thiazide diuretics (Prostaglandins are needed for renal blood flow).</p>
+                            <p style="margin-top:0.5rem;"><strong>Tip:</strong> Use Paracetamol for pain if possible.</p>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Lichenoid Reaction</h3>
+                            <p style="line-height:1.8;">Thiazides can cause lichen planus-like lesions in the mouth.</p>
                         </div>
                     </div>
                 </div>
