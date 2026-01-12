@@ -1592,7 +1592,7 @@
                             <h3>Topic 3: Diuretics</h3>
                             <p>Loop, Thiazides, K+ Sparing, Osmotic</p>
                         </div>
-                        <div class="card">
+                        <div class="card" onclick="showPharmaNote('angina')" style="cursor:pointer;">
                             <span class="tag cyan">CV4</span>
                             <h3>Topic 4: Angina Pectoris</h3>
                             <p>Anti-anginal drugs and mechanisms</p>
@@ -1616,7 +1616,7 @@
                 </div>
 
                 <!-- TEACHING UNIT 2: GASTROINTESTINAL TRACT -->
-                <div style="margin-top:3rem;">
+                <div id="pharma-git-grid" style="margin-top:3rem;">
                     <h2 style="font-family:var(--font-display); margin-bottom:2rem; color:var(--brand-primary);">
                         🩺 TEACHING UNIT 2: GASTROINTESTINAL TRACT
                     </h2>
@@ -1640,7 +1640,7 @@
                 </div>
 
                 <!-- TEACHING UNIT 3: CNS & ENDOCRINE -->
-                <div style="margin-top:3rem;">
+                <div id="pharma-cns-grid" style="margin-top:3rem;">
                     <h2 style="font-family:var(--font-display); margin-bottom:2rem; color:var(--brand-primary);">
                         🧠 TEACHING UNIT 3: CNS & ENDOCRINE
                     </h2>
@@ -2243,6 +2243,204 @@
                         <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem;">
                             <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Lichenoid Reaction</h3>
                             <p style="line-height:1.8;">Thiazides can cause lichen planus-like lesions in the mouth.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ANGINA PECTORIS DETAIL VIEW -->
+                <div id="pharma-angina-detail" style="display:none;">
+                    <button onclick="closePharmaNote()" class="btn" style="margin-bottom: 2rem;">← Back to Topics</button>
+                    <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Angina Pectoris (Anti-Anginal Drugs)</h1>
+                    
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">1. THE BASICS: The O₂ Balance</h2>
+                        
+                        <div style="background:rgba(239,68,68,0.15); padding:1.5rem; border-radius:1rem; margin-bottom:1.5rem;">
+                            <h3 style="color:#ef4444; margin-bottom:1rem;">Definition</h3>
+                            <p style="margin-bottom:0.5rem; line-height:1.8;">Chest pain resulting from <strong>Ischemia</strong> (inadequate blood supply to the heart muscle).</p>
+                        </div>
+
+                        <div style="display:flex; flex-direction:column; gap:1rem; margin-bottom:1.5rem;">
+                            <div style="background:rgba(139,92,246,0.1); padding:1.5rem; border-radius:1rem; text-align:center;">
+                                <h3 style="color:#8b5cf6; margin-bottom:0.5rem;">The Problem</h3>
+                                <p style="font-size:1.2rem; font-weight:700;">Supply &lt; Demand</p>
+                            </div>
+                        </div>
+
+                        <h3 style="color:var(--brand-primary); margin:1.5rem 0 1rem;">The Goal of Therapy:</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Decrease Demand:</strong> Reduce Heart Rate, Contractility, or Wall Tension (Preload/Afterload).</li>
+                            <li><strong>Increase Supply:</strong> Dilate coronary arteries (difficult in calcified vessels).</li>
+                        </ul>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">2. TYPES OF ANGINA (Clinical Classification)</h2>
+                        
+                        <div style="overflow-x:auto;">
+                            <table style="width:100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background:rgba(139,92,246,0.1);">
+                                        <th style="padding:1rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Type</th>
+                                        <th style="padding:1rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Cause</th>
+                                        <th style="padding:1rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Description</th>
+                                        <th style="padding:1rem; text-align:left; border:1px solid rgba(255,255,255,0.1);">Drug of Choice</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                                        <td style="padding:1rem;"><strong>Stable Angina (Classic)</strong></td>
+                                        <td style="padding:1rem;">Atherosclerosis (Fixed narrowing)</td>
+                                        <td style="padding:1rem;">Pain on Exertion or Stress. Relieved by Rest.</td>
+                                        <td style="padding:1rem;">Nitrates, β-Blockers</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                                        <td style="padding:1rem;"><strong>Unstable Angina (Crescendo)</strong></td>
+                                        <td style="padding:1rem;">Ruptured Plaque + Platelet Aggregation</td>
+                                        <td style="padding:1rem;">Pain at Rest. Change in frequency/severity. Precursor to MI.</td>
+                                        <td style="padding:1rem;"><strong>Emergency!</strong> (Antiplatelets + Nitrates)</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding:1rem;"><strong>Variant Angina (Prinzmetal)</strong></td>
+                                        <td style="padding:1rem;">Coronary Vasospasm</td>
+                                        <td style="padding:1rem;">Occurs at rest (often at night). Unrelated to exertion.</td>
+                                        <td style="padding:1rem;">CCBs, Nitrates. <br><span style="color:#ef4444; font-size:0.9rem;">(β-Blockers are Contraindicated!)</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; margin-bottom:2rem;">
+                        <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">3. NITRATES (The Rescue Squad)</h2>
+                        
+                        <h3 style="color:#06b6d4; margin:1.5rem 0 1rem;">A. Classification</h3>
+                        <ul style="line-height:2;">
+                            <li><strong>Short Acting:</strong> Nitroglycerin (GTN).
+                                <ul style="list-style:disc; margin-left:2rem; color:var(--text-secondary);">
+                                    <li><strong>Route:</strong> Sublingual (SL) or Spray.</li>
+                                    <li><strong>Use:</strong> Acute attack (Emergency relief).</li>
+                                </ul>
+                            </li>
+                            <li style="margin-top:0.5rem;"><strong>Long Acting:</strong> Isosorbide Dinitrate, Isosorbide Mononitrate.
+                                <ul style="list-style:disc; margin-left:2rem; color:var(--text-secondary);">
+                                    <li><strong>Route:</strong> Oral (sustained release) or Transdermal Patch.</li>
+                                    <li><strong>Use:</strong> Prophylaxis (Prevention).</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <div style="background:rgba(139,92,246,0.05); padding:1.5rem; border-radius:1rem; margin:1.5rem 0;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:1rem;">B. Mechanism of Action (The "NO" Pathway)</h4>
+                            <ol style="line-height:2;">
+                                <li>Nitrates enter vascular smooth muscle cells.</li>
+                                <li>Converted to <strong>Nitric Oxide (NO)</strong> via enzymes (requires SH-groups).</li>
+                                <li>NO activates <strong>Guanylyl Cyclase</strong>.</li>
+                                <li>Increases <strong>cGMP</strong> (Cyclic Guanosine Monophosphate).</li>
+                                <li>cGMP causes dephosphorylation of Myosin Light Chain.</li>
+                                <li><strong>Result:</strong> Smooth Muscle Relaxation.</li>
+                            </ol>
+                        </div>
+
+                        <div style="background:rgba(34,197,94,0.1); padding:1.5rem; border-radius:1rem; margin:1.5rem 0;">
+                            <h4 style="color:#22c55e; margin-bottom:1rem;">C. Hemodynamic Effects</h4>
+                            <ul style="line-height:2;">
+                                <li><strong>Venodilation (Major Effect):</strong> Dilates veins → Blood pools in periphery → Less blood returns to heart (↓ Preload) → Heart works less.</li>
+                                <li><strong>Arteriolar Dilation (Minor Effect):</strong> Dilates arteries → ↓ Afterload.</li>
+                                <li><strong>Coronary Dilation:</strong> Relieves spasm (crucial for Variant Angina).</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin:1.5rem 0;">
+                            <h4 style="color:var(--brand-primary); margin-bottom:1rem;">D. Pharmacokinetics (Exam Favorite)</h4>
+                            <ul style="line-height:2;">
+                                <li><strong>High First-Pass Metabolism:</strong> Oral Nitroglycerin is almost 100% destroyed by the liver before reaching the heart.</li>
+                                <li style="margin-top:0.5rem;"><strong>Why Sublingual?</strong> Bypasses the liver (drains into SVC) → Rapid onset (1-2 mins).</li>
+                                <li style="margin-top:0.5rem;"><strong>Metabolism:</strong> Metabolized by Liver (Glucuronidation).</li>
+                            </ul>
+                        </div>
+
+                        <div style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:1.5rem; margin:1.5rem 0; border-radius:0.5rem;">
+                            <h4 style="color:#ef4444; margin-bottom:1rem;">E. Adverse Effects ⚠️ MNEMONIC: "HEAD"</h4>
+                            <ul style="line-height:2; list-style:none; padding:0;">
+                                <li><strong>H = Headache</strong> (Throbbing - due to meningeal vasodilation). Most common.</li>
+                                <li><strong>E = Edema</strong> (Ankle edema / Fluid retention).</li>
+                                <li><strong>A = Arterial dilation</strong> → Flushing (Face redness) & Hypotension.</li>
+                                <li><strong>D = Drag</strong> (Reflex Tachycardia - Heart beats faster to compensate for low BP).</li>
+                                <li style="margin-top:0.5rem; padding-top:0.5rem; border-top:1px solid rgba(239,68,68,0.2);"><strong>Methemoglobinemia:</strong> Rare. High doses oxidize Hemoglobin (Fe²⁺ → Fe³⁺). <br><em>Treatment: Methylene Blue or Vit C.</em></li>
+                            </ul>
+                        </div>
+
+                        <div style="background:rgba(245,158,11,0.1); padding:1.5rem; border-radius:1rem; margin:1.5rem 0;">
+                            <h4 style="color:#f59e0b; margin-bottom:1rem;">F. Tolerance (The "Monday Disease")</h4>
+                            <p style="line-height:1.8;">Continuous use depletes "SH-groups" needed to convert Nitrate to NO.</p>
+                            <p style="margin-top:0.5rem;"><strong>Solution:</strong> Nitrate-Free Interval. Remove patches at night (sleep 10-12 hours without drug) to restore sensitivity.</p>
+                        </div>
+
+                        <div style="background:rgba(239,68,68,0.2); border:2px solid #ef4444; padding:1.5rem; border-radius:1rem; margin:1.5rem 0;">
+                            <h3 style="color:#ef4444; margin-bottom:1rem;">🚫 G. Serious Interaction</h3>
+                            <h4 style="margin-bottom:0.5rem;">PDE-5 Inhibitors (Sildenafil/Viagra)</h4>
+                            <p style="line-height:1.8;">Both drugs increase cGMP. Combination causes <strong>Severe, Fatal Hypotension</strong>.</p>
+                            <p style="margin-top:1rem; font-weight:700;">Rule: Never prescribe Nitrates within 24-48 hours of Sildenafil.</p>
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; margin-bottom:2rem;">
+                        <div class="card" style="padding:2.5rem;">
+                            <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">4. BETA BLOCKERS (Prophylaxis)</h2>
+                            
+                            <p style="margin-bottom:1rem;"><strong>Drugs:</strong> Atenolol, Metoprolol.</p>
+                            
+                            <div style="background:rgba(34,197,94,0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1rem;">
+                                <p><strong>Role:</strong> Decrease Heart Rate & Contractility → Massive reduction in O₂ Demand.</p>
+                                <p style="margin-top:0.5rem;"><strong>Status:</strong> First-line for Stable Angina prophylaxis.</p>
+                            </div>
+
+                            <div style="background:rgba(239,68,68,0.1); padding:1rem; border-radius:0.5rem;">
+                                <p style="color:#ef4444; font-weight:700;">Contraindication: Variant Angina (Prinzmetal).</p>
+                                <p style="margin-top:0.5rem;"><strong>Why?</strong> Blocking β-receptors leaves α-receptors unopposed → Worsens coronary spasm.</p>
+                            </div>
+                        </div>
+
+                        <div class="card" style="padding:2.5rem;">
+                            <h2 style="color:var(--brand-primary); margin-bottom:1.5rem;">5. CALCIUM CHANNEL BLOCKERS (CCBs)</h2>
+                            
+                            <ul style="line-height:2; margin-bottom:1rem;">
+                                <li><strong>Heart rate slowing:</strong> Verapamil, Diltiazem.</li>
+                                <li><strong>Vasodilators:</strong> Nifedipine, Amlodipine.</li>
+                            </ul>
+                            
+                            <div style="background:rgba(139,92,246,0.1); padding:1rem; border-radius:0.5rem;">
+                                <p><strong>Role:</strong></p>
+                                <ul style="list-style:disc; margin-left:1.5rem;">
+                                    <li>Dilate Coronary Arteries (Treat Spasm).</li>
+                                    <li>Dilate Peripheral Arteries (↓ Afterload).</li>
+                                </ul>
+                                <p style="margin-top:0.5rem; font-weight:700;">Status: Drug of Choice for Variant Angina.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="padding:2.5rem; background:rgba(245,158,11,0.1); border:2px solid #f59e0b;">
+                        <h2 style="color:#f59e0b; margin-bottom:1.5rem;">🦷 DENTAL IMPLICATIONS (Angina Patient)</h2>
+                        
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Stress Reduction</h3>
+                            <p style="line-height:1.8;">Anxiety causes adrenaline release → increases heart workload → precipitates attack. Use Benzodiazepines (pre-medication) if needed.</p>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem; margin-bottom:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Emergency Management</h3>
+                            <p style="line-height:1.8;">Patient should bring their Nitroglycerin spray/tablets.</p>
+                            <ul style="line-height:1.8; margin-top:0.5rem;">
+                                <li><strong>If chest pain occurs:</strong> Stop procedure → Administer SL Nitroglycerin.</li>
+                                <li><strong>If pain persists &gt; 10 mins:</strong> Suspect MI → Call Ambulance.</li>
+                            </ul>
+                        </div>
+
+                        <div style="background:rgba(255,255,255,0.5); padding:1.5rem; border-radius:1rem;">
+                            <h3 style="color:var(--brand-primary); margin-bottom:1rem;">Orthostatic Hypotension</h3>
+                            <p style="line-height:1.8;">Common side effect of nitrates. Upright chair slowly.</p>
                         </div>
                     </div>
                 </div>
@@ -6471,6 +6669,37 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 console.error("Answer element not found next to button", button);
             }
+        }
+        // --- PHARMA LOGIC ---
+        function showPharmaNote(id) {
+            // 1. Hide All Grids
+            const grids = ['pharma-cv-grid', 'pharma-git-grid', 'pharma-cns-grid'];
+            grids.forEach(g => {
+                const el = document.getElementById(g);
+                if(el) el.style.display = 'none';
+            });
+
+            // 2. Show Target Detail
+            const detail = document.getElementById('pharma-' + id + '-detail');
+            if(detail) {
+                detail.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function closePharmaNote() {
+            // 1. Hide all Details
+            document.querySelectorAll('[id^="pharma-"][id$="-detail"]').forEach(el => {
+                el.style.display = 'none';
+            });
+
+            // 2. Show All Grids
+            const grids = ['pharma-cv-grid', 'pharma-git-grid', 'pharma-cns-grid'];
+            grids.forEach(g => {
+                const el = document.getElementById(g);
+                if(el) el.style.display = ''; 
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>
