@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STATISTICS: 60% EXAM MASTERY NOTES</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #f4f4f0;
+            --accent-color: #ff3366; /* High-alert neon pink/red for critical 60% weightage topics */
+            --accent-sec: #00ffcc; /* Neon cyan for secondary highlights */
+            --box-bg: #111111;
+            --border-heavy: 4px solid var(--accent-color);
+            --border-light: 1px solid #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 18px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: var(--border-heavy);
+            padding-bottom: 1.5rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent-sec);
+            text-transform: uppercase;
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5rem;
+        }
+
+        p { margin-bottom: 1rem; }
+
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        mark.red {
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: 800;
+            padding: 2px 6px;
+        }
+        
+        mark.cyan {
+            background-color: var(--accent-sec);
+            color: #000;
+            font-weight: 800;
+            padding: 2px 6px;
+        }
+
+        .formula-box {
+            background-color: #000;
+            border: 2px dashed var(--accent-sec);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .box {
+            background-color: var(--box-bg);
+            border-left: var(--border-heavy);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-top: var(--border-light);
+            border-right: var(--border-light);
+            border-bottom: var(--border-light);
+        }
+
+        /* Interactive Elements */
+        .interactive-section {
+            background-color: #1a1a1a;
+            border: 2px solid var(--accent-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        canvas {
+            background-color: #000;
+            border: 1px solid #444;
+            cursor: crosshair;
+            margin-top: 1rem;
+            box-shadow: 0 0 15px rgba(255, 51, 102, 0.2);
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin: 1rem 0;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .stat-readout {
+            font-family: monospace;
+            font-size: 1.3rem;
+            color: var(--accent-sec);
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>60% WEIGHTAGE: THE HEAVYWEIGHT CONCEPTS</h1>
+        <p><strong>FOCUS PROTOCOL:</strong> Chapter 3 (Grouped Data) & Chapter 4 (Two Variables). No external links. No distractions. Master the formulas. Manipulate the logic.</p>
+    </header>
+
+    <section>
+        <h2>CH 3: MEDIAN & MODE OF GROUPED DATA</h2>
+        
+        <div class="box">
+            <h3>1. The Median of Grouped Data</h3>
+            <p>You use this when data is in class intervals (e.g., 10-19, 20-29) and you need the exact middle value.</p>
+            <div class="formula-box">
+                Median = L₁ + [ (n/2 - Cfb) / fm ] * C
+            </div>
+            <ul>
+                <li><mark class="cyan">L₁</mark> = Lower class boundary of the median class.</li>
+                <li><mark class="cyan">n</mark> = Total frequency (sum of all f).</li>
+                <li><mark class="cyan">Cfb</mark> = Cumulative frequency of the class BEFORE the median class.</li>
+                <li><mark class="cyan">fm</mark> = Frequency of the median class itself.</li>
+                <li><mark class="cyan">C</mark> = Class size/width (Upper boundary - Lower boundary).</li>
+            </ul>
+            <p><strong>Step 1:</strong> Find the total frequency (n). Divide by 2 to find the median position.</p>
+            <p><strong>Step 2:</strong> Look at the Cumulative Frequency (Cf) column. Find the first class where Cf is greater than or equal to n/2. This is your <mark class="red">Median Class</mark>.</p>
+            <p><strong>Step 3:</strong> Plug the values from that class into the formula.</p>
+        </div>
+
+        <div class="box">
+            <h3>2. The Mode of Grouped Data</h3>
+            <p>The mode is the value that occurs most frequently. In grouped data, find the class with the highest frequency.</p>
+            <div class="formula-box">
+                Mode = L₁ + [ Δ₁ / (Δ₁ + Δ₂) ] * C
+            </div>
+            <ul>
+                <li><mark class="cyan">L₁</mark> = Lower class boundary of the modal class.</li>
+                <li><mark class="cyan">Δ₁ (Delta 1)</mark> = Frequency of Modal Class MINUS Frequency of the class BEFORE it.</li>
+                <li><mark class="cyan">Δ₂ (Delta 2)</mark> = Frequency of Modal Class MINUS Frequency of the class AFTER it.</li>
+                <li><mark class="cyan">C</mark> = Class width.</li>
+            </ul>
+            <p><strong>Step 1:</strong> Find the class with the highest frequency. This is your <mark class="red">Modal Class</mark>.</p>
+            <p><strong>Step 2:</strong> Calculate Δ₁ and Δ₂, then plug into the formula.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>CH 4: RELATION BETWEEN TWO VARIABLES</h2>
+
+        <div class="box">
+            <h3>1. Scatter Diagrams & Correlation (r)</h3>
+            <ul>
+                <li><strong>Explanatory Variable (X):</strong> Plotted on the horizontal axis. It explains the changes.</li>
+                <li><strong>Response Variable (Y):</strong> Plotted on the vertical axis. It is the outcome.</li>
+                <li><strong>Linear Correlation Coefficient <mark class="red">(r)</mark>:</strong> Measures the strength and direction of the linear relation between X and Y.</li>
+            </ul>
+            <p><strong>Properties of 'r':</strong></p>
+            <ul>
+                <li>It is always between -1 and 1 inclusive. [-1, 1]</li>
+                <li>If r = +1, a perfect positive linear relation exists.</li>
+                <li>If r = -1, a perfect negative linear relation exists.</li>
+                <li>If r is close to 0, little to no linear relation exists.</li>
+                <li><strong>CRITICAL:</strong> Correlation is NOT resistant to outliers. One extreme point can destroy 'r'.</li>
+                <li><strong>CRITICAL:</strong> Correlation does NOT imply causation. <mark class="cyan">Lurking variables</mark> (variables not measured in the study) might be causing the changes in both X and Y.</li>
+            </ul>
+        </div>
+
+        <div class="interactive-section">
+            <h3 style="border-bottom:none; color: var(--text-color);">INTERACTIVE DRILL: LEAST-SQUARES & CORRELATION</h3>
+            <p>Click on the black grid below to plot data points. Watch how the <mark class="red">Line of Best Fit</mark> and the <mark class="cyan">Correlation (r)</mark> react to your inputs. Plot an outlier far away from a cluster and watch it destroy the line!</p>
+            
+            <canvas id="scatterCanvas" width="800" height="400"></canvas>
+            <br>
+            <button onclick="clearCanvas()">Clear Data</button>
+            
+            <div class="stat-readout">
+                <span id="rValue">r = 0.00</span>
+                <span id="eqValue">ŷ = 0x + 0</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>2. The Least-Squares Regression Line</h3>
+            <p>This is the line that minimizes the sum of the squared errors (residuals). It is the "Line of Best Fit".</p>
+            <div class="formula-box">
+                ŷ = b₁x + b₀
+            </div>
+            <ul>
+                <li><mark class="cyan">ŷ (y-hat)</mark> = The PREDICTED value of y.</li>
+                <li><mark class="cyan">b₁ (Slope)</mark> =  r * (Sy / Sx). (Where Sy is std dev of y, Sx is std dev of x).</li>
+                <li><mark class="cyan">b₀ (Y-Intercept)</mark> = ȳ - b₁x̄. (Where ȳ is mean of y, x̄ is mean of x).</li>
+            </ul>
+            <p><strong>The Residual:</strong> The difference between the OBSERVED value (y) and the PREDICTED value (ŷ).</p>
+            <p>Formula: <mark class="red">Residual = y - ŷ</mark></p>
+        </div>
+
+        <div class="box">
+            <h3>3. Coefficient of Determination (R²)</h3>
+            <p>This tells you how much of the variance in your response variable (Y) is actually explained by your explanatory variable (X).</p>
+            <ul>
+                <li>If R² = 0.85, that means <mark class="red">85% of the variation</mark> in Y is explained by the least-squares regression line involving X.</li>
+                <li>R² is literally the square of the correlation coefficient (r) when dealing with simple linear regression. R² = (r)².</li>
+                <li>Range is 0 to 1 (or 0% to 100%).</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h3>4. Contingency Tables & Association</h3>
+            <p>Used to relate two QUALITATIVE (categorical) variables. Think of a grid.</p>
+            <ul>
+                <li><strong>Marginal Distribution:</strong> A frequency or relative frequency distribution of EITHER the row or column variable in the contingency table. It ignores the other variable. (Formula: Row Total / Grand Total).</li>
+                <li><strong>Conditional Distribution:</strong> Lists the relative frequency of each category of the response variable, GIVEN a specific category of the explanatory variable. (Formula: Cell Value / Row or Col Total).</li>
+                <li>If the conditional distributions are vastly different across categories, an <mark class="cyan">association</mark> exists between the two variables.</li>
+            </ul>
+        </div>
+    </section>
+
+    <script>
+        // --- INTERACTIVE SCATTER PLOT & REGRESSION ENGINE ---
+        const canvas = document.getElementById('scatterCanvas');
+        const ctx = canvas.getContext('2d');
+        const rDisplay = document.getElementById('rValue');
+        const eqDisplay = document.getElementById('eqValue');
+        
+        let points = [];
+
+        function drawGrid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#222';
+            ctx.lineWidth = 1;
+            for(let i = 0; i < canvas.width; i += 50) {
+                ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
+            }
+            for(let i = 0; i < canvas.height; i += 50) {
+                ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(canvas.width, i); ctx.stroke();
+            }
+        }
+
+        function drawPoints() {
+            ctx.fillStyle = '#00ffcc';
+            points.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 6, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        function calculateRegression() {
+            if (points.length < 2) {
+                rDisplay.innerText = "r = N/A (need 2+ points)";
+                eqDisplay.innerText = "ŷ = 0x + 0";
+                return;
+            }
+
+            let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0, sumYY = 0;
+            let n = points.length;
+
+            // Canvas coordinates: 0,0 is top left. We need to invert Y for math.
+            let mathPoints = points.map(p => ({ x: p.x, y: canvas.height - p.y }));
+
+            mathPoints.forEach(p => {
+                sumX += p.x;
+                sumY += p.y;
+                sumXY += p.x * p.y;
+                sumXX += p.x * p.x;
+                sumYY += p.y * p.y;
+            });
+
+            // Calculate r
+            let numerator = (n * sumXY) - (sumX * sumY);
+            let denom = Math.sqrt(((n * sumXX) - (sumX * sumX)) * ((n * sumYY) - (sumY * sumY)));
+            let r = denom === 0 ? 0 : numerator / denom;
+
+            // Calculate slope (b1) and intercept (b0)
+            let b1 = denom === 0 ? 0 : numerator / ((n * sumXX) - (sumX * sumX));
+            let b0 = (sumY - b1 * sumX) / n;
+
+            // Update UI
+            rDisplay.innerText = `r = ${r.toFixed(3)}`;
+            eqDisplay.innerText = `ŷ = ${b1.toFixed(2)}x + ${b0.toFixed(2)}`;
+
+            // Draw Line
+            drawRegressionLine(b1, b0);
+        }
+
+        function drawRegressionLine(b1, b0) {
+            ctx.strokeStyle = '#ff3366';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            // Calculate y for x=0 and x=canvas.width
+            let startYMath = b1 * 0 + b0;
+            let endYMath = b1 * canvas.width + b0;
+
+            // Convert math Y back to canvas Y
+            let startYCanvas = canvas.height - startYMath;
+            let endYCanvas = canvas.height - endYMath;
+
+            ctx.moveTo(0, startYCanvas);
+            ctx.lineTo(canvas.width, endYCanvas);
+            ctx.stroke();
+        }
+
+        function render() {
+            drawGrid();
+            drawPoints();
+            calculateRegression();
+        }
+
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            points.push({x, y});
+            render();
+        });
+
+        function clearCanvas() {
+            points = [];
+            render();
+        }
+
+        // Init
+        render();
+    </script>
+</body>
+</html>
