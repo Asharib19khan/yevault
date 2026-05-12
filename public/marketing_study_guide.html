@@ -1287,6 +1287,662 @@
             box-shadow: 0 0 20px rgba(225, 29, 72, 0.4);
         }
 
+        /* --- MAC OS FINALS THEME --- */
+        #business-maths.section-view {
+            padding: 0 !important;
+            margin: 0 !important;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M5.5 2.5L16.5 14L11.5 15L15 21.5L12 23L8.5 16.5L3.5 20V2.5Z' fill='black' stroke='white' stroke-width='1.5' stroke-linejoin='round'/></svg>"), auto;
+        }
+
+        .mac-os-desktop {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1622737133809-d95047b9e673?w=2000'); /* Dark Big Sur */
+            background-size: cover;
+            background-position: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border-radius: 1.5rem; 
+        }
+
+        .mac-menubar {
+            height: 28px;
+            min-height: 28px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            user-select: none;
+            z-index: 100;
+        }
+
+        .mac-menubar-item {
+            padding: 0 8px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            cursor: default;
+            border-radius: 4px;
+            transition: background 0.1s;
+        }
+        .mac-menubar-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .mac-menubar-left, .mac-menubar-right {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .mac-logo { margin-right: 8px; display:flex; align-items:center; }
+        .mac-logo svg {
+            fill: rgba(255,255,255,0.9);
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Dropdown menus */
+        .mac-dropdown-container {
+            position: relative;
+        }
+        .mac-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 5px;
+            min-width: 200px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 200;
+            color: #fff;
+        }
+        .mac-dropdown-container:hover .mac-dropdown-menu {
+            display: flex;
+        }
+        .mac-dropdown-item {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+        .mac-dropdown-item:hover {
+            background: #0a60ff; /* Mac blue selection */
+        }
+        .mac-dropdown-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 4px 0;
+        }
+
+        /* Music Dropdown Specific */
+        .mac-music-dropdown {
+            right: -50px;
+            left: auto;
+            min-width: 280px;
+            padding: 15px;
+            align-items: center;
+        }
+        .mac-music-controls {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .mac-music-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            transition: background 0.2s;
+        }
+        .mac-music-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .mac-desktop-area {
+            flex: 1;
+            position: relative;
+            padding: 20px;
+        }
+
+        .mac-folder {
+            position: absolute;
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            z-index: 10;
+        }
+
+        .mac-folder-icon {
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%2381d4fa" d="M10,30 L40,30 L50,45 L90,45 C95.5,45 100,49.5 100,55 L100,85 C100,90.5 95.5,95 90,95 L10,95 C4.5,95 0,90.5 0,85 L0,40 C0,34.5 4.5,30 10,30 Z"/><path fill="%2329b6f6" d="M10,20 L35,20 L45,35 L90,35 C95.5,35 100,39.5 100,45 L100,85 C100,90.5 95.5,95 90,95 L10,95 C4.5,95 0,90.5 0,85 L0,30 C0,24.5 4.5,20 10,20 Z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
+            transition: filter 0.1s;
+        }
+
+        .mac-folder.active .mac-folder-icon {
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4)) brightness(0.7);
+        }
+
+        .mac-folder-name {
+            margin-top: 4px;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .mac-folder.active .mac-folder-name {
+            background: #0058d0;
+            text-shadow: none;
+        }
+
+        /* MAC DOCK */
+        .mac-dock {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 12px;
+            border-radius: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+        }
+
+        .mac-dock-item {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), margin 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transform-origin: bottom;
+        }
+        .mac-dock-item:hover {
+            transform: scale(1.4) translateY(-5px);
+            margin: 0 12px;
+            z-index: 10;
+        }
+
+        .mac-dock-item.running::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+        }
+
+        .mac-dock-divider {
+            width: 1px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            margin: 0 5px;
+        }
+
+        /* FINDER WINDOW */
+        .mac-window {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Starts centered */
+            width: 600px;
+            height: 400px;
+            background: rgba(40, 40, 40, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            z-index: 100;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            cursor: auto;
+        }
+
+        .mac-window-header {
+            height: 28px;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            position: relative;
+            cursor: default;
+        }
+
+        .mac-window-controls {
+            display: flex;
+            gap: 8px;
+            position: absolute;
+            left: 12px;
+        }
+
+        .mac-window-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mac-close { background: #ff5f56; }
+        .mac-min { background: #ffbd2e; }
+        .mac-max { background: #27c93f; }
+        
+        .mac-window-btn:hover::before {
+            color: rgba(0,0,0,0.5);
+            font-size: 8px;
+            font-weight: bold;
+        }
+        .mac-close:hover::before { content: 'x'; }
+        .mac-min:hover::before { content: '-'; }
+        .mac-max:hover::before { content: '+'; }
+
+        .mac-window-title {
+            flex: 1;
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            font-size: 13px;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        .mac-window-body {
+            flex: 1;
+            display: flex;
+        }
+        .mac-sidebar {
+            width: 150px;
+            background: rgba(0,0,0,0.2);
+            border-right: 1px solid rgba(255,255,255,0.1);
+            padding: 10px;
+        }
+        .mac-sidebar-item {
+            padding: 6px 10px;
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+            border-radius: 6px;
+            margin-bottom: 2px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .mac-sidebar-item.active, .mac-sidebar-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        .mac-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            gap: 20px;
+            background: rgba(30, 30, 30, 0.4);
+        }
+
+        /* CONTEXT MENU */
+        .mac-context-menu {
+            position: absolute;
+            background: rgba(40, 40, 40, 0.85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 5px;
+            min-width: 220px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 9999;
+            color: #fff;
+            display: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 13px;
+        }
+        .ctx-item {
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .ctx-item:hover {
+            background: #0a60ff;
+        }
+        .ctx-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 4px 0;
+        }
+
+        /* CONTROL CENTER */
+        .mac-control-center {
+            position: absolute;
+            top: 36px;
+            right: 16px;
+            background: rgba(30, 30, 30, 0.75);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            width: 300px;
+            padding: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            z-index: 300;
+            color: #fff;
+            display: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .cc-row { display: flex; gap: 12px; }
+        .cc-module {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 12px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+        }
+        .cc-module:hover { background: rgba(255,255,255,0.05); }
+        .cc-slider { flex-direction: column; align-items: flex-start; gap: 8px; }
+        .cc-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            background: #0a60ff;
+        }
+        .slider-track {
+            width: 100%;
+            height: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .slider-fill { height: 100%; background: rgba(255,255,255,0.9); border-radius: 10px; }
+
+        /* LAUNCHPAD */
+        .mac-launchpad {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            z-index: 500;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .mac-launchpad.show {
+            display: flex;
+            opacity: 1;
+        }
+        .mac-launchpad-search { margin-bottom: 40px; }
+        .mac-launchpad-search input {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #fff;
+            width: 300px;
+            text-align: center;
+            outline: none;
+            font-size: 16px;
+        }
+        .mac-launchpad-search input::placeholder { color: rgba(255,255,255,0.5); }
+        .mac-launchpad-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px 60px;
+            max-width: 1000px;
+        }
+        .mac-app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .mac-app:hover { transform: scale(1.1); }
+        .mac-app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .mac-app-name {
+            color: #fff;
+            font-size: 13px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        }
+
+        /* GENIE ANIMATION */
+        @keyframes genie-down {
+            0% { transform: scale(1) translate(0, 0); opacity: 1; border-radius: 10px; }
+            50% { transform: scale(0.5) translate(0, 200px); opacity: 0.5; border-radius: 50%; }
+            100% { transform: scale(0) translate(0, 400px); opacity: 0; border-radius: 50%; display:none; }
+        }
+        @keyframes genie-up {
+            0% { transform: scale(0) translate(0, 400px); opacity: 0; border-radius: 50%; }
+            50% { transform: scale(0.5) translate(0, 200px); opacity: 0.5; border-radius: 50%; }
+            100% { transform: scale(1) translate(0, 0); opacity: 1; border-radius: 10px; }
+        }
+        .genie-minimize { animation: genie-down 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .genie-maximize { animation: genie-up 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+        /* GLASS MUSIC PLAYER */
+        .mac-music-island-trigger {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 40px;
+            z-index: 101;
+        }
+        .mac-glass-player {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 30px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+            z-index: 100;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .mac-music-island-trigger:hover + .mac-glass-player,
+        .mac-glass-player:hover {
+            top: 40px;
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .player-cover {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 2px 10px rgba(245, 87, 108, 0.4);
+            animation: spin 4s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .player-info { display: flex; flex-direction: column; }
+        .player-title { font-size: 13px; font-weight: 600; }
+        .player-artist { font-size: 11px; opacity: 0.6; }
+        .player-controls { display: flex; gap: 12px; align-items: center; margin-left: 10px; }
+        .player-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+            transition: 0.2s;
+        }
+        .player-btn:hover { opacity: 1; transform: scale(1.1); }
+
+        /* SPACE BROWSER - DARK WINE RED THEME */
+        .space-titlebar {
+            display: flex;
+            align-items: flex-end;
+            background: #2b0b14;
+            padding: 8px 8px 0 75px; /* 75px padding clears Mac window buttons */
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            position: relative;
+        }
+        .space-titlebar .mac-window-controls {
+            top: 15px;
+            left: 12px;
+            position: absolute;
+        }
+        .space-tabs {
+            display: flex;
+            flex: 1;
+            overflow-x: auto;
+            gap: 4px;
+        }
+        .space-tabs::-webkit-scrollbar { display: none; }
+        .space-tab {
+            background: #3d1420;
+            color: #ffdce6;
+            padding: 8px 16px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-size: 12px;
+            min-width: 120px;
+            max-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            border-right: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 0; /* Align to bottom */
+        }
+        .space-tab.active {
+            background: #501728;
+            color: #fff;
+            font-weight: 500;
+            border-bottom: none;
+        }
+        .space-tab-close {
+            width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-left: 10px; font-size: 10px;
+        }
+        .space-tab-close:hover { background: rgba(255,255,255,0.2); }
+        .space-new-tab {
+            background: transparent; color: #ffdce6; border: none; font-size: 18px; cursor: pointer; padding: 0 12px;
+        }
+        .space-new-tab:hover { color: #fff; }
+        .space-toolbar {
+            display: flex;
+            align-items: center;
+            background: #501728;
+            padding: 8px;
+            gap: 8px;
+            border-bottom: 1px solid #1a050b;
+        }
+        .space-nav-btn {
+            background: transparent; border: none; color: #ffdce6; font-size: 16px; cursor: pointer; border-radius: 4px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+        }
+        .space-nav-btn:hover { background: rgba(255,255,255,0.1); }
+        .space-url-container {
+            flex: 1; background: #2b0b14; border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; display: flex; align-items: center; padding: 2px 16px; overflow: hidden;
+        }
+        .space-url-bar {
+            flex: 1; background: transparent; border: none; color: #fff; outline: none; font-size: 13px; padding: 4px 0;
+        }
+        .space-url-bar::placeholder { color: #884b5b; }
+        .space-popout-btn {
+            background: transparent; border: none; color: #884b5b; cursor: pointer; font-size: 14px; margin-left: 8px;
+        }
+        .space-popout-btn:hover { color: #fff; }
+        .space-viewport {
+            flex: 1; background: #fff; position: relative; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; overflow: hidden;
+        }
+        .space-iframe {
+            position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: none; background: #fff;
+        }
+        .space-iframe.active { display: block; }
     </style>
 </head>
 
@@ -1300,6 +1956,8 @@
     <!-- SOUND -->
     <audio id="timerSound"
         src="data:audio/mp3;base64,SUQzBAAAAAABAFRYWFgAAAASAAADbWFqb3JfYnJhbmQAZGFzaABUWFhYAAAAEQAAA21pbm9yX3ZlcnNpb24AMABUWFhYAAAAHAAAA2NvbXBhdGlibGVfYnJhbmRzAGlzbzZtcDQxAFRTU0UAAAAPAAADTGF2ZjU5LjI3LjEwMAAAAAAAAAAAAAAA//uQZAAAAAAAALAAAADXAAAASAAAAAABAAiQAAJAJAAAlAz//uQZAAAAAAAALAAAADXAAAASAAAAAABAAiQAAJAJAAAlAz//uQZAAAAAAAALAAAADXAAAASAAAAAABAAiQAAJAJAAAlAz//uQZAAAAAAAALAAAADXAAAASAAAAAABAAiQAAJAJAAAlA=="></audio>
+    <!-- MAC BOOT SOUND -->
+    <audio id="mac-boot-sound" src="https://upload.wikimedia.org/wikipedia/commons/3/36/Apple_Mac_startup_chime.ogg"></audio>
 
     <!-- ENTRY PORTAL (The Minimalist Name Drop) -->
     <div id="entry-portal">
@@ -1323,12 +1981,11 @@
     <div class="app-layout" id="app">
         <aside class="sidebar" id="mainSidebar">
             <div class="brand-logo">YE <span>VAULT</span></div>
-            <div class="nav-item active" onclick="nav('dashboard', this)">All roads lead to Rome</div>
+            <div class="nav-item" onclick="nav('dashboard', this)">All roads lead to Rome</div>
             <div class="nav-item" onclick="nav('it-business', this)">IT in Business</div>
-            <div class="nav-item" onclick="nav('business-maths', this)">Business Maths</div>
+            <div class="nav-item active" onclick="nav('business-maths', this)">Finals</div>
             <div class="nav-item" onclick="nav('pakistan-studies', this)">Pakistan studies - BDS</div>
             <div class="nav-item" onclick="nav('pharma', this)">PHARMA</div>
-            <div class="nav-item" onclick="window.open('https://examseatingplan-five.vercel.app/', '_blank')">Exam Seating Plan</div>
 
 
 
@@ -1349,7 +2006,7 @@
         <main class="main-viewport">
 
             <!-- DASHBOARD -->
-            <section id="dashboard" class="section-view active" style="position:relative;">
+            <section id="dashboard" class="section-view" style="position:relative;">
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:2rem;">
                     <h1 style="font-family:var(--font-display); font-size:3rem; line-height:1.1;">Run the world,
                         <br><span id="user-display" style="color:var(--brand-primary);">Future CEO</span>.
@@ -1375,7 +2032,7 @@
                     style="margin-top:2rem; background:linear-gradient(145deg, rgba(24, 24, 27, 0.9), rgba(20, 20, 22, 0.95)); border:1px solid rgba(255,255,255,0.05);">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
                         <h2 style="font-family:var(--font-display); font-size:1.5rem;">Exam Schedule</h2>
-                        <span class="tag cyan" style="font-size:0.8rem; padding:0.4rem 1rem;">Finals 2025</span>
+                        <span class="tag cyan" style="font-size:0.8rem; padding:0.4rem 1rem;">Finals 2026</span>
                     </div>
                     <div style="overflow-x:auto;">
                         <table
@@ -1393,11 +2050,11 @@
                             <tbody>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
                                     <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
-                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 16</strong> <span
+                                            style="color:var(--text-primary); font-size:1.1rem;">May 19</strong> <span
                                             style="font-size:0.9rem; opacity:0.7;">Tue</span></td>
                                     <td data-label="Subject" style="padding:1.5rem;">
-                                        <div style="color:var(--text-primary); font-weight:600;">Islamic Studies</div>
-                                        <div style="font-size:0.85rem; opacity:0.6;">FSMSS1007 • Room 297</div>
+                                        <div style="color:var(--text-primary); font-weight:600;">Data Analysis for Business I</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">MG2008</div>
                                     </td>
                                     <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
                                     <td data-label="Time Left"
@@ -1408,12 +2065,11 @@
                                 </tr>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
                                     <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
-                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 18</strong> <span
-                                            style="font-size:0.9rem; opacity:0.7;">Thu</span></td>
+                                            style="color:var(--text-primary); font-size:1.1rem;">May 22</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Fri</span></td>
                                     <td data-label="Subject" style="padding:1.5rem;">
-                                        <div style="color:var(--text-primary); font-weight:600;">Fundamentals of
-                                            Accounting</div>
-                                        <div style="font-size:0.85rem; opacity:0.6;">AF1001 • Room 319</div>
+                                        <div style="color:var(--text-primary); font-weight:600;">Fundamentals of Management</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">MG1001</div>
                                     </td>
                                     <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
                                     <td data-label="Time Left"
@@ -1424,13 +2080,28 @@
                                 </tr>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
                                     <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
-                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 24</strong> <span
-                                            style="font-size:0.9rem; opacity:0.7;">Wed</span></td>
+                                            style="color:var(--text-primary); font-size:1.1rem;">Jun 01</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Mon</span></td>
                                     <td data-label="Subject" style="padding:1.5rem;">
-                                        <div style="color:var(--text-primary); font-weight:600;">English - I</div>
-                                        <div style="font-size:0.85rem; opacity:0.6;">SS1016 • Room 308</div>
+                                        <div style="color:var(--text-primary); font-weight:600;">Pakistan Studies</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;"></div>
                                     </td>
                                     <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
+                                    <td data-label="Time Left"
+                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
+                                        id="countdown-2">--</td>
+                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
+                                            style="opacity:0.3;">Upcoming</span></td>
+                                </tr>
+                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
+                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
+                                            style="color:var(--text-primary); font-size:1.1rem;">Jun 05</strong> <span
+                                            style="font-size:0.9rem; opacity:0.7;">Fri</span></td>
+                                    <td data-label="Subject" style="padding:1.5rem;">
+                                        <div style="color:var(--text-primary); font-weight:600;">Programming for Business</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">CS2016</div>
+                                    </td>
+                                    <td data-label="Time" style="padding:1.5rem;">12:30 - 03:30</td>
                                     <td data-label="Time Left"
                                         style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
                                         id="countdown-3">--</td>
@@ -1439,31 +2110,16 @@
                                 </tr>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
                                     <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
-                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 26</strong> <span
-                                            style="font-size:0.9rem; opacity:0.7;">Fri</span></td>
-                                    <td data-label="Subject" style="padding:1.5rem;">
-                                        <div style="color:var(--text-primary); font-weight:600;">IT in Business</div>
-                                        <div style="font-size:0.85rem; opacity:0.6;">CS1001 • Room 313</div>
-                                    </td>
-                                    <td data-label="Time" style="padding:1.5rem;">08:30 - 12:30</td>
-                                    <td data-label="Time Left"
-                                        style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
-                                        id="countdown-4">--</td>
-                                    <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
-                                            style="opacity:0.3;">Upcoming</span></td>
-                                </tr>
-                                <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
-                                    <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
-                                            style="color:var(--text-primary); font-size:1.1rem;">Dec 30</strong> <span
+                                            style="color:var(--text-primary); font-size:1.1rem;">Jun 09</strong> <span
                                             style="font-size:0.9rem; opacity:0.7;">Tue</span></td>
                                     <td data-label="Subject" style="padding:1.5rem;">
-                                        <div style="color:var(--text-primary); font-weight:600;">Business Math – I</div>
-                                        <div style="font-size:0.85rem; opacity:0.6;">MT1002 • Room 317</div>
+                                        <div style="color:var(--text-primary); font-weight:600;">English II</div>
+                                        <div style="font-size:0.85rem; opacity:0.6;">SS1006</div>
                                     </td>
                                     <td data-label="Time" style="padding:1.5rem;">09:00 - 12:00</td>
                                     <td data-label="Time Left"
                                         style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
-                                        id="countdown-5">--</td>
+                                        id="countdown-4">--</td>
                                     <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
                                             style="opacity:0.3;">Upcoming</span></td>
                                 </tr>
@@ -1475,12 +2131,204 @@
 
             <!-- IT IN BUSINESS SECTION -->
 
-            <!-- BUSINESS MATHS SECTION -->
-            <section id="business-maths" class="section-view">
-                <h1 style="font-family:var(--font-display); margin-bottom:2rem;">Business Maths Notes</h1>
-                <p style="color: var(--text-secondary); text-align: center; margin-top: 4rem;">
-                    Content coming soon...
-                </p>
+            <!-- FINALS MAC OS SECTION -->
+            <section id="business-maths" class="section-view active">
+                <div class="mac-os-desktop" id="macDesktop">
+                    <!-- Menu Bar -->
+                    <div class="mac-menubar">
+                        <div class="mac-menubar-left">
+                            <div class="mac-dropdown-container mac-menubar-item">
+                                <span class="mac-logo"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg></span>
+                                <div class="mac-dropdown-menu">
+                                    <div class="mac-dropdown-item">About This Mac</div>
+                                    <div class="mac-dropdown-divider"></div>
+                                    <div class="mac-dropdown-item">System Settings...</div>
+                                    <div class="mac-dropdown-item">App Store...</div>
+                                    <div class="mac-dropdown-divider"></div>
+                                    <div class="mac-dropdown-item" onclick="macSleep()">Sleep</div>
+                                    <div class="mac-dropdown-item" onclick="macRestart()">Restart...</div>
+                                    <div class="mac-dropdown-item" onclick="macShutDown()">Shut Down...</div>
+                                </div>
+                            </div>
+                            <span class="mac-menubar-item" style="font-weight:700;">Finder</span>
+                            <span class="mac-menubar-item">File</span>
+                            <span class="mac-menubar-item">Edit</span>
+                            <span class="mac-menubar-item">View</span>
+                            <span class="mac-menubar-item">Go</span>
+                            <span class="mac-menubar-item">Window</span>
+                            <span class="mac-menubar-item">Help</span>
+                        </div>
+                        <div class="mac-menubar-right">
+                            <div id="mac-status-area" style="display:flex; align-items:center; cursor:pointer;" onclick="toggleControlCenter(event)">
+                                <span class="mac-menubar-item" id="mac-battery">🔋 100%</span>
+                                <span class="mac-menubar-item">Wi-Fi</span>
+                                <span class="mac-menubar-item" id="mac-clock">Tue 9:41 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Desktop Area -->
+                    <div class="mac-desktop-area" id="macDesktopArea">
+                        <div class="mac-folder" style="top: 20px; right: 20px;" data-name="DAB">
+                            <div class="mac-folder-icon"></div>
+                            <div class="mac-folder-name">DAB</div>
+                        </div>
+                        <div class="mac-folder" style="top: 110px; right: 20px;" data-name="FOM">
+                            <div class="mac-folder-icon"></div>
+                            <div class="mac-folder-name">FOM</div>
+                        </div>
+                        <div class="mac-folder" style="top: 200px; right: 20px;" data-name="PST">
+                            <div class="mac-folder-icon"></div>
+                            <div class="mac-folder-name">PST</div>
+                        </div>
+                        <div class="mac-folder" style="top: 290px; right: 20px;" data-name="PB">
+                            <div class="mac-folder-icon"></div>
+                            <div class="mac-folder-name">PB</div>
+                        </div>
+                        <div class="mac-folder" style="top: 380px; right: 20px;" data-name="English">
+                            <div class="mac-folder-icon"></div>
+                            <div class="mac-folder-name">English</div>
+                        </div>
+                    </div>
+
+                    <!-- Glass Music Player -->
+                    <div class="mac-music-island-trigger"></div>
+                    <div class="mac-glass-player">
+                        <div class="player-cover"></div>
+                        <div class="player-info">
+                            <div class="player-title">Study Focus Mix</div>
+                            <div class="player-artist">Ye Vault</div>
+                        </div>
+                        <div class="player-controls">
+                            <button class="player-btn">⏮</button>
+                            <button class="player-btn" style="font-size: 20px;">⏯</button>
+                            <button class="player-btn">⏭</button>
+                        </div>
+                    </div>
+
+                    <!-- Finder Window -->
+                    <div class="mac-window" id="mac-finder-window">
+                        <div class="mac-window-header" id="mac-window-header">
+                            <div class="mac-window-controls">
+                                <div class="mac-window-btn mac-close" onclick="closeFinder()"></div>
+                                <div class="mac-window-btn mac-min" onclick="minimizeFinder()"></div>
+                                <div class="mac-window-btn mac-max" onclick="maximizeFinder()"></div>
+                            </div>
+                            <div class="mac-window-title" id="mac-finder-title">Finder</div>
+                        </div>
+                        <div class="mac-window-body">
+                            <div class="mac-content" id="mac-finder-content" style="background: rgba(30, 30, 30, 0.6);">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Space Browser App -->
+                    <div class="mac-window space-browser-window" id="mac-space-window" style="width: 900px; height: 600px; top: 10%; left: 10%; z-index: 105; display: none;">
+                        <div class="space-titlebar" id="mac-space-header">
+                            <div class="mac-window-controls">
+                                <div class="mac-window-btn mac-close" onclick="closeApp('mac-space-window')"></div>
+                                <div class="mac-window-btn mac-min" onclick="minimizeApp('mac-space-window')"></div>
+                                <div class="mac-window-btn mac-max" onclick="maximizeApp('mac-space-window')"></div>
+                            </div>
+                            <div class="space-tabs" id="space-tabs-container">
+                                <!-- Tabs will be injected here -->
+                            </div>
+                            <button class="space-new-tab" onclick="spaceAddTab()">+</button>
+                        </div>
+                        
+                        <div class="space-toolbar">
+                            <button class="space-nav-btn">←</button>
+                            <button class="space-nav-btn">→</button>
+                            <button class="space-nav-btn" onclick="document.getElementById('frame_'+activeSpaceTabId).src += ''">↻</button>
+                            <div class="space-url-container">
+                                <input type="text" class="space-url-bar" id="space-url-bar" placeholder="Search Google or type a URL" onkeydown="if(event.key==='Enter') spaceGo(this.value)">
+                                <button class="space-popout-btn" onclick="window.open(document.getElementById('space-url-bar').value, '_blank')" title="Open in real browser tab">⇱</button>
+                            </div>
+                        </div>
+                        
+                        <div class="space-viewport" id="space-viewports-container">
+                            <!-- Iframes will be injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Notes App -->
+                    <div class="mac-window" id="mac-notes-window" style="width: 600px; height: 450px; top: 15%; left: 15%; z-index: 106;">
+                        <div class="mac-window-header" id="mac-notes-header">
+                            <div class="mac-window-controls">
+                                <div class="mac-window-btn mac-close" onclick="closeApp('mac-notes-window')"></div>
+                                <div class="mac-window-btn mac-min" onclick="minimizeApp('mac-notes-window')"></div>
+                                <div class="mac-window-btn mac-max" onclick="maximizeApp('mac-notes-window')"></div>
+                            </div>
+                            <div class="mac-window-title">Notes</div>
+                        </div>
+                        <div class="mac-window-body" style="background:#2c2c2e; display:flex;">
+                            <div style="width:200px; background:#1c1c1e; border-right:1px solid #38383a; padding:10px;">
+                                <div style="color:#fff; font-weight:bold; font-size:18px; margin-bottom:10px;">Notes</div>
+                                <div style="padding:10px; background:#ffca28; color:#000; border-radius:6px; font-size:14px; font-weight:600;">Exam Ideas</div>
+                            </div>
+                            <div style="flex:1; padding:20px;">
+                                <div style="color:#aaa; font-size:12px; text-align:center; margin-bottom:20px;">May 12, 2026 at 11:22 AM</div>
+                                <textarea style="width:100%; height:90%; background:transparent; border:none; color:#fff; font-size:16px; outline:none; resize:none;" placeholder="Start typing..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Context Menu -->
+                    <div class="mac-context-menu" id="mac-context-menu">
+                        <div class="ctx-item" onclick="createNewFolder()">New Folder</div>
+                        <div class="ctx-divider"></div>
+                        <div class="ctx-item">Get Info</div>
+                        <div class="ctx-item" onclick="changeWallpaper()">Change Desktop Background...</div>
+                        <div class="ctx-divider"></div>
+                        <div class="ctx-item">Use Stacks</div>
+                    </div>
+
+                    <!-- Control Center -->
+                    <div class="mac-control-center" id="mac-control-center" onclick="event.stopPropagation()">
+                        <div class="cc-row">
+                            <div class="cc-module cc-connectivity">
+                                <div class="cc-icon blue">📶</div><div><b>Wi-Fi</b><br>yevault_5G</div>
+                            </div>
+                            <div class="cc-module cc-connectivity">
+                                <div class="cc-icon blue">🛜</div><div><b>Bluetooth</b><br>On</div>
+                            </div>
+                        </div>
+                        <div class="cc-row">
+                            <div class="cc-module cc-slider">
+                                <span>Display</span> <div class="slider-track"><div class="slider-fill" style="width:80%"></div></div>
+                            </div>
+                        </div>
+                        <div class="cc-row">
+                            <div class="cc-module cc-slider">
+                                <span>Sound</span> <div class="slider-track"><div class="slider-fill" style="width:50%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Launchpad Overlay -->
+                    <div class="mac-launchpad" id="mac-launchpad" onclick="toggleLaunchpad()">
+                        <div class="mac-launchpad-search" onclick="event.stopPropagation()"><input type="text" placeholder="Search" /></div>
+                        <div class="mac-launchpad-grid" onclick="event.stopPropagation()">
+                            <div class="mac-app"><div class="mac-app-icon" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/7/71/Safari_14_icon.png');"></div><div class="mac-app-name">Safari</div></div>
+                            <div class="mac-app"><div class="mac-app-icon" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/e/ea/Settings_%28iOS%29.png');"></div><div class="mac-app-name">Settings</div></div>
+                            <div class="mac-app"><div class="mac-app-icon" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/c/c2/Messages_%28Mac%29.png');"></div><div class="mac-app-name">Messages</div></div>
+                            <div class="mac-app"><div class="mac-app-icon" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/4/4b/Apple_Mail.png');"></div><div class="mac-app-name">Mail</div></div>
+                        </div>
+                    </div>
+
+                    <!-- Mac Dock -->
+                    <div class="mac-dock">
+                        <div class="mac-dock-item running" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c9/Finder_Icon_macOS_Big_Sur.png');"></div>
+                        <div class="mac-dock-item" onclick="toggleLaunchpad()" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/d/d0/Launchpad_Icon_macOS_Big_Sur.png');"></div>
+                        <div class="mac-dock-item" onclick="openApp('mac-space-window')" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%232b0b14%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%23ffb3c6%22 stroke-width=%224%22/><circle cx=%2250%22 cy=%2220%22 r=%226%22 fill=%22%23ffb3c6%22/></svg>');"></div>
+                        <div class="mac-dock-item" onclick="openApp('mac-notes-window')" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/43/Notes_Icon_macOS_Big_Sur.png');"></div>
+                        <div class="mac-dock-divider"></div>
+                        <div class="mac-dock-item" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Trash_Icon_macOS_Big_Sur.png/1024px-Trash_Icon_macOS_Big_Sur.png');"></div>
+                    </div>
+
+                    <!-- Black Screen (Sleep/Shut Down) -->
+                    <div id="mac-black-screen" style="position:absolute; inset:0; background:#000; z-index:99999; opacity:0; pointer-events:none; transition:opacity 0.5s;"></div>
+                </div>
             </section>
 
             <!-- IT IN BUSINESS SECTION -->
@@ -6931,23 +7779,38 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- EXAM COUNTDOWN ---
         function updateExamCountdown() {
             const exams = [
-                { date: '2025-12-16', id: 'countdown-0' },
-                { date: '2025-12-18', id: 'countdown-1' },
-                { date: '2025-12-22', id: 'countdown-2' },
-                { date: '2025-12-24', id: 'countdown-3' },
-                { date: '2025-12-26', id: 'countdown-4' },
-                { date: '2025-12-30', id: 'countdown-5' }
+                { date: '2026-05-19T23:59:59', id: 'countdown-0' },
+                { date: '2026-05-22T23:59:59', id: 'countdown-1' },
+                { date: '2026-06-01T23:59:59', id: 'countdown-2' },
+                { date: '2026-06-05T23:59:59', id: 'countdown-3' },
+                { date: '2026-06-09T23:59:59', id: 'countdown-4' }
             ];
 
             const now = new Date();
-
-            exams.forEach(ex => {
+            
+            // Find the nearest upcoming exam
+            let nearestIdx = -1;
+            let minDiff = Infinity;
+            exams.forEach((ex, idx) => {
                 const target = new Date(ex.date);
                 const diffTime = target - now;
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                if (diffTime >= 0 && diffTime < minDiff) {
+                    minDiff = diffTime;
+                    nearestIdx = idx;
+                }
+            });
+
+            exams.forEach((ex, idx) => {
+                const target = new Date(ex.date);
+                // Calculate days remaining (using start of day for accurate day count)
+                const targetStart = new Date(target.getFullYear(), target.getMonth(), target.getDate());
+                const nowStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const diffDays = Math.ceil((targetStart - nowStart) / (1000 * 60 * 60 * 24));
 
                 const el = document.getElementById(ex.id);
                 if (el) {
+                    const row = el.parentElement;
+
                     // Update Time Left
                     if (diffDays > 0) el.innerText = `${diffDays} Days`;
                     else if (diffDays === 0) el.innerText = "Today!";
@@ -6959,11 +7822,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (diffDays < 0) {
                             statusCell.innerHTML = `<span style="color:#ef4444; font-weight:bold; opacity:1;">Passed</span>`;
                             el.style.color = "#64748b"; // Dim the 'Done' text
-                        } else if (diffDays === 0) {
-                            statusCell.innerHTML = `<span style="color:#10b981; font-weight:bold; opacity:1;">Active</span>`;
+                            row.style.opacity = '0.3';
+                            row.style.background = 'rgba(255,255,255,0.01)';
+                            row.style.boxShadow = 'none';
+                        } else if (idx === nearestIdx) {
+                            statusCell.innerHTML = `<span style="color:#10b981; font-weight:bold; opacity:1;">Next Paper</span>`;
                             el.style.color = "#10b981";
+                            row.style.opacity = '1';
+                            row.style.background = 'rgba(16, 185, 129, 0.15)'; // Highlighted
+                            row.style.boxShadow = 'inset 4px 0 0 #10b981';
                         } else {
-                            statusCell.innerHTML = `<span style="opacity:0.3;">Upcoming</span>`;
+                            statusCell.innerHTML = `<span style="opacity:0.5;">Upcoming</span>`;
+                            el.style.color = "var(--brand-glow)";
+                            row.style.opacity = '0.4'; // Dim for future ones
+                            row.style.background = 'rgba(255,255,255,0.02)';
+                            row.style.boxShadow = 'none';
                         }
                     }
                 }
@@ -7074,6 +7947,447 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // --- MAC OS DESKTOP LOGIC ---
+        function initMacDesktop() {
+            const folders = document.querySelectorAll('.mac-folder');
+            
+            // Selection logic
+            folders.forEach(f => {
+                f.addEventListener('mousedown', (e) => {
+                    // Deselect others
+                    folders.forEach(other => other.classList.remove('active'));
+                    f.classList.add('active');
+                });
+            });
+
+            document.getElementById('macDesktopArea')?.addEventListener('mousedown', (e) => {
+                if(e.target.id === 'macDesktopArea') {
+                    folders.forEach(f => f.classList.remove('active'));
+                }
+            });
+
+            // Drag Logic
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
+            let activeItem = null;
+
+            folders.forEach(item => {
+                item.addEventListener("mousedown", dragStart, false);
+            });
+
+            document.addEventListener("mouseup", dragEnd, false);
+            document.addEventListener("mousemove", drag, false);
+
+            function dragStart(e) {
+                activeItem = e.currentTarget;
+                if (!activeItem.classList.contains('mac-folder')) return;
+
+                if (!activeItem.dataset.initialized) {
+                    const rect = activeItem.getBoundingClientRect();
+                    const parentRect = document.getElementById('macDesktopArea').getBoundingClientRect();
+                    xOffset = rect.left - parentRect.left;
+                    yOffset = rect.top - parentRect.top;
+                    activeItem.style.right = 'auto';
+                    activeItem.style.left = xOffset + 'px';
+                    activeItem.dataset.initialized = 'true';
+                } else {
+                    xOffset = parseFloat(activeItem.style.left) || 0;
+                    yOffset = parseFloat(activeItem.style.top) || 0;
+                }
+
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+
+                isDragging = true;
+                folders.forEach(f => f.style.zIndex = '10');
+                activeItem.style.zIndex = '20';
+            }
+
+            function dragEnd(e) {
+                isDragging = false;
+                activeItem = null;
+            }
+
+            function drag(e) {
+                if (isDragging && activeItem) {
+                    e.preventDefault();
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                    
+                    if(currentX < 0) currentX = 0;
+                    if(currentY < 0) currentY = 0;
+
+                    setTranslate(currentX, currentY, activeItem);
+                }
+            }
+
+            function setTranslate(xPos, yPos, el) {
+                el.style.left = xPos + "px";
+                el.style.top = yPos + "px";
+            }
+            
+            // Mac Clock & Battery
+            setInterval(() => {
+                const now = new Date();
+                const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                const timeString = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+                const clk = document.getElementById('mac-clock');
+                if(clk) clk.innerText = days[now.getDay()] + ' ' + timeString;
+            }, 1000);
+
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    function updateBattery() {
+                        const level = Math.round(battery.level * 100);
+                        const isCharging = battery.charging ? '⚡' : '🔋';
+                        const batEl = document.getElementById('mac-battery');
+                        if (batEl) batEl.innerText = isCharging + ' ' + level + '%';
+                    }
+                    updateBattery();
+                    battery.addEventListener('levelchange', updateBattery);
+                    battery.addEventListener('chargingchange', updateBattery);
+                });
+            }
+
+            // Finder Window Logic
+            folders.forEach(f => {
+                f.addEventListener('dblclick', (e) => {
+                    const name = f.dataset.name;
+                    openFinder(name);
+                });
+            });
+
+            window.openFinder = function(folderName) {
+                const win = document.getElementById('mac-finder-window');
+                const title = document.getElementById('mac-finder-title');
+                const content = document.getElementById('mac-finder-content');
+                
+                win.style.display = 'flex';
+                // Reset transform if previously dragged
+                win.style.transform = 'none';
+                win.classList.remove('genie-minimize');
+                win.classList.add('genie-maximize');
+                
+                title.innerText = folderName;
+                
+                if (folderName === 'DAB') {
+                    content.innerHTML = `
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px;" ondblclick="openFinder('mid 1')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px;"></div>
+                            <div class="mac-folder-name" style="font-size:11px;">mid 1</div>
+                        </div>
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px;" ondblclick="openFinder('mid 2')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px;"></div>
+                            <div class="mac-folder-name" style="font-size:11px;">mid 2</div>
+                        </div>
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px;" ondblclick="openFinder('Aissign + sol')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px;"></div>
+                            <div class="mac-folder-name" style="font-size:11px; white-space:normal; text-align:center;">Aissign + sol</div>
+                        </div>
+                    `;
+                } else if (folderName === 'mid 1') {
+                    content.innerHTML = `
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/DAB_MID_1.html', 'DAB_MID_1.html')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 100\\'><path fill=\\'%23ffffff\\' d=\\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\\' opacity=\\'0.8\\'/><path fill=\\'%234285F4\\' d=\\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\\'/></svg>');"></div>
+                            <div class="mac-folder-name" style="font-size:11px;">DAB_MID_1.html</div>
+                        </div>
+                    `;
+                } else {
+                    content.innerHTML = '';
+                }
+            };
+
+            window.closeFinder = function() {
+                document.getElementById('mac-finder-window').style.display = 'none';
+            };
+
+            // Make ALL headers draggable
+            const makeDraggable = (headerId, winId) => {
+                const winHeader = document.getElementById(headerId);
+                const win = document.getElementById(winId);
+                if(!winHeader || !win) return;
+                
+                let isWinDragging = false;
+                let winInitialX, winInitialY;
+
+                winHeader.addEventListener('mousedown', (e) => {
+                    if(e.target.classList.contains('mac-window-btn')) return;
+                    isWinDragging = true;
+                    const rect = win.getBoundingClientRect();
+                    const parentRect = document.getElementById('macDesktop').getBoundingClientRect();
+                    
+                    winInitialX = e.clientX - (rect.left - parentRect.left);
+                    winInitialY = e.clientY - (rect.top - parentRect.top);
+                    win.style.zIndex = '150';
+                });
+                document.addEventListener('mouseup', () => {
+                    isWinDragging = false;
+                    win.style.zIndex = '100';
+                });
+                document.addEventListener('mousemove', (e) => {
+                    if(isWinDragging) {
+                        win.style.transform = 'none'; 
+                        win.style.left = (e.clientX - winInitialX) + 'px';
+                        win.style.top = (e.clientY - winInitialY) + 'px';
+                    }
+                });
+            };
+            
+            makeDraggable('mac-window-header', 'mac-finder-window');
+            makeDraggable('mac-safari-header', 'mac-safari-window');
+            makeDraggable('mac-notes-header', 'mac-notes-window');
+
+            // Genie Animation
+            window.minimizeFinder = function() {
+                const win = document.getElementById('mac-finder-window');
+                win.classList.remove('genie-maximize');
+                win.classList.add('genie-minimize');
+                setTimeout(() => {
+                    win.style.display = 'none';
+                }, 400);
+            };
+
+            // Launchpad Toggle
+            window.toggleLaunchpad = function() {
+                const lp = document.getElementById('mac-launchpad');
+                if(lp.classList.contains('show')) {
+                    lp.classList.remove('show');
+                } else {
+                    lp.classList.add('show');
+                }
+            };
+
+            // Control Center Toggle
+            window.toggleControlCenter = function(e) {
+                if(e) e.stopPropagation();
+                const cc = document.getElementById('mac-control-center');
+                if(cc.style.display === 'flex') {
+                    cc.style.display = 'none';
+                } else {
+                    cc.style.display = 'flex';
+                }
+            };
+            document.addEventListener('click', () => {
+                const cc = document.getElementById('mac-control-center');
+                if(cc) cc.style.display = 'none';
+                
+                const ctxMenu = document.getElementById('mac-context-menu');
+                if(ctxMenu) ctxMenu.style.display = 'none';
+            });
+
+            // Context Menu
+            document.getElementById('macDesktopArea').addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                const ctxMenu = document.getElementById('mac-context-menu');
+                ctxMenu.style.display = 'block';
+                
+                const desktopRect = document.getElementById('macDesktop').getBoundingClientRect();
+                let x = e.clientX - desktopRect.left;
+                let y = e.clientY - desktopRect.top;
+                
+                if (x + ctxMenu.offsetWidth > desktopRect.width) x -= ctxMenu.offsetWidth;
+                if (y + ctxMenu.offsetHeight > desktopRect.height) y -= ctxMenu.offsetHeight;
+                
+                ctxMenu.style.left = x + 'px';
+                ctxMenu.style.top = y + 'px';
+            });
+
+            // Context Menu & Desktop Actions
+            window.createNewFolder = function() {
+                const area = document.getElementById('macDesktopArea');
+                const folder = document.createElement('div');
+                folder.className = 'mac-folder';
+                folder.style.top = Math.max(20, Math.random() * 400) + 'px';
+                folder.style.left = Math.max(20, Math.random() * 400) + 'px';
+                folder.dataset.name = "Untitled Folder";
+                folder.innerHTML = `<div class="mac-folder-icon"></div><div class="mac-folder-name">Untitled Folder</div>`;
+                folder.addEventListener('mousedown', dragStart, false);
+                folder.addEventListener('dblclick', () => openFinder("Untitled Folder"));
+                area.appendChild(folder);
+            };
+
+            const wallpapers = [
+                'https://images.unsplash.com/photo-1622737133809-d95047b9e673?w=2000',
+                'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564',
+                'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=2000',
+                'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=2000'
+            ];
+            let wpIdx = 0;
+            window.changeWallpaper = function() {
+                wpIdx = (wpIdx + 1) % wallpapers.length;
+                document.querySelector('.mac-os-desktop').style.backgroundImage = `url('${wallpapers[wpIdx]}')`;
+            };
+
+            // Sleep / Power
+            window.macSleep = function() {
+                const bs = document.getElementById('mac-black-screen');
+                bs.style.opacity = '1';
+                bs.style.pointerEvents = 'all';
+                setTimeout(() => {
+                    bs.onclick = () => {
+                        bs.style.opacity = '0';
+                        bs.style.pointerEvents = 'none';
+                    };
+                }, 1000);
+            };
+            window.macRestart = function() { location.reload(); };
+            window.macShutDown = function() {
+                document.getElementById('macDesktop').innerHTML = '';
+                document.getElementById('macDesktop').style.background = '#000';
+            };
+
+            // App Logic
+            window.openApp = function(id) {
+                const win = document.getElementById(id);
+                win.style.display = 'flex';
+                win.style.transform = 'none';
+                win.classList.remove('genie-minimize');
+                win.classList.add('genie-maximize');
+                win.style.zIndex = '150';
+            };
+            window.closeApp = function(id) { document.getElementById(id).style.display = 'none'; };
+            window.minimizeApp = function(id) {
+                const win = document.getElementById(id);
+                win.classList.remove('genie-maximize');
+                win.classList.add('genie-minimize');
+                setTimeout(() => win.style.display = 'none', 400);
+            };
+
+            let winStates = {};
+            window.maximizeApp = function(id) {
+                const win = document.getElementById(id);
+                if(!winStates[id]) winStates[id] = false;
+                
+                if(!winStates[id]) {
+                    win.dataset.oldLeft = win.style.left || '10%';
+                    win.dataset.oldTop = win.style.top || '10%';
+                    win.dataset.oldWidth = win.style.width || '800px';
+                    win.dataset.oldHeight = win.style.height || '500px';
+                    
+                    win.style.left = '0';
+                    win.style.top = '28px'; // under menu
+                    win.style.width = '100%';
+                    win.style.height = 'calc(100% - 28px)';
+                    win.style.borderRadius = '0';
+                    winStates[id] = true;
+                } else {
+                    win.style.left = win.dataset.oldLeft;
+                    win.style.top = win.dataset.oldTop;
+                    win.style.width = win.dataset.oldWidth;
+                    win.style.height = win.dataset.oldHeight;
+                    win.style.borderRadius = '10px';
+                    winStates[id] = false;
+                }
+            };
+            window.maximizeFinder = () => maximizeApp('mac-finder-window');
+
+            // Space Browser Logic
+            window.spaceTabs = [];
+            window.activeSpaceTabId = null;
+
+            window.spaceAddTab = function(url = 'https://www.google.com/search?igu=1', title = 'New Tab') {
+                const tabId = 'tab_' + Date.now();
+                spaceTabs.push({ id: tabId, url, title });
+                
+                const frame = document.createElement('iframe');
+                frame.className = 'space-iframe';
+                frame.id = 'frame_' + tabId;
+                frame.src = url;
+                document.getElementById('space-viewports-container').appendChild(frame);
+                
+                spaceSwitchTab(tabId);
+            };
+
+            window.spaceSwitchTab = function(tabId) {
+                activeSpaceTabId = tabId;
+                const tab = spaceTabs.find(t => t.id === tabId);
+                
+                document.querySelectorAll('.space-iframe').forEach(f => f.classList.remove('active'));
+                document.getElementById('frame_' + tabId).classList.add('active');
+                
+                document.getElementById('space-url-bar').value = tab.url;
+                renderSpaceTabs();
+            };
+
+            window.spaceCloseTab = function(e, tabId) {
+                e.stopPropagation();
+                spaceTabs = spaceTabs.filter(t => t.id !== tabId);
+                document.getElementById('frame_' + tabId).remove();
+                
+                if (spaceTabs.length === 0) {
+                    closeApp('mac-space-window');
+                    spaceAddTab(); // Ready for next open
+                } else if (activeSpaceTabId === tabId) {
+                    spaceSwitchTab(spaceTabs[spaceTabs.length - 1].id);
+                } else {
+                    renderSpaceTabs();
+                }
+            };
+
+            window.renderSpaceTabs = function() {
+                const container = document.getElementById('space-tabs-container');
+                container.innerHTML = '';
+                spaceTabs.forEach(tab => {
+                    const t = document.createElement('div');
+                    t.className = 'space-tab' + (tab.id === activeSpaceTabId ? ' active' : '');
+                    t.onclick = () => spaceSwitchTab(tab.id);
+                    t.innerHTML = `<span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${tab.title}</span> <div class="space-tab-close" onclick="spaceCloseTab(event, '${tab.id}')">✕</div>`;
+                    container.appendChild(t);
+                });
+            };
+
+            window.spaceGo = function(query) {
+                if(spaceTabs.length === 0) return;
+                const tab = spaceTabs.find(t => t.id === activeSpaceTabId);
+                let originalUrl = query;
+                let frameUrl = query;
+                
+                if(!originalUrl.startsWith('http')) {
+                    frameUrl = 'https://www.google.com/search?igu=1&q=' + encodeURIComponent(query);
+                    tab.title = query + ' - Google Search';
+                } else {
+                    tab.title = originalUrl;
+                    // Bypass X-Frame-Options for external websites by using corsproxy
+                    if(!originalUrl.includes('google.com/search') && !originalUrl.includes('localhost') && !originalUrl.includes('.pdf')) {
+                        frameUrl = 'https://corsproxy.io/?' + encodeURIComponent(originalUrl);
+                    }
+                }
+                
+                tab.url = originalUrl;
+                document.getElementById('frame_' + activeSpaceTabId).src = frameUrl;
+                document.getElementById('space-url-bar').value = originalUrl;
+                renderSpaceTabs();
+            };
+
+            window.openSpaceApp = function(url, title) {
+                openApp('mac-space-window');
+                spaceAddTab(url, title);
+            };
+
+            // Init first tab
+            setTimeout(() => {
+                spaceAddTab('https://www.google.com/search?igu=1', 'Google');
+                makeDraggable('mac-space-header', 'mac-space-window');
+            }, 100);
+
+            // Play Boot Sound
+            setTimeout(() => {
+                const snd = document.getElementById('mac-boot-sound');
+                if(snd) {
+                    snd.volume = 0.4;
+                    snd.play().catch(e => console.log('Autoplay blocked until interaction'));
+                }
+            }, 500);
+
+        }
+        
+        initMacDesktop();
     </script>
 </body>
 

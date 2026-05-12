@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STATISTICS: EXAM MASTERY NOTES V3</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #f4f4f0;
+            --accent-color: #d1ff27; /* Neon for hyper-focus */
+            --accent-dark: #b3db1e;
+            --box-bg: #151515;
+            --border-heavy: 4px solid var(--accent-color);
+            --border-light: 1px solid #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 18px; /* Optimized for reading */
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: var(--border-heavy);
+            padding-bottom: 1.5rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: var(--accent-color);
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            box-shadow: 6px 6px 0px 0px var(--text-color);
+        }
+
+        h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        p { margin-bottom: 1rem; }
+
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        mark {
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: 800;
+            padding: 0 6px;
+        }
+
+        .box {
+            background-color: var(--box-bg);
+            border-left: var(--border-heavy);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-top: var(--border-light);
+            border-right: var(--border-light);
+            border-bottom: var(--border-light);
+        }
+
+        /* YouTube Links */
+        .yt-link {
+            display: inline-block;
+            background-color: #ff0000;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 1rem;
+            border: 2px solid #ff0000;
+            transition: all 0.2s ease;
+        }
+
+        .yt-link:hover {
+            background-color: #000;
+            color: #ff0000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            background-color: #000;
+        }
+
+        th, td {
+            border: var(--border-light);
+            padding: 1rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Interactive Elements */
+        .interactive-section {
+            background-color: #222;
+            border: 2px dashed var(--accent-color);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .interactive-section h4 {
+            color: var(--text-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 0.8rem 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover { background-color: var(--accent-dark); }
+
+        .citation {
+            font-size: 0.85rem;
+            color: #888;
+            font-family: monospace;
+        }
+
+        /* Visualizers */
+        .graph-container {
+            display: flex;
+            align-items: flex-end;
+            height: 250px;
+            gap: 5px;
+            background-color: #111;
+            padding: 10px;
+            border: var(--border-light);
+        }
+
+        .bar {
+            flex-grow: 1;
+            background-color: var(--accent-color);
+            transition: height 0.4s ease;
+            height: 10%;
+        }
+
+        .population-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .person {
+            aspect-ratio: 1;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #888;
+            transition: all 0.3s;
+        }
+
+        .person.selected {
+            background-color: var(--accent-color);
+            color: black;
+            transform: scale(1.1);
+        }
+
+        .person.group-a { border-bottom: 4px solid #ff4444; }
+        .person.group-b { border-bottom: 4px solid #4444ff; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Statistics Blueprint</h1>
+        <p><strong>MISSION:</strong> 100% Exam Readiness. Brutalist structure. Zero clutter. Follow the drills.</p>
+    </header>
+
+    <section>
+        <h2>SECTION 1: DATA COLLECTION</h2>
+        
+        <div class="box">
+            <h3>1. The Process of Statistics</h3>
+            <ul>
+                <li><mark>Statistics</mark> is the science of collecting, organizing, summarizing, and analyzing information to draw conclusions or answer questions.</li>
+                <li>Data are facts used to draw conclusions, and a key aspect is that data <mark>vary</mark>.</li>
+                <li><strong>The 4 Steps:</strong> 
+                    1. Identify the research objective. 
+                    2. Collect the data. 
+                    3. Describe the data (Descriptive Statistics). 
+                    4. Perform inference to extend results to a population (Inferential Statistics).
+                </li>
+                <li><strong>Population vs Sample:</strong> Population is the entire group; a sample is a subset.</li>
+                <li><strong>Parameter vs Statistic:</strong> A parameter summarizes a population; a statistic summarizes a sample.</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h3>2. Variables & Levels of Measurement</h3>
+            <ul>
+                <li><strong>Qualitative:</strong> Classifies individuals based on attributes (e.g., Gender).</li>
+                <li><strong>Quantitative:</strong> Numerical measures where math operations are meaningful. Can be <strong>Discrete</strong> (finite/countable) or <strong>Continuous</strong> (infinite/measured).</li>
+            </ul>
+            <p><strong>Levels of Measurement:</strong></p>
+            <ul>
+                <li><mark>Nominal:</mark> Names/labels only. No ranking.</li>
+                <li><mark>Ordinal:</mark> Can be ranked, but differences mean nothing.</li>
+                <li><mark>Interval:</mark> Differences have meaning, but zero does NOT mean absence (e.g., Temperature).</li>
+                <li><mark>Ratio:</mark> Ratios have meaning, and zero means true absence.</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h3>3. Observational Studies vs. Experiments</h3>
+            <ul>
+                <li><strong>Observational Study:</strong> Measures response variables without trying to influence outcomes. Can only claim association, not causation. 
+                    Types include <strong>Cross-sectional</strong> (specific point in time), <strong>Case-control</strong> (retrospective), and <strong>Cohort</strong> (prospective/over time).
+                </li>
+                <li><strong>Designed Experiment:</strong> Researcher assigns groups, intentionally changes the explanatory variable, and records responses.</li>
+                <li><mark>Confounding:</mark> When effects of two or more explanatory variables are not separated.</li>
+                <li><mark>Lurking Variable:</mark> An unaccounted variable that affects the response.</li>
+            </ul>
+            <a href="https://www.youtube.com/watch?v=L36VM5jGWic" class="yt-link" target="_blank">🎥 WATCH: Matched Pair Design & Experiments</a>
+        </div>
+
+        <div class="box">
+            <h3>4. Sampling & Bias</h3>
+            <ul>
+                <li><strong>Simple Random Sample (SRS):</strong> Every sample of size <i>n</i> has an equally likely chance of occurring.</li>
+                <li><strong>Stratified Sample:</strong> Population is divided into nonoverlapping groups (strata), and an SRS is drawn from each.</li>
+                <li><strong>Systematic Sample:</strong> Selecting every <i>k</i>th individual.</li>
+                <li><strong>Cluster Sample:</strong> Selecting all individuals within a randomly selected group.</li>
+                <li><strong>Multistage Sampling:</strong> A combination of techniques (e.g., Nielsen ratings).</li>
+                <li><strong>Census:</strong> A list of all individuals in a population. <strong>Web Scraping:</strong> Extracting data from the internet.</li>
+            </ul>
+
+            <div class="interactive-section">
+                <h4>Interactive Drill: Sampling Methods</h4>
+                <p>Red lines = Stratum A. Blue lines = Stratum B. Click to simulate sampling mechanics.</p>
+                <div class="btn-group">
+                    <button onclick="resetPopulation()">Reset Grid</button>
+                    <button onclick="simpleRandomSample()">SRS (n=10)</button>
+                    <button onclick="stratifiedSample()">Stratified (5 Red, 5 Blue)</button>
+                    <button onclick="systematicSample()">Systematic (Every 5th)</button>
+                </div>
+                <div class="population-grid" id="popGrid"></div>
+                <p id="sampleLog" style="margin-top: 15px; font-family: monospace; color: var(--accent-color);"></p>
+            </div>
+            
+            <p><strong>Errors & Bias:</strong></p>
+            <ul>
+                <li><strong>Sampling Error:</strong> Error resulting from using a sample to estimate a population.</li>
+                <li><strong>Nonsampling Error:</strong> Errors from sampling bias, nonresponse bias, response bias, or data entry error.</li>
+            </ul>
+            <a href="https://www.youtube.com/watch?v=_N0M0LrxFYk" class="yt-link" target="_blank">🎥 WATCH: Cluster vs. Stratified Sampling</a>
+        </div>
+    </section>
+
+    <section>
+        <h2>SECTION 2: ORGANIZING DATA</h2>
+
+        <div class="box">
+            <h3>1. Qualitative vs Quantitative Organization</h3>
+            <ul>
+                <li><strong>Qualitative:</strong> Use frequency distributions, relative frequencies, bar graphs (bars don't touch), Pareto charts (bars in decreasing order), or Pie charts (area is proportional to frequency).</li>
+                <li><strong>Quantitative:</strong> If continuous or large discrete, create <mark>Classes</mark> using intervals.</li>
+                <li><mark>Class Width:</mark> The difference between consecutive lower class limits.</li>
+                <li>Use Histograms (bars touch), Dot Plots, or Time-Series plots (data over time connected by lines).</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h3>2. Shapes of Distributions & Misleading Graphs</h3>
+            <ul>
+                <li><strong>Uniform:</strong> Frequencies are evenly spread out.</li>
+                <li><strong>Bell-shaped:</strong> Highest frequency in the middle, tailing off symmetrically.</li>
+                <li><strong>Skewed Right:</strong> Tail to the right is longer.</li>
+                <li><strong>Skewed Left:</strong> Tail to the left is longer.</li>
+                <li><strong>Misleading Graphs:</strong> Inconsistent scales, misplaced origin, 3D effects, or severe clutter.</li>
+            </ul>
+
+            <div class="interactive-section">
+                <h4>Interactive Drill: Distribution Shapes</h4>
+                <div class="btn-group">
+                    <button onclick="changeShape('bell')">Bell-Shaped</button>
+                    <button onclick="changeShape('skewRight')">Skewed Right</button>
+                    <button onclick="changeShape('skewLeft')">Skewed Left</button>
+                    <button onclick="changeShape('uniform')">Uniform</button>
+                </div>
+                <div class="graph-container" id="graph"></div>
+                <p id="shapeLog" style="margin-top: 15px; font-weight: bold; color: var(--accent-color);">Current Shape: Bell-Shaped</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>SECTION 3: OGIVES & POLYGONS</h2>
+
+        <div class="box">
+            <h3>1. Cumulative Distributions</h3>
+            <ul>
+                <li><strong>Relative Frequency:</strong> Comparing relative instead of absolute frequencies allows for comparing data from different sizes of samples.</li>
+                <li><strong>Frequency Polygon:</strong> Uses midpoints on the horizontal axis connected by straight lines. Add empty classes at ends to anchor to the axis.</li>
+                <li><strong>Ogives:</strong> A graph of a <mark>cumulative frequency distribution</mark>.</li>
+                <li>For a "less-than" ogive, plot points showing the number of items with less value than the axis marker; the line slopes up and to the right.</li>
+                <li><strong>Estimating the middle:</strong> Draw a horizontal line from 0.50 on a relative frequency ogive to the curve, drop down to the X-axis, and you can approximate the middle value of the original data.</li>
+            </ul>
+            <a href="https://www.youtube.com/watch?v=mwPh4Q6nl3E" class="yt-link" target="_blank">🎥 WATCH: How to Make an Ogive Graph By Hand</a>
+        </div>
+    </section>
+
+    <script>
+        // --- SAMPLING VISUALIZER LOGIC ---
+        const popGrid = document.getElementById('popGrid');
+        const sampleLog = document.getElementById('sampleLog');
+        const totalPopulation = 50;
+
+        function initPopulation() {
+            popGrid.innerHTML = '';
+            for (let i = 1; i <= totalPopulation; i++) {
+                let div = document.createElement('div');
+                div.className = 'person';
+                div.id = 'person-' + i;
+                div.innerText = i;
+                if(i <= 25) div.classList.add('group-a');
+                else div.classList.add('group-b');
+                popGrid.appendChild(div);
+            }
+        }
+
+        function clearSelection() {
+            const people = document.querySelectorAll('.person');
+            people.forEach(p => p.classList.remove('selected'));
+        }
+
+        function resetPopulation() {
+            clearSelection();
+            sampleLog.innerText = "System reset. 50 individuals. Red = Stratum A. Blue = Stratum B.";
+        }
+
+        function simpleRandomSample() {
+            clearSelection();
+            let selected = new Set();
+            while(selected.size < 10) {
+                let randomNum = Math.floor(Math.random() * totalPopulation) + 1;
+                selected.add(randomNum);
+            }
+            selected.forEach(num => document.getElementById('person-' + num).classList.add('selected'));
+            sampleLog.innerText = `SRS executed: 10 purely random selections.`;
+        }
+
+        function stratifiedSample() {
+            clearSelection();
+            let selected = new Set();
+            while(selected.size < 5) { selected.add(Math.floor(Math.random() * 25) + 1); }
+            while(selected.size < 10) { selected.add(Math.floor(Math.random() * 25) + 26); }
+            selected.forEach(num => document.getElementById('person-' + num).classList.add('selected'));
+            sampleLog.innerText = `Stratified executed: 5 drawn from Red, 5 drawn from Blue.`;
+        }
+
+        function systematicSample() {
+            clearSelection();
+            let start = Math.floor(Math.random() * 5) + 1;
+            for(let i = start; i <= totalPopulation; i += 5) {
+                document.getElementById('person-' + i).classList.add('selected');
+            }
+            sampleLog.innerText = `Systematic executed: Started at #${start}, pulling every 5th unit.`;
+        }
+
+        // --- DISTRIBUTION SHAPE SHIFTER LOGIC ---
+        const graph = document.getElementById('graph');
+        const shapeLog = document.getElementById('shapeLog');
+        const numBars = 12;
+
+        const shapes = {
+            'bell': [5, 10, 30, 60, 90, 100, 90, 60, 30, 10, 5, 2],
+            'skewRight': [100, 80, 50, 35, 20, 15, 10, 8, 5, 4, 3, 2],
+            'skewLeft': [2, 3, 4, 5, 8, 10, 15, 20, 35, 50, 80, 100],
+            'uniform': [80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80]
+        };
+
+        const shapeNames = {
+            'bell': 'Bell-Shaped (Symmetric) - Data clusters in the center.',
+            'skewRight': 'Skewed Right - Bulk of data on the left, long tail trailing to the right.',
+            'skewLeft': 'Skewed Left - Bulk of data on the right, long tail trailing to the left.',
+            'uniform': 'Uniform - Data frequencies are relatively equal across all intervals.'
+        };
+
+        function initGraph() {
+            for(let i = 0; i < numBars; i++) {
+                let bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.id = 'bar-' + i;
+                graph.appendChild(bar);
+            }
+            changeShape('bell'); 
+        }
+
+        function changeShape(type) {
+            const data = shapes[type];
+            for(let i = 0; i < numBars; i++) {
+                document.getElementById('bar-' + i).style.height = data[i] + '%';
+            }
+            shapeLog.innerText = shapeNames[type];
+        }
+
+        window.onload = () => {
+            initPopulation();
+            initGraph();
+        };
+    </script>
+</body>
+</html>
