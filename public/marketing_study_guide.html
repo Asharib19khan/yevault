@@ -2242,6 +2242,7 @@
                             <button class="space-nav-btn" onclick="document.getElementById('frame_'+activeSpaceTabId).src += ''">↻</button>
                             <div class="space-url-container">
                                 <input type="text" class="space-url-bar" id="space-url-bar" placeholder="Search Google or type a URL" onkeydown="if(event.key==='Enter') spaceGo(this.value)">
+                                <button class="space-popout-btn" onclick="document.getElementById('frame_'+activeSpaceTabId).src='https://www.blockaway.net/'" title="Load Proxy Tunnel (Fixes 'refused to connect' errors)">🛡️</button>
                                 <button class="space-popout-btn" onclick="window.open(document.getElementById('space-url-bar').value, '_blank')" title="Open in real browser tab">⇱</button>
                             </div>
                         </div>
