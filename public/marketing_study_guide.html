@@ -8070,7 +8070,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            window.openFinder = function(folderName) {
+                        window.openFinder = function(folderName) {
                 const win = document.getElementById('mac-finder-window');
                 const title = document.getElementById('mac-finder-title');
                 const content = document.getElementById('mac-finder-content');
@@ -8089,12 +8089,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="mac-folder-icon" style="width:40px; height:40px;"></div>
                             <div class="mac-folder-name" style="font-size:11px;">mid 1</div>
                         </div>
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px;" ondblclick="openFinder('remaining')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px;"></div>
+                            <div class="mac-folder-name" style="font-size:11px;">remaining</div>
+                        </div>
                         <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px;" ondblclick="openFinder('mid 2')">
                             <div class="mac-folder-icon" style="width:40px; height:40px;"></div>
-                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px;" ondblclick="openFinder('MIS 2')">
-                            <div class="mac-folder-icon" style="width:40px; height:40px;"></div>
-                            <div class="mac-folder-name" style="font-size:11px;">MIS 2</div>
-                        </div>
                             <div class="mac-folder-name" style="font-size:11px;">mid 2</div>
                         </div>
                         <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px;" ondblclick="openFinder('Aissign + sol')">
@@ -8105,18 +8105,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (folderName === 'mid 1') {
                     content.innerHTML = `
                         <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/DAB_MID_1.html', 'DAB_MID_1.html')">
-                            <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 100\\'><path fill=\\'%23ffffff\\' d=\\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\\' opacity=\\'0.8\\'/><path fill=\\'%234285F4\\' d=\\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\\'/></svg>');"></div>
+                            <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
                             <div class="mac-folder-name" style="font-size:11px;">DAB_MID_1.html</div>
                         </div>
                     `;
-                } else {
-                } else if (folderName === 'MIS 2') {
+                } else if (folderName === 'mid 2') {
                     content.innerHTML = `
                         <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/DA_MID_2.html', 'DA_MID_2.html')">
                             <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
                             <div class="mac-folder-name" style="font-size:11px;">DA_MID_2.html</div>
                         </div>
                     `;
+                } else if (folderName === 'remaining') {
+                    content.innerHTML = `
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/dab remaining.html', 'dab remaining.html')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
+                            <div class="mac-folder-name" style="font-size:11px;">dab remaining.html</div>
+                        </div>
+                    `;
+                } else {
                     content.innerHTML = '';
                 }
             };

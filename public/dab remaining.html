@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAP 5: PROBABILITY | 60% WEIGHTAGE MASTERY</title>
+    <style>
+        :root {
+            --bg-color: #030303;
+            --text-color: #e0e0e0;
+            --accent-primary: #ccff00; /* Toxic Yellow for primary focus */
+            --accent-secondary: #ff0055; /* Laser Red for critical warnings */
+            --accent-tertiary: #00e5ff; /* Cyan for formulas */
+            --box-bg: #0d0d0d;
+            --border-heavy: 4px solid var(--accent-primary);
+            --border-light: 1px solid #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 18px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: var(--border-heavy);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background-color: var(--accent-primary);
+            color: #000;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-tertiary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.5rem;
+        }
+
+        p { margin-bottom: 1.2rem; }
+        ul { margin-left: 2rem; margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.75rem; }
+
+        mark.yellow { background-color: var(--accent-primary); color: #000; font-weight: 800; padding: 2px 6px; }
+        mark.red { background-color: var(--accent-secondary); color: #fff; font-weight: 800; padding: 2px 6px; }
+        mark.cyan { background-color: var(--accent-tertiary); color: #000; font-weight: 800; padding: 2px 6px; }
+
+        .box {
+            background-color: var(--box-bg);
+            border-left: var(--border-heavy);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 6px 6px 0px 0px #1a1a1a;
+        }
+
+        .formula-box {
+            background-color: #000;
+            border: 2px dashed var(--accent-tertiary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.4rem;
+            text-align: center;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        /* Interactive Widgets */
+        .widget {
+            background-color: #0a0a0a;
+            border: 2px solid var(--accent-secondary);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .widget h4 {
+            color: var(--accent-secondary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background-color: var(--accent-primary);
+            color: #000;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        button:hover { background-color: #fff; }
+
+        canvas {
+            background-color: #000;
+            border: 1px solid #333;
+            margin-top: 1rem;
+            width: 100%;
+            height: 300px;
+            display: block;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--accent-tertiary);
+            font-family: monospace;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            background-color: #111;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 10px;
+            font-size: 1.2rem;
+            font-family: monospace;
+        }
+
+        .output-box {
+            background-color: var(--accent-secondary);
+            color: #fff;
+            padding: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>PROBABILITY DIRECTIVE</h1>
+        <p><strong>CHAPTER 5:</strong> 60% Exam Weightage. Master these rules and you control the outcome. Zero distractions. Pure logic.</p>
+    </header>
+
+    <section>
+        <h2>1. The Foundation & The Rules</h2>
+        
+        <div class="box">
+            <h3>The Core Definitions</h3>
+            <ul>
+                <li><mark class="yellow">Sample Space (S):</mark> The collection of ALL possible outcomes. Example: Rolling a die → S = {1,2,3,4,5,6}.</li>
+                <li><mark class="yellow">Event (E):</mark> Any collection of outcomes from the experiment. Example: Rolling an even number → E = {2,4,6}.</li>
+            </ul>
+
+            <h3>The Two Immutable Rules of Probability</h3>
+            <div class="formula-box">
+                Rule 1: 0 ≤ P(E) ≤ 1<br>
+                Rule 2: Σ P(e) = 1
+            </div>
+            <ul>
+                <li><strong>Rule 1:</strong> Probability is ALWAYS between 0 (impossible) and 1 (certain). <mark class="red">Negative probabilities do not exist.</mark></li>
+                <li><strong>Rule 2:</strong> If you add up the probability of every single outcome in the sample space, it must equal exactly 1.</li>
+            </ul>
+        </div>
+
+        <div class="box">
+            <h3>Empirical vs. Classical Methods</h3>
+            <ul>
+                <li><strong>Empirical (Experimental):</strong> Based on observing reality. 
+                    <br><mark class="cyan">P(E) ≈ (Frequency of E) / (Total Trials)</mark></li>
+                <li><strong>Classical (Theoretical):</strong> Based on equally likely outcomes (like a fair coin or die).
+                    <br><mark class="cyan">P(E) = N(E) / N(S)</mark> (Number of ways E can happen divided by total possible outcomes).</li>
+            </ul>
+        </div>
+
+        <div class="widget">
+            <h4>Simulator: The Law of Large Numbers</h4>
+            <p><strong>The Law:</strong> As the number of repetitions increases, the Empirical probability approaches the Classical probability. Flip the coin below. Watch how low repetitions are chaotic, but high repetitions stabilize at exactly 0.5 (50%).</p>
+            <div class="btn-group">
+                <button onclick="flipCoin(10)">Flip 10x</button>
+                <button onclick="flipCoin(100)">Flip 100x</button>
+                <button onclick="flipCoin(1000)">Flip 1,000x</button>
+                <button onclick="resetCoin()" style="background-color: #333; color: white;">Reset</button>
+            </div>
+            <p id="coinStats" style="font-family: monospace; color: var(--accent-tertiary); font-size: 1.2rem;">Heads: 0 | Tails: 0 | Proportion of Heads: 0.000</p>
+            <canvas id="coinCanvas"></canvas>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. The "OR" Protocol (Addition)</h2>
+        
+        <div class="box">
+            <h3>Disjoint (Mutually Exclusive) Events</h3>
+            <p>Two events are disjoint if they have <mark class="red">NO outcomes in common</mark>. (e.g., You cannot roll a 2 AND a 5 at the same time on a single die).</p>
+            <div class="formula-box">
+                If Disjoint: P(E or F) = P(E) + P(F)
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>The General Addition Rule</h3>
+            <p>If events ARE NOT disjoint (they overlap), you must subtract the overlap so you don't double-count it.</p>
+            <div class="formula-box">
+                General: P(E or F) = P(E) + P(F) - P(E and F)
+            </div>
+        </div>
+
+        <div class="box">
+            <h3>The Complement Rule</h3>
+            <p>The complement ($E^c$) is everything that is NOT $E$. If the probability of rain is 30%, the probability of NOT rain is 70%.</p>
+            <div class="formula-box">
+                P(E^c) = 1 - P(E)
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. The "AND" Protocol (Multiplication)</h2>
+        
+        <div class="box">
+            <h3>Independent Events</h3>
+            <p>Two events are independent if event E happening <mark class="yellow">does NOT affect</mark> the probability of event F happening. (e.g., Flipping a coin, then rolling a die).</p>
+            <div class="formula-box">
+                If Independent: P(E and F) = P(E) × P(F)
+            </div>
+            <p>You can chain this: $P(E \text{ and } F \text{ and } G) = P(E) \times P(F) \times P(G)$</p>
+        </div>
+
+        <div class="box">
+            <h3>The "At Least One" Trick</h3>
+            <p>Calculating "at least one" directly is mathematically exhausting. Instead, calculate the probability that it happens ZERO times, and subtract it from 1.</p>
+            <div class="formula-box">
+                P(At least one) = 1 - P(None)
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>4. The "GIVEN" Protocol (Conditional)</h2>
+
+        <div class="box">
+            <h3>Conditional Probability</h3>
+            <p>The probability of Event F occurring, <mark class="yellow">GIVEN that Event E has already occurred</mark>. This physically shrinks your sample space down to only the outcomes where E happened.</p>
+            <div class="formula-box">
+                P(F | E) = P(E and F) / P(E)<br>
+                -- OR --<br>
+                P(F | E) = N(E and F) / N(E)
+            </div>
+            <ul>
+                <li>The denominator is always the probability (or count) of the <mark class="cyan">GIVEN</mark> condition.</li>
+                <li>Used heavily in Contingency Tables (Rows and Columns).</li>
+            </ul>
+        </div>
+
+        <div class="widget">
+            <h4>Matrix Calculator: General & Conditional Probability</h4>
+            <p>Input the counts below to see how the General Addition Rule and Conditional Probability Formulas react.</p>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>N(E) [Count of Event E]</label>
+                    <input type="number" id="nE" value="50">
+                </div>
+                <div class="input-group">
+                    <label>N(F) [Count of Event F]</label>
+                    <input type="number" id="nF" value="40">
+                </div>
+                <div class="input-group">
+                    <label>N(E and F) [The Overlap]</label>
+                    <input type="number" id="nBoth" value="15">
+                </div>
+                <div class="input-group">
+                    <label>N(S) [Total Sample Space]</label>
+                    <input type="number" id="nS" value="100">
+                </div>
+            </div>
+            <button onclick="calculateMatrix()">Execute Logic</button>
+            <div id="matrixOutput" class="output-box" style="margin-top: 15px; display: none;">
+                </div>
+        </div>
+    </section>
+
+    <script>
+        // --- LAW OF LARGE NUMBERS LOGIC ---
+        const canvas = document.getElementById('coinCanvas');
+        const ctx = canvas.getContext('2d');
+        const stats = document.getElementById('coinStats');
+        
+        let flipHistory = [];
+        let totalHeads = 0;
+
+        function drawGraph() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw 0.5 Target Line
+            ctx.strokeStyle = '#ff0055';
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            if (flipHistory.length === 0) return;
+
+            // Draw Data Line
+            ctx.strokeStyle = '#ccff00';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            
+            let stepX = canvas.width / flipHistory.length;
+            
+            for(let i = 0; i < flipHistory.length; i++) {
+                let x = i * stepX;
+                // Invert Y because canvas 0 is at top
+                let y = canvas.height - (flipHistory[i] * canvas.height); 
+                
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+        }
+
+        function flipCoin(times) {
+            for(let i = 0; i < times; i++) {
+                let isHeads = Math.random() < 0.5;
+                if (isHeads) totalHeads++;
+                
+                let currentProportion = totalHeads / (flipHistory.length + 1);
+                flipHistory.push(currentProportion);
+            }
+            
+            let currentProp = (totalHeads / flipHistory.length).toFixed(4);
+            stats.innerText = `Total Flips: ${flipHistory.length} | Heads: ${totalHeads} | Proportion: ${currentProp}`;
+            
+            drawGraph();
+        }
+
+        function resetCoin() {
+            flipHistory = [];
+            totalHeads = 0;
+            stats.innerText = `Total Flips: 0 | Heads: 0 | Proportion: 0.000`;
+            drawGraph();
+        }
+
+        // Init canvas size
+        window.onload = () => {
+            canvas.width = canvas.parentElement.clientWidth;
+            drawGraph();
+        };
+
+        // --- MATRIX CALCULATOR LOGIC ---
+        function calculateMatrix() {
+            const nE = parseFloat(document.getElementById('nE').value);
+            const nF = parseFloat(document.getElementById('nF').value);
+            const nBoth = parseFloat(document.getElementById('nBoth').value);
+            const nS = parseFloat(document.getElementById('nS').value);
+            const out = document.getElementById('matrixOutput');
+
+            // Validation
+            if (nBoth > nE || nBoth > nF) {
+                out.innerHTML = "ERROR: Overlap cannot be greater than individual events.";
+                out.style.backgroundColor = "#ff0055";
+                out.style.display = "block";
+                return;
+            }
+            if (nE > nS || nF > nS) {
+                out.innerHTML = "ERROR: Events cannot be greater than total sample space.";
+                out.style.backgroundColor = "#ff0055";
+                out.style.display = "block";
+                return;
+            }
+
+            out.style.backgroundColor = "#0055ff";
+
+            // Calculations
+            let pE = nE / nS;
+            let pF = nF / nS;
+            let pBoth = nBoth / nS;
+            
+            let pEorF = pE + pF - pBoth;
+            let pFgivenE = nBoth / nE; // Conditional N(E and F) / N(E)
+            let pEgivenF = nBoth / nF; 
+
+            out.innerHTML = `
+                P(E or F) = ${(pEorF).toFixed(3)} <br><br>
+                P(F | E) [Given E] = ${(pFgivenE).toFixed(3)} <br>
+                P(E | F) [Given F] = ${(pEgivenF).toFixed(3)}
+            `;
+            out.style.display = "block";
+        }
+    </script>
+</body>
+</html>
