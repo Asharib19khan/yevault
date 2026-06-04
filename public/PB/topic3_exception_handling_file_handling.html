@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 3: Exception Handling and File Handling (CSV)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.65;
+            color: #2f2f2f;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 42px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.4em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.05em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .page-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            padding: 18px 0 24px;
+        }
+
+        .page-nav a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 18px;
+            border-radius: 999px;
+            background: rgba(102, 126, 234, 0.14);
+            color: #2f2f2f;
+            text-decoration: none;
+            font-size: 0.95em;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .page-nav a:hover,
+        .page-nav a:focus {
+            background: rgba(102, 126, 234, 0.24);
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .summary-card {
+            background: #ffffff;
+            border: 1px solid #e6e9f4;
+            border-radius: 18px;
+            padding: 24px 28px;
+            margin-bottom: 30px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .summary-card strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #2f2f2f;
+            font-size: 1.05em;
+        }
+
+        .summary-card ul {
+            display: grid;
+            gap: 10px;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .summary-card ul li::before {
+            content: '•';
+            display: inline-block;
+            margin-right: 8px;
+            color: #667eea;
+        }
+
+        section {
+            margin-bottom: 32px;
+            padding: 28px 30px;
+            background: #fbfcff;
+            border: 1px solid #e6e9f4;
+            border-radius: 18px;
+            box-shadow: 0 10px 24px rgba(20, 45, 108, 0.05);
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            color: #4a4a8a;
+            margin-bottom: 18px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        section h3 {
+            font-size: 1.3em;
+            color: #764ba2;
+            margin-top: 28px;
+            margin-bottom: 14px;
+        }
+
+        .note-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 18px;
+            margin: 22px 0;
+            border-radius: 8px;
+            color: #444;
+        }
+
+        code {
+            background: #f6f7fb;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            color: #d63384;
+            font-weight: 500;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 22px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            border-left: 4px solid #667eea;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #e4e4e7;
+            padding: 12px 14px;
+            text-align: left;
+        }
+
+        .table th {
+            background: #f2f4ff;
+            color: #2f2f2f;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background: #f7f9ff;
+        }
+
+        .footer-note {
+            background: #ffffff;
+            border: 1px solid #e6e9f4;
+            border-radius: 16px;
+            padding: 20px 22px;
+            color: #4a4a6a;
+            margin-top: 20px;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 18px;
+            margin: 24px 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Topic 3: Exception Handling and File Handling (CSV)</h1>
+            <p>Your crash course notes for exam-ready revision.</p>
+        </header>
+        <div class="content">
+            <div class="page-nav">
+                <a href="#exception-handling">Exception handling</a>
+                <a href="#file-handling">File handling</a>
+                <a href="#practice">Practice programs</a>
+                <a href="#mcq-prep">MCQ prep</a>
+                <a href="#short-answer">Short answer theory</a>
+            </div>
+
+            <div class="summary-card">
+                <strong>What you will learn</strong>
+                <ul>
+                    <li>How Python handles runtime errors safely</li>
+                    <li>How to read, write, append, and manage CSV files</li>
+                    <li>How to combine files and exceptions for stable programs</li>
+                    <li>Exam-ready examples and revision notes</li>
+                </ul>
+            </div>
+
+            <section id="exception-handling">
+                <h2>PART 1 — EXCEPTION HANDLING</h2>
+            </section>
+
+            <section>
+                <h3>What is an Exception?</h3>
+                <p>When a program runs into an error during execution, Python raises an exception and the program can crash.</p>
+                <p>Without handling, the program dies. With handling, the program survives and responds gracefully.</p>
+                <pre><code>print(10 / 0)
+# ZeroDivisionError: division by zero</code></pre>
+                <div class="note-box">
+                    <p><strong>Note:</strong> There are two types of errors:</p>
+                    <ul>
+                        <li><strong>Syntax Error</strong> — wrong code structure, caught before running.</li>
+                        <li><strong>Exception</strong> — error that happens while running.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>Common Built-in Exceptions</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Exception</th>
+                            <th>When it happens</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>ZeroDivisionError</code></td>
+                            <td>Dividing by zero</td>
+                        </tr>
+                        <tr>
+                            <td><code>ValueError</code></td>
+                            <td>Wrong value type, for example <code>int("abc")</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>TypeError</code></td>
+                            <td>Wrong data type operation</td>
+                        </tr>
+                        <tr>
+                            <td><code>NameError</code></td>
+                            <td>Using a variable that does not exist</td>
+                        </tr>
+                        <tr>
+                            <td><code>IndexError</code></td>
+                            <td>Accessing an index that does not exist</td>
+                        </tr>
+                        <tr>
+                            <td><code>KeyError</code></td>
+                            <td>Accessing a dictionary key that does not exist</td>
+                        </tr>
+                        <tr>
+                            <td><code>FileNotFoundError</code></td>
+                            <td>Opening a file that does not exist</td>
+                        </tr>
+                        <tr>
+                            <td><code>ImportError</code></td>
+                            <td>Importing a module that does not exist</td>
+                        </tr>
+                        <tr>
+                            <td><code>AttributeError</code></td>
+                            <td>Using a method that does not exist on an object</td>
+                        </tr>
+                        <tr>
+                            <td><code>OverflowError</code></td>
+                            <td>Number too large for Python to handle</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h3>The try / except Block</h3>
+                <p>Basic structure:</p>
+                <pre><code>try:
+    # code that MIGHT cause an error
+except:
+    # code that runs IF an error occurs</code></pre>
+                <p>Example:</p>
+                <pre><code>try:
+    num = int(input("Enter a number: "))
+    result = 10 / num
+    print("Result:", result)
+except:
+    print("Something went wrong!")</code></pre>
+                <p>If the user enters <code>0</code> or <code>"abc"</code>, the program prints the message instead of crashing.</p>
+            </section>
+
+            <section>
+                <h3>Catching Specific Exceptions</h3>
+                <pre><code>try:
+    num = int(input("Enter a number: "))
+    result = 10 / num
+    print(result)
+
+except ZeroDivisionError:
+    print("You can't divide by zero!")
+
+except ValueError:
+    print("That's not a valid number!")</code></pre>
+                <div class="note-box">
+                    <p>Python checks each <code>except</code> block from top to bottom and runs the first match.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>Multiple Exceptions in One Line</h3>
+                <pre><code>try:
+    x = int(input("Enter: "))
+    print(10 / x)
+
+except (ValueError, ZeroDivisionError):
+    print("Invalid input or division by zero!")</code></pre>
+            </section>
+
+            <section>
+                <h3>Catching the Exception Object</h3>
+                <pre><code>try:
+    x = int("hello")
+
+except ValueError as e:
+    print("Error occurred:", e)</code></pre>
+                <p>Example output:</p>
+                <pre><code>Error occurred: invalid literal for int() with base 10: 'hello'</code></pre>
+                <div class="note-box">
+                    <p><strong>Exam tip:</strong> <code>as e</code> gives you the exact error description as a string.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>The else Block</h3>
+                <p>The <code>else</code> block runs only if no exception occurred.</p>
+                <pre><code>try:
+    num = int(input("Enter: "))
+    result = 10 / num
+
+except ZeroDivisionError:
+    print("Can't divide by zero!")
+
+except ValueError:
+    print("Not a number!")
+
+else:
+    print("Success! Result is:", result)</code></pre>
+                <div class="note-box">
+                    <p><strong>Flow:</strong></p>
+                    <ul>
+                        <li>Error? → <code>except</code> runs, <code>else</code> is skipped.</li>
+                        <li>No error? → <code>else</code> runs, <code>except</code> is skipped.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3>The finally Block</h3>
+                <p>The <code>finally</code> block runs always, whether there was an error or not. It is used for cleanup like closing files.</p>
+                <pre><code>try:
+    f = open("data.txt", "r")
+    content = f.read()
+
+except FileNotFoundError:
+    print("File not found!")
+
+finally:
+    print("This always runs no matter what.")</code></pre>
+                <div class="note-box">
+                    <p><strong>Note:</strong> <code>finally</code> runs even if there is a <code>return</code> statement in <code>try</code> or <code>except</code>.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>Full Structure (All Four Blocks)</h3>
+                <pre><code>try:
+    # risky code
+
+except SpecificError:
+    # handle specific error
+
+except AnotherError:
+    # handle another error
+
+else:
+    # runs if no error occurred
+
+finally:
+    # always runs (error or not)</code></pre>
+                <p>Example:</p>
+                <pre><code>try:
+    age = int(input("Enter your age: "))
+    print("Next year you'll be:", age + 1)
+
+except ValueError:
+    print("Please enter a valid number.")
+
+else:
+    print("Age recorded successfully.")
+
+finally:
+    print("Program finished.")</code></pre>
+            </section>
+
+            <section>
+                <h3>The raise Keyword</h3>
+                <p>You can manually trigger an exception using <code>raise</code>. This stops the program and throws the exception you specify.</p>
+                <pre><code>age = int(input("Enter age: "))
+
+if age &lt; 0:
+    raise ValueError("Age cannot be negative")</code></pre>
+            </section>
+
+            <section>
+                <h3>Custom Exceptions (Theory)</h3>
+                <p>You can create your own exception class by inheriting from <code>Exception</code>.</p>
+                <pre><code>class NegativeAgeError(Exception):
+    pass
+
+age = int(input("Enter age: "))
+
+if age &lt; 0:
+    raise NegativeAgeError("Age cannot be negative")</code></pre>
+                <p>Just know the concept: inheriting from <code>Exception</code> creates a custom exception.</p>
+            </section>
+
+            <section id="practice">
+                <h3>Practice Programs — Exception Handling</h3>
+                <p>Safe Division:</p>
+                <pre><code>try:
+    a = int(input("Enter numerator: "))
+    b = int(input("Enter denominator: "))
+    print(a / b)
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+except ValueError:
+    print("Enter valid integers only!")</code></pre>
+                <p>Safe List Access:</p>
+                <pre><code>my_list = [10, 20, 30]
+try:
+    index = int(input("Enter index: "))
+    print(my_list[index])
+except IndexError:
+    print("Index out of range!")
+except ValueError:
+    print("Enter a valid number!")</code></pre>
+                <p>Loop Until Valid Input:</p>
+                <pre><code>while True:
+    try:
+        num = int(input("Enter a number: "))
+        break
+    except ValueError:
+        print("Invalid! Try again.")
+
+print("You entered:", num)</code></pre>
+            </section>
+
+            <section id="mcq-prep">
+                <h3>Exception Handling MCQ Prep</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Which block ALWAYS runs?</td>
+                            <td><code>finally</code></td>
+                        </tr>
+                        <tr>
+                            <td>Which block runs only if no error?</td>
+                            <td><code>else</code></td>
+                        </tr>
+                        <tr>
+                            <td>Exception for <code>int("abc")</code></td>
+                            <td><code>ValueError</code></td>
+                        </tr>
+                        <tr>
+                            <td>Exception for <code>10/0</code></td>
+                            <td><code>ZeroDivisionError</code></td>
+                        </tr>
+                        <tr>
+                            <td>Exception for <code>list[99]</code></td>
+                            <td><code>IndexError</code></td>
+                        </tr>
+                        <tr>
+                            <td>Exception for missing file</td>
+                            <td><code>FileNotFoundError</code></td>
+                        </tr>
+                        <tr>
+                            <td>Keyword to manually throw error</td>
+                            <td><code>raise</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>except Exception as e</code> — what is <code>e</code>?</td>
+                            <td>The error message/object</td>
+                        </tr>
+                        <tr>
+                            <td>Can you have multiple <code>except</code> blocks?</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>What runs first — <code>else</code> or <code>finally</code>?</td>
+                            <td><code>else</code> then <code>finally</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="file-handling">
+                <h2>PART 2 — FILE HANDLING (CSV)</h2>
+            </section>
+
+            <section>
+                <h3>What is File Handling?</h3>
+                <p>File handling lets a Python program read from and write to files stored on the computer. Without file handling, all data is lost when the program ends.</p>
+            </section>
+
+            <section>
+                <h3>Opening a File — <code>open()</code></h3>
+                <pre><code>file = open("filename.txt", "mode")</code></pre>
+                <p>Common file modes:</p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Mode</th>
+                            <th>Meaning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>"r"</code></td>
+                            <td>Read — opens file for reading. Error if file does not exist.</td>
+                        </tr>
+                        <tr>
+                            <td><code>"w"</code></td>
+                            <td>Write — creates file if not exists, overwrites if exists.</td>
+                        </tr>
+                        <tr>
+                            <td><code>"a"</code></td>
+                            <td>Append — adds to end of file. Creates file if not exists.</td>
+                        </tr>
+                        <tr>
+                            <td><code>"r+"</code></td>
+                            <td>Read + Write — file must exist.</td>
+                        </tr>
+                        <tr>
+                            <td><code>"x"</code></td>
+                            <td>Create — creates file, error if already exists.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="note-box">
+                    <p>Add <code>"b"</code> for binary mode: <code>"rb"</code>, <code>"wb"</code>.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>Reading a File</h3>
+                <p>Method 1: <code>read()</code> reads the entire file as one string.</p>
+                <pre><code>file = open("data.txt", "r")
+content = file.read()
+print(content)
+file.close()</code></pre>
+                <p>Method 2: <code>readline()</code> reads one line at a time.</p>
+                <pre><code>file = open("data.txt", "r")
+line1 = file.readline()
+line2 = file.readline()
+print(line1)
+print(line2)
+file.close()</code></pre>
+                <p>Method 3: <code>readlines()</code> reads all lines into a list.</p>
+                <pre><code>file = open("data.txt", "r")
+lines = file.readlines()
+print(lines)
+file.close()</code></pre>
+                <p>Method 4: Loop through lines.</p>
+                <pre><code>file = open("data.txt", "r")
+for line in file:
+    print(line.strip())
+file.close()</code></pre>
+            </section>
+
+            <section>
+                <h3>Writing to a File</h3>
+                <pre><code>file = open("output.txt", "w")
+file.write("Hello, World!\n")
+file.write("Second line\n")
+file.close()</code></pre>
+                <pre><code>file = open("output.txt", "a")
+file.write("This is added at the end\n")
+file.close()</code></pre>
+                <div class="note-box">
+                    <p>Always call <code>file.close()</code> after you are done. Otherwise data may not save properly.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>The <code>with</code> Statement</h3>
+                <p>The <code>with</code> statement automatically closes the file when done.</p>
+                <pre><code>with open("data.txt", "r") as file:
+    content = file.read()
+    print(content)</code></pre>
+                <pre><code>with open("output.txt", "w") as file:
+    file.write("Using with statement!\n")</code></pre>
+                <div class="note-box">
+                    <p>The <code>with</code> statement is the recommended way to handle files.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>CSV File Handling</h3>
+                <p>A CSV file is comma separated values. Data is stored in rows and columns separated by commas.</p>
+                <pre><code>import csv</code></pre>
+            </section>
+
+            <section>
+                <h3>Writing a CSV File with <code>csv.writer</code></h3>
+                <pre><code>import csv
+
+with open("students.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Name", "Age", "City"])
+    writer.writerow(["Asharib", 20, "Karachi"])
+    writer.writerow(["Ali", 22, "Lahore"])
+    writer.writerow(["Sara", 21, "Islamabad"])
+
+print("CSV file created!")</code></pre>
+                <div class="note-box">
+                    <p><code>newline=""</code> prevents extra blank lines in Windows.</p>
+                </div>
+            </section>
+
+            <section>
+                <h3>Reading a CSV File with <code>csv.reader</code></h3>
+                <pre><code>import csv
+
+with open("students.csv", "r") as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)</code></pre>
+                <p>Output contains each row as a list.</p>
+            </section>
+
+            <section>
+                <h3>Reading CSV with <code>csv.DictReader</code></h3>
+                <pre><code>import csv
+
+with open("students.csv", "r") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(row["Name"], row["Age"], row["City"])</code></pre>
+                <p><code>DictReader</code> uses the header row as keys.</p>
+            </section>
+
+            <section>
+                <h3>Writing CSV with <code>csv.DictWriter</code></h3>
+                <pre><code>import csv
+
+fields = ["Name", "Age", "City"]
+data = [
+    {"Name": "Asharib", "Age": 20, "City": "Karachi"},
+    {"Name": "Ali", "Age": 22, "City": "Lahore"}
+]
+
+with open("students.csv", "w", newline="") as file:
+    writer = csv.DictWriter(file, fieldnames=fields)
+    writer.writeheader()
+    writer.writerows(data)
+
+print("Done!")</code></pre>
+            </section>
+
+            <section>
+                <h3>Appending to a CSV File</h3>
+                <pre><code>import csv
+
+with open("students.csv", "a", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Zara", 19, "Karachi"])
+
+print("Row added!")</code></pre>
+            </section>
+
+            <section>
+                <h3>File Handling and Exception Handling Combined</h3>
+                <pre><code>import csv
+
+try:
+    with open("students.csv", "r") as file:
+        reader = csv.reader(file)
+        for row in reader:
+            print(row)
+
+except FileNotFoundError:
+    print("Error: The file does not exist!")
+
+except Exception as e:
+    print("Something went wrong:", e)
+
+finally:
+    print("File operation completed.")</code></pre>
+            </section>
+
+            <section>
+                <h3>Complete Practice Programs</h3>
+                <p>Write student data to CSV then read it back:</p>
+                <pre><code>import csv
+
+with open("class.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["Name", "Marks"])
+    writer.writerow(["Asharib", 95])
+    writer.writerow(["Sara", 88])
+    writer.writerow(["Ali", 72])
+
+with open("class.csv", "r") as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)</code></pre>
+                <p>Find highest marks from CSV:</p>
+                <pre><code>import csv
+
+highest = 0
+top_student = ""
+
+with open("class.csv", "r") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        if int(row["Marks"]) > highest:
+            highest = int(row["Marks"])
+            top_student = row["Name"]
+
+print(f"Top student: {top_student} with {highest} marks")</code></pre>
+                <p>Count lines in a file:</p>
+                <pre><code>try:
+    with open("data.txt", "r") as f:
+        lines = f.readlines()
+        print("Total lines:", len(lines))
+except FileNotFoundError:
+    print("File not found!")</code></pre>
+            </section>
+
+            <section>
+                <h3>File Handling MCQ Prep</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>read()</code></td>
+                            <td>Reads the entire file as a string</td>
+                        </tr>
+                        <tr>
+                            <td><code>readlines()</code></td>
+                            <td>Reads all lines into a list</td>
+                        </tr>
+                        <tr>
+                            <td><code>with</code> statement</td>
+                            <td>Auto-closes the file</td>
+                        </tr>
+                        <tr>
+                            <td>CSV module name</td>
+                            <td><code>csv</code></td>
+                        </tr>
+                        <tr>
+                            <td>CSV reader returns each row as</td>
+                            <td>A list</td>
+                        </tr>
+                        <tr>
+                            <td>DictReader uses header as</td>
+                            <td>Dictionary keys</td>
+                        </tr>
+                        <tr>
+                            <td>Write header in DictWriter</td>
+                            <td><code>writer.writeheader()</code></td>
+                        </tr>
+                        <tr>
+                            <td>Exception when file missing</td>
+                            <td><code>FileNotFoundError</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>newline=""</code> is used in CSV to</td>
+                            <td>Prevent blank lines on Windows</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="short-answer">
+                <h3>Short Answer Theory</h3>
+                <p><strong>What is exception handling?</strong></p>
+                <p>Exception handling is a mechanism to handle runtime errors gracefully using <code>try</code>, <code>except</code>, <code>else</code>, and <code>finally</code> blocks.</p>
+                <p><strong>Difference between <code>read()</code>, <code>readline()</code>, and <code>readlines()</code>?</strong></p>
+                <p><code>read()</code> returns the whole file as one string. <code>readline()</code> returns one line at a time. <code>readlines()</code> returns a list where each item is one line.</p>
+                <p><strong>Why use <code>with open()</code> instead of <code>open()</code>?</strong></p>
+                <p>The <code>with</code> statement automatically closes the file after the block ends, even if an error occurs.</p>
+                <p><strong>What is a CSV file?</strong></p>
+                <p>A CSV file is a plain text file where data is stored in rows and columns separated by commas.</p>
+                <p><strong>Difference between <code>csv.reader</code> and <code>csv.DictReader</code>?</strong></p>
+                <p><code>csv.reader</code> returns each row as a plain list. <code>csv.DictReader</code> returns each row as a dictionary using the header row as keys.</p>
+                <p><strong>What does <code>finally</code> do?</strong></p>
+                <p>The <code>finally</code> block always executes regardless of whether an exception occurred or not. It is used for cleanup like closing files.</p>
+            </section>
+
+            <div class="footer-note">
+                <p>Use this page as a fast reference for revision. The code examples are structured to match exam-style answers and help you build error-safe programs.</p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 5: Pandas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.65; color: #2f2f2f; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 960px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 18px 50px rgba(0,0,0,0.18); overflow: hidden; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 42px 36px; text-align: center; }
+        header h1 { font-size: 2.4em; margin-bottom: 10px; font-weight: 700; }
+        header p { font-size: 1.05em; opacity: 0.95; }
+        .content { padding: 36px; }
+        .page-nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; padding: 20px 0 24px; }
+        .page-nav a { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 999px; background: rgba(102,126,234,0.14); color: #2f2f2f; text-decoration: none; font-size: 0.95em; border: 1px solid transparent; transition: all 0.2s ease; }
+        .page-nav a:hover, .page-nav a:focus { background: rgba(102,126,234,0.24); border-color: rgba(102,126,234,0.4); }
+        .summary-card { background: #ffffff; border: 1px solid #e6e9f4; border-radius: 18px; padding: 24px 28px; margin-bottom: 30px; display: grid; gap: 12px; }
+        .summary-card strong { display: block; margin-bottom: 10px; color: #2f2f2f; font-size: 1.05em; }
+        .summary-card ul { display: grid; gap: 10px; list-style: none; padding-left: 0; }
+        .summary-card ul li::before { content: '•'; display: inline-block; margin-right: 8px; color: #667eea; }
+        section { margin-bottom: 32px; padding: 28px 30px; background: #fbfcff; border: 1px solid #e6e9f4; border-radius: 18px; box-shadow: 0 10px 24px rgba(20,45,108,0.05); }
+        section h2 { font-size: 1.8em; color: #4a4a8a; margin-bottom: 18px; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+        section h3 { font-size: 1.35em; color: #764ba2; margin-top: 24px; margin-bottom: 14px; }
+        .note-box { background: #f8f9fa; border-left: 4px solid #667eea; padding: 18px; margin: 22px 0; border-radius: 10px; color: #444; }
+        code { background: #f6f7fb; padding: 3px 6px; border-radius: 4px; font-family: 'Fira Code', monospace; color: #d63384; font-weight: 500; }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 22px; border-radius: 10px; overflow-x: auto; margin: 20px 0; font-family: 'Fira Code', monospace; font-size: 0.95em; line-height: 1.6; border-left: 4px solid #667eea; }
+        ul, ol { margin-left: 20px; margin-bottom: 20px; }
+        li { margin-bottom: 10px; }
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .table th, .table td { border: 1px solid #e4e4e7; padding: 12px 14px; text-align: left; }
+        .table th { background: #f2f4ff; color: #2f2f2f; }
+        .table tbody tr:nth-child(even) { background: #f7f9ff; }
+        .footer-note { background: #ffffff; border: 1px solid #e6e9f4; border-radius: 16px; padding: 20px 22px; color: #4a4a6a; margin-top: 20px; }
+        .key-concept { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 18px; margin: 24px 0; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Topic 5: Pandas</h1>
+            <p>Core Pandas notes for tabular data, CSV loading, selection, grouping, and missing value handling.</p>
+        </header>
+        <div class="content">
+            <div class="page-nav">
+                <a href="#intro">What is Pandas</a>
+                <a href="#selection">Selecting Data</a>
+                <a href="#missing">Missing Data</a>
+                <a href="#groupby">Groupby</a>
+                <a href="#mcq">MCQ prep</a>
+            </div>
+            <div class="summary-card">
+                <strong>What you will learn</strong>
+                <ul>
+                    <li>How to use Series and DataFrame objects</li>
+                    <li>How to load and explore CSV data</li>
+                    <li>How to filter, sort, group, and handle missing values</li>
+                    <li>How to answer Pandas MCQs quickly</li>
+                </ul>
+            </div>
+            <section id="intro">
+                <h2>PART 2 — Pandas (Data Manipulation)</h2>
+                <h3>What is Pandas?</h3>
+                <p>Pandas is the library for working with tabular data — think Excel sheets, CSV files, databases — all in Python. It is built on top of NumPy.</p>
+                <pre><code>import pandas as pd    # always as pd — standard convention</code></pre>
+            </section>
+            <section>
+                <h3>Two Core Data Structures</h3>
+                <h4>Series — 1D</h4>
+                <pre><code>s = pd.Series([10, 20, 30, 40])
+print(s)
+# 0    10
+# 1    20
+# 2    30
+# 3    40
+# dtype: int64
+
+s = pd.Series([10, 20, 30], index=["a", "b", "c"])
+print(s["a"])    # 10</code></pre>
+                <h4>DataFrame — 2D</h4>
+                <pre><code>data = {
+    "Name":  ["Asharib", "Ali", "Sara"],
+    "Age":   [20, 22, 21],
+    "City":  ["Karachi", "Lahore", "Islamabad"],
+    "Marks": [95, 88, 72]
+}
+df = pd.DataFrame(data)
+print(df)
+#       Name  Age       City  Marks
+# 0  Asharib   20    Karachi     95
+# 1      Ali   22     Lahore     88
+# 2     Sara   21  Islamabad     72</code></pre>
+            </section>
+            <section>
+                <h3>Loading Data</h3>
+                <pre><code># Read from CSV
+df = pd.read_csv("students.csv")
+
+# Read from Excel
+df = pd.read_excel("students.xlsx")
+
+# Save to CSV
+df.to_csv("output.csv", index=False)
+
+# Save to Excel
+df.to_excel("output.xlsx", index=False)</code></pre>
+            </section>
+            <section id="selection">
+                <h3>Exploring a DataFrame</h3>
+                <pre><code>print(df.head())
+print(df.head(3))
+print(df.tail())
+print(df.shape)
+print(df.info())
+print(df.describe())
+print(df.columns)
+print(df.dtypes)
+print(len(df))</code></pre>
+                <div class="note-box">
+                    <p><strong>Important:</strong> <code>df.shape</code> returns a tuple of (rows, columns).</p>
+                </div>
+            </section>
+            <section>
+                <h3>Selecting Data</h3>
+                <h4>Select a Column</h4>
+                <pre><code>print(df["Name"])
+print(df[["Name", "Age"]])</code></pre>
+                <h4>Select Rows — <code>.iloc</code></h4>
+                <pre><code>print(df.iloc[0])
+print(df.iloc[1])
+print(df.iloc[0:2])
+print(df.iloc[0, 1])</code></pre>
+                <h4>Select Rows — <code>.loc</code></h4>
+                <pre><code>print(df.loc[0])
+print(df.loc[0, "Name"])
+print(df.loc[df["Age"] > 20])</code></pre>
+                <div class="note-box">
+                    <p><strong>Note:</strong> <code>iloc</code> is integer position-based. <code>loc</code> is label-based or condition-based.</p>
+                </div>
+            </section>
+            <section>
+                <h3>Filtering (Conditions)</h3>
+                <pre><code>print(df[df["Marks"] > 85])
+print(df[(df["Marks"] > 80) & (df["Age"] < 90)])
+print(df[df["City"] == "Karachi"])</code></pre>
+                <p>Use <code>&</code> for AND and <code>|</code> for OR.</p>
+            </section>
+            <section>
+                <h3>Sorting</h3>
+                <pre><code>df.sort_values("Marks")
+df.sort_values("Marks", ascending=False)
+df.sort_values(["Age", "Marks"], ascending=[True, False])</code></pre>
+            </section>
+            <section id="groupby">
+                <h3>Aggregation and Grouping</h3>
+                <pre><code>print(df["Marks"].sum())
+print(df["Marks"].mean())
+print(df["Marks"].max())
+print(df["Marks"].min())
+print(df["Marks"].count())
+print(df["Marks"].std())
+print(df["Marks"].median())</code></pre>
+                <h4>Describe summary</h4>
+                <pre><code>print(df.describe())</code></pre>
+                <h4>Groupby</h4>
+                <pre><code>print(df.groupby("City")["Marks"].mean())
+print(df.groupby("City")["Name"].count())
+print(df.groupby("City").agg({"Marks": ["mean", "max", "min"]}))</code></pre>
+            </section>
+            <section id="missing">
+                <h3>Handling Missing Data</h3>
+                <pre><code>import numpy as np
+print(df.isnull())
+print(df.isnull().sum())
+
+# Drop rows with any missing value
+df.dropna()
+
+# Drop rows where a specific column is missing
+df.dropna(subset=["Marks"])
+
+# Fill missing values
+df.fillna(0)
+
+df["Marks"].fillna(df["Marks"].mean())
+
+df.fillna(method="ffill")</code></pre>
+                <div class="note-box">
+                    <p><strong>Note:</strong> <code>NaN</code> means missing or undefined data.</p>
+                </div>
+            </section>
+            <section>
+                <h3>Adding / Modifying Columns</h3>
+                <pre><code>df["Grade"] = ["A", "B", "C"]
+df["Marks_Doubled"] = df["Marks"] * 2
+df["Pass"] = df["Marks"] >= 50</code></pre>
+            </section>
+            <section>
+                <h3>Dropping Columns / Rows</h3>
+                <pre><code>df.drop("Age", axis=1)
+df.drop(["Age", "City"], axis=1)
+df.drop(0, axis=0)
+
+df.drop("Age", axis=1, inplace=True)</code></pre>
+            </section>
+            <section id="mcq">
+                <h3>Pandas MCQ Prep</h3>
+                <table class="table">
+                    <thead><tr><th>Question</th><th>Answer</th></tr></thead>
+                    <tbody>
+                        <tr><td>Standard import alias</td><td><code>pd</code></td></tr>
+                        <tr><td>2D Pandas structure</td><td><code>DataFrame</code></td></tr>
+                        <tr><td>1D Pandas structure</td><td><code>Series</code></td></tr>
+                        <tr><td>Load CSV file</td><td><code>pd.read_csv()</code></td></tr>
+                        <tr><td>First 5 rows</td><td><code>df.head()</code></td></tr>
+                        <tr><td>Shape of DataFrame</td><td><code>df.shape</code> (tuple)</td></tr>
+                        <tr><td>Select by position</td><td><code>df.iloc[]</code></td></tr>
+                        <tr><td>Select by label</td><td><code>df.loc[]</code></td></tr>
+                        <tr><td>Missing value in Pandas</td><td><code>NaN</code></td></tr>
+                        <tr><td>Remove rows with NaN</td><td><code>df.dropna()</code></td></tr>
+                        <tr><td>Fill NaN with value</td><td><code>df.fillna(value)</code></td></tr>
+                        <tr><td>Group data</td><td><code>df.groupby()</code></td></tr>
+                        <tr><td>Summary statistics</td><td><code>df.describe()</code></td></tr>
+                        <tr><td><code>df[["A","B"]]</code> returns</td><td>DataFrame</td></tr>
+                        <tr><td><code>df["A"]</code> returns</td><td>Series</td></tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h3>Short Answer Theory</h3>
+                <p><strong>What is a Series?</strong> A Series is a 1D labeled array (single column).</p>
+                <p><strong>What is a DataFrame?</strong> A DataFrame is a 2D labeled structure like an Excel sheet.</p>
+                <p><strong>What is NaN?</strong> NaN means missing or undefined data in a DataFrame.</p>
+                <p><strong>Difference between <code>iloc</code> and <code>loc</code>?</strong> <code>iloc</code> selects by integer position. <code>loc</code> selects by label or condition.</p>
+            </section>
+            <div class="footer-note">
+                <p>This Pandas page covers the exam-critical operations for data loading, selection, filtering, aggregation, and missing value handling.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

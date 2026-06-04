@@ -8074,6 +8074,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 win.classList.add('genie-maximize');
                 
                 title.innerText = folderName;
+                content.scrollTop = 0;
                 
                 if (folderName === 'DAB') {
                     content.innerHTML = `
@@ -8117,6 +8118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                 } else if (folderName === 'PB') {
                     content.innerHTML = `
+                        <div style="width:100%; color:#f8f8f8; font-weight:700; font-size:13px; margin-bottom:12px;">PB folder: Topics 1-6 are listed below</div>
                         <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/PB/topic1_variables_operators_control_structures_loops.html', 'topic1_variables_operators_control_structures_loops.html')">
                             <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
                             <div class="mac-folder-name" style="font-size:11px;">Topic 1</div>
@@ -8124,6 +8126,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/PB/topic2_functions_lists_dictionaries.html', 'topic2_functions_lists_dictionaries.html')">
                             <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
                             <div class="mac-folder-name" style="font-size:11px;">Topic 2</div>
+                        </div>
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/PB/topic3_exception_handling_file_handling.html', 'topic3_exception_handling_file_handling.html')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
+                            <div class="mac-folder-name" style="font-size:11px;">Topic 3</div>
+                        </div>
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/PB/topic4_numpy.html', 'topic4_numpy.html')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
+                            <div class="mac-folder-name" style="font-size:11px;">Topic 4</div>
+                        </div>
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/PB/topic5_pandas.html', 'topic5_pandas.html')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
+                            <div class="mac-folder-name" style="font-size:11px;">Topic 5</div>
+                        </div>
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/PB/topic6_matplotlib.html', 'topic6_matplotlib.html')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
+                            <div class="mac-folder-name" style="font-size:11px;">Topic 6</div>
                         </div>
                     `;
                 } else {

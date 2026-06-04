@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 4: NumPy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.65; color: #2f2f2f; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 960px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 18px 50px rgba(0,0,0,0.18); overflow: hidden; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 42px 36px; text-align: center; }
+        header h1 { font-size: 2.4em; margin-bottom: 10px; font-weight: 700; }
+        header p { font-size: 1.05em; opacity: 0.95; }
+        .content { padding: 36px; }
+        .page-nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; padding: 20px 0 24px; }
+        .page-nav a { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 999px; background: rgba(102,126,234,0.14); color: #2f2f2f; text-decoration: none; font-size: 0.95em; border: 1px solid transparent; transition: all 0.2s ease; }
+        .page-nav a:hover, .page-nav a:focus { background: rgba(102,126,234,0.24); border-color: rgba(102,126,234,0.4); }
+        .summary-card { background: #ffffff; border: 1px solid #e6e9f4; border-radius: 18px; padding: 24px 28px; margin-bottom: 30px; display: grid; gap: 12px; }
+        .summary-card strong { display: block; margin-bottom: 10px; color: #2f2f2f; font-size: 1.05em; }
+        .summary-card ul { display: grid; gap: 10px; list-style: none; padding-left: 0; }
+        .summary-card ul li::before { content: '•'; display: inline-block; margin-right: 8px; color: #667eea; }
+        section { margin-bottom: 32px; padding: 28px 30px; background: #fbfcff; border: 1px solid #e6e9f4; border-radius: 18px; box-shadow: 0 10px 24px rgba(20,45,108,0.05); }
+        section h2 { font-size: 1.8em; color: #4a4a8a; margin-bottom: 18px; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+        section h3 { font-size: 1.35em; color: #764ba2; margin-top: 24px; margin-bottom: 14px; }
+        .note-box { background: #f8f9fa; border-left: 4px solid #667eea; padding: 18px; margin: 22px 0; border-radius: 10px; color: #444; }
+        code { background: #f6f7fb; padding: 3px 6px; border-radius: 4px; font-family: 'Fira Code', monospace; color: #d63384; font-weight: 500; }
+        pre { background: #2d2d2d; color: #f8f8f2; padding: 22px; border-radius: 10px; overflow-x: auto; margin: 20px 0; font-family: 'Fira Code', monospace; font-size: 0.95em; line-height: 1.6; border-left: 4px solid #667eea; }
+        ul, ol { margin-left: 20px; margin-bottom: 20px; }
+        li { margin-bottom: 10px; }
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .table th, .table td { border: 1px solid #e4e4e7; padding: 12px 14px; text-align: left; }
+        .table th { background: #f2f4ff; color: #2f2f2f; }
+        .table tbody tr:nth-child(even) { background: #f7f9ff; }
+        .footer-note { background: #ffffff; border: 1px solid #e6e9f4; border-radius: 16px; padding: 20px 22px; color: #4a4a6a; margin-top: 20px; }
+        .key-concept { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 18px; margin: 24px 0; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Topic 4: NumPy</h1>
+            <p>Fast revision notes for NumPy — numerical arrays, reshaping, math, and MCQ prep.</p>
+        </header>
+        <div class="content">
+            <div class="page-nav">
+                <a href="#intro">What is NumPy</a>
+                <a href="#create">Create arrays</a>
+                <a href="#operations">Operations</a>
+                <a href="#reshape">Reshape</a>
+                <a href="#mcq">MCQ prep</a>
+            </div>
+            <div class="summary-card">
+                <strong>What you will learn</strong>
+                <ul>
+                    <li>How NumPy arrays differ from Python lists</li>
+                    <li>How to build and reshape arrays</li>
+                    <li>How to use vectorized math and broadcasting</li>
+                    <li>How to answer NumPy MCQs quickly</li>
+                </ul>
+            </div>
+            <section id="intro">
+                <h2>PART 1 — NumPy (Numerical Python)</h2>
+                <h3>What is NumPy?</h3>
+                <p>NumPy is a Python library for fast mathematical operations on arrays. It is a supercharged list that can do math on all elements at once.</p>
+                <pre><code>import numpy as np   # always import as np — standard convention</code></pre>
+                <div class="note-box">
+                    <p>Why not just use a Python list?</p>
+                    <ul>
+                        <li>Python list: loop through each element one by one → slow</li>
+                        <li>NumPy array: operates on all elements at once → fast</li>
+                        <li>NumPy arrays also use less memory</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h3>List vs NumPy Array</h3>
+                <pre><code># Python List — repeats the list, not math
+my_list = [1, 2, 3, 4]
+print(my_list * 2)
+# [1, 2, 3, 4, 1, 2, 3, 4]
+
+# NumPy Array — math happens on every element
+arr = np.array([1, 2, 3, 4])
+print(arr * 2)
+# [2 4 6 8]</code></pre>
+                <p>This difference will appear in MCQs.</p>
+            </section>
+            <section id="create">
+                <h3>Creating Arrays</h3>
+                <h4>From a Python list</h4>
+                <pre><code>import numpy as np
+arr = np.array([10, 20, 30, 40, 50])
+print(arr)          # [10 20 30 40 50]
+print(type(arr))    # &lt;class 'numpy.ndarray'&gt;</code></pre>
+                <h4>2D Array (matrix)</h4>
+                <pre><code>arr2d = np.array([[1, 2, 3],
+                   [4, 5, 6],
+                   [7, 8, 9]])
+print(arr2d)
+# [[1 2 3]
+#  [4 5 6]
+#  [7 8 9]]</code></pre>
+                <div class="note-box">
+                    <p>A 2D array is like a table or matrix with rows and columns.</p>
+                </div>
+            </section>
+            <section>
+                <h3>Special Array Creation Functions</h3>
+                <pre><code>np.zeros(5)              # [0. 0. 0. 0. 0.]
+np.zeros((3, 3))         # 3x3 matrix of zeros
+
+np.ones(4)               # [1. 1. 1. 1.]
+np.ones((2, 3))          # 2x3 matrix of ones
+
+np.arange(0, 10, 2)      # [0 2 4 6 8]
+np.arange(5)             # [0 1 2 3 4]
+
+np.linspace(0, 1, 5)     # [0.   0.25 0.5  0.75 1.  ]
+
+np.full((2, 3), 7)
+# [[7 7 7]
+#  [7 7 7]]
+
+np.eye(3)
+# [[1. 0. 0.]
+#  [0. 1. 0.]
+#  [0. 0. 1.]]
+
+np.random.rand(3)        # 3 random floats between 0 and 1
+np.random.randint(1, 10, 5)  # 5 random ints between 1 and 10</code></pre>
+            </section>
+            <section>
+                <h3>Array Attributes</h3>
+                <pre><code>arr = np.array([[1, 2, 3],
+                [4, 5, 6]])
+print(arr.shape)    # (2, 3)
+print(arr.ndim)     # 2
+print(arr.size)     # 6
+print(arr.dtype)    # int64</code></pre>
+                <div class="note-box">
+                    <p><strong>Exam MCQ:</strong> <code>.shape</code> returns a tuple of (rows, columns).</p>
+                </div>
+            </section>
+            <section>
+                <h3>Indexing &amp; Slicing</h3>
+                <h4>1D Array</h4>
+                <pre><code>arr = np.array([10, 20, 30, 40, 50])
+print(arr[0])       # 10
+print(arr[-1])      # 50
+print(arr[1:4])     # [20 30 40]
+print(arr[::-1])    # [50 40 30 20 10]</code></pre>
+                <h4>2D Array</h4>
+                <pre><code>arr = np.array([[1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]])
+print(arr[0])         # [1 2 3]
+print(arr[1][2])      # 6
+print(arr[1, 2])      # 6
+print(arr[0, :])      # [1 2 3]
+print(arr[:, 1])      # [2 5 8]
+print(arr[0:2, 0:2])  # [[1 2]
+                       #  [4 5]]</code></pre>
+                <div class="note-box">
+                    <p><strong>Note:</strong> <code>arr[row, column]</code> is NumPy-specific and not used for normal Python lists.</p>
+                </div>
+            </section>
+            <section id="operations">
+                <h3>Array Operations (Vectorized)</h3>
+                <pre><code>arr = np.array([1, 2, 3, 4, 5])
+print(arr + 10)     # [11 12 13 14 15]
+print(arr * 2)      # [2 4 6 8 10]
+print(arr ** 2)     # [1 4 9 16 25]
+print(arr / 2)      # [0.5 1. 1.5 2. 2.5]
+print(arr > 3)      # [False False False  True  True]</code></pre>
+                <h4>Element-wise between two arrays</h4>
+                <pre><code>a = np.array([1, 2, 3])
+b = np.array([10, 20, 30])
+print(a + b)    # [11 22 33]
+print(a * b)    # [10 40 90]</code></pre>
+            </section>
+            <section>
+                <h3>Broadcasting</h3>
+                <pre><code>arr = np.array([[1, 2, 3],
+                [4, 5, 6]])
+print(arr + 100)
+# [[101 102 103]
+#  [104 105 106]]
+
+a = np.array([[1, 2, 3],
+              [4, 5, 6]])
+b = np.array([10, 20, 30])
+print(a + b)
+# [[11 22 33]
+#  [14 25 36]]</code></pre>
+                <div class="note-box">
+                    <p>Broadcasting works when dimensions match or one dimension is size 1.</p>
+                </div>
+            </section>
+            <section>
+                <h3>Mathematical Functions</h3>
+                <pre><code>arr = np.array([4, 7, 2, 9, 1, 5])
+print(np.sum(arr))      # 28
+print(np.mean(arr))     # 4.67
+print(np.median(arr))   # 4.5
+print(np.std(arr))      # 2.62
+print(np.var(arr))      # 6.89
+print(np.min(arr))      # 1
+print(np.max(arr))      # 9
+print(np.argmin(arr))   # 4
+print(np.argmax(arr))   # 3
+print(np.sort(arr))     # [1 2 4 5 7 9]</code></pre>
+                <h4>Axis matters on 2D arrays</h4>
+                <pre><code>arr2d = np.array([[1, 2, 3],
+                   [4, 5, 6]])
+print(np.sum(arr2d))           # 21
+print(np.sum(arr2d, axis=0))   # [5 7 9]
+print(np.sum(arr2d, axis=1))   # [6 15]</code></pre>
+                <div class="note-box">
+                    <p><strong>Note:</strong> <code>axis=0</code> is column-wise and <code>axis=1</code> is row-wise.</p>
+                </div>
+            </section>
+            <section id="reshape">
+                <h3>Reshaping Arrays</h3>
+                <pre><code>arr = np.arange(1, 10)          # [1 2 3 4 5 6 7 8 9]
+print(arr.shape)                # (9,)
+reshaped = arr.reshape(3, 3)    # 3 rows, 3 columns
+print(reshaped)
+# [[1 2 3]
+#  [4 5 6]
+#  [7 8 9]]
+flat = reshaped.flatten()       # back to 1D
+print(flat)     # [1 2 3 4 5 6 7 8 9]</code></pre>
+                <div class="note-box">
+                    <p><strong>Warning:</strong> total elements must stay the same when reshaping.</p>
+                </div>
+            </section>
+            <section id="mcq">
+                <h3>NumPy MCQ Prep</h3>
+                <table class="table">
+                    <thead>
+                        <tr><th>Question</th><th>Answer</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>NumPy array type</td><td><code>ndarray</code></td></tr>
+                        <tr><td>Standard import alias</td><td><code>np</code></td></tr>
+                        <tr><td><code>arr.shape</code> returns</td><td>Tuple of dimensions</td></tr>
+                        <tr><td><code>np.zeros((2,3))</code> creates</td><td>2×3 matrix of 0s</td></tr>
+                        <tr><td><code>np.arange(0,10,3)</code></td><td><code>[0 3 6 9]</code></td></tr>
+                        <tr><td><code>axis=0</code> means</td><td>Column-wise</td></tr>
+                        <tr><td><code>axis=1</code> means</td><td>Row-wise</td></tr>
+                        <tr><td>NumPy list vs Python list multiply</td><td>NumPy does math, list repeats</td></tr>
+                        <tr><td><code>np.argmax(arr)</code></td><td>Index of max value</td></tr>
+                        <tr><td><code>arr.flatten()</code></td><td>Converts to 1D</td></tr>
+                        <tr><td><code>arr.reshape(2,3)</code> needs how many elements</td><td>6</td></tr>
+                        <tr><td><code>arr[:, 1]</code> on 2D</td><td>Entire second column</td></tr>
+                    </tbody>
+                </table>
+            </section>
+            <div class="footer-note">
+                <p>This NumPy page is focused on the most exam-relevant concepts: array creation, indexing, operations, broadcasting, and reshape behavior.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
