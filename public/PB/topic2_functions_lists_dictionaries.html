@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 2: Functions, Lists, and Dictionaries</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            font-weight: 500;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        section {
+            margin-bottom: 45px;
+        }
+
+        section h2 {
+            font-size: 1.9em;
+            color: #667eea;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 12px;
+        }
+
+        section h3 {
+            font-size: 1.4em;
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 18px;
+        }
+
+        .concept-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 18px 0;
+            border-radius: 6px;
+        }
+
+        .concept-card h4 {
+            color: #667eea;
+            font-family: 'Fira Code', monospace;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .concept-card p {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Fira Code', monospace;
+            color: #d63384;
+            font-weight: 500;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 22px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 22px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95em;
+            line-height: 1.6;
+            border-left: 4px solid #667eea;
+        }
+
+        .code-comment {
+            color: #75715e;
+        }
+
+        .code-keyword {
+            color: #66d9ef;
+        }
+
+        .code-string {
+            color: #e6db74;
+        }
+
+        .code-number {
+            color: #ae81ff;
+        }
+
+        .code-function {
+            color: #a6e22e;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-card li {
+            margin: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .feature-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            color: #555;
+        }
+
+        .video-section {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .video-section h3 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .video-item {
+            background: white;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+
+        .video-item strong {
+            color: #667eea;
+        }
+
+        .video-item p {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .highlight-box {
+            background: #fffacd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .highlight-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box p {
+            color: #856404;
+            margin: 8px 0;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .key-concept h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .key-concept p {
+            color: #2e7d32;
+            margin: 8px 0;
+        }
+
+        .exam-logic {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .exam-logic h4 {
+            color: #6a1b9a;
+            margin-bottom: 10px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #f8f9fa;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:hover {
+            background: #f1f3ff;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 25px;
+            text-align: center;
+            color: #666;
+            font-size: 0.95em;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .practice-section {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .practice-section h4 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            pre {
+                font-size: 0.85em;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔄 Functions, Lists, and Dictionaries</h1>
+            <p>From Script-Kiddie Code to Software Architecture</p>
+        </header>
+
+        <div class="content">
+            <div class="intro-box">
+                💡 <strong>Critical Insight:</strong> This is where you go from writing script-kiddie code to actual software architecture. In FinTech, you deal with massive amounts of customer data. Lists store that data, dictionaries organize it, and functions process it.
+            </div>
+
+            <!-- Section 1: Functions -->
+            <section>
+                <h2>1. Functions (Week 6)</h2>
+                <p>Functions are reusable blocks of code. You write the logic once and use it everywhere. The key to scaling code from 100 lines to 100,000 lines without losing your mind.</p>
+
+                <h3>The Three Core Concepts</h3>
+
+                <div class="concept-card">
+                    <h4>📝 Definition</h4>
+                    <p>Start with <code>def</code>, give it a name, pass parameters in <code>()</code>, and end with <code>:</code></p>
+                    <pre><span class="code-keyword">def</span> <span class="code-function">greet</span>(name):
+    print(<span class="code-string">f"Hello, {name}!"</span>)
+
+<span class="code-function">greet</span>(<span class="code-string">"Ali"</span>)  <span class="code-comment"># Output: Hello, Ali!</span></pre>
+                </div>
+
+                <div class="exam-logic">
+                    <h4>🎯 CRITICAL: Return vs. Print</h4>
+                    <p><strong>Print:</strong> Just displays text to the console. The data is lost.</p>
+                    <p><strong>Return:</strong> Gives data back to the program so you can use it in calculations.</p>
+                    <pre><span class="code-comment"># WRONG - Just prints, doesn't return</span>
+<span class="code-keyword">def</span> <span class="code-function">calculate_tax_wrong</span>(salary):
+    tax = salary * 0.10
+    print(tax)  <span class="code-comment"># Data is gone after this line!</span>
+
+<span class="code-comment"># CORRECT - Returns the value</span>
+<span class="code-keyword">def</span> <span class="code-function">calculate_tax</span>(salary):
+    tax = salary * 0.10
+    <span class="code-keyword">return</span> tax  <span class="code-comment"># Now we can use it!</span>
+
+final_salary = <span class="code-function">calculate_tax</span>(<span class="code-number">100000</span>)  <span class="code-comment"># Use the returned value</span>
+print(final_salary)  <span class="code-comment"># Output: 10000.0</span></pre>
+                </div>
+
+                <div class="concept-card">
+                    <h4>🔍 Variable Scope: Local vs. Global</h4>
+                    <p><strong>Local Variables:</strong> Created <em>inside</em> a function. They die when the function ends.</p>
+                    <p><strong>Global Variables:</strong> Created <em>outside</em> a function. Can be read anywhere.</p>
+                    <pre><span class="code-comment"># Global variable - accessible everywhere</span>
+bank_name = <span class="code-string">"Habib Bank Limited"</span>
+
+<span class="code-keyword">def</span> <span class="code-function">open_account</span>(customer_name):
+    account_id = <span class="code-string">"ACC001"</span>  <span class="code-comment"># Local - only exists here</span>
+    print(bank_name)  <span class="code-comment"># Can use global variable</span>
+    <span class="code-keyword">return</span> account_id
+
+<span class="code-function">open_account</span>(<span class="code-string">"Muid"</span>)
+print(account_id)  <span class="code-comment"># ERROR! account_id doesn't exist outside the function</span></pre>
+                </div>
+
+                <h3>Default Parameters</h3>
+                <div class="key-concept">
+                    <h4>⚙️ Make Functions Flexible</h4>
+                    <p>You can set default values for parameters. When the function is called without providing that parameter, it uses the default.</p>
+                    <pre><span class="code-keyword">def</span> <span class="code-function">calculate_tax</span>(salary, tax_rate=<span class="code-number">0.10</span>):  <span class="code-comment"># 0.10 is the default</span>
+    <span class="code-keyword">return</span> salary * tax_rate
+
+print(<span class="code-function">calculate_tax</span>(<span class="code-number">100000</span>))  <span class="code-comment"># Uses default: 10% tax</span>
+print(<span class="code-function">calculate_tax</span>(<span class="code-number">100000</span>, <span class="code-number">0.20</span>))  <span class="code-comment"># Override: 20% tax</span></pre>
+                </div>
+            </section>
+
+            <!-- Section 2: Lists & Tuples -->
+            <section>
+                <h2>2. Lists & Tuples (Week 7)</h2>
+                <p>You need to store 10,000 transactions. You don't make 10,000 variables. You make a list.</p>
+
+                <h3>Lists (Mutable) vs Tuples (Immutable)</h3>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Lists <code>[]</code></th>
+                            <th>Tuples <code>()</code></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Changeable?</strong></td>
+                            <td>✅ Yes (Mutable)</td>
+                            <td>❌ No (Immutable)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Speed</strong></td>
+                            <td>Slower</td>
+                            <td>Faster</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Use Case</strong></td>
+                            <td>Dynamic data (transactions)</td>
+                            <td>Fixed data (coordinates)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Safety</strong></td>
+                            <td>Can be modified accidentally</td>
+                            <td>Protected from changes</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Lists: The Workhorses</h3>
+
+                <div class="concept-card">
+                    <h4>📋 Common List Operations</h4>
+                    <pre><span class="code-comment"># Create a list of transactions</span>
+transactions = [<span class="code-number">100</span>, <span class="code-number">250</span>, <span class="code-number">300</span>, <span class="code-number">400</span>, <span class="code-number">500</span>]
+
+<span class="code-comment"># Add an item to the end</span>
+transactions.append(<span class="code-number">600</span>)
+
+<span class="code-comment"># Remove a specific item</span>
+transactions.remove(<span class="code-number">300</span>)
+
+<span class="code-comment"># Get the length</span>
+print(len(transactions))  <span class="code-comment"># Output: 5</span>
+
+<span class="code-comment"># Access by index (starts at 0)</span>
+print(transactions[<span class="code-number">0</span>])  <span class="code-comment"># First item: 100</span>
+print(transactions[<span class="code-number">-1</span>])  <span class="code-comment"># Last item: 600</span></pre>
+                </div>
+
+                <h3>Slicing: The Secret Weapon</h3>
+
+                <div class="highlight-box">
+                    <h4>🎯 Extract Portions of Lists</h4>
+                    <p><code>list[start:end]</code> gets items from index <code>start</code> up to (but not including) <code>end</code></p>
+                    <pre><span class="code-comment"># Slicing examples</span>
+daily_sales = [<span class="code-number">100</span>, <span class="code-number">250</span>, <span class="code-number">300</span>, <span class="code-number">400</span>, <span class="code-number">500</span>]
+
+<span class="code-comment"># Get items from index 1 to 3</span>
+print(daily_sales[<span class="code-number">1</span>:<span class="code-number">4</span>])  <span class="code-comment"># [250, 300, 400]</span>
+
+<span class="code-comment"># Get the last item</span>
+print(daily_sales[-<span class="code-number">1</span>])  <span class="code-comment"># 500</span>
+
+<span class="code-comment"># Get the last 3 items</span>
+print(daily_sales[-<span class="code-number">3</span>:])  <span class="code-comment"># [300, 400, 500]</span>
+
+<span class="code-comment"># EXAM TRICK: Reverse the whole list</span>
+print(daily_sales[::<span class="code-number">-1</span>])  <span class="code-comment"># [500, 400, 300, 250, 100]</span></pre>
+                </div>
+
+                <h3>Tuples: Fast & Immutable</h3>
+
+                <div class="concept-card">
+                    <h4>🔒 When to Use Tuples</h4>
+                    <p>Perfect for fixed data like an employee's ID or fixed GPS coordinates. Once created, they cannot be changed.</p>
+                    <pre><span class="code-comment"># Employee's fixed information</span>
+employee = (<span class="code-string">"EMP001"</span>, <span class="code-string">"Muid Ahmed"</span>, <span class="code-number">45000</span>)
+
+<span class="code-comment"># Access values</span>
+print(employee[<span class="code-number">0</span>])  <span class="code-comment"># EMP001</span>
+print(employee[<span class="code-number">1</span>])  <span class="code-comment"># Muid Ahmed</span>
+
+<span class="code-comment"># This will cause an ERROR - tuples are immutable</span>
+<span class="code-comment"># employee[2] = 50000  # TypeError!</span></pre>
+                </div>
+            </section>
+
+            <!-- Section 3: Dictionaries -->
+            <section>
+                <h2>3. Dictionaries (Week 8)</h2>
+                <p>This is the most critical data structure for business systems. It uses <strong>Key-Value pairs</strong> for lightning-fast, O(1) lookups.</p>
+
+                <h3>The Dictionary Structure</h3>
+
+                <div class="concept-card">
+                    <h4>🗝️ Key-Value Pairs</h4>
+                    <p>Format: <code>{"key": "value"}</code>. Keys <em>must</em> be unique and are usually strings or numbers.</p>
+                    <pre><span class="code-comment"># Simple dictionary</span>
+customer = {
+    <span class="code-string">"name"</span>: <span class="code-string">"Muid Ahmed"</span>,
+    <span class="code-string">"account_id"</span>: <span class="code-string">"ACC001"</span>,
+    <span class="code-string">"balance"</span>: <span class="code-number">45000</span>,
+    <span class="code-string">"is_verified"</span>: <span class="code-keyword">True</span>
+}
+
+<span class="code-comment"># Access values by key</span>
+print(customer[<span class="code-string">"name"</span>])  <span class="code-comment"># Muid Ahmed</span>
+print(customer[<span class="code-string">"balance"</span>])  <span class="code-comment"># 45000</span></pre>
+                </div>
+
+                <h3>Safe Access with .get()</h3>
+
+                <div class="exam-logic">
+                    <h4>⚠️ CRITICAL: Never Crash Your Program</h4>
+                    <p>Never use <code>dict["key"]</code> if you aren't sure the key exists. It will crash the program with a <code>KeyError</code>.</p>
+                    <pre><span class="code-comment"># WRONG - Will crash if key doesn't exist</span>
+<span class="code-keyword">if</span> customer[<span class="code-string">"age"</span>] > <span class="code-number">18</span>:  <span class="code-comment"># KeyError!</span>
+    print(<span class="code-string">"Adult"</span>)
+
+<span class="code-comment"># CORRECT - Safe access with default value</span>
+age = customer.get(<span class="code-string">"age"</span>, <span class="code-number">0</span>)  <span class="code-comment"># Returns 0 if "age" doesn't exist</span>
+<span class="code-keyword">if</span> age > <span class="code-number">18</span>:
+    print(<span class="code-string">"Adult"</span>)
+<span class="code-keyword">else</span>:
+    print(<span class="code-string">"Age not provided, defaulting to 0"</span>)</pre>
+                </div>
+
+                <h3>Updating & Adding to Dictionaries</h3>
+
+                <div class="concept-card">
+                    <h4>📝 Modify Dictionary Data</h4>
+                    <pre><span class="code-comment"># Update existing value</span>
+customer[<span class="code-string">"balance"</span>] = <span class="code-number">50000</span>
+
+<span class="code-comment"># Add new key-value pair</span>
+customer[<span class="code-string">"phone"</span>] = <span class="code-string">"+92-300-1234567"</span>
+
+<span class="code-comment"># Remove a key</span>
+<span class="code-keyword">del</span> customer[<span class="code-string">"is_verified"</span>]
+
+<span class="code-comment"># Check if key exists</span>
+<span class="code-keyword">if</span> <span class="code-string">"phone"</span> <span class="code-keyword">in</span> customer:
+    print(<span class="code-string">"Phone exists"</span>)</pre>
+                </div>
+
+                <h3>Master-Level: Nested Dictionaries</h3>
+
+                <div class="exam-logic">
+                    <h4>💎 Real-World Example: Bank Ledger</h4>
+                    <pre><span class="code-comment"># Dictionary of dictionaries</span>
+bank_ledger = {
+    <span class="code-string">"ACC001"</span>: {<span class="code-string">"name"</span>: <span class="code-string">"Muid"</span>, <span class="code-string">"balance"</span>: <span class="code-number">45000</span>},
+    <span class="code-string">"ACC002"</span>: {<span class="code-string">"name"</span>: <span class="code-string">"Avisha"</span>, <span class="code-string">"balance"</span>: <span class="code-number">120000</span>},
+    <span class="code-string">"ACC003"</span>: {<span class="code-string">"name"</span>: <span class="code-string">"Ali"</span>, <span class="code-string">"balance"</span>: <span class="code-number">85000</span>}
+}
+
+<span class="code-comment"># Access nested values</span>
+print(bank_ledger[<span class="code-string">"ACC001"</span>][<span class="code-string">"name"</span>])  <span class="code-comment"># Muid</span>
+
+<span class="code-comment"># Iterate through and display all accounts</span>
+<span class="code-keyword">for</span> acc_id, details <span class="code-keyword">in</span> bank_ledger.items():
+    print(<span class="code-string">f"Account: {acc_id} | Owner: {details['name']} | Balance: {details['balance']}"</span>)</pre>
+                </div>
+
+                <h3>Dictionary Iteration Methods</h3>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🔑 .keys()</h4>
+                        <pre><span class="code-keyword">for</span> key <span class="code-keyword">in</span> customer.keys():
+    print(key)</pre>
+                        <p>Iterate through all keys only</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💰 .values()</h4>
+                        <pre><span class="code-keyword">for</span> value <span class="code-keyword">in</span> customer.values():
+    print(value)</pre>
+                        <p>Iterate through all values only</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>⚙️ .items()</h4>
+                        <pre><span class="code-keyword">for</span> k, v <span class="code-keyword">in</span> customer.items():
+    print(k, v)</pre>
+                        <p>Iterate through both key AND value</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔄 .get()</h4>
+                        <pre>value = customer.get(
+    <span class="code-string">"age"</span>, <span class="code-string">"N/A"</span>)</pre>
+                        <p>Safe access with default value</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Video Resources -->
+            <section>
+                <div class="video-section">
+                    <h3>📺 Mandatory Rapid-Fire Viewing</h3>
+                    <p>Do not read the slides for this. Watch these and execute the code alongside them.</p>
+
+                    <div class="video-item">
+                        <strong>Video 1: Python Functions - Corey Schafer</strong>
+                        <p><strong>Action:</strong> Watch the full 15 minutes on 1.5x speed. He explains <code>return</code> vs <code>print</code> better than any textbook.</p>
+                        <p>🔍 <em>Search YouTube for: "Python Functions - Corey Schafer"</em></p>
+                    </div>
+
+                    <div class="video-item">
+                        <strong>Video 2: Python Dictionaries - Programming with Mosh</strong>
+                        <p><strong>Action:</strong> It's an 8-minute clip. Watch it to master the <code>.get()</code> method and key-value iteration.</p>
+                        <p>🔍 <em>Search YouTube for: "Python Dictionaries - Programming with Mosh"</em></p>
+                    </div>
+
+                    <div class="video-item">
+                        <strong>Video 3: Python Lists - Brad Traversy</strong>
+                        <p><strong>Action:</strong> 12-minute deep dive into list methods, slicing, and iteration. Essential for data manipulation.</p>
+                        <p>🔍 <em>Search YouTube for: "Python Lists - Brad Traversy"</em></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Answers to Topic 1 Micro-Test -->
+            <section>
+                <h2>💡 Answers to the Topic 1 Micro-Test</h2>
+                <p>Validate your understanding with this KYC (Know Your Customer) check implementation:</p>
+
+                <div class="practice-section">
+                    <h4>❓ Challenge: Write a loop that keeps asking for deposits until the amount exceeds 100,000 (KYC Flag)</h4>
+                    <pre><span class="code-keyword">while</span> <span class="code-keyword">True</span>:
+    deposit = int(input(<span class="code-string">"Enter deposit: "</span>))  <span class="code-comment"># Remember the int() cast!</span>
+    <span class="code-keyword">if</span> deposit > <span class="code-number">100000</span>:
+        print(<span class="code-string">"KYC Flag Triggered"</span>)
+        <span class="code-keyword">break</span>
+    <span class="code-keyword">else</span>:
+        print(<span class="code-string">"Deposit accepted."</span>)</pre>
+                </div>
+
+                <div class="key-concept">
+                    <h4>🎯 Key Takeaways from Topic 1-2</h4>
+                    <ul>
+                        <li>✅ You now understand types, operators, and control flow</li>
+                        <li>✅ You can write reusable functions with parameters and returns</li>
+                        <li>✅ You can store multiple values in lists and dictionaries</li>
+                        <li>✅ You know the difference between mutable (lists) and immutable (tuples) data</li>
+                        <li>✅ You can safely access dictionary values with <code>.get()</code></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Summary Checklist -->
+            <section>
+                <h2>📝 Quick Summary Checklist</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Functions</h4>
+                        <ul>
+                            <li>Understand <code>def</code> syntax</li>
+                            <li>Know the difference: return vs print</li>
+                            <li>Grasp variable scope (local/global)</li>
+                            <li>Use default parameters</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Lists & Tuples</h4>
+                        <ul>
+                            <li>Create and modify lists</li>
+                            <li>Master list slicing</li>
+                            <li>Know when to use tuples</li>
+                            <li>Reverse lists with <code>[::-1]</code></li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Dictionaries Pt. 1</h4>
+                        <ul>
+                            <li>Create key-value pairs</li>
+                            <li>ALWAYS use <code>.get()</code></li>
+                            <li>Update and add values</li>
+                            <li>Check if key exists</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Dictionaries Pt. 2</h4>
+                        <ul>
+                            <li>Work with nested dicts</li>
+                            <li>Use <code>.keys()</code>, <code>.values()</code></li>
+                            <li>Iterate with <code>.items()</code></li>
+                            <li>Build real-world data structures</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>✨ Topic 2: Functions, Lists, and Dictionaries | Programming Fundamentals Study Guide ✨</p>
+            <p>Master these concepts before moving to Pandas, NumPy, and Data Analysis</p>
+            <p style="margin-top: 15px; font-size: 0.9em; color: #999;">Next: Topic 3 - String Manipulation & File Handling</p>
+        </footer>
+    </div>
+</body>
+</html>

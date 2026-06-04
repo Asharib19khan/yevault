@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 1: Variables, Operators, Control Structures & Loops</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        section h3 {
+            font-size: 1.3em;
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .data-type {
+            background: #f8f9fa;
+            border-left: 3px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .data-type strong {
+            color: #667eea;
+            font-family: 'Fira Code', monospace;
+        }
+
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Fira Code', monospace;
+            color: #d63384;
+            font-weight: 500;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .code-comment {
+            color: #75715e;
+        }
+
+        .code-keyword {
+            color: #66d9ef;
+        }
+
+        .code-string {
+            color: #e6db74;
+        }
+
+        .code-number {
+            color: #ae81ff;
+        }
+
+        .operators-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .operator-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+
+        .operator-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .video-section {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 30px 0;
+        }
+
+        .video-section h3 {
+            color: #0066cc;
+            margin-top: 0;
+        }
+
+        .video-link {
+            display: inline-block;
+            background: #0066cc;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 10px 10px 10px 0;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .video-link:hover {
+            background: #0052a3;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .key-concept h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .operators-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔧 Variables, Operators, Control Structures & Loops</h1>
+            <p>The Foundation of Programming in Python</p>
+        </header>
+
+        <div class="content">
+            <div class="warning-box">
+                ⚠️ <strong>CRITICAL:</strong> If you mess up a loop or a typecast here, your Pandas DataFrames and NumPy arrays in the later sections will completely crash. Master these fundamentals!
+            </div>
+
+            <!-- Section 1: Variables & Data Types -->
+            <section>
+                <h2>1. Variables & Data Types</h2>
+                <p>In business programming, you must know exactly what kind of data you are holding. Data types determine what operations you can perform and how Python stores your values.</p>
+
+                <div class="data-type">
+                    <strong>Integer (<code>int</code>):</strong> Whole numbers (e.g., <code>transactions = 500</code>)
+                </div>
+
+                <div class="data-type">
+                    <strong>Float (<code>float</code>):</strong> Decimals, crucial for money (e.g., <code>balance = 150.75</code>)
+                </div>
+
+                <div class="data-type">
+                    <strong>String (<code>str</code>):</strong> Text (e.g., <code>customer_name = "Ali"</code>)
+                </div>
+
+                <div class="data-type">
+                    <strong>Boolean (<code>bool</code>):</strong> True or False flags (e.g., <code>is_fraud = False</code>)
+                </div>
+
+                <div class="key-concept">
+                    <h4>🎯 The 100/100 Trap (Type Casting)</h4>
+                    <p>You cannot do math on a string. If a user inputs their age, Python reads it as text. You <strong>MUST</strong> cast it explicitly:</p>
+                    <pre><span class="code-comment"># EXPLICIT CASTING</span>
+raw_input = <span class="code-string">"5000"</span>
+deposit = int(raw_input)  <span class="code-comment"># Now you can do math on it!</span>
+total = deposit + 1000
+print(total)  <span class="code-comment"># Output: 6000</span></pre>
+                </div>
+            </section>
+
+            <!-- Section 2: Input, Output, and Operators -->
+            <section>
+                <h2>2. Input, Output, and Operators</h2>
+                
+                <h3>Basic I/O</h3>
+                <ul>
+                    <li><code>input("Enter amount: ")</code> always returns a string</li>
+                    <li><code>print()</code> displays output to the console</li>
+                </ul>
+
+                <h3>Arithmetic Operators</h3>
+                <div class="operators-grid">
+                    <div class="operator-card">
+                        <h4>+</h4>
+                        <p><strong>Addition:</strong> Adds two values together</p>
+                        <code>5 + 3 = 8</code>
+                    </div>
+                    <div class="operator-card">
+                        <h4>-</h4>
+                        <p><strong>Subtraction:</strong> Subtracts one value from another</p>
+                        <code>10 - 4 = 6</code>
+                    </div>
+                    <div class="operator-card">
+                        <h4>*</h4>
+                        <p><strong>Multiplication:</strong> Multiplies two values</p>
+                        <code>7 * 6 = 42</code>
+                    </div>
+                    <div class="operator-card">
+                        <h4>/</h4>
+                        <p><strong>Division:</strong> Always returns a float</p>
+                        <code>10 / 2 = 5.0</code>
+                    </div>
+                    <div class="operator-card">
+                        <h4>**</h4>
+                        <p><strong>Exponent/Power:</strong> Raises to a power</p>
+                        <code>2 ** 3 = 8</code>
+                    </div>
+                    <div class="operator-card">
+                        <h4>//</h4>
+                        <p><strong>Floor Division:</strong> Divides and drops decimal</p>
+                        <code>10 // 3 = 3</code>
+                    </div>
+                </div>
+
+                <h3>The "Secret Weapon" Operators</h3>
+                <div class="key-concept">
+                    <h4>// (Floor Division)</h4>
+                    <p>Divides and drops the decimal. <code>10 // 3 = 3</code></p>
+                </div>
+
+                <div class="key-concept">
+                    <h4>% (Modulo)</h4>
+                    <p>Gives you the remainder. <code>10 % 3 = 1</code></p>
+                    <p><strong>Extremely useful for finding even/odd numbers:</strong></p>
+                    <pre>if num % 2 == 0:
+    print(<span class="code-string">"Even number"</span>)
+else:
+    print(<span class="code-string">"Odd number"</span>)</pre>
+                </div>
+            </section>
+
+            <!-- Section 3: Control Structures -->
+            <section>
+                <h2>3. Control Structures (The Brain)</h2>
+                <p>This is how your program makes decisions based on conditions.</p>
+
+                <h3>Relational Operators</h3>
+                <div class="operators-grid">
+                    <div class="operator-card">
+                        <h4>==</h4>
+                        <p>Equal to</p>
+                    </div>
+                    <div class="operator-card">
+                        <h4>!=</h4>
+                        <p>Not equal to</p>
+                    </div>
+                    <div class="operator-card">
+                        <h4>></h4>
+                        <p>Greater than</p>
+                    </div>
+                    <div class="operator-card">
+                        <h4><</h4>
+                        <p>Less than</p>
+                    </div>
+                    <div class="operator-card">
+                        <h4>>=</h4>
+                        <p>Greater than or equal</p>
+                    </div>
+                    <div class="operator-card">
+                        <h4><=</h4>
+                        <p>Less than or equal</p>
+                    </div>
+                </div>
+
+                <h3>Logical Operators</h3>
+                <div class="operators-grid">
+                    <div class="operator-card">
+                        <h4>and</h4>
+                        <p>Both conditions must be true</p>
+                    </div>
+                    <div class="operator-card">
+                        <h4>or</h4>
+                        <p>At least one condition must be true</p>
+                    </div>
+                    <div class="operator-card">
+                        <h4>not</h4>
+                        <p>Reverses the boolean value</p>
+                    </div>
+                </div>
+
+                <h3>Real-World Example: Fraud Detection</h3>
+                <pre><span class="code-comment"># REAL EXAM LOGIC: Fraud Detection Condition</span>
+withdrawal = <span class="code-number">50000</span>
+daily_limit = <span class="code-number">20000</span>
+is_international = <span class="code-keyword">True</span>
+
+<span class="code-keyword">if</span> withdrawal > daily_limit <span class="code-keyword">and</span> is_international:
+    print(<span class="code-string">"Flag transaction for review!"</span>)
+<span class="code-keyword">elif</span> withdrawal > daily_limit:
+    print(<span class="code-string">"Send OTP to customer."</span>)
+<span class="code-keyword">else</span>:
+    print(<span class="code-string">"Transaction approved."</span>)</pre>
+            </section>
+
+            <!-- Section 4: Loops -->
+            <section>
+                <h2>4. Loops (The Workhorse)</h2>
+                <p>You use loops to repeat tasks without writing the same code 100 times.</p>
+
+                <h3>Types of Loops</h3>
+                <div class="key-concept">
+                    <h4>for Loops</h4>
+                    <p>Used when you know <strong>exactly</strong> how many times to repeat</p>
+                </div>
+
+                <div class="key-concept">
+                    <h4>while Loops</h4>
+                    <p>Used when you want to repeat <strong>until a condition changes</strong></p>
+                </div>
+
+                <h3>FOR LOOP Example: Compound Interest</h3>
+                <p>Formula: <code>A = P(1 + r)^t</code></p>
+                <pre><span class="code-comment"># FOR LOOP: Calculating Compound Interest for 5 years</span>
+<span class="code-comment"># Formula: A = P(1 + r)^t</span>
+principal = <span class="code-number">1000</span>
+rate = <span class="code-number">0.05</span>
+
+<span class="code-keyword">for</span> year <span class="code-keyword">in</span> range(<span class="code-number">1</span>, <span class="code-number">6</span>):  <span class="code-comment"># Loops from 1 to 5</span>
+    principal = principal + (principal * rate)
+    print(<span class="code-string">f"Year {year} Balance: ${principal:.2f}"</span>)
+
+<span class="code-comment"># Output:</span>
+<span class="code-comment"># Year 1 Balance: $1050.00</span>
+<span class="code-comment"># Year 2 Balance: $1102.50</span>
+<span class="code-comment"># Year 3 Balance: $1157.62</span>
+<span class="code-comment"># Year 4 Balance: $1215.51</span>
+<span class="code-comment"># Year 5 Balance: $1276.28</span></pre>
+
+                <h3>WHILE LOOP Example: Password Validation</h3>
+                <pre><span class="code-comment"># WHILE LOOP: Forcing correct user input</span>
+password = <span class="code-string">""</span>
+<span class="code-keyword">while</span> password != <span class="code-string">"Yeezus2026"</span>:
+    password = input(<span class="code-string">"Enter admin password: "</span>)
+    <span class="code-keyword">if</span> password == <span class="code-string">"exit"</span>:
+        <span class="code-keyword">break</span>  <span class="code-comment"># Emergency exit</span>
+    <span class="code-keyword">elif</span> password != <span class="code-string">"Yeezus2026"</span>:
+        print(<span class="code-string">"Incorrect password. Try again."</span>)</pre>
+
+                <h3>Loop Controls</h3>
+                <div class="operators-grid">
+                    <div class="operator-card">
+                        <h4>break</h4>
+                        <p>Instantly exits the loop completely</p>
+                    </div>
+                    <div class="operator-card">
+                        <h4>continue</h4>
+                        <p>Skips current iteration and moves to next one</p>
+                    </div>
+                </div>
+
+                <h3>Practical Example: Skip Even Numbers</h3>
+                <pre><span class="code-keyword">for</span> num <span class="code-keyword">in</span> range(<span class="code-number">1</span>, <span class="code-number">11</span>):
+    <span class="code-keyword">if</span> num % <span class="code-number">2</span> == <span class="code-number">0</span>:
+        <span class="code-keyword">continue</span>  <span class="code-comment"># Skip even numbers</span>
+    print(num)
+
+<span class="code-comment"># Output: 1, 3, 5, 7, 9</span></pre>
+            </section>
+
+            <!-- Video Resources -->
+            <section>
+                <h2>📺 Mandatory Rapid-Fire Viewing</h2>
+                <p>Since we are on a strict timer, skip the 10-hour tutorials. Watch this specific sequence:</p>
+
+                <div class="video-section">
+                    <h3>Video 1: Variables, Type Conversion, Strings & Arithmetic</h3>
+                    <p><strong>Action:</strong> Watch the first <strong>25 minutes</strong> on 1.5x speed. This covers Variables, Type Conversion, Strings, and Arithmetic Operations perfectly.</p>
+                    <a href="https://www.youtube.com/watch?v=kqtD5dpn9C8" target="_blank" class="video-link">Watch on YouTube (First 25 min)</a>
+                </div>
+
+                <div class="video-section">
+                    <h3>Video 2: Control Flow & Logic</h3>
+                    <p><strong>Action:</strong> Watch this entire 10-minute video on 1.5x speed.</p>
+                    <a href="https://www.youtube.com/watch?v=6iF8Xb7Z3wQ" target="_blank" class="video-link">Watch on YouTube (10 min)</a>
+                </div>
+            </section>
+
+            <!-- Summary -->
+            <section>
+                <h2>📝 Quick Summary Checklist</h2>
+                <ul>
+                    <li>✅ Know all 4 basic data types: int, float, str, bool</li>
+                    <li>✅ Master type casting with int() and str()</li>
+                    <li>✅ Understand all arithmetic operators including // and %</li>
+                    <li>✅ Know relational operators: ==, !=, >, <, >=, <=</li>
+                    <li>✅ Understand logical operators: and, or, not</li>
+                    <li>✅ Write if, elif, else statements correctly</li>
+                    <li>✅ Use for loops with range() function</li>
+                    <li>✅ Use while loops with conditions</li>
+                    <li>✅ Know when to use break and continue</li>
+                    <li>✅ Practice writing 5+ example programs yourself</li>
+                </ul>
+            </section>
+        </div>
+
+        <footer>
+            <p>✨ Topic 1: Variables, Operators, Control Structures & Loops | Programming Fundamentals Study Guide ✨</p>
+            <p>Master these concepts before moving to Pandas, NumPy, and Data Analysis</p>
+        </footer>
+    </div>
+</body>
+</html>

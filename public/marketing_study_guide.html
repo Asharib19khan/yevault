@@ -2172,19 +2172,11 @@
                             <div class="mac-folder-icon"></div>
                             <div class="mac-folder-name">DAB</div>
                         </div>
-                        <div class="mac-folder" style="top: 110px; right: 20px;" data-name="FOM">
-                            <div class="mac-folder-icon"></div>
-                            <div class="mac-folder-name">FOM</div>
-                        </div>
-                        <div class="mac-folder" style="top: 200px; right: 20px;" data-name="PST">
-                            <div class="mac-folder-icon"></div>
-                            <div class="mac-folder-name">PST</div>
-                        </div>
-                        <div class="mac-folder" style="top: 290px; right: 20px;" data-name="PB">
+                        <div class="mac-folder" style="top: 110px; right: 20px;" data-name="PB">
                             <div class="mac-folder-icon"></div>
                             <div class="mac-folder-name">PB</div>
                         </div>
-                        <div class="mac-folder" style="top: 380px; right: 20px;" data-name="English">
+                        <div class="mac-folder" style="top: 200px; right: 20px;" data-name="English">
                             <div class="mac-folder-icon"></div>
                             <div class="mac-folder-name">English</div>
                         </div>
@@ -8121,6 +8113,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/dab remaining.html', 'dab remaining.html')">
                             <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
                             <div class="mac-folder-name" style="font-size:11px;">dab remaining.html</div>
+                        </div>
+                    `;
+                } else if (folderName === 'PB') {
+                    content.innerHTML = `
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/PB/topic1_variables_operators_control_structures_loops.html', 'topic1_variables_operators_control_structures_loops.html')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
+                            <div class="mac-folder-name" style="font-size:11px;">Topic 1</div>
+                        </div>
+                        <div class="mac-folder" style="position:relative; top:auto; left:auto; right:auto; width:60px; filter: hue-rotate(200deg);" ondblclick="openSpaceApp('/PB/topic2_functions_lists_dictionaries.html', 'topic2_functions_lists_dictionaries.html')">
+                            <div class="mac-folder-icon" style="width:40px; height:40px; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><path fill=\'%23ffffff\' d=\'M20,10 L60,10 L80,30 L80,90 L20,90 Z\' opacity=\'0.8\'/><path fill=\'%234285F4\' d=\'M30,40 L70,40 L70,45 L30,45 Z M30,55 L70,55 L70,60 L30,60 Z M30,70 L50,70 L50,75 L30,75 Z\'/></svg>');"></div>
+                            <div class="mac-folder-name" style="font-size:11px;">Topic 2</div>
                         </div>
                     `;
                 } else {
