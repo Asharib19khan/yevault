@@ -1985,7 +1985,8 @@
             <div class="nav-item" onclick="nav('it-business', this)">IT in Business</div>
             <div class="nav-item active" onclick="nav('business-maths', this)">Finals</div>
             <div class="nav-item" onclick="nav('pakistan-studies', this)">Pakistan studies - BDS</div>
-            <div class="nav-item" onclick="nav('pharma', this)">PHARMA</div>
+            <div class="nav-item" onclick="nav('pharma', this)">PHARMA - EKTA</div>
+            <div class="nav-item" onclick="nav('dbms-abeeha', this)">DBMS - ABEEHA</div>
 
 
 
@@ -2061,7 +2062,7 @@
                                         style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
                                         id="countdown-0">--</td>
                                     <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
-                                            style="opacity:0.3;">Upcoming</span></td>
+                                            style="opacity:1; color:#10b981;">Completed</span></td>
                                 </tr>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
                                     <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
@@ -2076,7 +2077,7 @@
                                         style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
                                         id="countdown-1">--</td>
                                     <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
-                                            style="opacity:0.3;">Upcoming</span></td>
+                                            style="opacity:1; color:#10b981;">Completed</span></td>
                                 </tr>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
                                     <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
@@ -2091,7 +2092,7 @@
                                         style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
                                         id="countdown-2">--</td>
                                     <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
-                                            style="opacity:0.3;">Upcoming</span></td>
+                                            style="opacity:1; color:#10b981;">Completed</span></td>
                                 </tr>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
                                     <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
@@ -2106,7 +2107,7 @@
                                         style="padding:1.5rem; font-weight:600; color:var(--brand-glow);"
                                         id="countdown-3">--</td>
                                     <td data-label="Status" style="padding:1.5rem; border-radius:0 1rem 1rem 0;"><span
-                                            style="opacity:0.3;">Upcoming</span></td>
+                                            style="opacity:1; color:#10b981;">Completed</span></td>
                                 </tr>
                                 <tr style="background:rgba(255,255,255,0.02); transition:0.2s;">
                                     <td data-label="Date" style="padding:1.5rem; border-radius:1rem 0 0 1rem;"><strong
@@ -3660,6 +3661,728 @@
                         <div style="margin-top:1.5rem; background:rgba(34, 197, 94, 0.1); padding:1rem; border-radius:0.5rem;">
                             <h4 style="color:#22c55e; margin-bottom:0.5rem;">Aspirin Patients</h4>
                             <p style="line-height:1.6;"><strong>Do NOT stop Aspirin</strong> for routine dental extractions. Bleeding can be managed locally.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DBMS - ABEEHA SECTION -->
+            <section id="dbms-abeeha" class="section-view">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+                    <h1 style="font-family:var(--font-display); margin:0; color:#a78bfa;">DBMS - ABEEHA</h1>
+                </div>
+
+                <div id="dbms-grid" style="margin-top:3rem;">
+                    <h2 style="font-family:var(--font-display); margin-bottom:2rem; color:#a78bfa;">
+                        📊 DATABASE CONCEPTS
+                    </h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                        <div class="card" onclick="showDbmsNote('er-diagrams')" style="cursor:pointer;">
+                            <span class="tag">DBMS1</span>
+                            <h3>Topic 1 - ER Diagrams</h3>
+                            <p>Entity-Relationship model and diagram design</p>
+                        </div>
+                        <div class="card" onclick="showDbmsNote('functional-dependencies')" style="cursor:pointer;">
+                            <span class="tag">DBMS2</span>
+                            <h3>Topic 2 - Functional Dependencies</h3>
+                            <p>Normalization and functional dependency rules</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FUNCTIONAL DEPENDENCIES DETAIL VIEW -->
+                <div id="dbms-functional-dependencies-detail" style="display:none;">
+                    <button onclick="closeDbmsNote()" class="btn" style="margin-bottom: 2rem;">← Back to Topics</button>
+                    
+                    <div style="max-width:100%; margin-bottom:3rem;">
+                        <h1 style="font-family:var(--font-display); margin-bottom:1rem; color:#a78bfa;">� Functional Dependencies (FDs)</h1>
+                        
+                        <div class="card" style="padding:1.5rem; background:rgba(167, 139, 250, 0.1); border:1px solid rgba(167, 139, 250, 0.3); margin-bottom:2rem;">
+                            <p style="margin:0; color:#a78bfa;"><strong>⚠️ Note:</strong> Rules of Inference & Closure Method are <strong>EXCLUDED</strong> from exam | Focus on types, examples & application to normalization</p>
+                        </div>
+
+                        <!-- SECTION 1 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1rem;">1️⃣ What is a Functional Dependency?</h2>
+                            <p style="line-height:1.8; margin-bottom:1rem;">A <strong>Functional Dependency (FD)</strong> is a constraint between two sets of attributes in a relation.</p>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin:1rem 0; border-left:3px solid #a78bfa;">
+                                <p style="margin:0; color:#a78bfa;"><strong>Key Idea:</strong> If you know the value of attribute <strong>X</strong>, you can <strong>always and uniquely determine</strong> the value of attribute <strong>Y</strong>.</p>
+                            </div>
+                            
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Notation:</h3>
+                            <div style="background:rgba(167, 139, 250, 0.15); padding:1.5rem; border-radius:0.5rem; font-family:monospace; color:#a78bfa; font-size:1.2rem; text-align:center; margin:1rem 0;">
+X → Y
+                            </div>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li><strong>X</strong> = Determinant (left side) — the attribute that determines</li>
+                                <li><strong>Y</strong> = Dependent (right side) — the attribute that is determined</li>
+                                <li>Read as: <strong>"X determines Y"</strong> or <strong>"Y is functionally dependent on X"</strong></li>
+                            </ul>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Formal Meaning:</h3>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; border-left:3px solid #a78bfa;">
+                                <p style="margin:0; color:#a78bfa;">If two tuples (rows) have the <strong>same value for X</strong>, they must have the <strong>same value for Y</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 2 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">2️⃣ Simple Examples</h2>
+                            
+                            <table style="width:100%; border-collapse:collapse; margin-bottom:1.5rem;">
+                                <tr style="background:rgba(167, 139, 250, 0.15);">
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Scenario</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>FD</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Explanation</strong></th>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;">Student table</td>
+                                    <td style="padding:0.8rem; font-family:monospace;">StudentID → StudentName</td>
+                                    <td style="padding:0.8rem;">Knowing StudentID uniquely gives you the name</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;">Employee table</td>
+                                    <td style="padding:0.8rem; font-family:monospace;">EmpID → {EmpName, Dept, Salary}</td>
+                                    <td style="padding:0.8rem;">EmpID determines all other details</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;">Course table</td>
+                                    <td style="padding:0.8rem; font-family:monospace;">CourseID → CourseName</td>
+                                    <td style="padding:0.8rem;">CourseID uniquely identifies course name</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.8rem;">Exam marks</td>
+                                    <td style="padding:0.8rem; font-family:monospace;">{StudentID, CourseID} → Marks</td>
+                                    <td style="padding:0.8rem;">Both together determine the marks</td>
+                                </tr>
+                            </table>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Real-world Analogy — CNIC Number:</h3>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-top:1rem;">
+                                <p style="margin:0.5rem 0; color:#a78bfa;"><strong>✅ CNIC → Name</strong> — CNIC uniquely determines your name</p>
+                                <p style="margin:0.5rem 0; color:#f87171;"><strong>❌ Name → CNIC</strong> — Name does NOT determine CNIC (many people can have same name)</p>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 3 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">3️⃣ Types of Functional Dependencies</h2>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">3.1 Trivial FD</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>When <strong>Y is a subset of X</strong> (Y ⊆ X)</li>
+                                <li>The dependency is <strong>obvious</strong> and always holds</li>
+                                <li>Not very useful — doesn't give new information</li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; color:#a78bfa;">
+{StudentID, Name} → Name        ✅ Trivial (Name is already part of left side)<br>{StudentID, Name} → StudentID   ✅ Trivial
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">3.2 Non-Trivial FD</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>When <strong>Y is NOT a subset of X</strong> (Y ⊄ X)</li>
+                                <li>These are the <strong>useful, meaningful</strong> dependencies</li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; color:#a78bfa;">
+StudentID → Name        ✅ Non-Trivial (Name is NOT part of left side)<br>EmpID → Salary          ✅ Non-Trivial
+                            </div>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; border-left:3px solid #a78bfa; margin-bottom:1.5rem;">
+                                <p style="margin:0; color:#a78bfa;"><strong>💡 These are the FDs we care about in normalization!</strong></p>
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">3.3 Fully Functional Dependency</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>Y is functionally dependent on X, and <strong>NOT dependent on any proper subset of X</strong></li>
+                                <li>In simpler terms: <strong>Y needs ALL attributes of X</strong> to be determined</li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1rem; font-family:monospace; color:#a78bfa;">
+{CourseID, StudentID} → Marks<br><br>- Marks depends on <strong>both</strong> CourseID AND StudentID together<br>- CourseID → Marks ❌ (alone, cannot determine)<br>- StudentID → Marks ❌ (alone, cannot determine)<br>- <strong>Both together are needed</strong> → Fully Functional Dependency ✅
+                            </div>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; border-left:3px solid #a78bfa;">
+                                <p style="margin:0; color:#a78bfa;"><strong>Important for 2NF:</strong> A relation is in 2NF if all non-key attributes are fully functionally dependent on the primary key.</p>
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">3.4 Partial Dependency ⚠️ (2NF Violation)</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>A non-key attribute depends on <strong>only PART of a composite primary key</strong></li>
+                                <li>This is a <strong>violation of 2NF</strong></li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; color:#a78bfa;">
+Primary Key: {StudentID, CourseID}<br><br>StudentID → StudentName   ← PARTIAL DEPENDENCY ❌<br>            (depends on only StudentID, not full key)<br><br>CourseID → Teacher        ← PARTIAL DEPENDENCY ❌
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">How to Identify Partial Dependency:</h3>
+                            <ol style="line-height:1.8; margin-left:1.5rem; margin-bottom:1.5rem;">
+                                <li>Check if table has <strong>composite primary key</strong> (2+ attributes as PK)</li>
+                                <li>Take each <strong>non-key attribute</strong></li>
+                                <li>Ask: "Does this depend on the <strong>FULL</strong> key or just <strong>PART</strong> of key?"</li>
+                                <li>If just PART → <strong>Partial Dependency</strong> → 2NF violation</li>
+                            </ol>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; border-left:3px solid #a78bfa;">
+                                <p style="margin:0; color:#a78bfa;"><strong>Note:</strong> Partial dependency only occurs with composite primary keys. Single PK cannot have partial dependency.</p>
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">3.5 Transitive Dependency ⚠️ (3NF Violation)</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>A non-key attribute depends on <strong>another non-key attribute</strong></li>
+                                <li>Pattern: <strong>Key → A → B</strong> (B depends on A, A depends on Key)</li>
+                                <li>This is a <strong>violation of 3NF</strong></li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1rem; font-family:monospace; color:#a78bfa;">
+Example — Employee Table:<br>EmpID → Designation → Salary<br><br>- EmpID is the primary key<br>- Designation is a non-key attribute<br>- Salary depends on Designation (not directly on EmpID)<br>→ TRANSITIVE DEPENDENCY ❌ → violates 3NF
+                            </div>
+
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1rem; font-family:monospace; color:#a78bfa;">
+Another Example:<br>StudentID → ExamType → MaxMarks<br><br>- MaxMarks depends on ExamType (if Viva → 20 marks)<br>- ExamType depends on StudentID<br>→ TRANSITIVE DEPENDENCY ❌
+                            </div>
+
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; border-left:3px solid #a78bfa;">
+                                <p style="margin:0; color:#a78bfa;"><strong>Quick Test:</strong> "Can I <strong>guess/predict</strong> the value of column B just by knowing another <strong>non-key column</strong> A?" If YES → Transitive Dependency!</p>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 4 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">4️⃣ Summary Table — All Types</h2>
+                            
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr style="background:rgba(167, 139, 250, 0.15);">
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Type</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Definition</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Violation</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Example</strong></th>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Trivial</strong></td>
+                                    <td style="padding:0.8rem;">Y ⊆ X</td>
+                                    <td style="padding:0.8rem;">Nothing (always true)</td>
+                                    <td style="padding:0.8rem; font-family:monospace; font-size:0.9rem;">{ID, Name} → Name</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Non-Trivial</strong></td>
+                                    <td style="padding:0.8rem;">Y ⊄ X</td>
+                                    <td style="padding:0.8rem;">—</td>
+                                    <td style="padding:0.8rem; font-family:monospace; font-size:0.9rem;">ID → Name</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Full FD</strong></td>
+                                    <td style="padding:0.8rem;">Depends on ALL of composite key</td>
+                                    <td style="padding:0.8rem;">—</td>
+                                    <td style="padding:0.8rem; font-family:monospace; font-size:0.9rem;">{SID, CID} → Marks</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Partial</strong></td>
+                                    <td style="padding:0.8rem;">Non-key depends on PART of composite key</td>
+                                    <td style="padding:0.8rem;"><strong>2NF</strong></td>
+                                    <td style="padding:0.8rem; font-family:monospace; font-size:0.9rem;">SID → Name (PK = SID+CID)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.8rem;"><strong>Transitive</strong></td>
+                                    <td style="padding:0.8rem;">Non-key depends on another non-key</td>
+                                    <td style="padding:0.8rem;"><strong>3NF</strong></td>
+                                    <td style="padding:0.8rem; font-family:monospace; font-size:0.9rem;">EmpID → Dept → DeptHead</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- SECTION 5 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">5️⃣ Uses of Functional Dependencies</h2>
+                            <ol style="line-height:2; margin-left:1.5rem;">
+                                <li><strong>Database Normalization</strong> — FDs help identify anomalies and redundancy (1NF → 2NF → 3NF → BCNF)</li>
+                                <li><strong>Designing Relational Schema</strong> — Ensures data integrity by establishing proper constraints</li>
+                                <li><strong>Detecting Anomalies:</strong>
+                                    <ul style="margin-left:1.5rem; margin-top:0.5rem;">
+                                        <li><strong>Update anomaly:</strong> Same data in multiple places, updating one creates inconsistency</li>
+                                        <li><strong>Insertion anomaly:</strong> Cannot insert data without having related data</li>
+                                        <li><strong>Deletion anomaly:</strong> Deleting record accidentally removes other important data</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <!-- SECTION 6 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">6️⃣ How to Find FDs in a Scenario (Exam Approach)</h2>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Step-by-Step Process:</h3>
+                            <ol style="line-height:2; margin-left:1.5rem; margin-bottom:1.5rem;">
+                                <li><strong>Step 1:</strong> Identify the <strong>Primary Key</strong> (or Composite Key)</li>
+                                <li><strong>Step 2:</strong> List all <strong>non-key attributes</strong></li>
+                                <li><strong>Step 3:</strong> For each non-key attribute, ask:
+                                    <ul style="margin-left:1.5rem; margin-top:0.5rem;">
+                                        <li>Does it depend on the <strong>full primary key</strong>? → Full FD ✅</li>
+                                        <li>Does it depend on only <strong>part</strong> of the key? → Partial Dependency ❌</li>
+                                        <li>Does it depend on <strong>another non-key</strong> attribute? → Transitive Dependency ❌</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Step 4:</strong> Write out all FDs explicitly</li>
+                            </ol>
+                        </div>
+
+                        <!-- SECTION 7 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">7️⃣ Worked Example</h2>
+                            
+                            <p style="line-height:1.8; margin-bottom:1rem;"><strong>Table: Result(StudentID, CourseID, StudentName, Marks, Teacher)</strong></p>
+                            <p style="line-height:1.8; margin-bottom:1rem;"><strong>Primary Key:</strong> {StudentID, CourseID} — <span style="color:#f87171;">Composite Key</span></p>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Identify all FDs:</h3>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; color:#a78bfa; line-height:1.8;">
+{StudentID, CourseID} → Marks        ✅ Full FD (Marks needs both)<br>StudentID → StudentName               ❌ Partial Dependency (only needs StudentID)<br>CourseID → Teacher                   ❌ Partial Dependency (only needs CourseID)
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Problems:</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1.5rem;">
+                                <li><span style="color:#f87171;">StudentName</span> is partially dependent → <strong>violates 2NF</strong></li>
+                                <li><span style="color:#f87171;">Teacher</span> is partially dependent → <strong>violates 2NF</strong></li>
+                            </ul>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Fix (move to 2NF) — Split into:</h3>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; font-family:monospace; color:#a78bfa; font-size:0.9rem; line-height:1.8;">
+Result(StudentID, CourseID, Marks)        → Full FD only<br>Student(StudentID, StudentName)           → Remove partial dep.<br>Course(CourseID, Teacher)                 → Remove partial dep.
+                            </div>
+                        </div>
+
+                        <!-- SECTION 8 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">8️⃣ Key Points to Remember for Exam</h2>
+                            
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr style="background:rgba(167, 139, 250, 0.15);">
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Point</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Detail</strong></th>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>FD notation</strong></td>
+                                    <td style="padding:0.8rem;">X → Y means X <strong>determines</strong> Y</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Partial dependency requires</strong></td>
+                                    <td style="padding:0.8rem;">A <strong>composite primary key</strong></td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Transitive dependency means</strong></td>
+                                    <td style="padding:0.8rem;">Non-key → Non-key (chain dependency)</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Partial dependency → fix with</strong></td>
+                                    <td style="padding:0.8rem;"><strong>2NF</strong> (remove to separate table)</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Transitive dependency → fix with</strong></td>
+                                    <td style="padding:0.8rem;"><strong>3NF</strong> (remove to separate table)</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>FD is directional</strong></td>
+                                    <td style="padding:0.8rem;">A → B does <strong>NOT</strong> mean B → A</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.8rem;"><strong>Full FD</strong></td>
+                                    <td style="padding:0.8rem;">Non-key depends on the <strong>entire</strong> composite key</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- EXAM CHECKLIST -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; background:rgba(167, 139, 250, 0.1); border:2px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">✅ Exam Checklist</h2>
+                            <ul style="line-height:2; margin-left:1.5rem;">
+                                <li>☐ Can I define a functional dependency with notation?</li>
+                                <li>☐ Can I identify trivial vs non-trivial FDs?</li>
+                                <li>☐ Can I spot partial dependencies in a table?</li>
+                                <li>☐ Can I spot transitive dependencies in a table?</li>
+                                <li>☐ Do I know which normal form each dependency type violates?</li>
+                                <li>☐ Can I list all FDs from a given table/scenario?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="dbms-er-diagrams-detail" style="display:none;">
+                    <button onclick="closeDbmsNote()" class="btn" style="margin-bottom: 2rem;">← Back to Topics</button>
+                    
+                    <div style="max-width:100%; margin-bottom:3rem;">
+                        <h1 style="font-family:var(--font-display); margin-bottom:1rem; color:#a78bfa;">📘 Entity-Relationship (ER) Diagrams</h1>
+                        
+                        <div class="card" style="padding:1.5rem; background:rgba(167, 139, 250, 0.1); border:1px solid rgba(167, 139, 250, 0.3); margin-bottom:2rem;">
+                            <p style="margin:0; color:#a78bfa;"><strong>Exam Weightage:</strong> ~14 Marks | <strong>Focus:</strong> Scenario-based ER creation + ERD to Schema conversion</p>
+                        </div>
+
+                        <!-- SECTION 1 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1rem;">1️⃣ What is an ER Diagram?</h2>
+                            <p style="line-height:1.8; margin-bottom:1rem;">An <strong>Entity-Relationship (ER) Diagram</strong> is a visual/graphical representation of the data and the relationships between data in a database.</p>
+                            <ul style="line-height:2; margin-left:1.5rem;">
+                                <li><strong style="color:#a78bfa;">Entities</strong> = Nouns (things/objects in the real world)</li>
+                                <li><strong style="color:#a78bfa;">Relationships</strong> = Verbs (how entities interact with each other)</li>
+                                <li><strong style="color:#a78bfa;">Attributes</strong> = Properties/characteristics of entities</li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-top:1rem; border-left:3px solid #a78bfa;">
+                                <p style="margin:0; color:#a78bfa;"><strong>💡 Exam Tip:</strong> In a scenario, identify nouns → they become entities. Identify verbs connecting those nouns → they become relationships.</p>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 2 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1rem;">2️⃣ Entities</h2>
+                            <p style="line-height:1.8; margin-bottom:1.5rem;">An <strong>entity</strong> is any real-world object that has an independent existence and can be uniquely identified.</p>
+                            
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 0.8rem;">2.1 Strong Entity</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1.5rem;">
+                                <li>Has its own <strong>primary key</strong> (can be uniquely identified on its own)</li>
+                                <li>Represented by a <strong>rectangle</strong></li>
+                                <li>Example: <code style="background:rgba(167, 139, 250, 0.2); padding:0.2rem 0.5rem; border-radius:0.3rem;">Student</code>, <code style="background:rgba(167, 139, 250, 0.2); padding:0.2rem 0.5rem; border-radius:0.3rem;">Employee</code>, <code style="background:rgba(167, 139, 250, 0.2); padding:0.2rem 0.5rem; border-radius:0.3rem;">Product</code></li>
+                            </ul>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 0.8rem;">2.2 Weak Entity</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem;">
+                                <li><strong>Cannot</strong> be uniquely identified without a related strong entity</li>
+                                <li>Depends on a <strong>strong entity</strong> for its existence</li>
+                                <li>Has a <strong>partial key</strong> (discriminator), not a full primary key</li>
+                                <li>Represented by a <strong>double rectangle</strong></li>
+                                <li>Example: <code style="background:rgba(167, 139, 250, 0.2); padding:0.2rem 0.5rem; border-radius:0.3rem;">Dependent</code> (depends on Employee), <code style="background:rgba(167, 139, 250, 0.2); padding:0.2rem 0.5rem; border-radius:0.3rem;">Order_Item</code> (depends on Order)</li>
+                            </ul>
+                        </div>
+
+                        <!-- SECTION 3 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">3️⃣ Attributes</h2>
+                            <p style="line-height:1.8; margin-bottom:1.5rem;">Attributes describe properties of an entity.</p>
+                            
+                            <table style="width:100%; border-collapse:collapse; margin-bottom:1.5rem;">
+                                <tr style="background:rgba(167, 139, 250, 0.15);">
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Type</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Description</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Notation</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Example</strong></th>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Simple</strong></td>
+                                    <td style="padding:0.8rem;">Cannot be divided further</td>
+                                    <td style="padding:0.8rem;">Oval</td>
+                                    <td style="padding:0.8rem;">Age, Salary</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Composite</strong></td>
+                                    <td style="padding:0.8rem;">Can be divided into sub-parts</td>
+                                    <td style="padding:0.8rem;">Oval with sub-ovals</td>
+                                    <td style="padding:0.8rem;">Full_Name → (First, Last)</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Multi-valued</strong></td>
+                                    <td style="padding:0.8rem;">Can have multiple values</td>
+                                    <td style="padding:0.8rem;"><strong>Double oval</strong></td>
+                                    <td style="padding:0.8rem;">Phone_Numbers, Skills</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Derived</strong></td>
+                                    <td style="padding:0.8rem;">Calculated from other attributes</td>
+                                    <td style="padding:0.8rem;"><strong>Dashed oval</strong></td>
+                                    <td style="padding:0.8rem;">Age (from DOB), Experience</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.8rem;"><strong>Key Attribute</strong></td>
+                                    <td style="padding:0.8rem;">Uniquely identifies the entity</td>
+                                    <td style="padding:0.8rem;"><u>Underlined</u> in oval</td>
+                                    <td style="padding:0.8rem;">StudentID, EmpID</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- SECTION 4 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">4️⃣ Relationships</h2>
+                            <p style="line-height:1.8; margin-bottom:1.5rem;">A <strong>relationship</strong> represents how two or more entities are associated with each other.</p>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1.5rem;">
+                                <li>Represented by a <strong>diamond</strong> shape</li>
+                                <li>Named with a <strong>verb</strong> (Enrolled_In, Works_For, Manages)</li>
+                            </ul>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Degree of Relationship</h3>
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr style="background:rgba(167, 139, 250, 0.15);">
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Degree</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Name</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Meaning</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Example</strong></th>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;">1</td>
+                                    <td style="padding:0.8rem;"><strong>Unary</strong></td>
+                                    <td style="padding:0.8rem;">Entity related to itself</td>
+                                    <td style="padding:0.8rem;">Employee <strong>manages</strong> Employee</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;">2</td>
+                                    <td style="padding:0.8rem;"><strong>Binary</strong></td>
+                                    <td style="padding:0.8rem;">Two entities involved</td>
+                                    <td style="padding:0.8rem;">Student <strong>enrolls in</strong> Course</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.8rem;">3</td>
+                                    <td style="padding:0.8rem;"><strong>Ternary</strong></td>
+                                    <td style="padding:0.8rem;">Three entities involved</td>
+                                    <td style="padding:0.8rem;">Doctor <strong>prescribes</strong> Medicine to Patient</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- SECTION 5 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">5️⃣ Cardinality (Relationship Constraints)</h2>
+                            <p style="line-height:1.8; margin-bottom:1.5rem;">Cardinality defines <strong>how many instances</strong> of one entity relate to how many instances of another entity.</p>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">One-to-One (1:1)</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>One record in Entity A relates to <strong>at most one</strong> record in Entity B</li>
+                                <li>Example: One Employee has one Passport</li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; color:#a78bfa;">
+EMPLOYEE ——1————1—— PASSPORT
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">One-to-Many (1:N)</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>One record in Entity A relates to <strong>many</strong> records in Entity B</li>
+                                <li>Example: One Department has many Employees</li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; color:#a78bfa;">
+DEPARTMENT ——1————N—— EMPLOYEE
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Many-to-Many (M:N)</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>Many records in Entity A relate to many records in Entity B</li>
+                                <li><strong>Requires a junction/bridge table</strong> when converting to schema</li>
+                                <li>Example: Many Students enroll in many Courses</li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1rem; font-family:monospace; color:#a78bfa;">
+STUDENT ——M————N—— COURSE
+                            </div>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; border-left:3px solid #a78bfa;">
+                                <p style="margin:0; color:#a78bfa;"><strong>In schema:</strong> Create a separate table <code style="background:rgba(167, 139, 250, 0.2); padding:0.2rem 0.5rem; border-radius:0.3rem;">Enrollment(StudentID, CourseID)</code></p>
+                            </div>
+                        </div>
+
+                        <!-- SECTION 6 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">6️⃣ Crow's Foot Notation</h2>
+                            <p style="line-height:1.8; margin-bottom:1.5rem;">Crow's Foot is the most common ER notation used in practical/exam scenarios.</p>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Symbols:</h3>
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr style="background:rgba(167, 139, 250, 0.15);">
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Symbol</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Meaning</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Reading</strong></th>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2); font-family:monospace;">
+                                    <td style="padding:0.8rem;">||</td>
+                                    <td style="padding:0.8rem;">Exactly one</td>
+                                    <td style="padding:0.8rem;">One and only one</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2); font-family:monospace;">
+                                    <td style="padding:0.8rem;">O|</td>
+                                    <td style="padding:0.8rem;">Zero or one</td>
+                                    <td style="padding:0.8rem;">Zero or one (optional)</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2); font-family:monospace;">
+                                    <td style="padding:0.8rem;">||<</td>
+                                    <td style="padding:0.8rem;">One or many</td>
+                                    <td style="padding:0.8rem;">One or more</td>
+                                </tr>
+                                <tr style="font-family:monospace;">
+                                    <td style="padding:0.8rem;">O<</td>
+                                    <td style="padding:0.8rem;">Zero or many</td>
+                                    <td style="padding:0.8rem;">Zero or more (optional many)</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- SECTION 7 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">7️⃣ ERD to Relational Schema Conversion</h2>
+                            <p style="line-height:1.8; margin-bottom:1.5rem;">Converting an ER Diagram into actual <strong>database tables (relations)</strong>.</p>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Rule 1: Strong Entity → Table</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>Entity becomes a table</li>
+                                <li>Attributes become columns</li>
+                                <li>Key attribute becomes <strong>Primary Key</strong></li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; font-size:0.9rem; color:#a78bfa;">
+Entity: STUDENT(StudentID, Name, DOB)<br>Table:  Student(StudentID PK, Name, DOB)
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Rule 2: Weak Entity → Table</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>Weak entity becomes a table</li>
+                                <li>Include <strong>partial key + primary key of strong entity</strong> as combined PK</li>
+                                <li>Foreign Key references the strong entity</li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; font-size:0.9rem; color:#a78bfa;">
+Entity: DEPENDENT (DependentName, Relation) — weak of EMPLOYEE<br>Table:  Dependent(EmpID FK, DependentName, Relation)<br>        PK: (EmpID, DependentName)
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Rule 3: One-to-One Relationship (1:1)</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>Can <strong>merge</strong> both entities into one table, OR</li>
+                                <li>Add Foreign Key to either side (prefer the <strong>mandatory/total participation</strong> side)</li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; font-size:0.9rem; color:#a78bfa;">
+Employee(EmpID PK, Name, PassportNo FK)<br>Passport(PassportNo PK, IssueDate)
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Rule 4: One-to-Many Relationship (1:N)</h3>
+                            <p style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">Add the <strong>Primary Key of the "1" side</strong> as a <strong>Foreign Key</strong> in the "N" side table</p>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; font-size:0.9rem; color:#a78bfa;">
+Department(DeptID PK, DeptName)<br>Employee(EmpID PK, Name, DeptID FK)   ← DeptID added here
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Rule 5: Many-to-Many Relationship (M:N)</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">
+                                <li>Create a <strong>new junction/bridge table</strong></li>
+                                <li>Its Primary Key = <strong>Combination of both entities' PKs</strong></li>
+                                <li>Both become Foreign Keys</li>
+                            </ul>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; font-size:0.9rem; color:#a78bfa;">
+Student(StudentID PK, Name)<br>Course(CourseID PK, CourseName)<br>Enrollment(StudentID FK, CourseID FK, Grade)<br>           PK: (StudentID, CourseID)
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Rule 6: Multi-valued Attribute → Separate Table</h3>
+                            <p style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">Create a new table with the entity's PK + the multi-valued attribute</p>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; font-size:0.9rem; color:#a78bfa;">
+Employee has multiple Phone numbers:<br>EmpPhone(EmpID FK, PhoneNo)<br>PK: (EmpID, PhoneNo)
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Rule 7: Composite Attribute</h3>
+                            <p style="line-height:1.8; margin-left:1.5rem; margin-bottom:1rem;">Just include the <strong>sub-attributes</strong> (components) as separate columns in the table</p>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; font-family:monospace; font-size:0.9rem; color:#a78bfa;">
+Name = (FirstName + LastName)<br>→ Table: Employee(EmpID, FirstName, LastName, ...)
+                            </div>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Rule 8: Derived Attribute</h3>
+                            <ul style="line-height:1.8; margin-left:1.5rem;">
+                                <li>Generally <strong>NOT stored</strong> in the table (calculated when needed)</li>
+                                <li>Example: Age is derived from DOB, so store DOB, not Age</li>
+                            </ul>
+                        </div>
+
+                        <!-- SECTION 8 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">8️⃣ How to Approach Scenario-Based ER Questions</h2>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Step-by-Step Process:</h3>
+                            <ol style="line-height:2; margin-left:1.5rem;">
+                                <li><strong>Step 1: Read the scenario carefully</strong> — Underline all nouns → these are potential entities</li>
+                                <li><strong>Step 2: Identify Entities</strong> — Ask: "Is this a real-world object that needs to be stored?"</li>
+                                <li><strong>Step 3: Identify Attributes</strong> — What properties describe each entity? Which one uniquely identifies it?</li>
+                                <li><strong>Step 4: Identify Relationships</strong> — Look for verbs connecting entities. What does Entity A do with Entity B?</li>
+                                <li><strong>Step 5: Determine Cardinality</strong> — Ask: How many of A can relate to B? How many of B can relate to A?</li>
+                                <li><strong>Step 6: Check for Special Cases</strong> — Any weak entities? Multi-valued attributes? Specialization/generalization?</li>
+                            </ol>
+                        </div>
+
+                        <!-- SECTION 9 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">9️⃣ Quick Example</h2>
+                            <p style="line-height:1.8; margin-bottom:1.5rem;"><strong>Scenario:</strong> "A university has students who enroll in multiple courses. Each course is taught by one teacher. Teachers belong to departments."</p>
+
+                            <table style="width:100%; border-collapse:collapse; margin-bottom:1.5rem;">
+                                <tr style="background:rgba(167, 139, 250, 0.15);">
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Element</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Identification</strong></th>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Entities</strong></td>
+                                    <td style="padding:0.8rem;">Student, Course, Teacher, Department</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Student attributes</strong></td>
+                                    <td style="padding:0.8rem;">StudentID (key), Name, DOB</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Course attributes</strong></td>
+                                    <td style="padding:0.8rem;">CourseID (key), CourseName, Credits</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Teacher attributes</strong></td>
+                                    <td style="padding:0.8rem;">TeacherID (key), Name</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Department attributes</strong></td>
+                                    <td style="padding:0.8rem;">DeptID (key), DeptName</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.8rem;"><strong>Relationships</strong></td>
+                                    <td style="padding:0.8rem;">Student <strong>Enrolls_In</strong> Course (M:N), Teacher <strong>Teaches</strong> Course (1:N), Teacher <strong>Belongs_To</strong> Department (M:1)</td>
+                                </tr>
+                            </table>
+
+                            <h3 style="color:#c4b5fd; margin:1.5rem 0 1rem;">Schema:</h3>
+                            <div style="background:rgba(167, 139, 250, 0.1); padding:1rem; border-radius:0.5rem; font-family:monospace; font-size:0.85rem; color:#a78bfa; line-height:1.8;">
+Student(StudentID, Name, DOB)<br>Course(CourseID, CourseName, Credits, TeacherID FK)<br>Enrollment(StudentID FK, CourseID FK, Grade)   ← M:N junction table<br>Teacher(TeacherID, Name, DeptID FK)<br>Department(DeptID, DeptName)
+                            </div>
+                        </div>
+
+                        <!-- SECTION 10 -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; border-left:4px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">🔟 Key Terms to Remember</h2>
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr style="background:rgba(167, 139, 250, 0.15);">
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Term</strong></th>
+                                    <th style="padding:0.8rem; text-align:left; border-bottom:2px solid #a78bfa; color:#a78bfa;"><strong>Definition</strong></th>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Entity</strong></td>
+                                    <td style="padding:0.8rem;">A real-world object with independent existence</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Attribute</strong></td>
+                                    <td style="padding:0.8rem;">Property/characteristic of an entity</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Relationship</strong></td>
+                                    <td style="padding:0.8rem;">Association between entities</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Primary Key</strong></td>
+                                    <td style="padding:0.8rem;">Unique identifier for each record</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Foreign Key</strong></td>
+                                    <td style="padding:0.8rem;">PK of one table referenced in another table</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Cardinality</strong></td>
+                                    <td style="padding:0.8rem;">Number of instances in a relationship (1:1, 1:N, M:N)</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Participation</strong></td>
+                                    <td style="padding:0.8rem;">Total (mandatory) or Partial (optional)</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid rgba(167, 139, 250, 0.2);">
+                                    <td style="padding:0.8rem;"><strong>Crow's Foot</strong></td>
+                                    <td style="padding:0.8rem;">Visual notation for ER diagrams</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.8rem;"><strong>Junction Table</strong></td>
+                                    <td style="padding:0.8rem;">Table created to resolve M:N relationships</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- EXAM CHECKLIST -->
+                        <div class="card" style="padding:2rem; margin-bottom:2rem; background:rgba(167, 139, 250, 0.1); border:2px solid #a78bfa;">
+                            <h2 style="color:#a78bfa; margin-bottom:1.5rem;">✅ Exam Checklist</h2>
+                            <ul style="line-height:2; margin-left:1.5rem;">
+                                <li>☐ Can I identify entities, attributes, relationships from a scenario?</li>
+                                <li>☐ Do I know crow's foot symbols?</li>
+                                <li>☐ Can I draw a complete ER diagram from a scenario?</li>
+                                <li>☐ Can I convert an ER diagram to relational schema?</li>
+                                <li>☐ Do I know how to handle M:N, weak entities, multi-valued attributes?</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -5506,6 +6229,27 @@
             
             // Show the topic grids
             document.getElementById('pharma-cv-grid').style.display = 'block';
+        }
+
+        // --- DBMS NOTES ---
+        function showDbmsNote(topicId) {
+            // Hide all topic grids
+            document.getElementById('dbms-grid').style.display = 'none';
+            
+            // Show the specific detail view
+            document.getElementById('dbms-' + topicId + '-detail').style.display = 'block';
+            
+            // Scroll to top of page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeDbmsNote() {
+            // Hide all detail views
+            const detailViews = document.querySelectorAll('[id^="dbms-"][id$="-detail"]');
+            detailViews.forEach(view => view.style.display = 'none');
+            
+            // Show the topic grid
+            document.getElementById('dbms-grid').style.display = 'block';
         }
 
         // --- NOTES ---
@@ -7940,6 +8684,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 2. Show All Grids
             const grids = ['pharma-cv-grid', 'pharma-git-grid', 'pharma-cns-grid', 'pharma-chemo-grid'];
+            grids.forEach(g => {
+                const el = document.getElementById(g);
+                if(el) el.style.display = ''; 
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- DBMS LOGIC ---
+        function showDbmsNote(id) {
+            // 1. Hide All Grids
+            const grids = ['dbms-grid'];
+            grids.forEach(g => {
+                const el = document.getElementById(g);
+                if(el) el.style.display = 'none';
+            });
+
+            // 2. Show Target Detail
+            const detail = document.getElementById('dbms-' + id + '-detail');
+            if(detail) {
+                detail.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function closeDbmsNote() {
+            // 1. Hide all Details
+            document.querySelectorAll('[id^="dbms-"][id$="-detail"]').forEach(el => {
+                el.style.display = 'none';
+            });
+
+            // 2. Show All Grids
+            const grids = ['dbms-grid'];
             grids.forEach(g => {
                 const el = document.getElementById(g);
                 if(el) el.style.display = ''; 
